@@ -16,6 +16,7 @@ const difference = computed(() => {
 </script>
 
 <template>
+  <div class="dashboard-page">
   <section class="page-heading">
     <div><span class="eyebrow">HOLIDAY COMPARISON / 专题</span><h1>假期客流对比</h1><p>按同口径比较假期总量或日均值，不把不同长度的假期直接计算成同比。</p></div>
   </section>
@@ -36,10 +37,10 @@ const difference = computed(() => {
   <div v-else-if="loading && !comparison" class="state-box holiday-state">正在加载假期定义与对比数据…</div>
   <div v-else-if="!holidays.length" class="state-box holiday-state">当前假期类型尚无可用定义，请选择其他类型。</div>
   <template v-else>
-    <div class="holiday-screen">
+    <div class="holiday-screen dashboard-body">
     <div class="holiday-info-grid">
-      <article class="panel holiday-info"><span class="holiday-index">PERIOD A</span><strong>{{ firstHoliday?.name ?? '未选择' }}</strong><p>{{ firstHoliday?.start ?? '—' }} — {{ firstHoliday?.end ?? '—' }}</p><small>{{ firstHoliday?.days_count ?? '—' }} 天 · {{ isDemo ? '演示假期定义' : `定义来源 ${firstHoliday?.definition_source_id ?? '待标注'}` }}</small></article>
-      <article class="panel holiday-info"><span class="holiday-index">PERIOD B</span><strong>{{ secondHoliday?.name ?? '未选择' }}</strong><p>{{ secondHoliday?.start ?? '—' }} — {{ secondHoliday?.end ?? '—' }}</p><small>{{ secondHoliday?.days_count ?? '—' }} 天 · {{ isDemo ? '演示假期定义' : `定义来源 ${secondHoliday?.definition_source_id ?? '待标注'}` }}</small></article>
+      <article class="panel holiday-info"><span class="holiday-index">PERIOD A</span><strong>{{ firstHoliday?.name ?? '未选择' }}</strong><p>{{ firstHoliday?.start ?? '—' }} — {{ firstHoliday?.end ?? '—' }}</p><small>{{ firstHoliday?.days_count ?? '—' }} 天 · {{ isDemo ? '静态假期样例' : `定义来源 ${firstHoliday?.definition_source_id ?? '待标注'}` }}</small></article>
+      <article class="panel holiday-info"><span class="holiday-index">PERIOD B</span><strong>{{ secondHoliday?.name ?? '未选择' }}</strong><p>{{ secondHoliday?.start ?? '—' }} — {{ secondHoliday?.end ?? '—' }}</p><small>{{ secondHoliday?.days_count ?? '—' }} 天 · {{ isDemo ? '静态假期样例' : `定义来源 ${secondHoliday?.definition_source_id ?? '待标注'}` }}</small></article>
       <article class="panel holiday-info change-card"><span class="holiday-index">COMPARABILITY</span><strong :class="comparison?.comparable ? 'text-green' : 'text-warn'">{{ comparison?.comparable ? '口径可比' : '暂不可比' }}</strong><p>{{ difference == null ? '—' : `${difference >= 0 ? '+' : ''}${difference.toFixed(1)}%` }}</p><small>{{ modeLabel }} · {{ entity?.name ?? '景区' }}</small></article>
     </div>
 
@@ -47,34 +48,36 @@ const difference = computed(() => {
       <div class="panel-head"><h2 class="panel-title">{{ modeLabel }}对比</h2><span class="panel-kicker">{{ metric?.display_name ?? '景区接待人次' }}</span></div>
       <div v-if="comparison?.comparable && comparison.items.length" class="compare-layout">
         <HolidayCompareChart :items="comparison.items" />
-        <div class="compare-values"><div v-for="(item, index) in comparison.items" :key="item.holiday_id" class="compare-value"><span>0{{ index + 1 }} / {{ item.label }}</span><strong>{{ formatValue(item.value) }} <small>{{ item.unit }}</small></strong><em>统计期 {{ item.period_start ?? '—' }} — {{ item.period_end ?? '—' }} · 缺失 {{ item.missing_days }} 天</em><em>{{ isDemo ? '来源与更新：演示数据' : `来源：${item.source_ids.join('、') || '待标注'} · 更新：${item.ingested_at || '待标注'}` }}</em></div></div>
+        <div class="compare-values"><div v-for="(item, index) in comparison.items" :key="item.holiday_id" class="compare-value"><span>0{{ index + 1 }} / {{ item.label }}</span><strong>{{ formatValue(item.value) }} <small>{{ item.unit }}</small></strong><em>统计期 {{ item.period_start ?? '—' }} — {{ item.period_end ?? '—' }} · 缺失 {{ item.missing_days }} 天</em><em>{{ isDemo ? '静态样例，非官方统计' : `来源：${item.source_ids.join('、') || '待标注'} · 更新：${item.ingested_at || '待标注'}` }}</em></div></div>
       </div>
       <div v-else class="state-box">{{ comparison?.reason ?? '所选假期没有可比较的数据。' }}</div>
-      <div class="chart-caption">{{ comparison?.reason ?? '展示值以接口返回的实际可用数据为准。' }} {{ isDemo ? '当前数值仅用于界面演示。' : '' }}</div>
+      <div class="chart-caption">{{ comparison?.reason ?? '展示值以接口返回的实际可用数据为准。' }} {{ isDemo ? '当前数值仅供界面展示。' : '' }}</div>
     </section>
 
     <section class="panel section-panel explain-panel"><h2 class="panel-title">口径说明</h2><p>{{ metric?.definition ?? '按指定景区与假期统计的接待人次。' }}</p><p>假期天数不同，优先比较日均值；缺少完整逐日数据时不生成逐日曲线。{{ metric?.comparability_note }}</p></section>
     </div>
     <div v-if="loading" class="load-hint">正在更新数据…</div>
   </template>
+  </div>
 </template>
 
 <style scoped>
 .filter-panel { margin-bottom: 11px; }.holiday-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; }.holiday-filters .field select { min-width: 137px; }
 .holiday-state { margin: 14px 0; }
-.holiday-screen { display: grid; grid-template-columns: minmax(215px, .8fr) minmax(420px, 1.8fr) minmax(215px, .8fr); grid-template-rows: auto 1fr; gap: 11px; }
+.holiday-screen { display: grid; grid-template-columns: minmax(215px, .8fr) minmax(420px, 1.8fr) minmax(215px, .8fr); grid-template-rows: auto minmax(0, 1fr); gap: 11px; }
 .holiday-info-grid { display: contents; }
 .holiday-info-grid > :nth-child(1) { grid-column: 1; grid-row: 1; }
 .holiday-info-grid > :nth-child(2) { grid-column: 3; grid-row: 1; }
 .holiday-info-grid > :nth-child(3) { grid-column: 1; grid-row: 2; }
-.holiday-info { display: grid; align-content: start; gap: 10px; padding: 19px; }.holiday-index { color: var(--accent); font: 10px Consolas, monospace; letter-spacing: .12em; }.holiday-info strong { color: var(--text-title); font-size: 19px; }.holiday-info p { margin: 0; color: var(--text-main); font-size: 12px; }.holiday-info small { color: var(--text-sub); font-size: 10px; }.holiday-info.change-card strong { font-size: 19px; }.holiday-info.change-card p { color: var(--accent); font-size: 28px; font-weight: 700; }
-.compare-panel { grid-column: 2; grid-row: 1 / 3; }
-.compare-layout { display: grid; grid-template-columns: 1fr; gap: 7px; }
-.compare-layout :deep(.chart-canvas) { height: clamp(230px, 37vh, 385px); }
+.holiday-info { display: grid; align-content: start; gap: 10px; padding: 19px; }.holiday-index { color: var(--accent); font: 12px Consolas, monospace; letter-spacing: .12em; }.holiday-info strong { color: var(--text-title); font-size: 19px; }.holiday-info p { margin: 0; color: var(--text-main); font-size: 13px; }.holiday-info small { color: var(--text-sub); font-size: 12px; }.holiday-info.change-card strong { font-size: 19px; }.holiday-info.change-card p { color: var(--accent); font-size: 28px; font-weight: 700; }
+.compare-panel { grid-column: 2; grid-row: 1 / 3; min-height: 0; display: flex; flex-direction: column; }
+.compare-layout { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; gap: 7px; }
+.compare-layout :deep(.chart-canvas) { min-height: 0; height: 100%; }
+.compare-panel .chart-caption { margin-top: auto; }
 .compare-values { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.compare-value { display: grid; gap: 6px; padding: 9px 0; border-top: 1px solid var(--border-soft); }.compare-value > span { color: var(--text-sub); font-size: 10px; }.compare-value strong { color: var(--accent); font-size: 21px; font-weight: 650; }.compare-value small { color: var(--text-sub); font-size: 10px; font-weight: 400; }.compare-value em { color: var(--text-sub); font-size: 9px; font-style: normal; }
-.explain-panel { grid-column: 3; grid-row: 2; }.explain-panel p { margin: 13px 0 0; color: var(--text-sub); font-size: 11px; line-height: 1.7; }.load-hint { padding-top: 10px; color: var(--text-sub); font-size: 11px; }
-@media (max-width: 1100px) { .holiday-screen { grid-template-columns: repeat(2, minmax(0, 1fr)); }.holiday-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-column: 1 / -1; grid-row: 1; gap: 11px; }.holiday-info-grid > :nth-child(n) { grid-column: auto; grid-row: auto; }.compare-panel { grid-column: 1 / -1; grid-row: 2; }.explain-panel { grid-column: 1 / -1; grid-row: 3; } }
+.compare-value { display: grid; gap: 6px; padding: 9px 0; border-top: 1px solid var(--border-soft); }.compare-value > span { color: var(--text-sub); font-size: 12px; }.compare-value strong { color: var(--accent); font-size: 21px; font-weight: 650; }.compare-value small { color: var(--text-sub); font-size: 12px; font-weight: 400; }.compare-value em { color: var(--text-sub); font-size: 11px; font-style: normal; line-height: 1.3; }
+.explain-panel { grid-column: 3; grid-row: 2; }.explain-panel p { margin: 13px 0 0; color: var(--text-sub); font-size: 13px; line-height: 1.55; }.load-hint { padding-top: 10px; color: var(--text-sub); font-size: 12px; }
+@media (max-width: 1100px) { .holiday-screen { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }.holiday-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-column: 1 / -1; grid-row: 1; gap: 11px; }.holiday-info-grid > :nth-child(n) { grid-column: auto; grid-row: auto; }.compare-panel { grid-column: 1 / -1; grid-row: 2; }.compare-layout :deep(.chart-canvas) { height: 270px; }.explain-panel { grid-column: 1 / -1; grid-row: 3; } }
 @media (max-width: 620px) { .holiday-info-grid { grid-template-columns: 1fr; }.holiday-filters .field { width: calc(50% - 5px); }.holiday-filters .field select { min-width: 0; width: 100%; }.compare-values { grid-template-columns: 1fr; } }
 @media (min-width: 1101px) and (max-height: 850px) {
   .filter-panel { margin-bottom: 8px; }
@@ -83,10 +86,9 @@ const difference = computed(() => {
   .holiday-info { padding: 11px; gap: 6px; }
   .holiday-info strong, .holiday-info.change-card strong { font-size: 17px; }
   .holiday-info.change-card p { font-size: 23px; }
-  .compare-layout :deep(.chart-canvas) { height: min(30vh, 216px); }
   .compare-values { gap: 8px; }
   .compare-value { gap: 3px; padding: 5px 0; }
   .compare-value strong { font-size: 18px; }
-  .explain-panel p { margin-top: 7px; font-size: 10px; line-height: 1.45; }
+  .explain-panel p { margin-top: 7px; font-size: 12px; line-height: 1.35; }
 }
 </style>

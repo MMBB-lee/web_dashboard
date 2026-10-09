@@ -9,19 +9,19 @@ import { useChart } from './useChart'
 const props = defineProps<{ points: NumericPoint[]; name?: string; unit?: string }>()
 const option = computed<EChartsOption>(() => ({
   animationDuration: 600,
-  grid: { top: 20, right: 18, bottom: 26, left: 14, containLabel: true },
+  grid: { top: 20, right: 32, bottom: 26, left: 14, containLabel: true },
   tooltip: {
     trigger: 'axis', backgroundColor: 'rgba(7, 23, 49, .96)', borderColor: 'rgba(0, 212, 255, .45)', borderRadius: 0,
-    textStyle: { color: '#e6f7ff' }, valueFormatter: (value) => `${formatValue(Number(value))} ${props.unit ?? '人次'}`,
+    textStyle: { color: '#e6f7ff', fontSize: 13 }, valueFormatter: (value) => `${formatValue(Number(value))} ${props.unit ?? '人次'}`,
   },
   xAxis: {
     type: 'category', boundaryGap: false, data: props.points.map(pointLabel),
     axisTick: { show: false }, axisLine: { lineStyle: { color: 'rgba(117, 167, 210, .3)' } },
-    axisLabel: { color: '#85a6c6', fontSize: 10, hideOverlap: true },
+    axisLabel: { color: '#a2bfda', fontSize: 12, hideOverlap: true },
   },
   yAxis: {
     type: 'value', scale: true,
-    axisLabel: { color: '#85a6c6', fontSize: 10, formatter: (value: number) => value >= 10000 ? `${Math.round(value / 10000)}万` : String(value) },
+    axisLabel: { color: '#a2bfda', fontSize: 12, formatter: (value: number) => value >= 10000 ? `${Math.round(value / 10000)}万` : String(value) },
     splitLine: { lineStyle: { color: 'rgba(117, 167, 210, .11)' } },
   },
   series: [{

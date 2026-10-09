@@ -13,7 +13,7 @@ const label = computed(() => props.card.label ?? ({ scenic_visits: '景区接待
     <div class="metric-amount"><strong>{{ formatValue(card.value) }}</strong><span>{{ card.value == null ? '该粒度暂无数据' : card.unit }}</span></div>
     <div class="metric-bottom">
       <span>{{ formatPeriod(card.period_start, card.period_end, card.grain) }}</span>
-      <span>{{ demo ? '演示数据' : card.source_ids.length ? `来源 ${card.source_ids.length} 项` : '来源待标注' }}</span>
+      <span>{{ demo ? '静态样例' : card.source_ids.length ? `来源 ${card.source_ids.length} 项` : '来源待标注' }}</span>
     </div>
   </article>
 </template>

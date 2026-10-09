@@ -3,7 +3,7 @@ import type {
   MetricDefinition, NumericPoint, Overview, SeriesResult, TrendGrain,
 } from './types'
 
-// 本文件中的所有数值均为界面演示数据，不代表官方统计或真实预测。
+// 本文件中的所有数值均为静态样例，不代表官方统计或真实预测。
 export const DEMO_SCENIC_IDS = {
   huangshan: '00000000-0000-4000-8000-000000000001',
   jiuhua: '00000000-0000-4000-8000-000000000002',
@@ -63,7 +63,7 @@ export function demoSeries(entityId: string, grain: TrendGrain, start: string, e
 export function demoForecast(entityId: string, grain: TrendGrain, trainingEnd: string, horizon: number): ForecastResult {
   const expectedEnd = grain === 'month' ? '2026-09-30' : '2026-09-27'
   if (trainingEnd !== expectedEnd) {
-    return { status: 'data_insufficient', reason: '演示预测只覆盖最新演示周期；所选历史区间暂无对应预测。', forecast_points: [] }
+    return { status: 'data_insufficient', reason: '样例预测只覆盖最新样例周期；所选历史区间暂无对应预测。', forecast_points: [] }
   }
   const isJiuhua = entityId === DEMO_SCENIC_IDS.jiuhua
   const values = grain === 'month'
@@ -75,7 +75,7 @@ export function demoForecast(entityId: string, grain: TrendGrain, trainingEnd: s
   return {
     status: 'ready', model_version: 'demo-baseline-v1', source_ids: [],
     training_window: { start: grain === 'month' ? '2025-10-01' : '2026-07-06', end: trainingEnd },
-    backtest: { method: '演示回测', mae: isJiuhua ? 7200 : 13800, smape: isJiuhua ? 8.2 : 7.6, sample_count: 4 },
+    backtest: { method: '样例回测', mae: isJiuhua ? 7200 : 13800, smape: isJiuhua ? 8.2 : 7.6, sample_count: 4 },
     forecast_points: periods.slice(0, horizon).map((period, index) => ({
       ...demoPoint('scenic_visits', values[index], period, grain === 'month' ? monthEnd(period.slice(0, 7)) : plusDays(period, 6), grain),
       is_forecast: true, lower_bound: Math.round(values[index] * 0.86), upper_bound: Math.round(values[index] * 1.14), model_version: 'demo-baseline-v1',
@@ -111,7 +111,7 @@ export const demoHolidays: Holiday[] = [
 export function demoHolidayCompare(holidayIds: string[], entityId: string, mode: string): HolidayCompareResult {
   const holidays = holidayIds.map((id) => demoHolidays.find((item) => item.id === id)).filter((item): item is Holiday => Boolean(item))
   if (holidays.length !== 2) return { comparable: false, reason: '请选择两个假期。', items: [] }
-  if (mode === 'day_index') return { comparable: false, reason: '演示数据仅有假期总量，缺少完整逐日数据，不能绘制逐日曲线。', items: [] }
+  if (mode === 'day_index') return { comparable: false, reason: '静态样例仅有假期总量，缺少完整逐日数据，不能绘制逐日曲线。', items: [] }
   const isJiuhua = entityId === DEMO_SCENIC_IDS.jiuhua
   const totals: Record<string, number> = isJiuhua
     ? { 'demo-may-2024': 135000, 'demo-may-2025': 151000, 'demo-national-2024': 188000, 'demo-national-2025': 219000 }

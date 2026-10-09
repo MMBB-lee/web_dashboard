@@ -98,7 +98,7 @@ export async function getMetricDefinitions(entityType?: string): Promise<MetricD
 }
 
 export function getSource(sourceId: string): Promise<Source> {
-  return request(`/sources/${encodeURIComponent(sourceId)}`, () => { throw new ApiError(404, 'demo_source', '演示数据没有官方来源。') })
+  return request(`/sources/${encodeURIComponent(sourceId)}`, () => { throw new ApiError(404, 'demo_source', '静态样例没有官方来源。') })
 }
 
 export function getOverview(grain: TrendGrain, regionCode = '340000'): Promise<Overview> {
@@ -136,5 +136,5 @@ export async function getEvents(regionCode = '340000'): Promise<EventSummary[]> 
 
 // D 的分析接口已预留，A 后续跨对象比较时可直接调用。
 export function compareSeries(body: { series: Array<{ entity_id: string; metric: string }>; grain: TrendGrain; start: string; end: string; display_mode: 'separate_axes' | 'index_100'; base_period?: string }): Promise<unknown> {
-  return request('/analytics/compare', () => ({ series: [], comparison_note: '演示模式暂无跨指标比较数据。' }), { method: 'POST', body: JSON.stringify(body) })
+  return request('/analytics/compare', () => ({ series: [], comparison_note: '静态样例暂无跨指标比较数据。' }), { method: 'POST', body: JSON.stringify(body) })
 }
