@@ -1,7 +1,9 @@
 # web_dashboard
 
-A 负责的唯一 Vue 应用。当前只建立项目配置和目录，`src/` 内的页面、组件、路由及样式文件尚未实现。
+A 负责的 Vue 3 + TypeScript 驾驶舱应用，实现总览、景区趋势和假期专题。开发环境运行 `pnpm install`、`pnpm dev`；类型检查和构建运行 `pnpm build`。
 
-目录规划见 `../04-项目架构与文件树.md`。`package.json` 预留了同级 `../web_interactions/` 本地包依赖；等 B 提交该包后，在本目录执行 `pnpm install` 生成 `pnpm-lock.yaml`。待 `src/main.ts` 等源文件完成后运行 `pnpm dev`。
+应用使用 `/api/v1` 的 D 端接口和服务端会话 Cookie。开发服务器将接口代理到 `http://127.0.0.1:8000`。当后端不可用时，页面展示明确标记的静态演示数据；当后端可用且登录有效时，改用真实接口。后端返回 401、422 或 `data_insufficient` 时不会显示演示值。
 
-开发服务器将 `/api/v1` 请求代理到 `http://127.0.0.1:8000`，与 D 的 FastAPI 约定一致。
+B 的 `web_interactions/` 包尚未创建，因此暂未写入本地依赖。A 已在 `src/app/router.ts` 预留 `registerInteractionRoutes`；B 交付后在 `package.json` 加入 `"web-interactions": "file:../web_interactions"`，并在应用入口装配 B 导出的路由和认证状态。
+
+`public/geo/anhui.geojson` 是空的授权占位文件。地图当前只表示对象的大致位置，明确标为示意图；取得可使用的边界数据后再替换。所有演示数值集中在 `src/app/demo.ts`，不代表官方统计。

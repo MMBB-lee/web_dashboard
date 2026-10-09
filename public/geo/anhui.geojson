@@ -1,0 +1,8 @@
+{
+  "type": "FeatureCollection",
+  "features": [],
+  "properties": {
+    "status": "pending_authorized_boundary",
+    "note": "尚未核验可使用的行政边界数据。界面当前仅展示对象位置示意。"
+  }
+}
