@@ -8,6 +8,7 @@ import MetricCard from '../../components/layout/MetricCard.vue'
 import AnhuiMap from '../../components/map/AnhuiMap.vue'
 import TrendChart from '../../components/charts/TrendChart.vue'
 import ForecastChart from '../../components/charts/ForecastChart.vue'
+import UiSelect from '../../components/ui/UiSelect.vue'
 import { useOverview } from './overview'
 
 const router = useRouter()
@@ -15,6 +16,11 @@ const { grain, loading, error, overview, series, forecast, events, reload } = us
 const isDemo = computed(() => backendMode.value === 'demo')
 const latestPoint = computed(() => series.value?.points.at(-1))
 const transportNotice = ref('')
+const grainOptions = [{ value: 'week', label: '按周' }, { value: 'month', label: '按月' }]
+
+function setGrain(value: string) {
+  if (value === 'week' || value === 'month') grain.value = value
+}
 
 function openEntity(entity: Entity) {
   if (entity.type === 'scenic') void router.push({ name: 'scenic', query: { id: entity.id } })
@@ -27,7 +33,7 @@ function openEntity(entity: Entity) {
   <section class="page-heading">
     <div><span class="eyebrow">OVERVIEW / 安徽省</span><h1>全域客流总览</h1><p>景区、铁路站与机场按各自指标展示，帮助快速定位客流变化。</p></div>
     <div class="toolbar">
-      <label class="field">统计粒度<select v-model="grain"><option value="week">按周</option><option value="month">按月</option></select></label>
+      <div class="field"><span>统计粒度</span><UiSelect :model-value="grain" :options="grainOptions" label="统计粒度" @update:model-value="setGrain" /></div>
       <button class="button-subtle" :disabled="loading" @click="reload">{{ loading ? '加载中…' : '刷新数据' }}</button>
     </div>
   </section>

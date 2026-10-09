@@ -3,11 +3,22 @@ import { computed } from 'vue'
 import { backendMode } from '../../app/data'
 import { formatValue } from '../../app/format'
 import HolidayCompareChart from '../../components/charts/HolidayCompareChart.vue'
+import UiSelect from '../../components/ui/UiSelect.vue'
 import { useHolidays } from './holidays'
 
 const { kind, firstId, secondId, entityId, mode, holidays, entities, metric, comparison, loading, error, firstHoliday, secondHoliday, entity, loadComparison } = useHolidays()
 const isDemo = computed(() => backendMode.value === 'demo')
 const modeLabel = computed(() => ({ daily_average: '日均接待人次', period_total: '假期总接待人次', day_index: '逐日变化' })[mode.value])
+const kindOptions = [{ value: 'may_day', label: '五一' }, { value: 'national_day', label: '国庆' }, { value: 'summer', label: '暑假' }, { value: 'winter', label: '寒假' }]
+const holidayOptions = computed(() => holidays.value.map(holiday => ({ value: holiday.id, label: holiday.name })))
+const entityOptions = computed(() => entities.value.map(item => ({ value: item.id, label: item.name })))
+const modeOptions = [{ value: 'daily_average', label: '日均值' }, { value: 'period_total', label: '假期总量' }, { value: 'day_index', label: '逐日序列' }]
+function setKind(value: string) {
+  if (value === 'may_day' || value === 'national_day' || value === 'summer' || value === 'winter') kind.value = value
+}
+function setMode(value: string) {
+  if (value === 'daily_average' || value === 'period_total' || value === 'day_index') mode.value = value
+}
 const difference = computed(() => {
   const [a, b] = comparison.value?.items ?? []
   if (!comparison.value?.comparable || a?.value == null || b?.value == null || a.value === 0) return null
@@ -24,11 +35,11 @@ const difference = computed(() => {
   <section class="panel section-panel filter-panel">
     <div class="panel-head"><h2 class="panel-title">比较条件</h2><span class="panel-kicker">FILTER / 口径选择</span></div>
     <div class="holiday-filters">
-      <label class="field">假期类型<select v-model="kind"><option value="may_day">五一</option><option value="national_day">国庆</option><option value="summer">暑假</option><option value="winter">寒假</option></select></label>
-      <label class="field">比较假期 A<select v-model="firstId"><option v-for="holiday in holidays" :key="holiday.id" :value="holiday.id">{{ holiday.name }}</option></select></label>
-      <label class="field">比较假期 B<select v-model="secondId"><option v-for="holiday in holidays" :key="holiday.id" :value="holiday.id">{{ holiday.name }}</option></select></label>
-      <label class="field">景区<select v-model="entityId"><option v-for="item in entities" :key="item.id" :value="item.id">{{ item.name }}</option></select></label>
-      <label class="field">比较方式<select v-model="mode"><option value="daily_average">日均值</option><option value="period_total">假期总量</option><option value="day_index">逐日序列</option></select></label>
+      <div class="field"><span>假期类型</span><UiSelect :model-value="kind" :options="kindOptions" label="假期类型" @update:model-value="setKind" /></div>
+      <div class="field"><span>比较假期 A</span><UiSelect v-model="firstId" :options="holidayOptions" label="比较假期 A" /></div>
+      <div class="field"><span>比较假期 B</span><UiSelect v-model="secondId" :options="holidayOptions" label="比较假期 B" /></div>
+      <div class="field"><span>景区</span><UiSelect v-model="entityId" :options="entityOptions" label="景区" /></div>
+      <div class="field"><span>比较方式</span><UiSelect :model-value="mode" :options="modeOptions" label="比较方式" @update:model-value="setMode" /></div>
       <button class="button-primary" :disabled="loading" @click="loadComparison">{{ loading ? '计算中…' : '更新对比' }}</button>
     </div>
   </section>
@@ -62,7 +73,7 @@ const difference = computed(() => {
 </template>
 
 <style scoped>
-.filter-panel { margin-bottom: 11px; }.holiday-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; }.holiday-filters .field select { min-width: 137px; }
+.filter-panel { margin-bottom: 11px; }.holiday-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; }.holiday-filters .field { --select-min-width: 137px; }
 .holiday-state { margin: 14px 0; }
 .holiday-screen { display: grid; grid-template-columns: minmax(215px, .8fr) minmax(420px, 1.8fr) minmax(215px, .8fr); grid-template-rows: auto minmax(0, 1fr); gap: 11px; }
 .holiday-info-grid { display: contents; }
@@ -78,7 +89,7 @@ const difference = computed(() => {
 .compare-value { display: grid; gap: 6px; padding: 9px 0; border-top: 1px solid var(--border-soft); }.compare-value > span { color: var(--text-sub); font-size: 12px; }.compare-value strong { color: var(--accent); font-size: 21px; font-weight: 650; }.compare-value small { color: var(--text-sub); font-size: 12px; font-weight: 400; }.compare-value em { color: var(--text-sub); font-size: 11px; font-style: normal; line-height: 1.3; }
 .explain-panel { grid-column: 3; grid-row: 2; }.explain-panel p { margin: 13px 0 0; color: var(--text-sub); font-size: 13px; line-height: 1.55; }.load-hint { padding-top: 10px; color: var(--text-sub); font-size: 12px; }
 @media (max-width: 1100px) { .holiday-screen { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }.holiday-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-column: 1 / -1; grid-row: 1; gap: 11px; }.holiday-info-grid > :nth-child(n) { grid-column: auto; grid-row: auto; }.compare-panel { grid-column: 1 / -1; grid-row: 2; }.compare-layout :deep(.chart-canvas) { height: 270px; }.explain-panel { grid-column: 1 / -1; grid-row: 3; } }
-@media (max-width: 620px) { .holiday-info-grid { grid-template-columns: 1fr; }.holiday-filters .field { width: calc(50% - 5px); }.holiday-filters .field select { min-width: 0; width: 100%; }.compare-values { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .holiday-info-grid { grid-template-columns: 1fr; }.holiday-filters .field { width: calc(50% - 5px); --select-min-width: 0; }.compare-values { grid-template-columns: 1fr; } }
 @media (min-width: 1101px) and (max-height: 850px) {
   .filter-panel { margin-bottom: 8px; }
   .holiday-filters { gap: 8px; }

@@ -2,13 +2,19 @@
 import { computed } from 'vue'
 import { backendMode } from '../../app/data'
 import { formatPeriod, formatRate, formatValue } from '../../app/format'
+import UiSelect from '../../components/ui/UiSelect.vue'
+import WeekPicker from '../../components/ui/WeekPicker.vue'
 import TrendChart from '../../components/charts/TrendChart.vue'
 import ForecastChart from '../../components/charts/ForecastChart.vue'
 import { useScenic } from './scenic'
 
-const { entityId, grain, start, end, horizon, entities, selectedEntity, metric, source, series, forecast, loading, error, reload } = useScenic()
+const { entityId, grain, setGrain, startPeriod, endPeriod, maxPeriod, refreshToday, horizon, entities, selectedEntity, metric, source, series, forecast, loading, error, reload } = useScenic()
 const last = computed(() => series.value?.points.at(-1))
 const isDemo = computed(() => backendMode.value === 'demo')
+const entityOptions = computed(() => entities.value.map(entity => ({ value: entity.id, label: entity.name })))
+const grainOptions = [{ value: 'week', label: '按周' }, { value: 'month', label: '按月' }]
+const horizonOptions = computed(() => Array.from({ length: grain.value === 'week' ? 8 : 6 }, (_, index) => ({ value: String(index + 1), label: `${index + 1} ${grain.value === 'week' ? '周' : '月'}` })))
+function setHorizon(value: string) { horizon.value = Number(value) }
 </script>
 
 <template>
@@ -16,10 +22,12 @@ const isDemo = computed(() => backendMode.value === 'demo')
   <section class="page-heading scenic-heading">
     <div><span class="eyebrow">SCENIC ANALYSIS / 景区</span><h1>景区客流观察</h1><p>查看接待人次的历史变化与经过回测的周／月预测。</p></div>
     <div class="toolbar">
-      <label class="field">选择景区<select v-model="entityId"><option v-for="entity in entities" :key="entity.id" :value="entity.id">{{ entity.name }}</option></select></label>
-      <label class="field">时间粒度<select v-model="grain"><option value="week">按周</option><option value="month">按月</option></select></label>
-      <label class="field">开始日期<input v-model="start" type="date" /></label>
-      <label class="field">结束日期<input v-model="end" type="date" /></label>
+      <div class="field scenic-entity-field"><span>选择景区</span><UiSelect v-model="entityId" :options="entityOptions" label="选择景区" /></div>
+      <div class="field"><span>时间粒度</span><UiSelect :model-value="grain" :options="grainOptions" label="时间粒度" @update:model-value="setGrain" /></div>
+      <label v-if="grain === 'month'" class="field period-field">开始月份<input v-model="startPeriod" type="month" :max="maxPeriod" @focus="refreshToday" /></label>
+      <div v-else class="field period-field" @focusin="refreshToday"><span>开始周次</span><WeekPicker v-model="startPeriod" label="开始周次" :max="maxPeriod" /></div>
+      <label v-if="grain === 'month'" class="field period-field">结束月份<input v-model="endPeriod" type="month" :min="startPeriod" :max="maxPeriod" @focus="refreshToday" /></label>
+      <div v-else class="field period-field" @focusin="refreshToday"><span>结束周次</span><WeekPicker v-model="endPeriod" label="结束周次" :min="startPeriod" :max="maxPeriod" align="right" /></div>
       <button class="button-subtle" :disabled="loading" @click="reload">{{ loading ? '加载中…' : '查询' }}</button>
     </div>
   </section>
@@ -42,7 +50,7 @@ const isDemo = computed(() => backendMode.value === 'demo')
         <div class="chart-caption">实线表示已核验实际值；缺失周期不补造。{{ series?.missing_periods.length ? `缺失 ${series.missing_periods.length} 个周期。` : '' }}</div>
       </section>
       <section class="panel section-panel">
-        <div class="panel-head"><h2 class="panel-title">历史预测与区间</h2><label class="field horizon-field">预测步数<select v-model.number="horizon"><option v-for="n in grain === 'week' ? 8 : 6" :key="n" :value="n">{{ n }} {{ grain === 'week' ? '周' : '月' }}</option></select></label></div>
+        <div class="panel-head"><h2 class="panel-title">历史预测与区间</h2><div class="field horizon-field"><span>预测步数</span><UiSelect :model-value="String(horizon)" :options="horizonOptions" label="预测步数" @update:model-value="setHorizon" /></div></div>
         <ForecastChart v-if="forecast?.status === 'ready' && forecast.forecast_points.length" :actual="series?.points ?? []" :forecast="forecast.forecast_points" unit="人次" />
         <div v-else class="state-box">{{ forecast?.reason ?? '数据不足，暂不输出预测曲线。' }}</div>
         <div class="chart-caption">预测值用虚线、上下界用点线表示。回测 MAE {{ formatValue(forecast?.backtest?.mae) }} 人次；样本数 {{ forecast?.backtest?.sample_count ?? '—' }}。</div>
@@ -65,6 +73,8 @@ const isDemo = computed(() => backendMode.value === 'demo')
 
 <style scoped>
 .scenic-heading .toolbar { max-width: 760px; justify-content: flex-end; }
+.scenic-entity-field { --select-min-width: 153px; }
+.period-field input { min-width: 140px; border-radius: 0; }
 .scenic-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 11px; margin-bottom: 11px; }
 .summary-tile { display: grid; align-content: start; gap: 7px; min-height: 102px; padding: 12px 14px; }
 .summary-tile > span { color: var(--text-sub); font-size: 13px; }.summary-tile strong { color: var(--text-title); font-size: 21px; font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -77,7 +87,7 @@ const isDemo = computed(() => backendMode.value === 'demo')
 .scenic-dashboard > section:nth-child(2) { grid-column: 3; grid-row: 1; }
 .scenic-dashboard > .source-panel { grid-column: 2; grid-row: 1; }
 .scenic-dashboard :deep(.chart-canvas) { flex: 1; min-height: 0; height: auto; }
-.horizon-field { display: flex; align-items: center; gap: 7px; white-space: nowrap; }.horizon-field select { min-width: 74px; height: 29px; font-size: 12px; }
+.horizon-field { display: flex; align-items: center; gap: 7px; white-space: nowrap; --select-min-width: 74px; --select-height: 29px; }.horizon-field :deep(.ui-select-trigger) { font-size: 12px; }
 .source-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }.source-grid > div { padding-bottom: 12px; border-bottom: 1px solid var(--border-soft); }.source-grid span { color: var(--text-sub); font-size: 12px; }.source-grid p { margin: 7px 0 0; color: var(--text-main); font-size: 13px; line-height: 1.5; word-break: break-word; }.source-grid a { color: var(--accent); }
 .source-footnote { margin: 19px 0 0; padding-top: 10px; border-top: 1px solid var(--border-soft); color: var(--text-sub); font-size: 12px; }.load-hint { padding-top: 10px; color: var(--text-sub); font-size: 12px; }
 @media (max-width: 1180px) { .scenic-summary { grid-template-columns: repeat(2, 1fr); }.scenic-dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }.scenic-dashboard > section:nth-child(2) { grid-column: 2; }.scenic-dashboard > .source-panel { grid-column: 1 / -1; grid-row: 2; }.scenic-dashboard :deep(.chart-canvas) { flex: none; height: 320px; }.source-grid { grid-template-columns: repeat(4, 1fr); } }

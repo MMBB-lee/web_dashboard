@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { backendMode, refreshBackendStatus } from '../../app/data'
+import { backendMode, interactionsAvailable, refreshBackendStatus } from '../../app/data'
 
 const route = useRoute()
 const now = ref(new Date())
@@ -17,11 +17,17 @@ const clock = computed(() => {
   const part = (type: Intl.DateTimeFormatPartTypes) => parts.find((item) => item.type === type)?.value ?? ''
   return `${part('year')}年${Number(part('month'))}月${Number(part('day'))}日 ${part('hour')}:${part('minute')}:${part('second')}`
 })
-const modeLabel = computed(() => ({ checking: '正在连接', demo: '', live: '真实接口', auth: '需要登录' })[backendMode.value])
+const modeLabel = computed(() => ({ checking: '正在连接', demo: '', live: '真实接口', auth: '需要登录', offline: '后端离线' })[backendMode.value])
 const nav = [
   { to: '/', label: '全域总览', index: '01' },
   { to: '/scenic', label: '景区客流', index: '02' },
   { to: '/holidays', label: '假期专题', index: '03' },
+  ...(interactionsAvailable ? [
+  { to: '/transport', label: '交通客流', index: '04' },
+  { to: '/events', label: '事件中心', index: '05' },
+  { to: '/assistant', label: '智能问答', index: '06' },
+  { to: '/video', label: '录像回放', index: '07' },
+  ] : []),
 ]
 </script>
 

@@ -1,4 +1,5 @@
 import type { Grain, NumericPoint } from './types'
+import { isoWeek } from './period'
 
 export function formatValue(value: number | null | undefined, maximumFractionDigits = 0): string {
   if (value == null || !Number.isFinite(value)) return '—'
@@ -13,7 +14,19 @@ export function formatPeriod(start?: string | null, end?: string | null, grain?:
 }
 
 export function pointLabel(point: NumericPoint): string {
-  return point.grain === 'month' ? point.period_start.slice(0, 7) : point.period_start.slice(5)
+  if (point.grain === 'month') {
+    const [year, month] = point.period_start.split('-')
+    return `${year}年${Number(month)}月`
+  }
+  if (point.grain === 'week') {
+    const [year, week] = isoWeek(point.period_start).split('-W')
+    return `${year}年第${Number(week)}周`
+  }
+  return point.period_start.slice(5)
+}
+
+export function formatAxisValue(value: number): string {
+  return Math.abs(value) >= 10000 ? `${formatValue(value / 10000, 2)}万` : formatValue(value, 2)
 }
 
 export function formatRate(value: number | null | undefined): string {

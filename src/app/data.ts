@@ -8,6 +8,8 @@ import type {
 
 const API = '/api/v1'
 const CHECK_INTERVAL_MS = 12_000
+declare const __WEB_INTERACTIONS_AVAILABLE__: boolean
+export const interactionsAvailable = __WEB_INTERACTIONS_AVAILABLE__
 export const backendMode = ref<BackendMode>('checking')
 export const csrfToken = ref<string | null>(null)
 let checkedAt = 0
@@ -21,6 +23,10 @@ function timedFetch(path: string, init: RequestInit = {}): Promise<Response> {
 }
 
 export function refreshBackendStatus(force = false): Promise<BackendMode> {
+  if (!interactionsAvailable) {
+    backendMode.value = 'demo'
+    return Promise.resolve('demo')
+  }
   if (!force && checkedAt && Date.now() - checkedAt < CHECK_INTERVAL_MS) return Promise.resolve(backendMode.value)
   if (checkInFlight) return checkInFlight
   checkInFlight = (async () => {
@@ -40,7 +46,7 @@ export function refreshBackendStatus(force = false): Promise<BackendMode> {
       }
     } catch {
       csrfToken.value = null
-      backendMode.value = 'demo'
+      backendMode.value = 'offline'
     }
     checkedAt = Date.now()
     return backendMode.value
@@ -52,17 +58,17 @@ async function request<T>(path: string, demo: () => T, init?: RequestInit): Prom
   const mode = await refreshBackendStatus()
   if (mode === 'demo') return demo()
   if (mode === 'auth') throw new ApiError(401, 'unauthorized', '请先登录后查看业务数据。')
+  if (mode === 'offline') throw new ApiError(0, 'network_error', '暂时无法连接后端服务。')
   const headers = new Headers(init?.headers)
   if (init?.body) headers.set('Content-Type', 'application/json')
   if (init?.method && init.method !== 'GET' && csrfToken.value) headers.set('X-CSRF-Token', csrfToken.value)
   let response: Response
   try {
     response = await timedFetch(path, { ...init, headers })
-  } catch (error) {
-    if (await refreshBackendStatus(true) === 'demo') return demo()
-    throw error
+  } catch {
+    await refreshBackendStatus(true)
+    throw new ApiError(0, 'network_error', '暂时无法连接后端服务。')
   }
-  if (response.status >= 500 && await refreshBackendStatus(true) === 'demo') return demo()
   if (response.status === 401) {
     backendMode.value = 'auth'
     csrfToken.value = null

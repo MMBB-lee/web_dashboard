@@ -15,14 +15,13 @@ onMounted(() => {
 onUnmounted(() => { if (poller) window.clearInterval(poller) })
 
 watch(backendMode, (mode) => {
-  if (mode === 'auth' && route.name !== 'login-placeholder') {
-    void router.replace({ name: 'login-placeholder', query: { redirect: route.fullPath } })
+  if (mode === 'auth' && route.path !== '/login') {
+    void router.replace({ path: '/login', query: { redirect: route.fullPath } })
   }
 })
 </script>
 
 <template>
-  <DashboardShell>
-    <RouterView />
-  </DashboardShell>
+  <RouterView v-if="route.path === '/login'" />
+  <DashboardShell v-else><RouterView /></DashboardShell>
 </template>

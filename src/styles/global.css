@@ -16,7 +16,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
 .topbar-title small { margin-top: 2px; color: #75a8cb; font: 11px Consolas, monospace; letter-spacing: .18em; }
 .topbar-right { display: flex; align-items: center; justify-content: flex-end; gap: 13px; min-width: 0; white-space: nowrap; }
 .connection { display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; border: 1px solid rgba(0, 242, 169, .22); color: var(--accent-green); background: rgba(0, 242, 169, .07); font-size: 12px; }
-.connection.auth { color: var(--accent-danger); border-color: rgba(255, 107, 116, .25); background: rgba(255, 107, 116, .08); }
+.connection.auth, .connection.offline { color: var(--accent-danger); border-color: rgba(255, 107, 116, .25); background: rgba(255, 107, 116, .08); }
 .connection.checking { color: var(--text-sub); border-color: var(--border-glow); background: rgba(133, 166, 198, .08); }
 .connection-dot { width: 6px; height: 6px; background: currentColor; box-shadow: 0 0 7px currentColor; }
 .clock { color: #c4def5; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; font-size: clamp(16px, 1vw, 20px); font-variant-numeric: tabular-nums; font-weight: 600; letter-spacing: .03em; }
@@ -37,8 +37,8 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
 .page-heading h1 { margin: 3px 0 3px; color: var(--text-title); font-size: clamp(20px, 1.6vw, 25px); line-height: 1.2; letter-spacing: .04em; }
 .page-heading p { margin: 0; color: var(--text-sub); font-size: 13px; line-height: 1.45; }
 .toolbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 9px; }
-.field { display: grid; gap: 4px; color: var(--text-sub); font-size: 12px; }
-.field select, .field input { height: 31px; min-width: 108px; padding: 0 9px; border: 1px solid var(--border-glow); background: #10274b; color: var(--text-title); color-scheme: dark; }
+.field { display: grid; gap: 4px; color: var(--text-sub); font-size: 12px; --select-height: 31px; }
+.field select, .field input { height: 31px; min-width: 108px; padding: 0 9px; border: 1px solid var(--border-glow); border-radius: 0; background: #10274b; color: var(--text-title); color-scheme: dark; }
 .field select:hover, .field input:hover { border-color: rgba(0, 212, 255, .7); }
 .button-primary, .button-subtle { min-height: 31px; padding: 0 13px; border: 1px solid rgba(0, 212, 255, .55); color: #04243d; background: var(--accent); font-size: 13px; font-weight: 700; }
 .button-primary:hover { background: #63e7ff; }
@@ -116,7 +116,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
   .eyebrow { font-size: 11px; }
   .page-heading h1 { margin: 1px 0; font-size: 19px; }
   .page-heading p { font-size: 12px; line-height: 1.25; }
-  .field { gap: 2px; font-size: 11px; }
+  .field { gap: 2px; font-size: 11px; --select-height: 27px; }
   .field select, .field input { height: 27px; }
   .button-primary, .button-subtle { min-height: 27px; }
   .metric-grid { gap: 8px; margin-bottom: 8px; }

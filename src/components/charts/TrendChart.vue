@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { graphic } from 'echarts/core'
 import type { EChartsOption } from 'echarts'
-import { formatValue, pointLabel } from '../../app/format'
+import { formatAxisValue, formatValue, pointLabel } from '../../app/format'
 import type { NumericPoint } from '../../app/types'
 import { useChart } from './useChart'
 
@@ -21,7 +21,7 @@ const option = computed<EChartsOption>(() => ({
   },
   yAxis: {
     type: 'value', scale: true,
-    axisLabel: { color: '#a2bfda', fontSize: 12, formatter: (value: number) => value >= 10000 ? `${Math.round(value / 10000)}万` : String(value) },
+    axisLabel: { color: '#a2bfda', fontSize: 12, formatter: formatAxisValue },
     splitLine: { lineStyle: { color: 'rgba(117, 167, 210, .11)' } },
   },
   series: [{
