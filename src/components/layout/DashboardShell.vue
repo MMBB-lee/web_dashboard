@@ -17,7 +17,7 @@ const clock = computed(() => {
   const part = (type: Intl.DateTimeFormatPartTypes) => parts.find((item) => item.type === type)?.value ?? ''
   return `${part('year')}年${Number(part('month'))}月${Number(part('day'))}日 ${part('hour')}:${part('minute')}:${part('second')}`
 })
-const modeLabel = computed(() => ({ checking: '正在连接', demo: '', live: '真实接口', auth: '需要登录', offline: '后端离线' })[backendMode.value])
+const modeLabel = computed(() => ({ checking: '正在连接', demo: '', live: '真实接口', auth: '需要登录' })[backendMode.value])
 const nav = [
   { to: '/', label: '全域总览', index: '01' },
   { to: '/scenic', label: '景区客流', index: '02' },

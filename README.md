@@ -2,9 +2,9 @@
 
 A 负责的 Vue 3 + TypeScript 驾驶舱应用，实现总览、景区趋势和假期专题。开发环境运行 `pnpm install`、`pnpm dev`；类型检查和构建运行 `pnpm build`。
 
-应用使用 `/api/v1` 的 D 端接口和服务端会话 Cookie。开发服务器将接口代理到 `http://127.0.0.1:8000`。当同级 `web_interactions/src/index.ts` 不存在时，只显示 A 原有的静态样例驾驶舱；当它存在时，接入 B 的页面，A 的页面使用真实接口，不在后端断开时回退到静态样例。后端返回 401、422 或 `data_insufficient` 时也不会显示 A 的样例值。B 页面内部的数据回退由 B 项目自身维护。
+应用使用 `/api/v1` 的 D 端接口和服务端会话 Cookie。开发服务器将接口代理到 `http://127.0.0.1:8000`。未接入后端时，A 页面使用原有的静态样例；如果同级 `web_interactions/src/index.ts` 存在，B 页面使用其 `dev/mock.ts` 演示接口，登录页可点击“进入演示工作台”。后端可用时，两边切换为真实接口；后端返回 401、422 或 `data_insufficient` 时不会显示 A 的样例值。
 
-B 的 `web_interactions/` 是可选的同级目录。`vite.config.ts` 在启动或构建时检查其入口；`src/main.ts` 在存在时加载 B 的路由、登录状态、样式和 PrimeVue。启动 `web_dashboard` 即可通过同一地址打开总览、景区、假期、交通、事件、智能问答和录像页面，无需单独启动 B 的 Vite 服务。若增删 B 目录，请重启 Vite。
+B 的 `web_interactions/` 是可选的同级目录。`vite.config.ts` 在启动或构建时检查其入口；`src/main.ts` 在存在时加载 B 的路由、登录状态、样式和 PrimeVue，并按后端可用性选择演示或 API 模式。启动 `web_dashboard` 即可通过同一地址打开总览、景区、假期、交通、事件、智能问答和录像页面，无需单独启动 B 的 Vite 服务。若增删 B 目录，请重启 Vite；后端状态变化时，页面会刷新以同步 B 的模式。
 
 首次启动请在 `项目/web_dashboard/` 中安装依赖，随后运行 `pnpm --config.verifyDepsBeforeRun=false dev`，访问终端显示的地址。本机的 pnpm 11 将未获批的 `esbuild` 构建脚本当作安装错误；如遇此错误，可用 `pnpm --config.strictDepBuilds=false install` 完成安装。pnpm 11 可能自动生成 `pnpm-workspace.yaml` 记录待审批的脚本。当前 `项目/` 中只有两个前端目录；B 存在时，登录及业务数据请求需要 `http://127.0.0.1:8000` 上的 FastAPI 后端。
 

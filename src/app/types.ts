@@ -1,7 +1,7 @@
 export type Grain = 'day' | 'week' | 'month' | 'holiday'
 export type TrendGrain = 'week' | 'month'
 export type MetricCode = 'scenic_visits' | 'rail_departures' | 'airport_throughput'
-export type BackendMode = 'checking' | 'demo' | 'live' | 'auth' | 'offline'
+export type BackendMode = 'checking' | 'demo' | 'live' | 'auth'
 
 export interface NumericPoint {
   metric: string

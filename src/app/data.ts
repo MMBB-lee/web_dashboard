@@ -46,7 +46,7 @@ export function refreshBackendStatus(force = false): Promise<BackendMode> {
       }
     } catch {
       csrfToken.value = null
-      backendMode.value = 'offline'
+      backendMode.value = 'demo'
     }
     checkedAt = Date.now()
     return backendMode.value
@@ -58,7 +58,6 @@ async function request<T>(path: string, demo: () => T, init?: RequestInit): Prom
   const mode = await refreshBackendStatus()
   if (mode === 'demo') return demo()
   if (mode === 'auth') throw new ApiError(401, 'unauthorized', '请先登录后查看业务数据。')
-  if (mode === 'offline') throw new ApiError(0, 'network_error', '暂时无法连接后端服务。')
   const headers = new Headers(init?.headers)
   if (init?.body) headers.set('Content-Type', 'application/json')
   if (init?.method && init.method !== 'GET' && csrfToken.value) headers.set('X-CSRF-Token', csrfToken.value)
@@ -66,9 +65,10 @@ async function request<T>(path: string, demo: () => T, init?: RequestInit): Prom
   try {
     response = await timedFetch(path, { ...init, headers })
   } catch {
-    await refreshBackendStatus(true)
+    if (await refreshBackendStatus(true) === 'demo') return demo()
     throw new ApiError(0, 'network_error', '暂时无法连接后端服务。')
   }
+  if (response.status >= 500 && await refreshBackendStatus(true) === 'demo') return demo()
   if (response.status === 401) {
     backendMode.value = 'auth'
     csrfToken.value = null

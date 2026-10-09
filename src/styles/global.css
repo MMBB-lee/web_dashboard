@@ -16,7 +16,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
 .topbar-title small { margin-top: 2px; color: #75a8cb; font: 11px Consolas, monospace; letter-spacing: .18em; }
 .topbar-right { display: flex; align-items: center; justify-content: flex-end; gap: 13px; min-width: 0; white-space: nowrap; }
 .connection { display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; border: 1px solid rgba(0, 242, 169, .22); color: var(--accent-green); background: rgba(0, 242, 169, .07); font-size: 12px; }
-.connection.auth, .connection.offline { color: var(--accent-danger); border-color: rgba(255, 107, 116, .25); background: rgba(255, 107, 116, .08); }
+.connection.auth { color: var(--accent-danger); border-color: rgba(255, 107, 116, .25); background: rgba(255, 107, 116, .08); }
 .connection.checking { color: var(--text-sub); border-color: var(--border-glow); background: rgba(133, 166, 198, .08); }
 .connection-dot { width: 6px; height: 6px; background: currentColor; box-shadow: 0 0 7px currentColor; }
 .clock { color: #c4def5; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; font-size: clamp(16px, 1vw, 20px); font-variant-numeric: tabular-nums; font-weight: 600; letter-spacing: .03em; }
