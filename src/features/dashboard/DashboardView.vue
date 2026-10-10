@@ -32,7 +32,8 @@ function setScenic(value: string) {
 
 function openEntity(entity: Entity) {
   if (entity.type === 'scenic') void router.push({ name: 'scenic', query: { id: entity.id } })
-  else transportNotice.value = `${entity.name}的详情页由 B 模块提供，接入后可从此处打开。`
+  else if (router.hasRoute('b-transport')) void router.push({ name: 'b-transport', query: { entity_id: entity.id } })
+  else transportNotice.value = `${entity.name}的交通客流页面尚未接入。`
 }
 </script>
 

@@ -12,8 +12,8 @@ export const DEMO_SCENIC_IDS = {
 export const demoEntities: Entity[] = [
   { id: DEMO_SCENIC_IDS.huangshan, name: '黄山风景区', type: 'scenic', region_code: '341000', longitude: 118.17, latitude: 30.13, available_metrics: ['scenic_visits'], available_grains: ['week', 'month'], status: 'demo' },
   { id: DEMO_SCENIC_IDS.jiuhua, name: '九华山风景区', type: 'scenic', region_code: '341700', longitude: 117.82, latitude: 30.48, available_metrics: ['scenic_visits'], available_grains: ['week', 'month'], status: 'demo' },
-  { id: '00000000-0000-4000-8000-000000000003', name: '合肥南站', type: 'rail_station', region_code: '340100', longitude: 117.29, latitude: 31.79, available_metrics: ['rail_departures'], available_grains: ['week', 'month'], status: 'demo' },
-  { id: '00000000-0000-4000-8000-000000000004', name: '合肥新桥国际机场', type: 'airport', region_code: '340100', longitude: 116.97, latitude: 31.99, available_metrics: ['airport_throughput'], available_grains: ['month'], status: 'demo' },
+  { id: '10000000-0000-4000-8000-000000000001', name: '合肥南站', type: 'rail_station', region_code: '340100', longitude: 117.29, latitude: 31.79, available_metrics: ['rail_departures'], available_grains: ['month'], status: 'demo' },
+  { id: '10000000-0000-4000-8000-000000000003', name: '合肥新桥国际机场', type: 'airport', region_code: '340100', longitude: 116.97, latitude: 31.99, available_metrics: ['airport_throughput'], available_grains: ['month'], status: 'demo' },
 ]
 
 export const demoMetrics: MetricDefinition[] = [
@@ -90,12 +90,12 @@ export function demoOverview(grain: TrendGrain): Overview {
   return {
     cards: [
       { ...demoPoint('scenic_visits', isMonth ? 322000 : 81200, start, end, grain), label: '黄山风景区 · 接待人次', entity_id: DEMO_SCENIC_IDS.huangshan, status: 'demo' },
-      { ...demoPoint('rail_departures', isMonth ? 625000 : 148000, start, end, grain), label: '合肥南站 · 发送人次', entity_id: demoEntities[2].id, status: 'demo' },
-      { ...demoPoint('airport_throughput', isMonth ? 1020000 : 0, start, end, grain), value: isMonth ? 1020000 : null, label: '新桥机场 · 旅客吞吐量', entity_id: demoEntities[3].id, status: isMonth ? 'demo' : 'unsupported_grain' },
+      { ...demoPoint('rail_departures', 1548000, start, end, grain), value: isMonth ? 1548000 : null, label: '合肥南站 · 发送人次', entity_id: demoEntities[2].id, status: isMonth ? 'demo' : 'unsupported_grain' },
+      { ...demoPoint('airport_throughput', 930000, start, end, grain), value: isMonth ? 930000 : null, label: '新桥机场 · 旅客吞吐量', entity_id: demoEntities[3].id, status: isMonth ? 'demo' : 'unsupported_grain' },
     ],
-    map_entities: demoEntities.map((entity, index) => ({ ...entity, latest_value: [322000, 167000, 625000, 1020000][index], latest_metric: entity.available_metrics[0] })),
+    map_entities: demoEntities.map((entity, index) => ({ ...entity, latest_value: [322000, 167000, 1548000, 930000][index], latest_metric: entity.available_metrics[0] })),
     active_events_count: 0,
-    data_freshness: demoMetrics.map((metric) => ({ metric: metric.code, latest_period_end: end, ingested_at: null })),
+    data_freshness: demoMetrics.map((metric) => ({ metric: metric.code, latest_period_end: metric.code === 'scenic_visits' ? end : '2026-09-30', ingested_at: null })),
   }
 }
 

@@ -94,26 +94,17 @@ function drawMarkers() {
   if (markers.length) map.add(markers)
 }
 
-function addAdminLabel(name: string, position: unknown, detail: string, kind: 'city' | 'county'): void {
+function addAdminLabel(name: string, position: unknown, kind: 'city' | 'county'): void {
   if (!AMap || !map || !position) return
 
   const content = document.createElement('span')
   content.className = `admin-label ${kind}`
   content.textContent = name
-  content.tabIndex = 0
-  content.setAttribute('aria-label', detail)
-
-  const tooltip = document.createElement('span')
-  tooltip.className = 'admin-tooltip'
-  tooltip.textContent = detail
-  tooltip.setAttribute('aria-hidden', 'true')
-  content.append(tooltip)
 
   adminMarkers.push(new AMap.Marker({
     position,
     anchor: 'center',
     content,
-    bubble: true,
     zIndex: kind === 'city' ? 13 : 12,
     zooms: kind === 'city' ? [2, COUNTY_LABEL_ZOOM - 0.01] : [COUNTY_LABEL_ZOOM, 20],
   }))
@@ -126,14 +117,12 @@ function drawAdministrativeAreas(province: DistrictNode): void {
   const seenCounties = new Set<string>()
   for (const city of cities) {
     const counties = (city.districtList ?? []).filter(county => county.name && county.adcode && county.center && county.name !== '市辖区')
-    const countyNames: string[] = []
     for (const county of counties) {
       if (seenCounties.has(county.adcode!)) continue
       seenCounties.add(county.adcode!)
-      countyNames.push(county.name!)
-      addAdminLabel(county.name!, county.center, `${city.name} · ${county.name}`, 'county')
+      addAdminLabel(county.name!, county.center, 'county')
     }
-    addAdminLabel(city.name!, city.center, `${city.name}：${countyNames.join('、')}`, 'city')
+    addAdminLabel(city.name!, city.center, 'city')
   }
 
   if (adminMarkers.length) map.add(adminMarkers)
@@ -412,57 +401,24 @@ onUnmounted(() => {
 }
 
 :deep(.admin-label) {
-  position: relative;
   display: inline-block;
-  padding: 2px 4px;
-  border: 1px solid transparent;
-  background: rgba(7, 27, 53, .55);
   color: #d5eaff;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.25;
   white-space: nowrap;
-  text-shadow: 0 1px 4px #06152c;
-  cursor: default;
+  text-shadow: 0 1px 4px #06152c, 0 0 5px #06152c;
+  pointer-events: none;
 }
 
 :deep(.admin-label.county) {
-  background: rgba(7, 27, 53, .42);
   color: #a9c8df;
   font-size: 11px;
   font-weight: 400;
 }
 
-:deep(.admin-label:focus-visible) {
-  outline: 1px solid #e6f7ff;
-}
-
-:deep(.admin-tooltip) {
-  position: absolute;
-  bottom: calc(100% + 5px);
-  left: 50%;
-  z-index: 5;
-  width: max-content;
-  max-width: 260px;
-  padding: 6px 8px;
-  border: 1px solid rgba(117, 167, 210, .5);
-  background: rgba(6, 20, 42, .96);
-  color: #e6f7ff;
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 1.5;
-  white-space: normal;
-  text-shadow: none;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(-50%);
-}
-
-:deep(.admin-label:hover .admin-tooltip),
-:deep(.admin-label:focus-visible .admin-tooltip) {
-  opacity: 1;
-  visibility: visible;
+.map-canvas :deep(.amap-marker:has(.admin-label)) {
+  pointer-events: none !important;
 }
 
 .reset-button {
@@ -552,8 +508,8 @@ onUnmounted(() => {
   visibility: visible;
 }
 
-.map-canvas :deep(.amap-marker:hover),
-.map-canvas :deep(.amap-marker:focus-within) {
+.map-canvas :deep(.amap-marker:has(.entity-pin):hover),
+.map-canvas :deep(.amap-marker:has(.entity-pin):focus-within) {
   z-index: 1000 !important;
 }
 
