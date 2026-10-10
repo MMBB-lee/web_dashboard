@@ -8,7 +8,7 @@ import { useChart } from './useChart'
 
 const props = defineProps<{ points: NumericPoint[]; name?: string; unit?: string }>()
 const option = computed<EChartsOption>(() => ({
-  animationDuration: 600,
+  animationDuration: 1000,
   grid: { top: 20, right: 32, bottom: 26, left: 14, containLabel: true },
   tooltip: {
     trigger: 'axis', backgroundColor: 'rgba(7, 23, 49, .96)', borderColor: 'rgba(0, 212, 255, .45)', borderRadius: 0,

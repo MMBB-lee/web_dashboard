@@ -102,8 +102,12 @@ export function demoOverview(grain: TrendGrain): Overview {
 export const demoEvents: EventSummary[] = []
 
 export const demoHolidays: Holiday[] = [
+  { id: 'demo-may-2022', name: '2022 年五一假期', kind: 'may_day', year: 2022, start: '2022-04-30', end: '2022-05-04', definition_source_id: null, days_count: 5 },
+  { id: 'demo-may-2023', name: '2023 年五一假期', kind: 'may_day', year: 2023, start: '2023-04-29', end: '2023-05-03', definition_source_id: null, days_count: 5 },
   { id: 'demo-may-2024', name: '2024 年五一假期', kind: 'may_day', year: 2024, start: '2024-05-01', end: '2024-05-05', definition_source_id: null, days_count: 5 },
   { id: 'demo-may-2025', name: '2025 年五一假期', kind: 'may_day', year: 2025, start: '2025-05-01', end: '2025-05-05', definition_source_id: null, days_count: 5 },
+  { id: 'demo-national-2022', name: '2022 年国庆假期', kind: 'national_day', year: 2022, start: '2022-10-01', end: '2022-10-07', definition_source_id: null, days_count: 7 },
+  { id: 'demo-national-2023', name: '2023 年国庆假期', kind: 'national_day', year: 2023, start: '2023-09-29', end: '2023-10-06', definition_source_id: null, days_count: 8 },
   { id: 'demo-national-2024', name: '2024 年国庆假期', kind: 'national_day', year: 2024, start: '2024-10-01', end: '2024-10-07', definition_source_id: null, days_count: 7 },
   { id: 'demo-national-2025', name: '2025 年国庆假期', kind: 'national_day', year: 2025, start: '2025-10-01', end: '2025-10-08', definition_source_id: null, days_count: 8 },
 ]
@@ -114,8 +118,8 @@ export function demoHolidayCompare(holidayIds: string[], entityId: string, mode:
   if (mode === 'day_index') return { comparable: false, reason: '静态样例仅有假期总量，缺少完整逐日数据，不能绘制逐日曲线。', items: [] }
   const isJiuhua = entityId === DEMO_SCENIC_IDS.jiuhua
   const totals: Record<string, number> = isJiuhua
-    ? { 'demo-may-2024': 135000, 'demo-may-2025': 151000, 'demo-national-2024': 188000, 'demo-national-2025': 219000 }
-    : { 'demo-may-2024': 292000, 'demo-may-2025': 316000, 'demo-national-2024': 405000, 'demo-national-2025': 478000 }
+    ? { 'demo-may-2022': 112000, 'demo-may-2023': 126000, 'demo-may-2024': 135000, 'demo-may-2025': 151000, 'demo-national-2022': 167000, 'demo-national-2023': 195000, 'demo-national-2024': 188000, 'demo-national-2025': 219000 }
+    : { 'demo-may-2022': 248000, 'demo-may-2023': 277000, 'demo-may-2024': 292000, 'demo-may-2025': 316000, 'demo-national-2022': 359000, 'demo-national-2023': 436000, 'demo-national-2024': 405000, 'demo-national-2025': 478000 }
   const sameLength = holidays[0].days_count === holidays[1].days_count
   return {
     comparable: mode === 'daily_average' || sameLength,

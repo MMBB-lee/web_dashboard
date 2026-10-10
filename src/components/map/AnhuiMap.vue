@@ -9,16 +9,27 @@ type MapEntity = Entity & {
   latest_metric?: string
 }
 
+type DistrictNode = {
+  adcode?: string
+  name?: string
+  center?: unknown
+  districtList?: DistrictNode[]
+}
+
+const COUNTY_LABEL_ZOOM = 8.5
+
 const props = defineProps<{ entities: MapEntity[] }>()
 const emit = defineEmits<{ select: [entity: MapEntity] }>()
 
 const mapElement = ref<HTMLElement | null>(null)
 const loadError = ref('')
 const hasProvince = ref(false)
+const adminCount = ref({ cities: 0, counties: 0 })
 let AMap: any = null
 let map: any = null
 let markers: any[] = []
 let provincePolygons: any[] = []
+let adminMarkers: any[] = []
 let provinceView: { zoom: number; center: any } | null = null
 let resizeObserver: ResizeObserver | null = null
 let resizeFrame = 0
@@ -67,6 +78,7 @@ function drawMarkers() {
         position: [entity.longitude!, entity.latitude!],
         anchor: 'center',
         content,
+        zIndex: 30,
       })
 
       marker.on('click', () => emit('select', entity))
@@ -80,6 +92,75 @@ function drawMarkers() {
     })
 
   if (markers.length) map.add(markers)
+}
+
+function addAdminLabel(name: string, position: unknown, detail: string, kind: 'city' | 'county'): void {
+  if (!AMap || !map || !position) return
+
+  const content = document.createElement('span')
+  content.className = `admin-label ${kind}`
+  content.textContent = name
+  content.tabIndex = 0
+  content.setAttribute('aria-label', detail)
+
+  const tooltip = document.createElement('span')
+  tooltip.className = 'admin-tooltip'
+  tooltip.textContent = detail
+  tooltip.setAttribute('aria-hidden', 'true')
+  content.append(tooltip)
+
+  adminMarkers.push(new AMap.Marker({
+    position,
+    anchor: 'center',
+    content,
+    bubble: true,
+    zIndex: kind === 'city' ? 13 : 12,
+    zooms: kind === 'city' ? [2, COUNTY_LABEL_ZOOM - 0.01] : [COUNTY_LABEL_ZOOM, 20],
+  }))
+}
+
+function drawAdministrativeAreas(province: DistrictNode): void {
+  if (!AMap || !map) return
+
+  const cities = (province.districtList ?? []).filter(city => city.name && city.adcode && city.center)
+  const seenCounties = new Set<string>()
+  for (const city of cities) {
+    const counties = (city.districtList ?? []).filter(county => county.name && county.adcode && county.center && county.name !== '市辖区')
+    const countyNames: string[] = []
+    for (const county of counties) {
+      if (seenCounties.has(county.adcode!)) continue
+      seenCounties.add(county.adcode!)
+      countyNames.push(county.name!)
+      addAdminLabel(county.name!, county.center, `${city.name} · ${county.name}`, 'county')
+    }
+    addAdminLabel(city.name!, city.center, `${city.name}：${countyNames.join('、')}`, 'city')
+  }
+
+  if (adminMarkers.length) map.add(adminMarkers)
+  adminCount.value = { cities: cities.length, counties: seenCounties.size }
+
+  if (AMap.DistrictLayer?.Province) {
+    const cityBorders = new AMap.DistrictLayer.Province({ adcode: ['340000'], depth: 1, zIndex: 3 })
+    cityBorders.setStyles({
+      'fill': '',
+      'stroke-width': 1,
+      'province-stroke': '',
+      'city-stroke': 'rgba(102, 172, 215, .58)',
+    })
+    map.add(cityBorders)
+
+    const countyBorders = new AMap.DistrictLayer.Province({
+      adcode: ['340000'], depth: 2, zIndex: 4, zooms: [COUNTY_LABEL_ZOOM, 20],
+    })
+    countyBorders.setStyles({
+      'fill': '',
+      'stroke-width': 1,
+      'province-stroke': '',
+      'city-stroke': '',
+      'county-stroke': 'rgba(117, 159, 195, .42)',
+    })
+    map.add(countyBorders)
+  }
 }
 
 function showWholeProvince() {
@@ -175,7 +256,7 @@ onMounted(async () => {
 
     const district = new AMap.DistrictSearch({
       level: 'province',
-      subdistrict: 0,
+      subdistrict: 2,
       extensions: 'all',
     })
 
@@ -200,12 +281,14 @@ onMounted(async () => {
           strokeWeight: 2,
           fillColor: '#103a69',
           fillOpacity: 0.18,
+          bubble: true,
         }),
       )
 
       map.add(provincePolygons)
       hasProvince.value = true
       fitAndLockProvince()
+      drawAdministrativeAreas(result.districtList[0])
     })
   } catch {
     loadError.value = '高德地图加载失败，请检查 Key、密钥和网络。'
@@ -231,6 +314,10 @@ onUnmounted(() => {
       <span><i class="legend-dot scenic" />景区</span>
       <span><i class="legend-dot rail_station" />铁路站</span>
       <span><i class="legend-dot airport" />机场</span>
+    </div>
+
+    <div v-if="adminCount.cities" class="admin-hint">
+      {{ adminCount.cities }} 个地级市 · {{ adminCount.counties }} 个区县 · 放大查看区县
     </div>
 
     <button
@@ -311,6 +398,72 @@ onUnmounted(() => {
 }
 .legend-dot.rail_station { background: #00f2a9; }
 .legend-dot.airport { background: #ffb84d; }
+
+.admin-hint {
+  position: absolute;
+  z-index: 2;
+  top: 50px;
+  left: 12px;
+  padding: 5px 8px;
+  background: rgba(6, 20, 42, .78);
+  color: #8fb5d2;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+:deep(.admin-label) {
+  position: relative;
+  display: inline-block;
+  padding: 2px 4px;
+  border: 1px solid transparent;
+  background: rgba(7, 27, 53, .55);
+  color: #d5eaff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px #06152c;
+  cursor: default;
+}
+
+:deep(.admin-label.county) {
+  background: rgba(7, 27, 53, .42);
+  color: #a9c8df;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+:deep(.admin-label:focus-visible) {
+  outline: 1px solid #e6f7ff;
+}
+
+:deep(.admin-tooltip) {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  z-index: 5;
+  width: max-content;
+  max-width: 260px;
+  padding: 6px 8px;
+  border: 1px solid rgba(117, 167, 210, .5);
+  background: rgba(6, 20, 42, .96);
+  color: #e6f7ff;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: normal;
+  text-shadow: none;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%);
+}
+
+:deep(.admin-label:hover .admin-tooltip),
+:deep(.admin-label:focus-visible .admin-tooltip) {
+  opacity: 1;
+  visibility: visible;
+}
 
 .reset-button {
   position: absolute;

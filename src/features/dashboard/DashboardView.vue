@@ -8,18 +8,26 @@ import MetricCard from '../../components/layout/MetricCard.vue'
 import AnhuiMap from '../../components/map/AnhuiMap.vue'
 import TrendChart from '../../components/charts/TrendChart.vue'
 import ForecastChart from '../../components/charts/ForecastChart.vue'
+import ChartLoading from '../../components/charts/ChartLoading.vue'
+import { useVisibleChartLoading } from '../../components/charts/useVisibleChartLoading'
 import UiSelect from '../../components/ui/UiSelect.vue'
 import { useOverview } from './overview'
 
 const router = useRouter()
-const { grain, loading, error, overview, series, forecast, events, reload } = useOverview()
+const { grain, scenicId, selectedScenicId, scenicEntities, loading, error, overview, series, forecast, events, reload } = useOverview()
+const chartLoading = useVisibleChartLoading(loading)
 const isDemo = computed(() => backendMode.value === 'demo')
 const latestPoint = computed(() => series.value?.points.at(-1))
 const transportNotice = ref('')
 const grainOptions = [{ value: 'week', label: '按周' }, { value: 'month', label: '按月' }]
+const scenicOptions = computed(() => scenicEntities.value.map(entity => ({ value: entity.id, label: entity.name })))
 
 function setGrain(value: string) {
   if (value === 'week' || value === 'month') grain.value = value
+}
+
+function setScenic(value: string) {
+  scenicId.value = value
 }
 
 function openEntity(entity: Entity) {
@@ -39,7 +47,7 @@ function openEntity(entity: Entity) {
   </section>
 
   <div v-if="error" class="state-box error">{{ error }}</div>
-  <div v-else-if="loading && !overview" class="state-box">正在加载总览数据…</div>
+  <ChartLoading v-else-if="chartLoading && !overview" class="initial-chart-loading" kind="line" label="正在读取总览数据…" />
   <template v-else-if="overview">
     <div class="metric-grid">
       <MetricCard v-for="(card, index) in overview.cards" :key="`${card.metric}-${card.entity_id ?? index}`" :card="card" :index="index" :demo="isDemo" />
@@ -48,8 +56,9 @@ function openEntity(entity: Entity) {
     <div class="dashboard-grid dashboard-body">
       <div class="dashboard-column">
         <section class="panel section-panel chart-panel">
-          <div class="panel-head"><h2 class="panel-title">景区历史趋势</h2><span class="panel-kicker">{{ series?.entity.name ?? '景区' }} / {{ grain === 'week' ? '周' : '月' }}</span></div>
-          <TrendChart v-if="series?.points.length" :points="series.points" name="实际接待人次" unit="人次" />
+          <div class="panel-head"><h2 class="panel-title">景区历史趋势</h2><div class="field trend-controls"><UiSelect :model-value="selectedScenicId" :options="scenicOptions" label="选择景区" searchable @update:model-value="setScenic" /><span class="panel-kicker">/ {{ grain === 'week' ? '周' : '月' }}</span></div></div>
+          <ChartLoading v-if="chartLoading" kind="line" label="正在加载景区趋势…" />
+          <TrendChart v-else-if="series?.points.length" :points="series.points" name="实际接待人次" unit="人次" />
           <div v-else class="state-box">没有符合当前粒度的已核验数据。</div>
           <div class="chart-caption">指标：景区接待人次 · 单位：人次 · 统计期：{{ latestPoint ? formatPeriod(latestPoint.period_start, latestPoint.period_end, latestPoint.grain) : '—' }} · {{ isDemo ? '静态样例，非官方统计' : `来源：${latestPoint?.source_ids.join('、') || '待标注'} · 更新：${latestPoint?.ingested_at || '待标注'}` }}</div>
         </section>
@@ -72,7 +81,8 @@ function openEntity(entity: Entity) {
       <div class="dashboard-column">
         <section class="panel section-panel chart-panel">
         <div class="panel-head"><h2 class="panel-title">历史趋势预测</h2><span class="panel-kicker">历史实线 / 预测虚线</span></div>
-        <ForecastChart v-if="forecast?.status === 'ready' && forecast.forecast_points.length" :actual="series?.points ?? []" :forecast="forecast.forecast_points" unit="人次" />
+        <ChartLoading v-if="chartLoading" kind="line" label="正在加载趋势预测…" />
+        <ForecastChart v-else-if="forecast?.status === 'ready' && forecast.forecast_points.length" :actual="series?.points ?? []" :forecast="forecast.forecast_points" unit="人次" />
         <div v-else class="state-box">{{ forecast?.reason ?? '历史数据不足，暂不绘制预测曲线。' }}</div>
         <div class="chart-caption">{{ forecast?.status === 'ready' ? `回测 MAE：${formatValue(forecast.backtest?.mae)} 人次 · sMAPE：${forecast.backtest?.smape ?? '—'}% · 模型：${forecast.model_version ?? '—'} · 训练截至：${forecast.training_window?.end ?? '—'} · ${isDemo ? '静态样例' : `来源：${forecast.source_ids?.join('、') || '待标注'}`}` : '数据不足时不生成预测值。' }}</div>
         </section>
@@ -83,7 +93,6 @@ function openEntity(entity: Entity) {
         </section>
       </div>
     </div>
-    <div v-if="loading" class="updating-tip">正在更新数据…</div>
   </template>
   </div>
 </template>
@@ -92,6 +101,9 @@ function openEntity(entity: Entity) {
 .dashboard-grid { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(390px, 1.42fr) minmax(260px, 1fr); grid-template-rows: minmax(0, 1fr); gap: 11px; align-items: stretch; }
 .dashboard-column { min-width: 0; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 11px; }
 .chart-panel { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.initial-chart-loading { flex: 1; min-height: 320px; }
+.trend-controls { display: flex; align-items: center; gap: 7px; min-width: 0; --select-min-width: 150px; --select-height: 28px; }
+.trend-controls :deep(.ui-select-trigger) { font-size: 12px; }
 .chart-panel :deep(.chart-canvas) { height: auto; min-height: 0; flex: 1; }
 .chart-panel .chart-caption { margin-top: auto; }
 .map-panel { min-height: 0; display: flex; flex-direction: column; }
@@ -108,7 +120,6 @@ function openEntity(entity: Entity) {
 .event-empty { margin-top: 8px; padding: 10px; border: 1px dashed var(--border-soft); color: var(--text-sub); font-size: 12px; line-height: 1.45; }
 .event-item { display: grid; gap: 5px; padding: 10px 0; border-bottom: 1px solid var(--border-soft); font-size: 12px; }.event-item strong { font-weight: 500; }
 .transport-notice { margin-top: 9px; color: var(--accent-warn); font-size: 12px; }
-.updating-tip { padding-top: 10px; color: var(--text-sub); font-size: 12px; }
 @media (max-width: 1160px) { .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }.map-panel { grid-column: 1 / -1; grid-row: 1; }.map-panel :deep(.map-stage) { flex: none; height: 420px; }.chart-panel :deep(.chart-canvas) { flex: none; height: 270px; } }
 @media (max-width: 700px) { .dashboard-grid { grid-template-columns: 1fr; }.map-panel { grid-column: auto; grid-row: auto; }.dashboard-column { display: contents; } }
 @media (min-width: 1161px) and (max-height: 850px) {

@@ -16,7 +16,7 @@ const option = computed<EChartsOption>(() => {
     ...Array(actual.length).fill(null), ...forecast.map((point) => point[key] ?? null),
   ]
   return {
-    animationDuration: 600,
+    animationDuration: 1000,
     color: ['#00d4ff', '#ffb84d', '#688cae'],
     grid: { top: 35, right: 36, bottom: 27, left: 14, containLabel: true },
     legend: { top: 0, right: 0, textStyle: { color: '#a2bfda', fontSize: 12 }, itemWidth: 16, itemHeight: 6, data: ['历史实际', '预测值', '预测区间'] },
