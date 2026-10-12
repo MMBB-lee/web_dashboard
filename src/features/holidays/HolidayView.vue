@@ -10,7 +10,7 @@ import { useVisibleChartLoading } from '../../components/charts/useVisibleChartL
 import UiSelect from '../../components/ui/UiSelect.vue'
 import { useHolidays } from './holidays'
 
-const { kind, selectedIds, entityId, mode, holidays, entities, metric, comparison, loading, error, selectedHolidays, loadComparison } = useHolidays()
+const { kind, selectedIds, entityId, mode, holidays, entities, metric, comparison, dailyAverageComparison, loading, error, selectedHolidays, loadComparison } = useHolidays()
 const chartLoading = useVisibleChartLoading(loading)
 const isDemo = computed(() => backendMode.value === 'demo')
 const modeLabel = computed(() => ({ daily_average: '日均接待人次', period_total: '假期总接待人次', day_index: '逐日变化' })[mode.value])
@@ -28,8 +28,11 @@ function setMode(value: string) {
 }
 const selectedItems = computed(() => selectedHolidays.value.map(holiday => ({
   holiday,
-  result: comparison.value?.items.find(item => item.holiday_id === holiday.id),
+  result: dailyAverageComparison.value?.items.find(item => item.holiday_id === holiday.id),
 })))
+const selectionHint = computed(() => selectedHolidays.value.length === 0
+  ? '请先添加假期；选择至少两个假期后，这里会显示客流对比。'
+  : selectedHolidays.value.length === 1 ? '再添加一个假期后，这里会显示客流对比。' : '')
 const shareValues = computed(() => {
   const values = comparison.value?.items.map(item => item.value)
   if (!comparison.value?.comparable || !values?.length || values.some(value => value == null || value < 0)) return null
@@ -47,54 +50,71 @@ function removeHoliday(id: string) {
 <template>
   <div class="dashboard-page">
   <section class="page-heading">
-    <div><span class="eyebrow">HOLIDAY COMPARISON / 专题</span><h1>假期客流对比</h1><p>按同口径比较假期总量或日均值，不把不同长度的假期直接计算成同比。</p></div>
+    <p>按同口径比较假期总量或日均值，不把不同长度的假期直接计算成同比。</p>
   </section>
 
   <section class="panel section-panel filter-panel">
-    <div class="panel-head"><h2 class="panel-title">比较条件</h2><span class="panel-kicker">FILTER / 已选 {{ selectedHolidays.length }} 个假期</span></div>
     <div class="holiday-filters">
       <div class="field"><span>假期类型</span><UiSelect :model-value="kind" :options="kindOptions" label="假期类型" @update:model-value="setKind" /></div>
-      <div class="field add-field"><span>添加假期</span><UiSelect v-if="canAdd" model-value="" :options="holidayOptions" label="添加假期" @update:model-value="addHoliday" /><span v-else class="add-unavailable">{{ selectedIds.length >= 6 ? '最多选择 6 个' : '当前类型已全部加入' }}</span></div>
       <div class="field"><span>景区</span><UiSelect v-model="entityId" :options="entityOptions" label="景区" searchable /></div>
       <div class="field"><span>比较方式</span><UiSelect :model-value="mode" :options="modeOptions" label="比较方式" @update:model-value="setMode" /></div>
+      <div class="field add-field"><span>添加假期（{{ selectedHolidays.length }}/6）</span><UiSelect v-if="canAdd" model-value="" :options="holidayOptions" label="添加假期" @update:model-value="addHoliday" /><span v-else class="add-unavailable">{{ selectedIds.length >= 6 ? '最多选择 6 个' : '当前类型已全部加入' }}</span></div>
       <button class="button-primary" :disabled="loading" @click="loadComparison">{{ loading ? '计算中…' : '更新对比' }}</button>
     </div>
-    <div class="selected-holidays" role="list" aria-label="已选假期" :style="{ '--holiday-count': Math.max(selectedHolidays.length, 1) }">
-      <div v-for="{ holiday, result } in selectedItems" :key="holiday.id" class="selected-holiday" role="listitem" :title="`${holiday.name}：${holiday.start} 至 ${holiday.end}，${holiday.days_count} 天`">
-        <div class="selected-holiday-main"><strong>{{ holiday.name }}</strong><button type="button" class="remove-holiday" :aria-label="`移除${holiday.name}`" :title="`移除${holiday.name}`" @click="removeHoliday(holiday.id)">×</button></div>
-        <span>{{ holiday.start }} — {{ holiday.end }} · {{ holiday.days_count }} 天</span>
-        <em v-if="comparison?.comparable && result?.value != null">{{ formatValue(result.value) }} {{ result.unit }}</em>
-      </div>
-      <div v-if="!selectedHolidays.length" class="empty-selection" role="listitem">尚未选择假期，请从“添加假期”中选择。</div>
-    </div>
   </section>
+
+  <div v-if="selectedHolidays.length" class="selected-holidays" role="list" aria-label="已选假期" :style="{ '--holiday-columns': selectedHolidays.length }">
+    <article v-for="{ holiday, result } in selectedItems" :key="holiday.id" class="panel selected-holiday" role="listitem" :title="`${holiday.name}：${holiday.start} 至 ${holiday.end}，${holiday.days_count} 天`">
+      <div class="holiday-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M4 37 17 14l8 13 6-9 13 19H4Z"/><path d="m12 29 5-8 5 8m5 1 4-6 4 6"/></svg></div>
+      <div class="holiday-details"><strong>{{ holiday.name }}</strong><span>{{ holiday.start.slice(5).replace('-', '.') }}—{{ holiday.end.slice(5).replace('-', '.') }} · {{ holiday.days_count }}天</span></div>
+      <div class="holiday-value" title="日均接待人次"><span>日均</span><strong>{{ result?.value == null ? '—' : formatValue(result.value) }}</strong><small>人次/日</small></div>
+      <button type="button" class="remove-holiday" :aria-label="`移除${holiday.name}`" :title="`移除${holiday.name}`" @click="removeHoliday(holiday.id)">×</button>
+    </article>
+  </div>
 
   <div v-if="error" class="state-box error holiday-state">{{ error }}</div>
   <div v-else-if="!chartLoading && !holidays.length" class="state-box holiday-state">当前没有可用的假期定义。</div>
   <template v-else>
-    <div class="holiday-screen dashboard-body">
+    <div class="holiday-screen dashboard-body" :class="{ 'has-selected-holidays': selectedHolidays.length > 0 }">
       <div class="holiday-visuals">
         <section class="panel section-panel compare-panel">
-          <div class="panel-head"><h2 class="panel-title">{{ modeLabel }}对比</h2><span class="panel-kicker">{{ metric?.display_name ?? '景区接待人次' }} / 同口径</span></div>
+          <div class="panel-head"><h2 class="panel-title">{{ modeLabel }}对比</h2><span class="panel-kicker">{{ comparison?.items[0]?.unit ?? '人次' }}</span></div>
           <ChartLoading v-if="chartLoading" kind="bar" label="正在加载假期客流对比…" />
-          <HolidayCompareChart v-else-if="comparison?.comparable && comparison.items.length" :items="comparison.items" />
-          <div v-else class="state-box empty-chart-state">{{ !selectedHolidays.length ? '请先添加假期；选择至少两个假期后，这里会显示客流对比。' : selectedHolidays.length === 1 ? '再添加一个假期后，这里会显示客流对比。' : comparison?.reason ?? '所选假期没有可比较的数据。' }}</div>
-          <div v-if="!chartLoading && selectedHolidays.length >= 2" class="chart-caption">{{ metric?.definition ?? '景区接待人次。' }} {{ isDemo ? '静态假期样例，非官方统计。' : `来源：${comparison?.items.flatMap(item => item.source_ids).join('、') || '待标注'}。` }} {{ comparison?.reason ?? (isDemo ? '当前数值仅供界面展示。' : '展示值以接口返回数据为准。') }}</div>
+          <HolidayCompareChart v-else-if="selectedHolidays.length >= 2 && comparison?.comparable && comparison.items.length" :items="comparison.items" />
+          <div v-else class="state-box empty-chart-state">{{ selectionHint || comparison?.reason || '所选假期没有可比较的数据。' }}</div>
+          <div v-if="!chartLoading && selectedHolidays.length >= 2" class="chart-caption">{{ metric?.definition ?? '景区接待人次。' }} {{ isDemo ? '静态假期样例，非官方统计。' : `来源：${comparison?.items.flatMap(item => item.source_ids).join('、') || '待标注'}。` }}</div>
         </section>
 
         <section class="panel section-panel visual-panel donut-panel">
-          <div class="panel-head"><h2 class="panel-title">所选假期数值占比</h2><span class="panel-kicker">{{ modeLabel }} / 同口径</span></div>
+          <div class="panel-head"><h2 class="panel-title">所选假期数值占比</h2><span class="panel-kicker">{{ modeLabel }}</span></div>
           <ChartLoading v-if="chartLoading" kind="donut" label="正在加载假期占比…" />
-          <HolidayShareChart v-else-if="shareValues && comparison" :labels="comparison.items.map(item => item.label)" :values="shareValues" :unit="comparison.items[0]?.unit ?? '人次'" title="所选假期数值占比" />
-          <div v-else class="state-box empty-chart-state">{{ !selectedHolidays.length ? '选择至少两个假期后，这里会显示各假期数值占比。' : selectedHolidays.length === 1 ? '再添加一个假期后，这里会显示数值占比。' : comparison?.reason ?? '当前条件下没有可计算占比的数值。' }}</div>
+          <HolidayShareChart v-else-if="selectedHolidays.length >= 2 && shareValues && comparison" :labels="comparison.items.map(item => item.label)" :values="shareValues" :unit="comparison.items[0]?.unit ?? '人次'" title="所选假期数值占比" />
+          <div v-else class="state-box empty-chart-state">{{ selectionHint || comparison?.reason || '当前条件下没有可计算占比的数值。' }}</div>
         </section>
 
         <section class="panel section-panel visual-panel duration-panel">
           <div class="panel-head"><h2 class="panel-title">假期天数对比</h2><span class="panel-kicker">假期日历 / 天</span></div>
           <ChartLoading v-if="chartLoading" kind="bar" label="正在加载假期天数…" />
-          <HolidayDurationChart v-else-if="selectedHolidays.length" :holidays="selectedHolidays" />
-          <div v-else class="state-box empty-chart-state">添加假期后，这里会显示假期天数。</div>
-          <div v-if="!chartLoading && selectedHolidays.length" class="chart-caption">起止日期来自假期定义。天数不同，优先比较日均值。</div>
+          <HolidayDurationChart v-else-if="selectedHolidays.length >= 2" :holidays="selectedHolidays" />
+          <div v-else class="state-box empty-chart-state">{{ selectionHint }}</div>
+        </section>
+
+        <section class="panel section-panel visual-panel daily-panel">
+          <div class="panel-head"><h2 class="panel-title">日均客流量变化</h2><span class="panel-kicker">按所选假期时间顺序 · 人次/日</span></div>
+          <ChartLoading v-if="chartLoading" kind="line" label="正在加载日均客流量变化…" />
+          <HolidayCompareChart v-else-if="selectedHolidays.length >= 2 && dailyAverageComparison?.comparable && dailyAverageComparison.items.length" :items="dailyAverageComparison.items" variant="timeline" />
+          <div v-else class="state-box empty-chart-state">{{ selectionHint || dailyAverageComparison?.reason || '所选假期没有可用的日均客流数据。' }}</div>
+          <div v-if="!chartLoading && dailyAverageComparison?.comparable" class="chart-caption">仅显示当前选中的 {{ selectedHolidays.length }} 个假期；按假期开始日期从早到晚排列。</div>
+        </section>
+
+        <section class="panel section-panel source-panel">
+          <div class="panel-head"><h2 class="panel-title">口径与来源</h2></div>
+          <dl class="source-list">
+            <div><dt>指标</dt><dd>{{ metric?.display_name ?? '景区接待人次' }}</dd></div>
+            <div><dt>统计方式</dt><dd>{{ modeLabel }}</dd></div>
+            <div><dt>已选假期</dt><dd>{{ selectedHolidays.length }} 个（最多 6 个）</dd></div>
+            <div><dt>数据来源</dt><dd>{{ isDemo ? '静态演示数据，非官方统计' : comparison?.items.flatMap(item => item.source_ids).join('、') || '待标注' }}</dd></div>
+          </dl>
         </section>
       </div>
 
@@ -105,41 +125,79 @@ function removeHoliday(id: string) {
 
 <style scoped>
 .filter-panel { margin-bottom: 11px; }
-.holiday-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; }
-.holiday-filters .field { --select-min-width: 137px; }
-.add-field { min-width: 180px; }
+.holiday-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.holiday-filters .field { flex: 0 1 215px; --select-min-width: 0; }
+.holiday-filters .field :deep(.ui-select) { width: 100%; }
 .add-unavailable { display: flex; align-items: center; height: var(--select-height, 31px); padding: 0 10px; border: 1px solid var(--border-glow); background: #10274b; color: var(--text-sub); font-size: 12px; }
-.selected-holidays { display: grid; grid-template-columns: repeat(var(--holiday-count), minmax(0, 1fr)); min-height: 62px; gap: 8px; margin-top: 10px; }
-.selected-holiday { box-sizing: border-box; min-width: 0; height: 62px; padding: 6px 9px; border: 1px solid var(--border-soft); background: rgba(0, 21, 46, .42); }
-.empty-selection { display: flex; align-items: center; padding: 0 10px; border: 1px dashed var(--border-soft); color: var(--text-sub); font-size: 12px; }
-.selected-holiday-main { display: flex; align-items: center; justify-content: space-between; gap: 5px; }
-.selected-holiday strong { overflow: hidden; color: var(--text-title); font-size: 13px; white-space: nowrap; text-overflow: ellipsis; }
-.selected-holiday > span, .selected-holiday em { display: block; overflow: hidden; color: var(--text-sub); font-size: 11px; font-style: normal; white-space: nowrap; text-overflow: ellipsis; }
-.selected-holiday em { color: var(--accent); }
-.remove-holiday { flex: none; width: 20px; height: 20px; padding: 0; border: 0; background: transparent; color: var(--text-sub); font-size: 19px; line-height: 18px; cursor: pointer; }
-.remove-holiday:hover:not(:disabled) { color: var(--accent); }
+.selected-holidays { flex: none; display: grid; grid-template-columns: repeat(var(--holiday-columns), minmax(0, 1fr)); gap: 11px; margin-bottom: 11px; }
+.selected-holiday { display: flex; align-items: center; gap: 6px; min-width: 0; min-height: 70px; padding: 7px 19px 7px 9px; }
+.holiday-icon { width: 38px; height: 38px; flex: none; display: grid; place-items: center; border: 1px solid rgba(0, 212, 255, .6); border-radius: 50%; color: var(--accent); background: radial-gradient(circle, rgba(0, 212, 255, .18), rgba(0, 212, 255, .02) 72%); }
+.holiday-icon svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.selected-holiday:nth-child(even) .holiday-icon, .selected-holiday:nth-child(even) .holiday-value strong { color: var(--accent-green); }
+.holiday-details { display: grid; gap: 3px; min-width: 0; flex: 1; }
+.holiday-details strong { overflow: hidden; color: var(--text-title); font-size: 13px; white-space: nowrap; text-overflow: ellipsis; }
+.holiday-details span { overflow: hidden; color: var(--text-sub); font-size: 10px; white-space: nowrap; text-overflow: ellipsis; }
+.holiday-value { display: grid; gap: 2px; min-width: 75px; padding-left: 6px; border-left: 1px solid var(--border-glow); }
+.holiday-value span { color: var(--text-sub); font-size: 9px; }
+.holiday-value strong { color: var(--accent); font-size: 19px; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.holiday-value small { color: var(--text-sub); font-size: 9px; }
+.remove-holiday { position: absolute; top: 2px; right: 2px; width: 17px; height: 17px; padding: 0; border: 0; background: transparent; color: var(--text-sub); font-size: 16px; line-height: 16px; cursor: pointer; }
+.remove-holiday:hover { color: var(--accent); }
 .holiday-state { margin: 14px 0; }
 .holiday-screen { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-.holiday-visuals { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(230px, .8fr) minmax(230px, .8fr); grid-template-rows: minmax(0, 1fr); gap: 11px; }
-.visual-panel, .compare-panel { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
-.visual-panel :deep(.chart-canvas), .compare-panel :deep(.chart-canvas) { flex: 1; min-height: 0; height: auto; }
+.holiday-visuals { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr) clamp(187px, calc(26vh - 18px), 252px); gap: 11px; }
+.has-selected-holidays .holiday-visuals { grid-template-rows: minmax(0, 1fr) clamp(209px, calc(26vh + 4px), 274px); }
+.holiday-visuals > .panel { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.compare-panel { grid-column: span 6; }.donut-panel, .duration-panel { grid-column: span 3; }
+.daily-panel { grid-column: span 8; }.source-panel { grid-column: span 4; }
+.holiday-visuals :deep(.chart-canvas) { flex: 1; min-height: 0; height: auto; }
+.daily-panel { padding-top: 8px; padding-bottom: 8px; }
+.daily-panel .panel-head { padding-bottom: 5px; }
+.daily-panel .chart-caption { padding-top: 4px; }
 .empty-chart-state { flex: 1; display: grid; place-items: center; min-height: 0; padding: 12px; text-align: center; }
-.visual-panel .chart-caption, .compare-panel .chart-caption { margin-top: auto; }
+.holiday-visuals .chart-caption { margin-top: auto; }
+.source-list { display: grid; gap: 0; margin: 0; font-size: 12px; }
+.source-list > div { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border-soft); }
+.source-list dt { color: var(--text-sub); }.source-list dd { min-width: 0; margin: 0; color: var(--text-main); overflow-wrap: anywhere; }
+@media (max-width: 1500px) {
+  .selected-holidays { gap: 7px; }
+  .selected-holiday { gap: 4px; padding-left: 6px; padding-right: 16px; }
+  .holiday-icon { width: 30px; height: 30px; }
+  .holiday-icon svg { width: 21px; height: 21px; }
+  .holiday-value { min-width: 65px; padding-left: 4px; }
+  .holiday-value strong { font-size: 15px; }
+  .holiday-details strong { font-size: 11px; }
+}
+@media (min-width: 1101px) and (max-width: 1250px) {
+  .holiday-icon { display: none; }
+  .holiday-details span { display: none; }
+}
 @media (max-width: 1100px) {
   .selected-holidays { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .holiday-screen { flex: none; }
-  .holiday-visuals { min-height: 600px; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(300px, 1fr) minmax(270px, .8fr); }
+  .holiday-visuals { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }
+  .has-selected-holidays .holiday-visuals { grid-template-rows: auto; }
+  .holiday-visuals > .panel { min-height: 280px; }
   .compare-panel { grid-column: 1 / -1; }
+  .donut-panel, .duration-panel, .daily-panel, .source-panel { grid-column: auto; }
+  .daily-panel { grid-column: 1 / -1; }
+  .holiday-visuals :deep(.chart-canvas) { flex: none; height: 260px; }
 }
 @media (max-width: 620px) {
-  .holiday-filters .field { width: calc(50% - 5px); --select-min-width: 0; }
+  .holiday-filters .field { flex-basis: calc(50% - 6px); }
   .selected-holidays, .holiday-visuals { grid-template-columns: 1fr; }
-  .holiday-visuals { min-height: 900px; grid-template-rows: minmax(360px, auto) repeat(2, minmax(250px, auto)); }
-  .compare-panel { grid-column: auto; }
+  .holiday-visuals > .panel { grid-column: 1; }
 }
-@media (min-width: 1101px) and (max-height: 850px) {
+@media (min-width: 1101px) and (max-height: 900px) {
   .filter-panel { margin-bottom: 8px; }
   .holiday-filters, .holiday-visuals { gap: 8px; }
-  .selected-holidays { margin-top: 7px; }
+  .selected-holidays { gap: 8px; margin-bottom: 8px; }
+  .selected-holiday { min-height: 64px; padding-top: 5px; padding-bottom: 5px; }
+  .holiday-icon { width: 34px; height: 34px; }
+  .holiday-icon svg { width: 22px; height: 22px; }
+  .holiday-value strong { font-size: 17px; }
+  .holiday-visuals { grid-template-rows: minmax(0, 1fr) 147px; }
+  .has-selected-holidays .holiday-visuals { grid-template-rows: minmax(0, 1fr) 163px; }
+  .source-list { font-size: 11px; }.source-list > div { padding: 6px 0; }
 }
 </style>

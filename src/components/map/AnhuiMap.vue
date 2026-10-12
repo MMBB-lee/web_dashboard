@@ -411,6 +411,13 @@ onUnmounted(() => {
   pointer-events: none;
 }
 
+:deep(.admin-label.city) {
+  color: #8faec8;
+  font-size: 10px;
+  font-weight: 400;
+  text-shadow: 0 1px 3px #06152c;
+}
+
 :deep(.admin-label.county) {
   color: #a9c8df;
   font-size: 11px;
@@ -426,10 +433,14 @@ onUnmounted(() => {
   z-index: 2;
   top: 12px;
   right: 12px;
-  padding: 6px 10px;
+  min-height: 27px;
+  padding: 4px 10px;
   border: 1px solid #417da5;
+  border-radius: 999px;
   background: rgba(6, 20, 42, .86);
   color: #e6f7ff;
+  font-size: 12px;
+  line-height: 1.2;
   cursor: pointer;
 }
 

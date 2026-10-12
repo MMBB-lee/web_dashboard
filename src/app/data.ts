@@ -1,5 +1,4 @@
 import { ref } from 'vue'
-import { demoEntities, demoEvents, demoForecast, demoHolidayCompare, demoHolidays, demoMetrics, demoOverview, demoSeries } from './demo'
 import { ApiError } from './types'
 import type {
   ApiEnvelope, BackendMode, Entity, EventSummary, ForecastResult, Holiday,
@@ -8,6 +7,14 @@ import type {
 
 const API = '/api/v1'
 const CHECK_INTERVAL_MS = 12_000
+type DemoData = typeof import('../../tests/demoData')
+let demoDataPromise: Promise<DemoData> | null = null
+
+function fromDemo<T>(read: (data: DemoData) => T): Promise<T> {
+  // 演示数据单独分包；真实接口可用时不会加载 tests 中的数据。
+  demoDataPromise ??= import('../../tests/demoData')
+  return demoDataPromise.then(read)
+}
 declare const __WEB_INTERACTIONS_AVAILABLE__: boolean
 export const interactionsAvailable = __WEB_INTERACTIONS_AVAILABLE__
 export const backendMode = ref<BackendMode>('checking')
@@ -23,10 +30,6 @@ function timedFetch(path: string, init: RequestInit = {}): Promise<Response> {
 }
 
 export function refreshBackendStatus(force = false): Promise<BackendMode> {
-  if (!interactionsAvailable) {
-    backendMode.value = 'demo'
-    return Promise.resolve('demo')
-  }
   if (!force && checkedAt && Date.now() - checkedAt < CHECK_INTERVAL_MS) return Promise.resolve(backendMode.value)
   if (checkInFlight) return checkInFlight
   checkInFlight = (async () => {
@@ -54,7 +57,7 @@ export function refreshBackendStatus(force = false): Promise<BackendMode> {
   return checkInFlight
 }
 
-async function request<T>(path: string, demo: () => T, init?: RequestInit): Promise<T> {
+async function request<T>(path: string, demo: () => T | Promise<T>, init?: RequestInit): Promise<T> {
   const mode = await refreshBackendStatus()
   if (mode === 'demo') return demo()
   if (mode === 'auth') throw new ApiError(401, 'unauthorized', '请先登录后查看业务数据。')
@@ -93,13 +96,13 @@ function asList<T>(value: T[] | { items?: T[]; results?: T[] }): T[] {
 
 export async function getCatalogEntities(type?: Entity['type']): Promise<Entity[]> {
   const value = await request<Entity[] | { items?: Entity[] }>(`/catalog/entities?${query({ type, page_size: 100 })}`,
-    () => demoEntities.filter((entity) => !type || entity.type === type))
+    () => fromDemo(({ demoEntities }) => demoEntities.filter((entity) => !type || entity.type === type)))
   return asList(value)
 }
 
 export async function getMetricDefinitions(entityType?: string): Promise<MetricDefinition[]> {
   const value = await request<MetricDefinition[] | { items?: MetricDefinition[] }>(`/catalog/metrics?${query({ entity_type: entityType })}`,
-    () => demoMetrics.filter((metric) => !entityType || metric.supported_entity_types.includes(entityType)))
+    () => fromDemo(({ demoMetrics }) => demoMetrics.filter((metric) => !entityType || metric.supported_entity_types.includes(entityType))))
   return asList(value)
 }
 
@@ -108,35 +111,35 @@ export function getSource(sourceId: string): Promise<Source> {
 }
 
 export function getOverview(grain: TrendGrain, regionCode = '340000'): Promise<Overview> {
-  return request(`/dashboard/overview?${query({ region_code: regionCode, grain })}`, () => demoOverview(grain))
+  return request(`/dashboard/overview?${query({ region_code: regionCode, grain })}`, () => fromDemo(({ demoOverview }) => demoOverview(grain)))
 }
 
 export function getScenicSeries(entityId: string, grain: TrendGrain, start: string, end: string): Promise<SeriesResult> {
   return request(`/scenic/${encodeURIComponent(entityId)}/series?${query({ metric: 'scenic_visits', grain, start, end, quality: 'verified' })}`,
-    () => demoSeries(entityId, grain, start, end))
+    () => fromDemo(({ demoSeries }) => demoSeries(entityId, grain, start, end)))
 }
 
 export function getHistoryForecast(entityId: string, grain: TrendGrain, trainingEnd: string, horizon: number): Promise<ForecastResult> {
   const body = { entity_id: entityId, metric: 'scenic_visits', grain, training_end: trainingEnd, horizon, model: 'baseline' }
-  return request('/forecasts/history', () => demoForecast(entityId, grain, trainingEnd, horizon), { method: 'POST', body: JSON.stringify(body) })
+  return request('/forecasts/history', () => fromDemo(({ demoForecast }) => demoForecast(entityId, grain, trainingEnd, horizon)), { method: 'POST', body: JSON.stringify(body) })
 }
 
 export async function getHolidays(year?: number, kind?: Holiday['kind']): Promise<Holiday[]> {
   const value = await request<Holiday[] | { items?: Holiday[] }>(`/holidays?${query({ year, kind, region_code: '340000' })}`,
-    () => demoHolidays.filter((holiday) => (!year || holiday.year === year) && (!kind || holiday.kind === kind)))
+    () => fromDemo(({ demoHolidays }) => demoHolidays.filter((holiday) => (!year || holiday.year === year) && (!kind || holiday.kind === kind))))
   return asList(value)
 }
 
 export async function getHolidayComparison(holidayIds: string[], entityId: string, mode: 'daily_average' | 'period_total' | 'day_index'): Promise<HolidayCompareResult> {
   const body = { holiday_ids: holidayIds, series: [{ entity_id: entityId, metric: 'scenic_visits' }], mode }
   const value = await request<HolidayCompareResult & { results?: HolidayCompareResult['items']; comparisons?: HolidayCompareResult['items'] }>(
-    '/holidays/compare', () => demoHolidayCompare(holidayIds, entityId, mode), { method: 'POST', body: JSON.stringify(body) })
+    '/holidays/compare', () => fromDemo(({ demoHolidayCompare }) => demoHolidayCompare(holidayIds, entityId, mode)), { method: 'POST', body: JSON.stringify(body) })
   return { comparable: value.comparable, reason: value.reason ?? null, items: value.items ?? value.results ?? value.comparisons ?? [] }
 }
 
 export async function getEvents(regionCode = '340000'): Promise<EventSummary[]> {
   const value = await request<EventSummary[] | { items?: EventSummary[] }>(`/events?${query({ region_code: regionCode, status: 'active', page_size: 5 })}`,
-    () => demoEvents)
+    () => fromDemo(({ demoEvents }) => demoEvents))
   return asList(value)
 }
 

@@ -24,7 +24,7 @@ const option = computed<EChartsOption>(() => ({
   yAxis: { type: 'category', inverse: true, data: props.holidays.map(item => item.name), axisLabel: { color: '#a2bfda', fontSize: 11, interval: 0 }, axisTick: { show: false }, axisLine: { lineStyle: { color: 'rgba(117, 167, 210, .25)' } } },
   series: [{
     type: 'bar',
-    barMaxWidth: 25,
+    barMaxWidth: props.holidays.length >= 5 ? 14 : props.holidays.length === 4 ? 19 : 25,
     data: props.holidays.map((item, index) => ({ value: item.days_count, itemStyle: { color: colors[index % colors.length] } })),
     label: { show: true, position: 'right', color: '#c0d8f0', fontSize: 11, formatter: '{c} 天' },
   }],
