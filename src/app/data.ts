@@ -119,6 +119,11 @@ export function getScenicSeries(entityId: string, grain: TrendGrain, start: stri
     () => fromDemo(({ demoSeries }) => demoSeries(entityId, grain, start, end)))
 }
 
+export function getTransportSeries(entityId: string, metric: 'rail_departures' | 'airport_throughput', grain: TrendGrain, start: string, end: string): Promise<SeriesResult> {
+  return request(`/transport/${encodeURIComponent(entityId)}/series?${query({ metric, grain, start, end, quality: 'verified' })}`,
+    () => fromDemo(({ demoTransportSeries }) => demoTransportSeries(entityId, metric, grain, start, end)))
+}
+
 export function getHistoryForecast(entityId: string, grain: TrendGrain, trainingEnd: string, horizon: number): Promise<ForecastResult> {
   const body = { entity_id: entityId, metric: 'scenic_visits', grain, training_end: trainingEnd, horizon, model: 'baseline' }
   return request('/forecasts/history', () => fromDemo(({ demoForecast }) => demoForecast(entityId, grain, trainingEnd, horizon)), { method: 'POST', body: JSON.stringify(body) })

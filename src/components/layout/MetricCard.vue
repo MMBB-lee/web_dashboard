@@ -2,9 +2,14 @@
 import { computed } from 'vue'
 import { formatPeriod, formatValue } from '../../app/format'
 import type { OverviewCard } from '../../app/types'
+import UiSelect from '../ui/UiSelect.vue'
 
-const props = defineProps<{ card: OverviewCard; demo: boolean; index: number }>()
-const label = computed(() => props.card.label ?? ({ scenic_visits: '景区接待人次', rail_departures: '铁路发送人次', airport_throughput: '机场旅客吞吐量' } as Record<string, string>)[props.card.metric] ?? props.card.metric)
+type Option = { value: string; label: string }
+const props = defineProps<{ card: OverviewCard; demo: boolean; index: number; selectedId: string; options: Option[] }>()
+const emit = defineEmits<{ select: [id: string] }>()
+const title = computed(() => ({ scenic_visits: '接待人次', rail_departures: '总客流量', airport_throughput: '旅客吞吐量' } as Record<string, string>)[props.card.metric] ?? props.card.metric)
+const selectorLabel = computed(() => ({ scenic_visits: '景区', rail_departures: '火车站', airport_throughput: '机场' } as Record<string, string>)[props.card.metric] ?? '地点')
+const selectorOptions = computed(() => props.options)
 </script>
 
 <template>
@@ -16,11 +21,11 @@ const label = computed(() => props.card.label ?? ({ scenic_visits: '景区接待
       <svg v-else viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M24 14v20m-10-10h20"/></svg>
     </div>
     <div class="metric-content">
-      <div class="metric-head"><span class="metric-index">0{{ index + 1 }}</span><span class="metric-label">{{ label }}</span></div>
+      <div class="metric-head"><span class="metric-index">0{{ index + 1 }}</span><UiSelect class="metric-entity-select" :model-value="selectedId" :options="selectorOptions" :label="`选择${selectorLabel}`" searchable @update:model-value="emit('select', $event)" /><span class="metric-head-title">· {{ title }}</span></div>
       <div class="metric-amount"><strong>{{ formatValue(card.value) }}</strong><span>{{ card.value == null ? '该粒度暂无数据' : card.unit }}</span></div>
       <div class="metric-bottom">
         <span>{{ formatPeriod(card.period_start, card.period_end, card.grain) }}</span>
-        <span>{{ demo ? '静态样例' : card.source_ids.length ? `来源 ${card.source_ids.length} 项` : '来源待标注' }}</span>
+        <span>{{ card.metric === 'rail_departures' ? '发送人次口径 · ' : '' }}{{ demo ? '静态样例' : card.source_ids.length ? `来源 ${card.source_ids.length} 项` : '来源待标注' }}</span>
       </div>
     </div>
   </article>
@@ -33,9 +38,15 @@ const label = computed(() => props.card.label ?? ({ scenic_visits: '景区接待
 .metric-icon .airplane-icon { fill: currentColor; stroke: none; }
 .metric-icon .icon-detail { stroke-width: 1.6; }
 .metric-content { min-width: 0; flex: 1; }
+.metric-entity-select { flex: 0 1 153px; width: 153px; min-width: 0; --select-min-width: 0; }
+.metric-entity-select :deep(.ui-select-trigger) { gap: 8px; font-size: 13px; }
+.metric-entity-select :deep(.ui-select-trigger > span:first-child) { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.metric-entity-select :deep(.ui-select-menu) { width: 100%; min-width: 100%; max-width: 100%; font-size: 12px; }
+.metric-head-title { min-width: 0; overflow: hidden; color: var(--text-main); font-size: 13px; white-space: nowrap; text-overflow: ellipsis; }
 @media (max-width: 720px), (min-width: 1101px) and (max-height: 850px) {
   .metric-card { gap: 9px; }
   .metric-icon { width: 46px; height: 46px; }
   .metric-icon svg { width: 28px; height: 28px; }
+  .metric-entity-select :deep(.ui-select-trigger) { font-size: 12px; }
 }
 </style>

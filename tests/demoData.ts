@@ -60,6 +60,7 @@ const demoLatestMonthly: Record<string, number> = {
   '10000000-0000-4000-8000-000000000005': 286000,
   '10000000-0000-4000-8000-000000000003': 930000,
 }
+const transportMonthlyShape = [.79, .82, .76, .81, .89, .87, .92, .95, .91, 1.02, 1.06, 1]
 
 function monthEnd(month: string): string {
   const [year, number] = month.split('-').map(Number)
@@ -86,6 +87,17 @@ export function demoSeries(entityId: string, grain: TrendGrain, start: string, e
     return demoPoint('scenic_visits', values[index], periodStart, periodEnd, grain)
   }).filter((point) => point.period_end >= start && point.period_start <= end)
   return { entity, metric: 'scenic_visits', grain, points, missing_periods: [], coverage_ratio: points.length ? 1 : 0 }
+}
+
+export function demoTransportSeries(entityId: string, metric: 'rail_departures' | 'airport_throughput', grain: TrendGrain, start: string, end: string): SeriesResult {
+  const entity = demoEntities.find(item => item.id === entityId && item.available_metrics.includes(metric))
+  if (!entity) throw new Error('未找到对应的交通客流对象。')
+  if (grain !== 'month') return { entity, metric, grain, points: [], missing_periods: [], coverage_ratio: 0 }
+  const latest = demoLatestMonthly[entityId] ?? 0
+  const points = monthlyPeriods.map((period, index) =>
+    demoPoint(metric, Math.round(latest * transportMonthlyShape[index]), `${period}-01`, monthEnd(period), 'month'),
+  ).filter(point => point.period_end >= start && point.period_start <= end)
+  return { entity, metric, grain, points, missing_periods: [], coverage_ratio: points.length ? 1 : 0 }
 }
 
 export function demoForecast(entityId: string, grain: TrendGrain, trainingEnd: string, horizon: number): ForecastResult {

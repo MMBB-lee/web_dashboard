@@ -18,7 +18,7 @@ type DistrictNode = {
 
 const COUNTY_LABEL_ZOOM = 8.5
 
-const props = defineProps<{ entities: MapEntity[] }>()
+const props = defineProps<{ entities: MapEntity[]; scenicId?: string; railId?: string; airportId?: string }>()
 const emit = defineEmits<{ select: [entity: MapEntity] }>()
 
 const mapElement = ref<HTMLElement | null>(null)
@@ -28,9 +28,23 @@ const adminCount = ref({ cities: 0, counties: 0 })
 let AMap: any = null
 let map: any = null
 let markers: any[] = []
+let flowOverlays: any[] = []
+let movingFlows: Array<{
+  marker: any
+  path: number[][]
+  trailGlow: any
+  trailCore: any
+  duration: number
+  offset: number
+}> = []
+let flowFrame = 0
+let lastFlowPaint = 0
+let flowPaused = false
+let flowResumeTimer = 0
 let provincePolygons: any[] = []
 let adminMarkers: any[] = []
 let provinceView: { zoom: number; center: any } | null = null
+let dragEnabled: boolean | null = null
 let resizeObserver: ResizeObserver | null = null
 let resizeFrame = 0
 let disposed = false
@@ -50,7 +64,8 @@ function drawMarkers() {
     .map(entity => {
       // 用 DOM 节点和 textContent，避免把地点名称拼进 HTML 字符串。
       const content = document.createElement('div')
-      content.className = `entity-pin ${entity.type}`
+      const selected = entity.id === props.scenicId || entity.id === props.railId || entity.id === props.airportId
+      content.className = `entity-pin ${entity.type}${selected ? ' selected' : ''}`
       content.tabIndex = 0
       content.setAttribute('role', 'button')
 
@@ -92,6 +107,123 @@ function drawMarkers() {
     })
 
   if (markers.length) map.add(markers)
+}
+
+function clearFlows() {
+  if (flowFrame) cancelAnimationFrame(flowFrame)
+  flowFrame = 0
+  lastFlowPaint = 0
+  if (map && flowOverlays.length) map.remove(flowOverlays)
+  flowOverlays = []
+  movingFlows = []
+}
+
+function curvedPath(from: MapEntity, to: MapEntity, side: number): number[][] {
+  const start = [from.longitude!, from.latitude!]
+  const end = [to.longitude!, to.latitude!]
+  const dx = end[0] - start[0]
+  const dy = end[1] - start[1]
+  const distance = Math.hypot(dx, dy)
+  if (distance < 0.001) return []
+  const bend = Math.min(.38, Math.max(.12, distance * .27)) * side
+  const control = [(start[0] + end[0]) / 2 - dy / distance * bend, (start[1] + end[1]) / 2 + dx / distance * bend]
+  return Array.from({ length: 49 }, (_, index) => {
+    const t = index / 48
+    const inverse = 1 - t
+    return [
+      inverse * inverse * start[0] + 2 * inverse * t * control[0] + t * t * end[0],
+      inverse * inverse * start[1] + 2 * inverse * t * control[1] + t * t * end[1],
+    ]
+  })
+}
+
+function animateFlows(time: number) {
+  if (flowPaused || !map) {
+    flowFrame = 0
+    return
+  }
+  // 地图的线段更新比 DOM 动画重，约 30 帧即可保持流动感。
+  if (time - lastFlowPaint < 32) {
+    flowFrame = requestAnimationFrame(animateFlows)
+    return
+  }
+  lastFlowPaint = time
+  for (const flow of movingFlows) {
+    const position = ((time / flow.duration + flow.offset) % 1) * (flow.path.length - 1)
+    const index = Math.floor(position)
+    const fraction = position - index
+    const current = flow.path[index]
+    const next = flow.path[Math.min(index + 1, flow.path.length - 1)]
+    const head = [
+      current[0] + (next[0] - current[0]) * fraction,
+      current[1] + (next[1] - current[1]) * fraction,
+    ]
+    const trail = flow.path.slice(Math.max(0, index - 8), index + 1)
+    trail.push(head)
+    flow.trailGlow.setPath(trail)
+    flow.trailCore.setPath(trail)
+    flow.marker.setPosition(head)
+  }
+  flowFrame = requestAnimationFrame(animateFlows)
+}
+
+function drawFlows() {
+  clearFlows()
+  if (!AMap || !map) return
+  const scenic = props.entities.find(entity => entity.id === props.scenicId)
+  if (scenic?.longitude == null || scenic.latitude == null) return
+
+  for (const [id, kind, side, duration, offset] of [
+    [props.railId, 'rail_station', 1, 3800, 0],
+    [props.airportId, 'airport', -1, 4600, .48],
+  ] as const) {
+    const origin = props.entities.find(entity => entity.id === id)
+    if (origin?.longitude == null || origin.latitude == null) continue
+    const path = curvedPath(origin, scenic, side)
+    if (!path.length) continue
+    const color = kind === 'rail_station' ? '#00f2a9' : '#ffb84d'
+    const glow = new AMap.Polyline({
+      path, strokeColor: color, strokeOpacity: .17, strokeWeight: 6,
+      zIndex: 20, bubble: true,
+    })
+    const line = new AMap.Polyline({
+      path, strokeColor: color, strokeOpacity: .7, strokeWeight: 1.5,
+      zIndex: 21, bubble: true,
+    })
+    const trailGlow = new AMap.Polyline({
+      path: [], strokeColor: color, strokeOpacity: .35, strokeWeight: 8,
+      zIndex: 22, bubble: true,
+    })
+    const trailCore = new AMap.Polyline({
+      path: [], strokeColor: color, strokeOpacity: 1, strokeWeight: 3,
+      zIndex: 23, bubble: true,
+    })
+    const particle = document.createElement('span')
+    particle.className = `flow-particle ${kind}`
+    particle.setAttribute('aria-hidden', 'true')
+    const marker = new AMap.Marker({ position: path[0], anchor: 'center', content: particle, zIndex: 45 })
+    flowOverlays.push(glow, line, trailGlow, trailCore, marker)
+    movingFlows.push({ marker, path, trailGlow, trailCore, duration, offset })
+  }
+  if (!flowOverlays.length) return
+  map.add(flowOverlays)
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    for (const flow of movingFlows) flow.marker.setPosition(flow.path[Math.floor(flow.path.length / 2)])
+  } else if (!flowPaused) flowFrame = requestAnimationFrame(animateFlows)
+}
+
+function pauseFlowAnimation() {
+  flowPaused = true
+  if (flowFrame) cancelAnimationFrame(flowFrame)
+  flowFrame = 0
+}
+
+function resumeFlowAnimation() {
+  flowPaused = false
+  if (movingFlows.length && !flowFrame && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    lastFlowPaint = 0
+    flowFrame = requestAnimationFrame(animateFlows)
+  }
 }
 
 function addAdminLabel(name: string, position: unknown, kind: 'city' | 'county'): void {
@@ -154,13 +286,27 @@ function drawAdministrativeAreas(province: DistrictNode): void {
 
 function showWholeProvince() {
   if (!map || !provinceView) return
-  map.setZoomAndCenter(provinceView.zoom, provinceView.center, true)
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (flowResumeTimer) clearTimeout(flowResumeTimer)
+  if (reduceMotion) {
+    map.setZoomAndCenter(provinceView.zoom, provinceView.center, true)
+  } else {
+    pauseFlowAnimation()
+    map.setZoomAndCenter(provinceView.zoom, provinceView.center, false, 480)
+    flowResumeTimer = window.setTimeout(() => {
+      flowResumeTimer = 0
+      resumeFlowAnimation()
+    }, 560)
+  }
   syncDragState()
 }
 
 function syncDragState() {
   if (!map || !provinceView) return
-  map.setStatus({ dragEnable: map.getZoom() > provinceView.zoom + 0.001 })
+  const shouldEnable = map.getZoom() > provinceView.zoom + 0.001
+  if (dragEnabled === shouldEnable) return
+  dragEnabled = shouldEnable
+  map.setStatus({ dragEnable: shouldEnable })
 }
 
 function fitAndLockProvince() {
@@ -170,7 +316,7 @@ function fitAndLockProvince() {
   provinceView = null
   map.clearLimitBounds()
   map.setZooms([2, 20])
-  map.setFitView(provincePolygons, true, [36, 36, 36, 36])
+  map.setFitView(provincePolygons, true, [14, 14, 14, 14])
 
   provinceView = { zoom: map.getZoom(), center: map.getCenter() }
   map.setZooms([provinceView.zoom, 20])
@@ -242,6 +388,7 @@ onMounted(async () => {
     map.add(provinceBorders)
 
     drawMarkers()
+    drawFlows()
 
     const district = new AMap.DistrictSearch({
       level: 'province',
@@ -284,12 +431,17 @@ onMounted(async () => {
   }
 })
 
-watch(() => props.entities, drawMarkers, { deep: true })
+watch(() => [props.entities, props.scenicId, props.railId, props.airportId], () => {
+  drawMarkers()
+  drawFlows()
+}, { deep: true })
 
 onUnmounted(() => {
   disposed = true
   resizeObserver?.disconnect()
   cancelAnimationFrame(resizeFrame)
+  if (flowResumeTimer) clearTimeout(flowResumeTimer)
+  clearFlows()
   map?.destroy()
   map = null
 })
@@ -306,7 +458,7 @@ onUnmounted(() => {
     </div>
 
     <div v-if="adminCount.cities" class="admin-hint">
-      {{ adminCount.cities }} 个地级市 · {{ adminCount.counties }} 个区县 · 放大查看区县
+      {{ adminCount.cities }} 个地级市 · {{ adminCount.counties }} 个区县
     </div>
 
     <button
@@ -487,6 +639,49 @@ onUnmounted(() => {
   background: #ffb84d;
   box-shadow: 0 0 8px #ffb84d;
 }
+:deep(.entity-pin.selected .pin-dot) {
+  width: 12px;
+  height: 12px;
+  outline: 1px solid rgba(255, 255, 255, .8);
+  outline-offset: 3px;
+}
+:deep(.entity-pin.selected::before) {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #00d4ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00d4ff;
+  pointer-events: none;
+  animation: selected-pin-pulse 2.4s ease-out infinite;
+}
+:deep(.entity-pin.selected.rail_station::before) {
+  border-color: #00f2a9;
+  box-shadow: 0 0 10px #00f2a9;
+}
+:deep(.entity-pin.selected.airport::before) {
+  border-color: #ffb84d;
+  box-shadow: 0 0 10px #ffb84d;
+}
+@keyframes selected-pin-pulse {
+  0% { opacity: .85; transform: scale(.8); }
+  100% { opacity: 0; transform: scale(2.2); }
+}
+:deep(.flow-particle) {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: #eafff7;
+  box-shadow: 0 0 5px 2px #00f2a9, 0 0 13px 5px #00f2a9;
+  pointer-events: none;
+}
+:deep(.flow-particle.airport) {
+  background: #fff7e8;
+  box-shadow: 0 0 5px 2px #ffb84d, 0 0 13px 5px #ffb84d;
+}
 
 :deep(.pin-tooltip) {
   position: absolute;
@@ -527,5 +722,8 @@ onUnmounted(() => {
 @media (max-width: 640px) {
   .map-stage { min-height: 330px; }
   .map-legend { gap: 7px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :deep(.entity-pin.selected::before) { animation: none; opacity: .5; }
 }
 </style>

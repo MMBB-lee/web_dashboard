@@ -15,11 +15,24 @@ import UiSelect from '../../components/ui/UiSelect.vue'
 import { useOverview } from './overview'
 
 const router = useRouter()
-const { grain, scenicId, selectedScenicId, scenicEntities, loading, error, overview, series, forecast, events, holidayComparison, holidayError, reload } = useOverview()
+const {
+  grain, scenicId, railId, airportId, selectedScenicId, selectedRailId, selectedAirportId,
+  scenicEntities, railEntities, airportEntities, selectedCards, mapEntities,
+  loading, error, overview, series, railSeries, airportSeries, seriesError, railError, airportError,
+  forecast, forecastError, events, holidayComparison, holidayError, reload,
+} = useOverview()
 const chartLoading = useVisibleChartLoading(loading)
 const isDemo = computed(() => backendMode.value === 'demo')
 const latestPoint = computed(() => series.value?.points.at(-1))
 const previousPoint = computed(() => series.value?.points.at(-2))
+const transportMode = ref<'rail_station' | 'airport'>('rail_station')
+const transportSeries = computed(() => transportMode.value === 'rail_station' ? railSeries.value : airportSeries.value)
+const transportEntity = computed(() => transportMode.value === 'rail_station'
+  ? railEntities.value.find(entity => entity.id === selectedRailId.value)
+  : airportEntities.value.find(entity => entity.id === selectedAirportId.value))
+const transportError = computed(() => transportMode.value === 'rail_station' ? railError.value : airportError.value)
+const transportMetric = computed(() => transportMode.value === 'rail_station' ? '铁路发送人次' : '机场旅客吞吐量')
+const transportLastPoint = computed(() => transportSeries.value?.points.at(-1))
 const demoTrendNote = computed(() => {
   const latest = latestPoint.value?.value
   const previous = previousPoint.value?.value
@@ -29,7 +42,6 @@ const demoTrendNote = computed(() => {
 })
 const transportNotice = ref('')
 const grainOptions = [{ value: 'week', label: '按周' }, { value: 'month', label: '按月' }]
-const scenicOptions = computed(() => scenicEntities.value.map(entity => ({ value: entity.id, label: entity.name })))
 const keyObjects = computed(() => [...(overview.value?.map_entities ?? [])]
   .filter(entity => entity.type === 'scenic' && entity.latest_metric === 'scenic_visits' && entity.latest_value != null)
   .sort((a, b) => (b.latest_value ?? 0) - (a.latest_value ?? 0))
@@ -43,6 +55,23 @@ function setGrain(value: string) {
 
 function setScenic(value: string) {
   scenicId.value = value
+}
+
+function optionsFor(metric: string) {
+  const entities = metric === 'scenic_visits' ? scenicEntities.value
+    : metric === 'rail_departures' ? railEntities.value : airportEntities.value
+  return entities.map(entity => ({ value: entity.id, label: entity.name }))
+}
+
+function selectedIdFor(metric: string) {
+  return metric === 'scenic_visits' ? selectedScenicId.value
+    : metric === 'rail_departures' ? selectedRailId.value : selectedAirportId.value
+}
+
+function setCardSelection(metric: string, id: string) {
+  if (metric === 'scenic_visits') setScenic(id)
+  else if (metric === 'rail_departures') railId.value = id
+  else if (metric === 'airport_throughput') airportId.value = id
 }
 
 function openEntity(entity: Entity) {
@@ -66,17 +95,18 @@ function openEntity(entity: Entity) {
   <ChartLoading v-else-if="chartLoading && !overview" class="initial-chart-loading" kind="line" label="正在读取总览数据…" />
   <template v-else-if="overview">
     <div class="metric-grid">
-      <MetricCard v-for="(card, index) in overview.cards" :key="`${card.metric}-${card.entity_id ?? index}`" :card="card" :index="index" :demo="isDemo" />
+      <MetricCard v-for="(card, index) in selectedCards" :key="`${card.metric}-${index}`" :card="card" :index="index" :demo="isDemo" :selected-id="selectedIdFor(card.metric)" :options="optionsFor(card.metric)" @select="setCardSelection(card.metric, $event)" />
     </div>
 
     <div class="dashboard-grid dashboard-body">
       <div class="dashboard-column">
         <section class="panel section-panel chart-panel">
-          <div class="panel-head"><h2 class="panel-title">景区历史趋势</h2><div class="field trend-controls"><UiSelect :model-value="selectedScenicId" :options="scenicOptions" label="选择景区" searchable @update:model-value="setScenic" /><span class="panel-kicker">/ {{ grain === 'week' ? '周' : '月' }}</span></div></div>
+          <div class="panel-head"><h2 class="panel-title">景区历史及未来趋势</h2><span class="panel-kicker">{{ grain === 'week' ? '周' : '月' }}度 · 历史实线 / 预测虚线</span></div>
           <ChartLoading v-if="chartLoading" kind="line" label="正在加载景区趋势…" />
+          <ForecastChart v-else-if="forecast?.status === 'ready' && forecast.forecast_points.length" :actual="series?.points ?? []" :forecast="forecast.forecast_points" unit="人次" />
           <TrendChart v-else-if="series?.points.length" :points="series.points" name="实际接待人次" unit="人次" />
-          <div v-else class="state-box">没有符合当前粒度的已核验数据。</div>
-          <div class="chart-caption">指标：景区接待人次 · 单位：人次 · 统计期：{{ latestPoint ? formatPeriod(latestPoint.period_start, latestPoint.period_end, latestPoint.grain) : '—' }} · {{ isDemo ? '静态样例，非官方统计' : `来源：${latestPoint?.source_ids.join('、') || '待标注'} · 更新：${latestPoint?.ingested_at || '待标注'}` }}</div>
+          <div v-else class="state-box">{{ seriesError || '没有符合当前粒度的已核验数据。' }}</div>
+          <div class="chart-caption">{{ series?.entity.name ?? '景区' }} · 景区接待人次 · 人次 · 统计期：{{ latestPoint ? formatPeriod(latestPoint.period_start, latestPoint.period_end, latestPoint.grain) : '—' }} · {{ isDemo ? '静态样例，非官方统计' : `来源：${latestPoint?.source_ids.join('、') || '待标注'} · 更新：${latestPoint?.ingested_at || '待标注'}` }}<template v-if="forecast?.status === 'ready'"> · 回测 MAE：{{ formatValue(forecast.backtest?.mae) }} 人次 · sMAPE：{{ forecast.backtest?.smape ?? '—' }}% · 模型：{{ forecast.model_version ?? '—' }}</template><template v-else-if="forecastError || forecast?.reason"> · {{ forecastError || forecast?.reason }}</template></div>
         </section>
         <section class="panel section-panel holiday-panel">
           <div class="panel-head"><h2 class="panel-title">节假日对比</h2><span class="panel-kicker">国庆节 · 同期日均</span></div>
@@ -89,9 +119,9 @@ function openEntity(entity: Entity) {
       <div class="dashboard-column dashboard-center">
         <section class="panel section-panel map-panel">
           <div class="panel-head"><h2 class="panel-title">客流对象分布</h2><span class="panel-kicker">MAP / 点击对象进入详情</span></div>
-          <AnhuiMap :entities="overview.map_entities" @select="openEntity" />
+          <AnhuiMap :entities="mapEntities" :scenic-id="selectedScenicId" :rail-id="selectedRailId" :airport-id="selectedAirportId" @select="openEntity" />
           <div v-if="transportNotice" class="transport-notice" role="status">{{ transportNotice }}</div>
-          <div class="meta-strip"><span>覆盖对象 <strong>{{ overview.map_entities.length }} 个</strong></span><span>景区、铁路发送与机场吞吐量分开统计</span><span v-if="isDemo">位置与数值为静态样例</span></div>
+          <div class="meta-strip"><span>覆盖对象 <strong>{{ mapEntities.length }} 个</strong></span><span>动态连线仅示意地点关联，非实际出行轨迹</span><span v-if="isDemo">位置与数值为静态样例</span></div>
         </section>
         <section class="panel section-panel key-panel">
           <div class="panel-head"><h2 class="panel-title">重点对象</h2><span class="panel-kicker">景区接待人次 TOP 5</span></div>
@@ -107,12 +137,12 @@ function openEntity(entity: Entity) {
         </section>
       </div>
       <div class="dashboard-column">
-        <section class="panel section-panel chart-panel">
-        <div class="panel-head"><h2 class="panel-title">历史趋势预测</h2><span class="panel-kicker">历史实线 / 预测虚线</span></div>
-        <ChartLoading v-if="chartLoading" kind="line" label="正在加载趋势预测…" />
-        <ForecastChart v-else-if="forecast?.status === 'ready' && forecast.forecast_points.length" :actual="series?.points ?? []" :forecast="forecast.forecast_points" unit="人次" />
-        <div v-else class="state-box">{{ forecast?.reason ?? '历史数据不足，暂不绘制预测曲线。' }}</div>
-        <div class="chart-caption">{{ forecast?.status === 'ready' ? `回测 MAE：${formatValue(forecast.backtest?.mae)} 人次 · sMAPE：${forecast.backtest?.smape ?? '—'}% · 模型：${forecast.model_version ?? '—'} · 训练截至：${forecast.training_window?.end ?? '—'} · ${isDemo ? '静态样例' : `来源：${forecast.source_ids?.join('、') || '待标注'}`}` : '数据不足时不生成预测值。' }}</div>
+        <section class="panel section-panel chart-panel transport-chart-panel">
+        <div class="panel-head"><h2 class="panel-title">交通客流趋势</h2><div class="transport-switch" role="group" aria-label="选择交通客流类型"><button type="button" :aria-pressed="transportMode === 'rail_station'" :class="{ active: transportMode === 'rail_station' }" @click="transportMode = 'rail_station'">火车站</button><button type="button" :aria-pressed="transportMode === 'airport'" :class="{ active: transportMode === 'airport' }" @click="transportMode = 'airport'">机场</button></div></div>
+        <ChartLoading v-if="chartLoading" kind="line" label="正在加载交通客流…" />
+        <TrendChart v-else-if="transportSeries?.points.length" :points="transportSeries.points" :name="transportMetric" unit="人次" />
+        <div v-else class="state-box">{{ transportError || '所选地点暂无可展示的客流序列。' }}</div>
+        <div class="chart-caption">{{ transportEntity?.name ?? '所选地点' }} · {{ transportMetric }} · 人次 · 统计期：{{ transportLastPoint ? formatPeriod(transportLastPoint.period_start, transportLastPoint.period_end, transportLastPoint.grain) : '—' }} · {{ isDemo ? '静态样例，非官方统计' : `来源：${transportLastPoint?.source_ids.join('、') || '待标注'} · 更新：${transportLastPoint?.ingested_at || '待标注'}` }}</div>
         </section>
         <section class="panel section-panel event-panel">
           <div class="panel-head"><h2 class="panel-title">事件摘要</h2><span class="panel-kicker">{{ isDemo ? '演示数据 · 以官方公告为准' : `${events.length} 条有效事件` }}</span></div>
@@ -138,8 +168,10 @@ function openEntity(entity: Entity) {
 .grain-field > span { white-space: nowrap; }
 .chart-panel { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
 .initial-chart-loading { flex: 1; min-height: 320px; }
-.trend-controls { display: flex; align-items: center; gap: 7px; min-width: 0; --select-min-width: 150px; --select-height: 28px; }
-.trend-controls :deep(.ui-select-trigger) { font-size: 12px; }
+.transport-switch { display: inline-flex; flex: none; overflow: hidden; padding: 2px; border: 1px solid var(--border-glow); border-radius: 999px; background: rgba(0, 212, 255, .06); }
+.transport-switch button { min-width: 52px; padding: 3px 10px; border: 0; border-radius: 999px; background: transparent; color: var(--text-sub); font-size: 12px; line-height: 1.2; }
+.transport-switch button.active { background: var(--accent); color: #062540; font-weight: 700; }
+.transport-switch button:not(.active):hover { color: var(--text-title); }
 .chart-panel :deep(.chart-canvas) { height: auto; min-height: 0; flex: 1; }
 .chart-panel .chart-caption { margin-top: auto; }
 .map-panel { min-height: 0; display: flex; flex-direction: column; }

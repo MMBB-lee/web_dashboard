@@ -117,7 +117,7 @@ onUnmounted(() => document.removeEventListener('pointerdown', onDocumentPointerD
             class="ui-select-search"
             type="search"
             :aria-label="`搜索${label}`"
-            placeholder="搜索景区"
+            :placeholder="`搜索${label}`"
             autocomplete="off"
             @keydown="onSearchKeydown"
           />
@@ -133,7 +133,7 @@ onUnmounted(() => document.removeEventListener('pointerdown', onDocumentPointerD
             @click="choose(option.value)"
             @keydown="onOptionKeydown($event, index)"
           >{{ option.label }}</button>
-          <div v-if="searchable && !filteredOptions.length" class="ui-select-empty" role="status">未找到匹配景区</div>
+          <div v-if="searchable && !filteredOptions.length" class="ui-select-empty" role="status">未找到匹配{{ label }}</div>
         </div>
       </div>
     </Transition>

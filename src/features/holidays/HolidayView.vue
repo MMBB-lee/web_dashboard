@@ -12,6 +12,7 @@ import { useHolidays } from './holidays'
 
 const { kind, selectedIds, entityId, mode, holidays, entities, metric, comparison, dailyAverageComparison, loading, error, selectedHolidays, loadComparison } = useHolidays()
 const chartLoading = useVisibleChartLoading(loading)
+const comparisonLoading = computed(() => selectedHolidays.value.length >= 2 && chartLoading.value)
 const isDemo = computed(() => backendMode.value === 'demo')
 const modeLabel = computed(() => ({ daily_average: '日均接待人次', period_total: '假期总接待人次', day_index: '逐日变化' })[mode.value])
 const kindOptions = [{ value: 'may_day', label: '五一' }, { value: 'national_day', label: '国庆' }, { value: 'summer', label: '暑假' }, { value: 'winter', label: '寒假' }]
@@ -79,32 +80,32 @@ function removeHoliday(id: string) {
       <div class="holiday-visuals">
         <section class="panel section-panel compare-panel">
           <div class="panel-head"><h2 class="panel-title">{{ modeLabel }}对比</h2><span class="panel-kicker">{{ comparison?.items[0]?.unit ?? '人次' }}</span></div>
-          <ChartLoading v-if="chartLoading" kind="bar" label="正在加载假期客流对比…" />
+          <ChartLoading v-if="comparisonLoading" kind="bar" label="正在加载假期客流对比…" />
           <HolidayCompareChart v-else-if="selectedHolidays.length >= 2 && comparison?.comparable && comparison.items.length" :items="comparison.items" />
           <div v-else class="state-box empty-chart-state">{{ selectionHint || comparison?.reason || '所选假期没有可比较的数据。' }}</div>
-          <div v-if="!chartLoading && selectedHolidays.length >= 2" class="chart-caption">{{ metric?.definition ?? '景区接待人次。' }} {{ isDemo ? '静态假期样例，非官方统计。' : `来源：${comparison?.items.flatMap(item => item.source_ids).join('、') || '待标注'}。` }}</div>
+          <div v-if="!comparisonLoading && selectedHolidays.length >= 2" class="chart-caption">{{ metric?.definition ?? '景区接待人次。' }} {{ isDemo ? '静态假期样例，非官方统计。' : `来源：${comparison?.items.flatMap(item => item.source_ids).join('、') || '待标注'}。` }}</div>
         </section>
 
         <section class="panel section-panel visual-panel donut-panel">
           <div class="panel-head"><h2 class="panel-title">所选假期数值占比</h2><span class="panel-kicker">{{ modeLabel }}</span></div>
-          <ChartLoading v-if="chartLoading" kind="donut" label="正在加载假期占比…" />
+          <ChartLoading v-if="comparisonLoading" kind="donut" label="正在加载假期占比…" />
           <HolidayShareChart v-else-if="selectedHolidays.length >= 2 && shareValues && comparison" :labels="comparison.items.map(item => item.label)" :values="shareValues" :unit="comparison.items[0]?.unit ?? '人次'" title="所选假期数值占比" />
           <div v-else class="state-box empty-chart-state">{{ selectionHint || comparison?.reason || '当前条件下没有可计算占比的数值。' }}</div>
         </section>
 
         <section class="panel section-panel visual-panel duration-panel">
           <div class="panel-head"><h2 class="panel-title">假期天数对比</h2><span class="panel-kicker">假期日历 / 天</span></div>
-          <ChartLoading v-if="chartLoading" kind="bar" label="正在加载假期天数…" />
+          <ChartLoading v-if="comparisonLoading" kind="bar" label="正在加载假期天数…" />
           <HolidayDurationChart v-else-if="selectedHolidays.length >= 2" :holidays="selectedHolidays" />
           <div v-else class="state-box empty-chart-state">{{ selectionHint }}</div>
         </section>
 
         <section class="panel section-panel visual-panel daily-panel">
           <div class="panel-head"><h2 class="panel-title">日均客流量变化</h2><span class="panel-kicker">按所选假期时间顺序 · 人次/日</span></div>
-          <ChartLoading v-if="chartLoading" kind="line" label="正在加载日均客流量变化…" />
+          <ChartLoading v-if="comparisonLoading" kind="line" label="正在加载日均客流量变化…" />
           <HolidayCompareChart v-else-if="selectedHolidays.length >= 2 && dailyAverageComparison?.comparable && dailyAverageComparison.items.length" :items="dailyAverageComparison.items" variant="timeline" />
           <div v-else class="state-box empty-chart-state">{{ selectionHint || dailyAverageComparison?.reason || '所选假期没有可用的日均客流数据。' }}</div>
-          <div v-if="!chartLoading && dailyAverageComparison?.comparable" class="chart-caption">仅显示当前选中的 {{ selectedHolidays.length }} 个假期；按假期开始日期从早到晚排列。</div>
+          <div v-if="!comparisonLoading && dailyAverageComparison?.comparable" class="chart-caption">仅显示当前选中的 {{ selectedHolidays.length }} 个假期；按假期开始日期从早到晚排列。</div>
         </section>
 
         <section class="panel section-panel source-panel">
