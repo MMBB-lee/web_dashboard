@@ -7,19 +7,21 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "test:map": "node --test tests/map.test.mjs"
   },
   "dependencies": {
-    "@amap/amap-jsapi-loader": "^1.0.1",
     "@primeuix/themes": "1.2.5",
     "echarts": "^5.6.0",
     "primeicons": "^7.0.0",
     "primevue": "4.5.5",
+    "three": "0.180.0",
     "vue": "^3.5.43",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
+    "@types/three": "0.180.0",
     "@vitejs/plugin-vue": "^6.0.9",
     "typescript": "~5.9.3",
     "vite": "^7.3.0",

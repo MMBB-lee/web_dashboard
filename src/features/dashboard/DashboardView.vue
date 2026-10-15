@@ -119,7 +119,7 @@ function openEntity(entity: Entity) {
       <div class="dashboard-column dashboard-center">
         <section class="panel section-panel map-panel">
           <div class="panel-head"><h2 class="panel-title">客流对象分布</h2><span class="panel-kicker">MAP / 点击对象进入详情</span></div>
-          <AnhuiMap :entities="mapEntities" :scenic-id="selectedScenicId" :rail-id="selectedRailId" :airport-id="selectedAirportId" @select="openEntity" />
+          <AnhuiMap :entities="mapEntities" :scenic-id="selectedScenicId" :rail-id="selectedRailId" :airport-id="selectedAirportId" :demo="isDemo" @select="openEntity" />
           <div v-if="transportNotice" class="transport-notice" role="status">{{ transportNotice }}</div>
           <div class="meta-strip"><span>覆盖对象 <strong>{{ mapEntities.length }} 个</strong></span><span>动态连线仅示意地点关联，非实际出行轨迹</span><span v-if="isDemo">位置与数值为静态样例</span></div>
         </section>
@@ -161,6 +161,14 @@ function openEntity(entity: Entity) {
 </template>
 
 <style scoped>
+/* 压缩总览指标卡，把剩余高度交给下方图表和地图。 */
+.metric-grid :deep(.metric-card) { padding: 6px 12px; gap: 10px; }
+.metric-grid :deep(.metric-icon) { width: 48px; height: 48px; }
+.metric-grid :deep(.metric-icon svg) { width: 30px; height: 30px; }
+.metric-grid :deep(.metric-entity-select) { --select-height: 26px; }
+.metric-grid :deep(.metric-amount) { padding: 3px 0; }
+.metric-grid :deep(.metric-amount strong) { font-size: clamp(24px, 1.7vw, 29px); }
+.metric-grid :deep(.metric-bottom) { padding-top: 4px; font-size: 11px; }
 .dashboard-grid { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(390px, 1.42fr) minmax(260px, 1fr); grid-template-rows: minmax(0, 1fr); gap: 11px; align-items: stretch; }
 .dashboard-column { min-width: 0; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr) clamp(210px, 23vh, 270px); gap: 11px; }
 .dashboard-center { grid-template-rows: minmax(0, 1fr) 180px; }
@@ -201,7 +209,7 @@ function openEntity(entity: Entity) {
 .note-dot.warn { background: var(--accent-warn); color: var(--accent-warn); }
 .event-item { display: grid; gap: 5px; padding: 10px 0; border-bottom: 1px solid var(--border-soft); font-size: 12px; }.event-item strong { font-weight: 500; }
 .transport-notice { margin-top: 9px; color: var(--accent-warn); font-size: 12px; }
-@media (max-width: 1160px) { .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }.dashboard-column { grid-template-rows: auto auto; }.dashboard-center { grid-column: 1 / -1; grid-row: 1; }.map-panel :deep(.map-stage) { flex: none; height: 420px; }.chart-panel :deep(.chart-canvas) { flex: none; height: 270px; }.holiday-panel :deep(.chart-canvas) { flex: none; height: 180px; } }
+@media (max-width: 1160px) { .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }.dashboard-column { grid-template-rows: auto auto; }.dashboard-center { grid-column: 1 / -1; grid-row: 1; }.map-panel :deep(.map-stage) { flex: none; height: 460px; }.chart-panel :deep(.chart-canvas) { flex: none; height: 310px; }.holiday-panel :deep(.chart-canvas) { flex: none; height: 180px; } }
 @media (max-width: 700px) { .dashboard-grid { grid-template-columns: 1fr; }.dashboard-center { grid-column: auto; grid-row: auto; }.key-row { grid-template-columns: 20px minmax(75px, 1fr) minmax(50px, 1fr) 50px; gap: 6px; } }
 @media (min-width: 1161px) and (max-height: 850px) {
   .dashboard-grid, .dashboard-column { gap: 8px; }

@@ -1,0 +1,59 @@
+.map-stage.three-map-stage {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 330px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(105, 158, 210, .13);
+  background: radial-gradient(ellipse at 48% 42%, #0f2b4c 0, #091d3b 64%);
+}
+.three-map-canvas, .three-map-labels, .three-map-points { position: absolute; inset: 0; }
+.three-map-canvas { z-index: 0; }
+.three-map-canvas canvas { width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+.three-map-labels { z-index: 2; pointer-events: none; overflow: hidden; }
+.three-map-points { z-index: 3; pointer-events: none; }
+.three-admin-label { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; line-height: 1.15; text-shadow: 0 1px 2px #06152c, 1px 0 2px #06152c, -1px 0 2px #06152c, 0 -1px 2px #06152c; pointer-events: none; user-select: none; }
+.three-admin-label.city { font-size: 10px; font-weight: 500; color: #b3d0e5; letter-spacing: .02em; }
+.three-admin-label.county { font-size: 8.5px; font-weight: 400; color: #88a9c5; }
+.three-map-stage [hidden] { display: none !important; }
+.three-map-legend { position: absolute; z-index: 5; top: 10px; left: 10px; display: flex; gap: 11px; padding: 6px 8px; background: rgba(6, 20, 42, .84); border: 1px solid rgba(105, 158, 210, .12); color: #c9e4f6; font-size: 10px; pointer-events: none; }
+.three-map-legend > span { display: inline-flex; gap: 5px; align-items: center; }
+.three-legend-dot { display: block; width: 6px; height: 6px; background: var(--point-color); border-radius: 50%; box-shadow: 0 0 5px var(--point-color); }
+.three-legend-dot.rail_station { border-radius: 1px; }
+.three-legend-dot.airport { border-radius: 0; transform: rotate(45deg); }
+.three-map-detail { position: absolute; top: 44px; left: 11px; color: #8fb5d2; font-size: 9px; pointer-events: none; background: rgba(6, 20, 42, .55); padding: 3px 5px; z-index: 5; }
+.three-map-label-controls { position: absolute; top: 70px; left: 11px; display: flex; flex-direction: column; gap: 7px; z-index: 5; padding: 8px; border: 1px solid rgba(105,158,210,.13); background: rgba(6,20,42,.7); }
+.three-map-label-controls label { display: flex; gap: 6px; align-items: center; font-size: 13px; line-height: 1.3; color: #c0d8f0; cursor: pointer; user-select: none; }
+.three-map-label-controls input { width: 13px; height: 13px; margin: 0; accent-color: #00d4ff; }
+.three-map-view-controls { position: absolute; top: 10px; right: 10px; z-index: 5; display: flex; align-items: center; gap: 4px; }
+.three-map-view-controls button { min-width: 23px; min-height: 24px; padding: 3px 6px; border: 1px solid #34688d; border-radius: 3px; background: rgba(6,20,42,.86); color: #c5e7fa; font-size: 10px; line-height: 1.15; }
+.three-map-view-controls button:hover { background: #123b5d; border-color: #00d4ff; }
+.three-map-footer { position: absolute; left: 9px; right: 9px; bottom: 22px; z-index: 4; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2px 7px; color: #779bb8; font-size: 8.5px; line-height: 1.2; pointer-events: none; }
+.three-map-coordinate { font-variant-numeric: tabular-nums; }
+.three-map-attribution { position: absolute; bottom: 5px; left: 9px; right: 9px; z-index: 4; display: flex; flex-wrap: wrap; align-items: center; gap: 3px 9px; color: #5f819e; font-size: 8px; line-height: 1.15; }
+.three-map-attribution a { color: #86aec8; }
+.three-map-attribution a:hover { color: #00d4ff; text-decoration: underline; }
+.three-map-marker { --point-color: #00d4ff; position: absolute; z-index: 3; width: 20px; height: 20px; display: grid; place-items: center; transform: translate(-50%,-50%); padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; pointer-events: auto; }
+.three-point-core { width: 6px; height: 6px; border: 1px solid rgba(228,249,255,.55); border-radius: 50%; background: var(--point-color); box-shadow: 0 0 5px var(--point-color), 0 0 10px var(--point-color); }
+.three-map-marker.rail_station .three-point-core { border-radius: 1px; }
+.three-map-marker.airport .three-point-core { transform: rotate(45deg); border-radius: 1px; }
+.three-map-marker.selected .three-point-core { width: 8px; height: 8px; border-color: #e6f7ff; }
+.three-map-marker.selected::before { content: ''; position: absolute; width: 14px; height: 14px; border: 1px solid var(--point-color); border-radius: 50%; opacity: .72; box-shadow: 0 0 7px var(--point-color); animation: three-pin-wave 2.1s ease-out infinite; pointer-events: none; }
+.three-map-marker:hover, .three-map-marker:focus-visible { z-index: 6; }
+.three-map-marker:hover .three-point-core, .three-map-marker:focus-visible .three-point-core { outline: 1px solid #e6f7ff; outline-offset: 3px; }
+@keyframes three-pin-wave { from { transform: scale(.8); opacity: .8; } to { transform: scale(1.9); opacity: 0; } }
+.three-map-tooltip { position: absolute; z-index: 9; max-width: calc(100% - 16px); display: grid; gap: 4px; padding: 10px 12px; border: 1px solid rgba(0,212,255,.55); background: rgba(5,20,39,.96); box-shadow: 0 5px 24px #0006; color: #c0d8f0; font-size: 11px; line-height: 1.4; pointer-events: none; }
+.three-map-tooltip > strong { color: #e6f7ff; font-size: 12px; }
+.three-tooltip-kind { font-size: 10px; }
+.three-tooltip-value { font-variant-numeric: tabular-nums; }
+.three-tooltip-coordinate { color: #8fb5d2; font-size: 9px; font-variant-numeric: tabular-nums; }
+.three-tooltip-note { padding-top: 4px; border-top: 1px solid rgba(105,158,210,.16); color: #789bb9; font-size: 9px; }
+.three-map-error { position: absolute; z-index: 10; inset: 35% 10% auto; padding: 14px; border: 1px solid #6e4b42; background: #2f2434; color: #f4c5b8; text-align: center; font-size: 12px; line-height: 1.7; }
+.three-map-stage.reduce-motion .three-map-marker::before { animation: none; }
+@media (prefers-reduced-motion: reduce) { .three-map-marker.selected::before { animation: none; } }
+
+.three-map-host { position: absolute; inset: 0; }
+.three-map-status { position: absolute; z-index: 12; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 25px; background: #091d3b; color: #85a6c6; text-align: center; font-size: 12px; line-height: 1.6; }
+.three-map-status.error { color: #f4c5b8; }
+.three-map-status button { padding: 5px 12px; border: 1px solid #417da5; background: #123452; color: #c0d8f0; }
