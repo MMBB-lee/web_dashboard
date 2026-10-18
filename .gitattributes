@@ -1,0 +1,6 @@
+# Evidence and pinned model sources are verified by SHA256. Preserve their bytes
+# across Windows/Linux checkouts rather than applying automatic line endings.
+data_foundation/real_data/** -text
+**/model_bundle/** -text
+**/fixtures/** -text
+**/acceptance/** -text

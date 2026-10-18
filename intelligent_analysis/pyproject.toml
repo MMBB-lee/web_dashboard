@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "shumei-intelligent-analysis"
+version = "0.6.2"
+description = "Sourced RAG, fixed-ROI visible people counting, and damped Holt forecasts"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "numpy>=2.0",
+  "pandas>=2.2",
+  "pydantic>=2.11",
+  "PyYAML>=6.0",
+  "pypdf>=5.0",
+]
+
+[project.optional-dependencies]
+vision = [
+  "torch>=2.6",
+  "opencv-python>=4.10",
+  "torchvision>=0.21",
+  "scipy>=1.16",
+  "Pillow>=11",
+]
+legacy-vision = ["ultralytics>=8.4.57", "openvino>=2025.3"]
+forecast = [
+  "scikit-learn>=1.6",
+  "statsmodels>=0.14",
+]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.12",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["intelligent_analysis"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"

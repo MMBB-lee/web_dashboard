@@ -1,0 +1,37 @@
+{
+  "status": "prerelease_verified_full_plan_incomplete",
+  "at": "2026-10-16T15:23:57.057299+00:00",
+  "version": "0.3.0a1",
+  "standard_facts": 287,
+  "candidate_facts": 2,
+  "unique_facts": 289,
+  "entities_with_standard_facts": 24,
+  "objects": 44,
+  "sources": 34,
+  "audit_targets": 108,
+  "closed_audit_targets": 0,
+  "tests": {
+    "source": {
+      "tests": 127,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "wheel": {
+      "tests": 127,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  },
+  "mac_package_and_databases": "passed",
+  "mac_native_scheduler": "passed",
+  "mac_daily_task": "installed",
+  "windows_receipts": "pending_user_native_run",
+  "full_acceptance": false,
+  "remaining": [
+    "object_metric_historical_audits_incomplete",
+    "native_package_or_database_receipt_missing_or_invalid:Windows",
+    "native_scheduler_trigger_and_recovery_receipt_missing_or_invalid:Windows"
+  ]
+}

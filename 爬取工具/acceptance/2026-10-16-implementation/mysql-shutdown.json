@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-16T15:25:17.171977+00:00",
+  "owned_test_instance_shutdown": true,
+  "socket_absent": true,
+  "pid_file_absent": true,
+  "shutdown_log_confirmed": true,
+  "data_files_retained": true,
+  "production_sqlite_unaffected": true
+}

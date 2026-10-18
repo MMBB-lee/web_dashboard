@@ -36,7 +36,7 @@ const nav = [
     <div class="workspace">
       <header class="topbar">
         <div class="brand"><div class="brand-mark">皖</div><span>安徽文旅交通</span></div>
-        <div class="topbar-title"><span>安徽文旅交通客流观察与预测</span><small>ANHUI TOURISM & TRANSPORT DASHBOARD</small></div>
+        <div class="topbar-title"><span>安徽文旅交通客流可视化平台</span><small>ANHUI TOURISM & TRANSPORT DASHBOARD</small></div>
         <div class="topbar-right">
           <span v-if="backendMode !== 'demo'" :class="['connection', backendMode]"><span class="connection-dot" />{{ modeLabel }}</span>
           <time class="clock">{{ clock }}</time>

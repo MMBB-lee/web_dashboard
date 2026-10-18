@@ -1,7 +1,7 @@
 import { computed, ref, watch } from 'vue'
 import {
   backendMode, getCatalogEntities, getEvents, getHistoryForecast, getHolidayComparison,
-  getHolidays, getOverview, getScenicSeries, getTransportSeries,
+  getHolidays, getOverview, getScenicSeries, getTransportSeries, getNativeSeries,
 } from '../../app/data'
 import { displayError } from '../../app/format'
 import type {
@@ -67,7 +67,7 @@ export function useOverview() {
 
   const selectedCards = computed(() => [
     cardFor('scenic_visits', selectedScenic.value, series.value, '接待人次'),
-    cardFor('rail_departures', selectedRail.value, railSeries.value, '总客流量'),
+    cardFor('rail_departures', selectedRail.value, railSeries.value, '发送人次'),
     cardFor('airport_throughput', selectedAirport.value, airportSeries.value, '旅客吞吐量'),
   ].filter((card): card is OverviewCard => card !== null))
 
@@ -140,9 +140,9 @@ export function useOverview() {
       if (railChanged) railError.value = ''
       if (airportChanged) airportError.value = ''
       const responses = await Promise.allSettled([
-        scenicChanged && scenic ? getScenicSeries(scenic.id, grain.value, scenicRange.start, scenicRange.end) : Promise.resolve(scenic ? series.value : null),
-        railChanged && rail ? getTransportSeries(rail.id, 'rail_departures', railGrain, railRange.start, railRange.end) : Promise.resolve(rail ? railSeries.value : null),
-        airportChanged && airport ? getTransportSeries(airport.id, 'airport_throughput', airportGrain, airportRange.start, airportRange.end) : Promise.resolve(airport ? airportSeries.value : null),
+        scenicChanged && scenic ? backendMode.value === 'live' ? getNativeSeries(scenic.id, 'scenic_visits', 'auto', grain.value) : getScenicSeries(scenic.id, grain.value, scenicRange.start, scenicRange.end) : Promise.resolve(scenic ? series.value : null),
+        railChanged && rail ? backendMode.value === 'live' ? getNativeSeries(rail.id, 'rail_departures', 'auto', grain.value) : getTransportSeries(rail.id, 'rail_departures', railGrain, railRange.start, railRange.end) : Promise.resolve(rail ? railSeries.value : null),
+        airportChanged && airport ? backendMode.value === 'live' ? getNativeSeries(airport.id, 'airport_throughput', 'auto', grain.value) : getTransportSeries(airport.id, 'airport_throughput', airportGrain, airportRange.start, airportRange.end) : Promise.resolve(airport ? airportSeries.value : null),
       ])
       if (current !== requestId) return
       series.value = responses[0].status === 'fulfilled' ? responses[0].value : null
@@ -154,7 +154,7 @@ export function useOverview() {
 
       if (scenicChanged) {
         const lastPoint = series.value?.points.at(-1)
-        const forecastTask = scenic && lastPoint ? getHistoryForecast(scenic.id, grain.value, lastPoint.period_end, grain.value === 'week' ? 4 : 3)
+        const forecastTask = scenic && lastPoint && ['week', 'month'].includes(series.value?.grain ?? '') ? getHistoryForecast(scenic.id, grain.value, lastPoint.period_end, grain.value === 'week' ? 4 : 3)
           .then(result => { if (current === requestId) forecast.value = result })
           .catch(cause => { if (current === requestId) forecastError.value = displayError(cause) }) : Promise.resolve()
         const holidayTask = scenic ? getHolidays()

@@ -1,0 +1,24 @@
+{
+  "status": "exported",
+  "records": 287,
+  "candidates": 2,
+  "version": "0.3.0a1",
+  "generated_at": "2026-10-17T04:12:03.607909+00:00",
+  "database_dialect": "sqlite",
+  "fact_filter": {
+    "start": "2023-01-01",
+    "end": "2026-10-17",
+    "semantics": "interval_overlap_no_period_clipping"
+  },
+  "coverage_window": {
+    "start": "2023-01",
+    "end": "2026-10"
+  },
+  "data_acceptance_complete": false,
+  "audit_window": {
+    "start": "2023-01-01",
+    "end": "2026-10-17"
+  },
+  "quality_status": "passed",
+  "package_scope": "independent_data_only"
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": "anhui-crawler-release-1",
+  "version": "0.2.0",
+  "released_at": "2026-10-15T09:52:09.235102+00:00",
+  "scope": "standalone_airport_plus_nine_city_bulletins",
+  "published_to_remote": false,
+  "files": [
+    {
+      "name": "anhui_public_data_crawler-0.2.0-py3-none-any.whl",
+      "byte_size": 32700,
+      "sha256": "3748cdd1097c1a8f1b136544c15634a1ad986fe56a98e2a7ad52febcd7a225a5"
+    },
+    {
+      "name": "anhui-public-data-crawler-0.2.0-2026-10-15.zip",
+      "byte_size": 283613,
+      "sha256": "a97ff1c9cb6b433e8c3ef8e05bd36a758fc30b40c1f527e621ecf04914f377b8"
+    },
+    {
+      "name": "anhui-crawler-data-0.2.0-2026-10-15.zip",
+      "byte_size": 108750,
+      "sha256": "c599c3d308cb8fe6d9b97a3c81bcaa97b99333b3b62f051b1a35d2f192aa6d76"
+    }
+  ],
+  "exported_files": [
+    {
+      "name": "coverage.json",
+      "byte_size": 29898,
+      "sha256": "58090ea5445e1356a038f44fb43c40120a19085fabdeff37f13cf81401c11532"
+    },
+    {
+      "name": "facts.csv",
+      "byte_size": 206657,
+      "sha256": "ac2eb373ae9965e6c083eede8a85ece6aa50603b9ca0420ca1e0471dfdf6c592"
+    },
+    {
+      "name": "facts.json",
+      "byte_size": 345939,
+      "sha256": "e288980076a5c8933cc1cf019c703561794c91ca2f8b8b17880aa34a1e848ec2"
+    },
+    {
+      "name": "manifest.json",
+      "byte_size": 154,
+      "sha256": "d98f2ebf7bc0df77ec7e9feb52810b82bbbd4777fea6f7bdfa3b466e2d2d7120"
+    },
+    {
+      "name": "parser_capabilities.json",
+      "byte_size": 4432,
+      "sha256": "8bb0add63847aa5f19a7d5f796e3c0c974c6b1a14c9ee5dc86cf0f484551a053"
+    },
+    {
+      "name": "registry.json",
+      "byte_size": 37231,
+      "sha256": "4acb619d4d452f0399e4a0b3b601dd4ddda9f10c33fa4e938e0f50722dde2693"
+    }
+  ],
+  "verification": {
+    "status": "passed",
+    "verified_at": "2026-10-15T09:52:09.209635+00:00",
+    "version": "0.2.0",
+    "test_runs": {
+      "source-tests.xml": {
+        "tests": 85,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "installed-wheel-tests.xml": {
+        "tests": 85,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      }
+    },
+    "counts": {
+      "facts": 277,
+      "airport_months": 260,
+      "city_records": 17,
+      "cities": 9,
+      "annual_city_flows": 11,
+      "year_end_inventory": 6,
+      "registry_entities": 44
+    },
+    "installed_wheel_sqlite_and_mysql": "passed",
+    "portable_clean_backfill": "passed",
+    "original_0_1_0_release_sha_unchanged": true,
+    "old_airport_facts_unchanged": true,
+    "mysql_shutdown_confirmed": true,
+    "data_files_deleted": false,
+    "team_code_or_database_modified": false,
+    "new_source_network_requests": 0,
+    "scheduled_service_enabled": false,
+    "full_province_complete": false
+  },
+  "excluded": [
+    "Raw HTML/PDF full documents",
+    "Database credentials",
+    "Team C/D/E packages"
+  ],
+  "next_batch": "Wanfohu holiday bulletin, then single-station actual daily departures"
+}

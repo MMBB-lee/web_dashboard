@@ -1,0 +1,538 @@
+{
+  "assets": [
+    {
+      "asset_id": "0696e4bfbd5100bb7c8e84d2cf4e10e4822e18e42fc9a04b9940dbe175bba74c",
+      "source_id": "rail_station-hefei-south",
+      "url": "https://news.cri.cn/n/20250217/fe33a8cc-283c-de32-ec94-3f3bd8eccf6b.html",
+      "sha256": "f14ae56bed20871ad6096a35028681011ccf25919e6b6386fea32529c5314fd8",
+      "byte_size": 62042
+    },
+    {
+      "asset_id": "06ef06f2bacde4cce39a0356889c9b90d8b0c31336b48977e524c3c96b6cd4f9",
+      "source_id": "city-huaibei",
+      "url": "https://tj.huaibei.gov.cn/zwgk/public/76/65004912.html",
+      "sha256": "e6082b5c28f0605a8c281542548160c6e5bc3351d0e4440a614347ec59dcddb5",
+      "byte_size": 400707
+    },
+    {
+      "asset_id": "083332e09bf8dc4ea2050c8e54c921ba9192d449f94c92adf2165e5618df64eb",
+      "source_id": "city-tongling",
+      "url": "https://tjj.tl.gov.cn/tlstjj/c00142/pc/content/content_2074671942385590272.html",
+      "sha256": "6898dd70be53f468d969f03c7a3a9beada3483e7d4414940ee248c2e49812df5",
+      "byte_size": 280650
+    },
+    {
+      "asset_id": "08ae68e4c761ce211bfb3564fa1077770d07fd4125b40963ecbb45e7d505d77c",
+      "source_id": "rail_station-hefei",
+      "url": "https://www.ahjd.gov.cn/News/show/1693081.html",
+      "sha256": "bdb96c68edb5050c11f2541ca9a2fca8e5524a34a324b0fe467a4f7c0d29909b",
+      "byte_size": 28529
+    },
+    {
+      "asset_id": "0cb7ebc6fe4b93cd50f639aac555ff819712d22f61bc5f82da7d7224cf141730",
+      "source_id": "city-chuzhou",
+      "url": "https://www.chuzhou.gov.cn/zxzx/bmdt/1112768667.html",
+      "sha256": "cfa9ef9da4a2a78955f12739c325be55dc9194c303364b465001523dd76edc2d",
+      "byte_size": 36711
+    },
+    {
+      "asset_id": "0d35a66db3fad9193b4ddbcc7c17a8d43b00ed7cfcb706b50f5f0043284bde09",
+      "source_id": "city-chizhou",
+      "url": "https://cztjj.chizhou.gov.cn/Content/show/781353.html",
+      "sha256": "e8e0cfaeca76300f2b4a3bfde2aa690510971357fd94099465eeab0af03d166b",
+      "byte_size": 251318
+    },
+    {
+      "asset_id": "12a2a2502aada16a786abf11b39a810cb3c49938a85f62c7a0250f24a7aa0ae3",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202603/P020260324516185298505.pdf",
+      "sha256": "e7abba2fcefdee68e8240ac3bf3fda0fd0177b2b55a7aaaca500230bf6c6b5ee",
+      "byte_size": 76468
+    },
+    {
+      "asset_id": "14544f053a8d5d90ec7d0148a3bf045db17c0dafe1b185ea705fb8c0ef5546c0",
+      "source_id": "city-bengbu",
+      "url": "https://www.bengbu.gov.cn/",
+      "sha256": "3328e2f06de026bb2e449c62503660e54f46e4405b4990647da6faf6dbae73f5",
+      "byte_size": 123611
+    },
+    {
+      "asset_id": "18034ef5741857b1b34d301ae1cd7f5e97212f87fbc09579a64fa911e22b7452",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202402/P020241211554572934062.pdf",
+      "sha256": "aec34ddb79dbb7d6d54772ae499787b3ac402ccc2ac07f30873f2a9fef8efe28",
+      "byte_size": 73036
+    },
+    {
+      "asset_id": "1b5dbf3aefbbd94716a206fc11e1b622f9ce92947378befce2412ab928727e29",
+      "source_id": "city-luan",
+      "url": "https://tjj.luan.gov.cn/sjla/tjgg/5480630.html",
+      "sha256": "1c5683600fd4f1184d3912bb5df2f005e03a095bfd6242e90875e2be51170a97",
+      "byte_size": 307437
+    },
+    {
+      "asset_id": "1c0feb5533ce4f2e1806270928b56ca2a408a66ff570e75bb8fe6a2b752b4182",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202302/P020230221341131726336.pdf",
+      "sha256": "8044e4d7881687d4f833ba9e5a943a8afaa1a899bdbe965b8d77d653efae4e7b",
+      "byte_size": 99998
+    },
+    {
+      "asset_id": "1e88efd89dee86197354bfddc6ed8324e410964f285432c9fd39179245ac16c7",
+      "source_id": "city-chizhou",
+      "url": "https://cztjj.chizhou.gov.cn/",
+      "sha256": "65c48cb12ae4fb20c90424f0b0fe4f4d7443e15cb1677480e14c594d8c2ea3ae",
+      "byte_size": 68201
+    },
+    {
+      "asset_id": "2266de249bf4f579bd03115bbaabfbe80116419d53efd77e9e1d10958cd15876",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202309/P020230927363480473878.pdf",
+      "sha256": "b8c7abe578879574a9df1ee46dd3e89ab63d505b0e889e3f3a6d67de5be008cd",
+      "byte_size": 109686
+    },
+    {
+      "asset_id": "243fb835676737d81d9feb158a9f34d2b042e2295846d91b1bfba5b23609449b",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202306/P020230626378845155476.pdf",
+      "sha256": "b89b8065c58914d121b0ed314a8cb4ae671d63485c41d4c8765acfb6cf6554ea",
+      "byte_size": 109607
+    },
+    {
+      "asset_id": "24ec4ec9553973f911b0269a9bea09c8b57c70ab6470ad40a8c56334660f2d60",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202502/P020250224343413036795.pdf",
+      "sha256": "c7302d6b9c545c971d194f84e2d7d063b7e7d7c4bcb0decb5dd607e589846fd5",
+      "byte_size": 73289
+    },
+    {
+      "asset_id": "251d456ea534e67ac7ea6f1a6947c46a2219d3a4d65dc84aa168868f0081ce2e",
+      "source_id": "scenic-balihe",
+      "url": "https://www.balihe.com/4g/info.asp?base_id=3",
+      "sha256": "39ded15d1884d2d4d8152a9d3a5d26f5456cdb32b58ee4adc9eff2dfe89dc0ca",
+      "byte_size": 9729
+    },
+    {
+      "asset_id": "310657382eb410750db7b4fe78d32bbecbdd83f42f27f53f70580678c9a7862f",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202606/P020260625349637911435.pdf",
+      "sha256": "a8a628e9f907275312044ff3a26d84529720275601ff401fcbb2d6592d28a8fc",
+      "byte_size": 87730
+    },
+    {
+      "asset_id": "34c44d826c8657e3055631d4b4f0ff7b0b15694dd795889fc6173210ebf3281d",
+      "source_id": "city-chizhou",
+      "url": "https://cztjj.chizhou.gov.cn/Content/showList/545/page_1.html",
+      "sha256": "ea20626f5b1c2ebc1d4b06136f81a16dd6b81e56b3972040bca386b71c2e67cd",
+      "byte_size": 21113
+    },
+    {
+      "asset_id": "38cd08d75f210ef4f2d824930c3a62ba9335a3bfece8b2fc6d72ffc4e1c6aa34",
+      "source_id": "city-xuancheng",
+      "url": "https://www.xuancheng.gov.cn/News/show/1706704.html",
+      "sha256": "9203ce2f882c858b4c48413082706a843cfb82576d011fae6649a6d7e9f819fb",
+      "byte_size": 339808
+    },
+    {
+      "asset_id": "3d92039a3d9f442fd8ab0a421252422bffbf89fb234c3c2ecceb7bd7b2523435",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202305/P020230522544747598027.pdf",
+      "sha256": "198d81bda54e86e48555009425578b0a524436c50b054bd3cbf03336f68eebaa",
+      "byte_size": 110028
+    },
+    {
+      "asset_id": "4375da684b13e255370c0f13a44ebd9f60b22f497297fbf74074e0c685fc3d51",
+      "source_id": "city-anqing",
+      "url": "https://www.anqing.gov.cn/tjsj/tjgb/index.html",
+      "sha256": "265e204927531cb396803a87ad05b7f22864ac5c3481c401d2b533799077e88f",
+      "byte_size": 40668
+    },
+    {
+      "asset_id": "44542b7635f491dbf8739e32d022869dd629cc9e80f8a1f323ddd747f5566191",
+      "source_id": "city-fuyang",
+      "url": "https://www.fy.gov.cn/Content/show/1345298.html",
+      "sha256": "21cc8668c15fe689e90a61956978607f7168e15da5cb0e0eb494b78c7cadd3b7",
+      "byte_size": 21402
+    },
+    {
+      "asset_id": "49b18611648b80344754cbd5e6d075f909ed53501a2f58551dbe776d38c11faa",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202410/P020241211604436045155.pdf",
+      "sha256": "19b3176dc8a741b44e3d18246c48a748315f9af676f530f7f5c1daf4eedca4e4",
+      "byte_size": 74155
+    },
+    {
+      "asset_id": "4cc4630a52f7dea43a08ba8bb5121c29ae46bd35bc71993fc60149eefb711c98",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202511/P020251125550261257219.pdf",
+      "sha256": "8e84a33a6a991de9f1a957c5a9ddd8d9ef0ba3966117036663f5b74f164775c0",
+      "byte_size": 75173
+    },
+    {
+      "asset_id": "4cf918fa3dc12e70710ebe499d8777be8e180d02e760270520e7d328ffc251f6",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202505/P020250523396346793125.pdf",
+      "sha256": "aa56e7fa52b2a93e145c9b17431e146de64993c69879c06645178ec60a53a669",
+      "byte_size": 69709
+    },
+    {
+      "asset_id": "4d42187d6cafad65a1d086bb128e29cd0269f6d895c705ae3240571208a22b34",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202512/P020251224339954553759.pdf",
+      "sha256": "52b860e7c9652dee8f5b5a69a7b4f86a3c6088996ab9222d03e409705909f482",
+      "byte_size": 75437
+    },
+    {
+      "asset_id": "50e999f3a3776d637543934204b3179efde3f49ee8009e8f13b16202e63490c5",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202412/P020241224290590780657.pdf",
+      "sha256": "8f1fa9fad119bf61d94dbee944c4fa4a58cdc49d046b448ccaa3a024e2115654",
+      "byte_size": 73930
+    },
+    {
+      "asset_id": "54616c18f63fa14a8430dd2969c4339486cfa6573f7b7f6c489aecd5e9bb9cc3",
+      "source_id": "rail_station-wuhu",
+      "url": "https://tzcjzx.wuhu.gov.cn/zsdt/gzdt/8754081.html",
+      "sha256": "ef3075e5885db58728f29e8b5c9305de7a95f83591bfdd06f7c0928af2d27be0",
+      "byte_size": 15729
+    },
+    {
+      "asset_id": "579584613516b0048a6dbd679cab8eb3e67b675152b684007d96fcfbe7730ca7",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202312/P020231225383968678629.pdf",
+      "sha256": "f3511b0d03aa75eaa229254fa3db069d1231e8ef07a0a2dad1cb1f51e60a893b",
+      "byte_size": 117372
+    },
+    {
+      "asset_id": "5839e512852075ef512d2c1dd231d3ba44be6829ff906e18ddc876c2a982b6c0",
+      "source_id": "city-fuyang",
+      "url": "https://www.fy.gov.cn/",
+      "sha256": "9b7e322f0337d00cac082784930dba1011561b1f5e15862fa0a21c7b19c39b07",
+      "byte_size": 152958
+    },
+    {
+      "asset_id": "67b077710f17b5c5b7a7422dff30dedfdfd3f7f1533e7389e24ab176947ebd4f",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202506/P020250624489135864504.pdf",
+      "sha256": "c28c6da4d6c8cdb6798a66452cc8ad0cfd291527154eab259c47dc76aee70dfe",
+      "byte_size": 73936
+    },
+    {
+      "asset_id": "6a4726ecdec9a92db5e2cb0765e9ffc60ec0d56dfef4f0ca4e98afa4cf22241e",
+      "source_id": "scenic-jiuhuashan",
+      "url": "https://www.jiuhuashan.gov.cn/OpennessContent/show/1645195.html",
+      "sha256": "fee50c9f224e6d96a52675a95a5f02363db8de3e421b21f74145c03f263a4ae3",
+      "byte_size": 25715
+    },
+    {
+      "asset_id": "6b848ba18a43b1ce9ac24447634907b071105655d19474c455fc4a56b9c9c514",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202405/P020241211558569773771.pdf",
+      "sha256": "c32f7c212f23e99d1199dceb314251847afb499d1da8799baed6fb6938748d6e",
+      "byte_size": 73697
+    },
+    {
+      "asset_id": "6de9fac200d6dfafeb4eff6073ec57d61ceec6830d44811e13be39251ba5a134",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202304/P020230423405864706384.pdf",
+      "sha256": "5f0e64ec71e87982406752765cf040e43ed0d46bab69a608e8417f8ccdef8cb1",
+      "byte_size": 109602
+    },
+    {
+      "asset_id": "7113d1593d095810eb4efef72950c4ebbfddc78739b3102ca4d58e069cf2cdb5",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202407/P020241211593938672768.pdf",
+      "sha256": "70d622decc02522828e319b366f80d8be7355cac4b4f1a045774bb69a35c2a72",
+      "byte_size": 73817
+    },
+    {
+      "asset_id": "7449baa8535028ce11bde626c1ed22ff5a13653cd94279482ac61117fb203fe2",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202609/P020260924526836562690.pdf",
+      "sha256": "c42dfb4232510256775629ba67ae2c0188902eade69be1586b2515707edd1063",
+      "byte_size": 87376
+    },
+    {
+      "asset_id": "77330dcb85eba2faad3edd0f9436a0f7d3a46b9cb834b8e96c71f22d19726a82",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202310/P020231023371906253729.pdf",
+      "sha256": "c2b53837fdd0492886317478a0efabb4cfde484ac26d0c32da065f302eb05666",
+      "byte_size": 109641
+    },
+    {
+      "asset_id": "77961e405e79a9e540ce7cd5ecedd5c0a01be985525997f8ca4fb05229416334",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202508/P020250825386434382356.pdf",
+      "sha256": "6a2e49a445e07c96ab31328ca857528d5fe1bf590b2d00be707c58a3e199d0b8",
+      "byte_size": 74870
+    },
+    {
+      "asset_id": "7a0de56542b04f0fd340f5d42f162e6f46facadbda3b3716a986dc242f635deb",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202507/P020250725365169315525.pdf",
+      "sha256": "fa755e737125224688a315a5690bfdf5bd85c8b47cc7c25c72b4cbb3668af265",
+      "byte_size": 73974
+    },
+    {
+      "asset_id": "7cb3e97380c63f6b2386ce64ea6bc3ab526f6c70b96ad0c8b26eefd5ffd4f04a",
+      "source_id": "city-suzhou",
+      "url": "https://tjj.ahsz.gov.cn/sjsz/tjgb/196408981.html",
+      "sha256": "9eea1169e2e0905f8a1e92e90576dfff4d68d16b3e26a3ea853312e23b359c37",
+      "byte_size": 254976
+    },
+    {
+      "asset_id": "7cc96158be07efbaf31466e3dde74bd655c80627557c22b6f7011b01e92a32cb",
+      "source_id": "city-chuzhou",
+      "url": "https://www.chuzhou.gov.cn/",
+      "sha256": "f3cfbbfd18dc7011e7813441fb518f3f05b3fb3918d8b5f756f3fae93df4d76b",
+      "byte_size": 182044
+    },
+    {
+      "asset_id": "859ca55844226243f30ba2d53241b5ec49f7c7be59f7e06b60e815ed013852be",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202404/P020241211558025619743.pdf",
+      "sha256": "80036ae4a66b7592baebcd9264b86a3ed5bdbe097bcbce53ae545fa241d377f3",
+      "byte_size": 73674
+    },
+    {
+      "asset_id": "885f389848a4676b761f9d8a8313db0d4f3551916a8d2c5627b3e4ba6b2ea65c",
+      "source_id": "city-anqing",
+      "url": "https://www.anqing.gov.cn/",
+      "sha256": "19c41f04e210ad03b7629a28aa3950caedd6b55a2dc848d6a18bc480283e56f2",
+      "byte_size": 141319
+    },
+    {
+      "asset_id": "89c21a718b4de29ea5467ada8ea8804f89e1396efef7a542a4575c55bbaae7b4",
+      "source_id": "scenic-tiantangzhai",
+      "url": "https://www.ahjinzhai.gov.cn/public/6596281/38246535.html",
+      "sha256": "c45a8a2fd5291aecc06d984555b998cde7bc2f392bddad41b1d8002ab29f9d61",
+      "byte_size": 30938
+    },
+    {
+      "asset_id": "8a4ff5e30ea2504f632dab41770c17f847f8d0a440d1a4c57d2310092f7ead11",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202607/P020260724320238229091.pdf",
+      "sha256": "3285973d3e6b0e89d8169fd150a116efaac485db3d460a15e3a5a865362b47dc",
+      "byte_size": 87812
+    },
+    {
+      "asset_id": "8b77ba8d1f89d12f373f286d84ba6278a6a48323d90f17b54cbc774df2786b8d",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202608/P020260824603500472990.pdf",
+      "sha256": "3c3c0f1fd19d03eff07f445cce27d39f48dc91292f9e2df55dcfa782937ed273",
+      "byte_size": 77444
+    },
+    {
+      "asset_id": "96a949049cd9317078fd904346167d9319650383db2050a92c3760d76cb433be",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202409/P020241211603175740641.pdf",
+      "sha256": "1f5827317ff07017fb79d927100988b8d353e842a4f6907b92a2fbbafedfbb89",
+      "byte_size": 74338
+    },
+    {
+      "asset_id": "9824b9d276a7b986f906c80776ec97921be61f80d6ed4b1d3e18256ea88fb2c0",
+      "source_id": "rail_station-chizhou",
+      "url": "https://www.chizhou.gov.cn/",
+      "sha256": "e95ead7baf9ebf2119e246d9160eb4f45aa323b20a5398e65085a715818a99ee",
+      "byte_size": 85019
+    },
+    {
+      "asset_id": "a159fdd96f4c50ca97446a69531780b372b57edffd26501ac7d519abffd37f73",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202510/P020251024405462790164.pdf",
+      "sha256": "191f129b66f2ead4d18fdeb7a1d35e115f0556918730f783e6252e0bb940e3eb",
+      "byte_size": 75215
+    },
+    {
+      "asset_id": "a6fb75a854b28a349d5de9d2a1f6a66be3d48f11cea27d889d624af09e482423",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202411/P020241211605311487741.pdf",
+      "sha256": "8fc9deda5a1dc3355ddae21c905bdba8ee943bdea5d103df7ecaa06af76f6047",
+      "byte_size": 74148
+    },
+    {
+      "asset_id": "b18eafddc1fdca480712905789a404fe8012bdc0900bdd69d0c6819cba40d22f",
+      "source_id": "city-huainan",
+      "url": "https://tjj.huainan.gov.cn/zxfbyjd/551865247.html",
+      "sha256": "00b1f0a8c529a8913e4615356f0bd4e5ea7af86bcad41d332b9e3dec5eb73c92",
+      "byte_size": 233829
+    },
+    {
+      "asset_id": "b1d4d18b8535017d9ab39c4493233491fcb4099a7e286f2a239e8e79f07333bd",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202303/P020230322493420271752.pdf",
+      "sha256": "cdd819102a14c249f07486196495e76fb8b7480ac0a31a75a9594f5ee2d82396",
+      "byte_size": 109592
+    },
+    {
+      "asset_id": "b39057c07634b6fd9a278b81a1792ed8a4b6e586df30807daee663994f6edaf8",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202605/P020260525605971113121.pdf",
+      "sha256": "1a1c9766770c965d4aad9e645a1fae535ae48543e6d46ce55cebdceede03d8c2",
+      "byte_size": 81357
+    },
+    {
+      "asset_id": "b8887ecfc986067e688f1147a83f1a6160b9e752bfc5a7a6ee9763537f0dd90e",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202504/P020250424388745613238.pdf",
+      "sha256": "a04e6f9e110e59188093b65a88c04c216d27a73988b6c9d3da105def2a556d15",
+      "byte_size": 73905
+    },
+    {
+      "asset_id": "b92ab946f52215676e33f2f280317e7ae464058b2ae954588f72a7f379efc5ae",
+      "source_id": "rail_station-fuyang-west",
+      "url": "https://paper.people.com.cn/rmrb/pc/content/202603/01/content_30142836.html",
+      "sha256": "bb93e7861366a01070db15af6179a3cbd6e160e2dfafd2d82d351a8a448b009d",
+      "byte_size": 32793
+    },
+    {
+      "asset_id": "bc1538ba8fbe8f5e2fd8098c4ac7461add772f643ce52775476e80e69fca961b",
+      "source_id": "city-maanshan",
+      "url": "https://www.mas.gov.cn/",
+      "sha256": "ec37cb5512fed8e0cf778b73ab585e8dfda29a7718746fc6a420816098f1c775",
+      "byte_size": 196390
+    },
+    {
+      "asset_id": "c4cdf3af40c8fb72e46caa5b6a8efebfc7f1272600fabd04c6e19d1ad1a5d476",
+      "source_id": "scenic-longchuan",
+      "url": "https://www.cnjx.gov.cn/OpennessContent/show/3478342.html",
+      "sha256": "b25f6163599361c8b4dcb553f71ad23a4a7f84399f04721d235ad1ce7f0f2b97",
+      "byte_size": 118188
+    },
+    {
+      "asset_id": "cbeafcb3ca1da17f892cc429637cb8c1c6a4993ed79e105721d9f33c0f213310",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202403/P020240322318945362132.pdf",
+      "sha256": "a6e5595129db132ebe0e531c5488967d314694fbba41c7b715f94ee53c2bcba5",
+      "byte_size": 142378
+    },
+    {
+      "asset_id": "cd6a36fef056d7bf5bfcfa8c4ea09a4df3561a7984351522fbea967e44a4c189",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/",
+      "sha256": "5509cd193287d1eacfb6033c3661feee43342cfc689efe7a86e780857270116b",
+      "byte_size": 27086
+    },
+    {
+      "asset_id": "cdbbd20a5df5aa8b20199d0ef0150c571a20fff20f729925142e5b69276ecf73",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202503/P020250324365164283355.pdf",
+      "sha256": "2bd92c0389e6bc86eb3294f1f3e1a96083f4703f2501851c81a5ec169f09cf9a",
+      "byte_size": 73822
+    },
+    {
+      "asset_id": "cdd8f4a1941df283f42b341f2da74cd6bbb50737a578634ad59023da083e10f9",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202509/P020250924377469735037.pdf",
+      "sha256": "5c8d488d8cc2bc6fb162645ef74a1cad463e562538ae645397b70b731725af6e",
+      "byte_size": 74888
+    },
+    {
+      "asset_id": "cf08f4e871ae5af582b47785cee3e62a9c4a573473fd18217c6e955d54b9102c",
+      "source_id": "scenic-langyashan",
+      "url": "https://www.lysfjq.cn/info.php?class_id=105",
+      "sha256": "63c4c6738e6d72fd0a18d1c5bb0abf442197bf42b51e4013c8f676e0e84a0668",
+      "byte_size": 32216
+    },
+    {
+      "asset_id": "d5c16f07fe22b4fefa22e443c854abcd168ad47836cb23c794ccff3e051187a1",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202311/P020231122447128265508.pdf",
+      "sha256": "68ea29d912a514dd27442bedf16e53641fc8ffa8c9f52a76731e3ed9eda0e564",
+      "byte_size": 132862
+    },
+    {
+      "asset_id": "d5eea3ad4b1dda5471ac01a5bc63cfb3978aa07debef2303084cdeff7eb81c6f",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202307/P020230721322819035993.pdf",
+      "sha256": "cf176298b0d01eaf4a585213880dc59e0e7ec2d7de9adaeaebfb1d745ec66be6",
+      "byte_size": 118082
+    },
+    {
+      "asset_id": "d9fe14d975257abff033c65a1344f99ae23b40b35b04a11fa13f229dfdcd6d30",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202503/P020250317323525882405.pdf",
+      "sha256": "dcfbc1af3114d5165f0da1654d455a9c783004b4163d2a0effd51cd6d6225200",
+      "byte_size": 72997
+    },
+    {
+      "asset_id": "da557d63ecde80e8ddca39a623d3c1f054ab7f70c2c28f105e037443b5371047",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202408/P020241211595237311017.pdf",
+      "sha256": "26412f80d03a54c5bb3772017475684327090ed6a2d9348caabb4e0bf077ef1b",
+      "byte_size": 73744
+    },
+    {
+      "asset_id": "dca1fee2e968b643a0a4fbee5cd2c5a6966b3d32fe46032f0bf691218d6340bc",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202604/P020260423497528922112.pdf",
+      "sha256": "77f94a5d89a4cee5df5db1082a57b0ab842a7cbb04d2059362123e183487a1d8",
+      "byte_size": 76381
+    },
+    {
+      "asset_id": "de6e7fb33d46df1764bef60cc240f4aa964e8bd9a5aea2065915c663e391e4fc",
+      "source_id": "city-wuhu",
+      "url": "https://www.wuhu.gov.cn/mlwh/tjgb/41219509.html",
+      "sha256": "eb5adea68b3bcc22a69332b61af16c70195b35c03b131b2b4e08251c608fdfe3",
+      "byte_size": 195423
+    },
+    {
+      "asset_id": "e22f611702272932412d4b0993bb315ecf9dc3f653d09b84e7e6dacfcd66d8c7",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202406/P020241211559273857296.pdf",
+      "sha256": "3c4e240297e9d787822b115f3cd29b5bfea55d595404e466f4f5d59a19c8be43",
+      "byte_size": 73826
+    },
+    {
+      "asset_id": "e75b50e18727a79597f01227baa3c54b4cb08f9a460bc90de9d86f455cd870d1",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202602/P020260227413264760427.pdf",
+      "sha256": "de43d2090a37a45a325d52161197ed98f1df21bf96acae2a3087d91e74062eee",
+      "byte_size": 73770
+    },
+    {
+      "asset_id": "ec487c63117c059349c1f7234f6f67834e16386b8bf81e9e474b82059b317e94",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202308/P020230822336968584349.pdf",
+      "sha256": "aaebb36728d6a632449f34cec88483128144795a49689d4de93e365be6602b76",
+      "byte_size": 118067
+    },
+    {
+      "asset_id": "ed6a360bc2e467af13b90ede4f02d851a421b3bf89ba1f5d1202429af94384f1",
+      "source_id": "scenic-langyashan",
+      "url": "https://www.lysfjq.cn/display.php?id=1247",
+      "sha256": "9db8cd5597e0b90dd312f69c633dc12e655699de141560aed8645370d7bac8be",
+      "byte_size": 33091
+    },
+    {
+      "asset_id": "f1c810ebb9bc4368e9acd83852b32034fcdde80dc6020c132bfbc933b4e69420",
+      "source_id": "city-anqing",
+      "url": "https://www.anqing.gov.cn/tjsj/tjgb/2007357161.html",
+      "sha256": "28b8c98b67548d84a8e5040d0e4cb6e102bd511d63c5c6f6b57f0194dbea1560",
+      "byte_size": 240311
+    },
+    {
+      "asset_id": "f260f88a311edf3dafb89eb828d0ffa48ffcf97c73c8d3968de8e0ae54be32eb",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202602/P020260225337525826076.pdf",
+      "sha256": "00451a82bde9359d822e437af14e6fdff32bbdb8b8d422dcb28715bf3bc9aa6b",
+      "byte_size": 80583
+    },
+    {
+      "asset_id": "f4700660af59518ac950b648aa0f7220c228de0d0f846a8f9578b2931b54dd62",
+      "source_id": "scenic-wanfohu",
+      "url": "https://wlj.luan.gov.cn/zwzx/xqcz/5423086.html",
+      "sha256": "328124fed743cc34eff1307748dde066f5c3da7bee89f28546eebb7cb54b5c49",
+      "byte_size": 30983
+    },
+    {
+      "asset_id": "f7eae54f2f2ce17b096fb3d018551d3f996585a6098d82526c5561c2a0063556",
+      "source_id": "caac-east-monthly",
+      "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202403/P020241211556253271717.pdf",
+      "sha256": "1872b392507a4b8c3a32b49376a2481fac924127d43137e275c9b542782499bc",
+      "byte_size": 73649
+    }
+  ],
+  "count": 76,
+  "all_local_bytes_match": true
+}

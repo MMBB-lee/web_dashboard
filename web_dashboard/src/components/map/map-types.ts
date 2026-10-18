@@ -3,6 +3,9 @@ import type { Entity } from '../../app/types'
 export type MapEntity = Entity & {
   latest_value?: number | null
   latest_metric?: string
+  latest_period_end?: string
+  latest_grain?: string
+  unit?: string
 }
 
 export type LocatedEntity = MapEntity & { longitude: number; latitude: number }

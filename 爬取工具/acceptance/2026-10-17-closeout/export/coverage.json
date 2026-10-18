@@ -1,0 +1,1088 @@
+{
+  "window": {
+    "start": "2023-01",
+    "end": "2026-10"
+  },
+  "airports": [
+    {
+      "entity_id": "airport:HFE",
+      "name": "合肥新桥机场",
+      "months": 41,
+      "first_observed_in_window": "2023-01",
+      "latest_observed": "2026-08",
+      "longest_contiguous_months": 11,
+      "missing": [
+        {
+          "period": "2023-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2024-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2025-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-09",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-10",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        }
+      ],
+      "before_first_observed": [],
+      "actual_opening_date_verified": false
+    },
+    {
+      "entity_id": "airport:TXN",
+      "name": "黄山屯溪机场",
+      "months": 41,
+      "first_observed_in_window": "2023-01",
+      "latest_observed": "2026-08",
+      "longest_contiguous_months": 11,
+      "missing": [
+        {
+          "period": "2023-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2024-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2025-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-09",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-10",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        }
+      ],
+      "before_first_observed": [],
+      "actual_opening_date_verified": false
+    },
+    {
+      "entity_id": "airport:FUG",
+      "name": "阜阳机场",
+      "months": 41,
+      "first_observed_in_window": "2023-01",
+      "latest_observed": "2026-08",
+      "longest_contiguous_months": 11,
+      "missing": [
+        {
+          "period": "2023-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2024-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2025-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-09",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-10",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        }
+      ],
+      "before_first_observed": [],
+      "actual_opening_date_verified": false
+    },
+    {
+      "entity_id": "airport:WHA",
+      "name": "芜湖宣州机场",
+      "months": 41,
+      "first_observed_in_window": "2023-01",
+      "latest_observed": "2026-08",
+      "longest_contiguous_months": 11,
+      "missing": [
+        {
+          "period": "2023-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2024-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2025-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-09",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-10",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        }
+      ],
+      "before_first_observed": [],
+      "actual_opening_date_verified": false
+    },
+    {
+      "entity_id": "airport:AQG",
+      "name": "安庆天柱山机场",
+      "months": 41,
+      "first_observed_in_window": "2023-01",
+      "latest_observed": "2026-08",
+      "longest_contiguous_months": 11,
+      "missing": [
+        {
+          "period": "2023-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2024-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2025-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-09",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-10",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        }
+      ],
+      "before_first_observed": [],
+      "actual_opening_date_verified": false
+    },
+    {
+      "entity_id": "airport:JUH",
+      "name": "池州九华山机场",
+      "months": 41,
+      "first_observed_in_window": "2023-01",
+      "latest_observed": "2026-08",
+      "longest_contiguous_months": 11,
+      "missing": [
+        {
+          "period": "2023-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2024-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2025-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-09",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-10",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        }
+      ],
+      "before_first_observed": [],
+      "actual_opening_date_verified": false
+    },
+    {
+      "entity_id": "airport:bozhou",
+      "name": "亳州机场",
+      "months": 9,
+      "first_observed_in_window": "2025-11",
+      "latest_observed": "2026-08",
+      "longest_contiguous_months": 8,
+      "missing": [
+        {
+          "period": "2025-12",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-09",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-10",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        }
+      ],
+      "before_first_observed": [
+        {
+          "period": "2023-01",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-02",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-03",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-04",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-05",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-06",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-07",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-08",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-09",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-10",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-11",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-12",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-01",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-02",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-03",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-04",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-05",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-06",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-07",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-08",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-09",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-10",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-11",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-12",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-01",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-02",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-03",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-04",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-05",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-06",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-07",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-08",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-09",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-10",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        }
+      ],
+      "actual_opening_date_verified": false
+    },
+    {
+      "entity_id": "airport:bengbu-tenghu",
+      "name": "蚌埠滕湖机场",
+      "months": 5,
+      "first_observed_in_window": "2026-04",
+      "latest_observed": "2026-08",
+      "longest_contiguous_months": 5,
+      "missing": [
+        {
+          "period": "2026-09",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        },
+        {
+          "period": "2026-10",
+          "reason": "no_validated_monthly_original_in_current_collection"
+        }
+      ],
+      "before_first_observed": [
+        {
+          "period": "2023-01",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-02",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-03",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-04",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-05",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-06",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-07",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-08",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-09",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-10",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-11",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2023-12",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-01",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-02",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-03",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-04",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-05",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-06",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-07",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-08",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-09",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-10",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-11",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2024-12",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-01",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-02",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-03",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-04",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-05",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-06",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-07",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-08",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-09",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-10",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-11",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2025-12",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2026-01",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2026-02",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        },
+        {
+          "period": "2026-03",
+          "reason": "before_first_observed_public_record_not_assumed_zero_or_closed"
+        }
+      ],
+      "actual_opening_date_verified": false
+    }
+  ],
+  "other_entities": [
+    {
+      "entity_id": "city:hefei",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 0,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "city:wuhu",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 4,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_road_transport",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-wuhu"
+        },
+        {
+          "metric": "rail_passenger_departures",
+          "scope": "municipal_rail_not_single_station",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-wuhu"
+        },
+        {
+          "metric": "a_rated_scenic_sites",
+          "scope": "municipal_year_end_inventory",
+          "grain": "day",
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "unit": "处",
+          "source_id": "city-wuhu"
+        },
+        {
+          "metric": "star_rated_hotels",
+          "scope": "municipal_year_end_inventory",
+          "grain": "day",
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "unit": "家",
+          "source_id": "city-wuhu"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "city:bengbu",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "city:huainan",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 3,
+      "validated_records_in_window": 2,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_road_transport",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-huainan"
+        },
+        {
+          "metric": "star_rated_hotels",
+          "scope": "municipal_year_end_inventory",
+          "grain": "day",
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "unit": "家",
+          "source_id": "city-huainan"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "city:maanshan",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "city:huaibei",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 3,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_road_transport",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-huaibei"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "city:tongling",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 2,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_road_transport",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-tongling"
+        },
+        {
+          "metric": "rail_passenger_departures",
+          "scope": "municipal_rail_not_single_station",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-tongling"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "city:anqing",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 3,
+      "validated_records_in_window": 3,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_road_transport",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-anqing"
+        },
+        {
+          "metric": "star_rated_hotels",
+          "scope": "municipal_year_end_inventory",
+          "grain": "day",
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "unit": "家",
+          "source_id": "city-anqing"
+        },
+        {
+          "metric": "a_rated_scenic_sites",
+          "scope": "municipal_year_end_inventory",
+          "grain": "day",
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "unit": "处",
+          "source_id": "city-anqing"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "city:huangshan",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 0,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "city:chuzhou",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 2,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "city:fuyang",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 2,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "city:suzhou",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 2,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_road_transport",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-suzhou"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "city:luan",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 2,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_road_transport",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-luan"
+        },
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_water_transport",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-luan"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "city:bozhou",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 0,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "city:chizhou",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 3,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "a_rated_scenic_sites",
+          "scope": "municipal_year_end_inventory",
+          "grain": "day",
+          "period_start": "2025-12-31",
+          "period_end": "2025-12-31",
+          "unit": "个",
+          "source_id": "city-chizhou"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "city:xuancheng",
+      "type": "city",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "passenger_transport_volume",
+          "scope": "municipal_road_and_water_excluding_rail",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人次",
+          "source_id": "city-xuancheng"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "scenic:huangshan-main",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 2,
+      "validated_records_in_window": 3,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "scenic_mountain_entries",
+          "scope": "scenic_mountain_entries",
+          "grain": "year",
+          "period_start": "2023-01-01",
+          "period_end": "2023-12-31",
+          "unit": "人",
+          "source_id": "scenic-huangshan-main"
+        },
+        {
+          "metric": "scenic_mountain_entries",
+          "scope": "scenic_mountain_entries",
+          "grain": "year",
+          "period_start": "2024-01-01",
+          "period_end": "2024-12-31",
+          "unit": "人",
+          "source_id": "scenic-huangshan-main"
+        },
+        {
+          "metric": "scenic_mountain_entries",
+          "scope": "scenic_mountain_entries",
+          "grain": "year",
+          "period_start": "2025-01-01",
+          "period_end": "2025-12-31",
+          "unit": "人",
+          "source_id": "scenic-huangshan-main"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "scenic:hongcun",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 0,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "scenic:xidi",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 0,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "scenic:jiuhuashan",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "scenic_visits",
+          "scope": "scenic_reported_visits",
+          "grain": "holiday",
+          "period_start": "2025-01-28",
+          "period_end": "2025-02-04",
+          "unit": "人次",
+          "source_id": "scenic-jiuhuashan"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "scenic:tianzhushan",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 0,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "scenic:tiantangzhai",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "scenic:wanfohu",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 2,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "scenic_visits",
+          "scope": "scenic_reported_visits",
+          "grain": "holiday",
+          "period_start": "2025-05-01",
+          "period_end": "2025-05-05",
+          "unit": "人次",
+          "source_id": "scenic-wanfohu"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "scenic:sanhe",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 0,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "scenic:langyashan",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 3,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "scenic:balihe",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "scenic:longchuan",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "scenic:caishiji",
+      "type": "scenic",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "rail:hefei-south",
+      "type": "rail_station",
+      "originals_archived_from_candidate_sources": 2,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "station_passenger_departures",
+          "scope": "single_station_departures",
+          "grain": "day",
+          "period_start": "2025-02-15",
+          "period_end": "2025-02-15",
+          "unit": "人次",
+          "source_id": "rail_station-hefei-south"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "rail:hefei",
+      "type": "rail_station",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "rail:wuhu",
+      "type": "rail_station",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 2,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "station_passenger_departures",
+          "scope": "single_station_departures",
+          "grain": "day",
+          "period_start": "2025-04-04",
+          "period_end": "2025-04-04",
+          "unit": "人次",
+          "source_id": "rail_station-wuhu"
+        },
+        {
+          "metric": "station_passenger_departures",
+          "scope": "single_station_departures",
+          "grain": "day",
+          "period_start": "2025-04-06",
+          "period_end": "2025-04-06",
+          "unit": "人次",
+          "source_id": "rail_station-wuhu"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "rail:fuyang-west",
+      "type": "rail_station",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "station_passenger_departures",
+          "scope": "single_station_departures",
+          "grain": "day",
+          "period_start": "2026-02-24",
+          "period_end": "2026-02-24",
+          "unit": "人次",
+          "source_id": "rail_station-fuyang-west"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "rail:bengbu-south",
+      "type": "rail_station",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "rail:huangshan-north",
+      "type": "rail_station",
+      "originals_archived_from_candidate_sources": 1,
+      "validated_records_in_window": 1,
+      "observed_metrics_and_periods": [
+        {
+          "metric": "station_passenger_departures",
+          "scope": "single_station_departures",
+          "grain": "cumulative",
+          "period_start": "2025-01-01",
+          "period_end": "2025-06-30",
+          "unit": "人次",
+          "source_id": "rail_station-huangshan-north-ahnews"
+        }
+      ],
+      "status": "partial_native_grain_facts_not_complete"
+    },
+    {
+      "entity_id": "rail:chizhou",
+      "type": "rail_station",
+      "originals_archived_from_candidate_sources": 2,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    },
+    {
+      "entity_id": "rail:anqing",
+      "type": "rail_station",
+      "originals_archived_from_candidate_sources": 3,
+      "validated_records_in_window": 0,
+      "observed_metrics_and_periods": [],
+      "status": "source_samples_or_adapter_pending_not_zero"
+    }
+  ],
+  "completeness_claim": "validated_available_public_records_only_not_all_province_data"
+}

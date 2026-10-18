@@ -1,0 +1,19 @@
+{
+  "status": "incomplete",
+  "full_acceptance": false,
+  "blockers": [
+    "object_metric_historical_audits_incomplete",
+    "native_package_or_database_receipt_missing_or_invalid:Windows",
+    "native_scheduler_trigger_and_recovery_receipt_missing_or_invalid:Windows"
+  ],
+  "native_packages": {
+    "Darwin": true,
+    "Windows": false
+  },
+  "native_schedulers": {
+    "Darwin": true,
+    "Windows": false
+  },
+  "wheel_sha256": "4dc19c97bc51dd5863d62232d22243ac6e32b49aeaac9a74f17d283df86461e1",
+  "crawler_version": "0.3.0a1"
+}

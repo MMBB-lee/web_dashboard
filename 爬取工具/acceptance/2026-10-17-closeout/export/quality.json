@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-17T04:12:03.595356+00:00",
+  "originals_verified": 135,
+  "facts_verified": 289,
+  "active_runs": 0,
+  "errors": [],
+  "counts": {
+    "ac_entities": 44,
+    "ac_meta": 2,
+    "ac_runs": 60,
+    "ac_sources": 34,
+    "ac_assets": 135,
+    "ac_issues": 27,
+    "ac_source_state": 34,
+    "ac_facts": 289,
+    "ac_fetch_state": 129,
+    "ac_revisions": 0
+  },
+  "data_acceptance_complete": false,
+  "schema_integrity_is_not_full_data_acceptance": true
+}

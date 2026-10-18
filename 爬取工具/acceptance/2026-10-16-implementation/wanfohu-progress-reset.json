@@ -1,0 +1,32 @@
+{
+  "status": "succeeded",
+  "source_id": "scenic-wanfohu",
+  "previous": {
+    "source_id": "scenic-wanfohu",
+    "status": "partial",
+    "last_checked": "2026-10-16T14:25:35.241737+00:00",
+    "last_success": null,
+    "next_due": "2026-10-23T14:25:35.241712+00:00",
+    "details": {
+      "window": {
+        "start": "2023-01-01",
+        "end": "2026-10-16"
+      },
+      "pending": [],
+      "completed": [
+        "https://wlj.luan.gov.cn/wgxgz/wlsc/index.html",
+        "https://wlj.luan.gov.cn/zwzx/xqcz/5423086.html"
+      ],
+      "failures": [],
+      "review_required": [
+        {
+          "url": "https://wlj.luan.gov.cn/wgxgz/wlsc/index.html",
+          "reason": "article_or_entry_requires_adapter_or_scope_review",
+          "asset_id": "69e46be9184b2d359932829963ab1cbb45079e2a1305f2d6936a660c4bd4b904"
+        }
+      ],
+      "last_run_id": "8f85dfac-11c9-4dfe-aaef-9a86088e9af4"
+    }
+  },
+  "reason": "Old queue included unrelated articles before object-name filtering; preserve originals/facts and rescan the registered entry."
+}

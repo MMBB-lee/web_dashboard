@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f0"><title>江淮采集 · 爬虫运行控制台</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232b4039'/%3E%3Cpath d='M14 42L26 20l9 16 7-12 9 18' fill='none' stroke='%23d8ed96' stroke-width='5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css"><script defer src="/app.js"></script>
+</head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="#overview"><span class="brand-mark">川</span><span>江淮采集<small>ANHUI DATA OBSERVATORY</small></span></a>
+  <div class="workspace"><span class="workspace-icon">皖</span><div>安徽公开数据<small>独立采集工作空间</small></div><span class="tiny-dot"></span></div>
+  <div class="nav-label">工作空间</div>
+  <nav aria-label="主要导航">
+    <a href="#overview" data-page="overview"><span data-icon="overview"></span>运行总览</a>
+    <a href="#sources" data-page="sources"><span data-icon="sources"></span>来源监控<span class="nav-count" id="source-count">—</span></a>
+    <a href="#results" data-page="results"><span data-icon="results"></span>采集结果</a>
+    <a href="#runs" data-page="runs"><span data-icon="runs"></span>运行日志</a>
+    <a href="#coverage" data-page="coverage"><span data-icon="coverage"></span>覆盖与缺口</a>
+  </nav>
+  <div class="sidebar-bottom"><div class="local-status"><span class="tiny-dot"></span>本机实时控制台</div><p>连接独立采集库<br>每 15 秒自动读取最新状态</p><div class="version">CRAWLER <span>0.3.0a1</span><span class="beta">预发布</span></div></div>
+</aside>
+<div class="app">
+  <header class="topbar"><div class="breadcrumb">安徽公开数据<span>/</span><strong id="breadcrumb-title">运行总览</strong></div><div class="topbar-right"><span id="connection" class="connection"><i></i>正在连接</span><span class="divider"></span><time id="clock"></time><span class="avatar">皖</span></div></header>
+  <main>
+    <div id="error-banner" class="error-banner" hidden role="alert"></div>
+    <div class="page-heading"><div><div class="eyebrow">PUBLIC DATA / LIVE OPERATIONS</div><h1 id="page-title">让每一次采集，都清晰可见<span class="heading-dot">.</span></h1><p id="page-description">从公开原件到可追溯的数据，掌握整个采集过程。</p></div><div class="heading-actions"><span class="refresh-time" id="refresh-time">等待数据</span><button class="button secondary" id="refresh"><span data-icon="refresh"></span>刷新状态</button><button class="button primary" id="export-main"><span data-icon="download"></span>导出数据</button></div></div>
+    <section class="project-flow-panel" aria-label="文旅交通客流数据">
+      <div><strong>文旅交通客流数据</strong><p id="project-flow-summary">正在读取项目序列…</p><small id="project-flow-status"></small></div>
+      <div class="heading-actions"><button class="button primary" id="project-flow-update">采集并同步 MySQL</button><a class="button secondary" href="/api/project-data/export.csv" download="文旅交通客流数据.csv">导出 CSV</a><a class="button secondary" href="/api/project-data/manifest.json" download="文旅交通数据清单.json">导出数据清单</a></div>
+    </section>
+    <details class="project-flow-records"><summary>查看项目序列</summary><div class="table-scroll"><table><thead><tr><th>地点</th><th>统计周期</th><th>粒度</th><th>人次</th><th>数据类型</th></tr></thead><tbody id="project-flow-records"></tbody></table></div></details>
+    <section id="view-overview" class="view"></section>
+    <section id="view-sources" class="view" hidden></section>
+    <section id="view-results" class="view" hidden></section>
+    <section id="view-runs" class="view" hidden></section>
+    <section id="view-coverage" class="view" hidden></section>
+    <footer><span><span class="tiny-dot"></span>直接读取本机采集库 · 北京时间 UTC+8</span><span>保留原生周期、单位与来源 · 缺失不补零</span></footer>
+  </main>
+</div>
+<dialog id="detail-dialog"><div class="dialog-heading"><div><div class="eyebrow">DATA PROVENANCE</div><h2 id="detail-title">来源证据</h2></div><button id="close-dialog" class="icon-button" aria-label="关闭详情">×</button></div><div id="detail-content"></div></dialog>
+<div id="toast" class="toast" hidden role="status"></div>
+</body></html>

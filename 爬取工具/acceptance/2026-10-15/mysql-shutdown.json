@@ -1,0 +1,8 @@
+{
+  "status": "shutdown_requested",
+  "mysql_version": "8.4.11",
+  "scope": "only_standalone_crawler_temporary_instance",
+  "network_listener_enabled": false,
+  "databases_or_files_deleted": false,
+  "requested_at": "2026-10-15T08:58:21.595916+00:00"
+}

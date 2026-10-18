@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-17T04:14:15.175594+00:00",
+  "bundle_sha256": "7ea94af0e2af079bba57fe3a5e817f5098440a152078368033dfd758fdb8e3f1",
+  "bundle_extracted_outside_repository": true,
+  "bundled_closeout_script_executed_with_installed_wheel": true,
+  "private_development_baseline_required": false,
+  "original_277_exported_rows_identical": true,
+  "current_289_business_rows_identical": true,
+  "original_integrity_and_empty_directory_restore": "passed",
+  "live_runtime_mutated": false,
+  "full_acceptance": false,
+  "blockers": [
+    "object_metric_historical_audits_incomplete",
+    "native_package_or_database_receipt_missing_or_invalid:Windows",
+    "native_scheduler_trigger_and_recovery_receipt_missing_or_invalid:Windows"
+  ]
+}

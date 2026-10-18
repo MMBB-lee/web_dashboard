@@ -1,0 +1,46 @@
+{
+  "purpose": "team_supplied_model_receiving",
+  "count_model": "p2pnet",
+  "weights_version": "leader-SHTechA-50604773",
+  "upstream_commit_verified": false,
+  "public_redistribution_permission_verified": false,
+  "members": {
+    "models/__init__.py": {
+      "sha256": "dad01c6bd92f1251ed430ad2e7e305da4581da0c05fbae78a3e0bfa66642b4ab",
+      "bytes": 164
+    },
+    "models/backbone.py": {
+      "sha256": "92b5fc36f79359aa04a80db6dd222e81e77cd44ae7e5a9de55494c49901ff5f0",
+      "bytes": 2331
+    },
+    "models/matcher.py": {
+      "sha256": "4426df389f763510d9879b858ddc15f8d6aae935d0812e5b957b281bcf549bc2",
+      "bytes": 3918
+    },
+    "models/p2pnet.py": {
+      "sha256": "a3705b70b9253f37babe437fc79f1be8a7a05563ac2f2430a4dfbda3f21546a0",
+      "bytes": 13248
+    },
+    "models/vgg_.py": {
+      "sha256": "2e4d08e1b04d549b414fd4fc3034399224f8140cf0d6f628a1a68c92507175e7",
+      "bytes": 7659
+    },
+    "util/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "util/misc.py": {
+      "sha256": "0ef59aa8d0a4a77fe7fd8f84f278b6975bcc8bbebea3c4f23121632ccbfe0c52",
+      "bytes": 16584
+    },
+    "SHTechA.pth": {
+      "sha256": "506047732b128ff09efef18e94bfacbe35fcfef300e5e9eeeece259b0488c63f",
+      "bytes": 86372926
+    },
+    "mytest.mp4": {
+      "sha256": "a0e8a2b4bd0a0b5e7b56c1cffe552415d0ace6e2550238d81b30ace1f4ecbf3a",
+      "bytes": 9312856
+    }
+  },
+  "delivery": "repository_included_by_user_request_2026-10-18"
+}

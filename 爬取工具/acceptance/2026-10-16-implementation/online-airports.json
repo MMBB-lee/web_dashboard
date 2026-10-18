@@ -1,0 +1,97 @@
+{
+  "status": "partial",
+  "started_at": "2026-10-16T14:12:28.345431+00:00",
+  "finished_at": "2026-10-16T14:12:36.972344+00:00",
+  "clock_override": false,
+  "window": {
+    "start": "2023-01-01",
+    "end": "2026-10-16"
+  },
+  "recovered_interrupted_runs": 0,
+  "sources": [
+    {
+      "run_id": "1f00354c-1011-4f68-b791-edecbc2658eb",
+      "source_id": "caac-east-monthly",
+      "status": "partial",
+      "started_at": "2026-10-16T14:12:28.347850+00:00",
+      "window": {
+        "start": "2023-01-01",
+        "end": "2026-10-16"
+      },
+      "items": [
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/",
+          "kind": "page",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "5509cd193287d1eacfb6033c3661feee43342cfc689efe7a86e780857270116b",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202609/t20260924_231787.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "7b23582a7ad835b250fd0238d655787df1f4fcb7e788a0b5881dd9c20d9eaedd",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202608/t20260824_231576.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "79e04dd95e62f1cda34084068af4526fdf46c0296dc8fbce25abe8a3142f5a67",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202607/t20260724_231373.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "b50fa0161afded5d327e2d2f0e10e64b2f17a83f9229a95fcb5ce373a5df0eec",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        }
+      ],
+      "records": {
+        "inserted": 0,
+        "skipped": 0,
+        "revised": 0,
+        "quarantined": 0
+      },
+      "discovery_complete_in_configured_entries": false,
+      "public_search_audit_complete": false,
+      "resumed": false,
+      "robots": [
+        {
+          "url": "https://hd.caac.gov.cn/robots.txt",
+          "http_status": 404,
+          "policy": "no_robots_file"
+        }
+      ],
+      "pending": 19,
+      "review_required": [],
+      "finished_at": "2026-10-16T14:12:36.970196+00:00"
+    }
+  ],
+  "team_database_touched": false
+}

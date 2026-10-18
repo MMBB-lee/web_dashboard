@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-16T15:18:04.140003+00:00",
+  "platform": "Darwin",
+  "os": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.13.16",
+  "crawler_version": "0.3.0a1",
+  "wheel_sha256": "4dc19c97bc51dd5863d62232d22243ac6e32b49aeaac9a74f17d283df86461e1",
+  "scheduler_acceptance": "pending_separate_native_evidence",
+  "full_acceptance": false,
+  "installed_files_checked": 20,
+  "sqlite": "passed",
+  "restore": "passed",
+  "fact_count": 289,
+  "mysql": "passed",
+  "finished_at": "2026-10-16T15:18:30.670428+00:00"
+}

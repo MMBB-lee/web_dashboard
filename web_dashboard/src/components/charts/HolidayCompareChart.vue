@@ -18,7 +18,7 @@ const option = computed<EChartsOption>(() => props.variant === 'timeline' ? ({
   animationDuration: 1000,
   grid: { top: 17, right: 72, bottom: 26, left: 20, containLabel: true },
   tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(7, 23, 49, .96)', borderColor: 'rgba(0, 212, 255, .45)', borderRadius: 0, textStyle: { color: '#e6f7ff', fontSize: 13 }, valueFormatter: (value) => `${formatValue(Number(value))} ${props.items[0]?.unit ?? ''}` },
-  xAxis: { type: 'value', axisLabel: { color: '#a2bfda', fontSize: 12, formatter: (value: number) => value >= 10000 ? `${Math.round(value / 10000)}万` : String(value) }, splitLine: { lineStyle: { color: 'rgba(117, 167, 210, .11)' } } },
+  xAxis: { type: 'value', splitNumber: 3, axisLabel: { color: '#a2bfda', fontSize: 11, hideOverlap: true, margin: 10, formatter: (value: number) => value >= 10000 ? `${formatValue(value / 10000, 1)}万` : value >= 1000 ? `${formatValue(value / 1000, 1)}千` : String(value) }, splitLine: { lineStyle: { color: 'rgba(117, 167, 210, .11)' } } },
   yAxis: { type: 'category', inverse: true, data: props.items.map((item) => item.label), axisLabel: { color: '#c0d8f0', fontSize: props.items.length >= 5 ? 11 : 13 }, axisTick: { show: false }, axisLine: { show: false } },
   series: [{
     type: 'bar', barWidth: props.items.length >= 5 ? 13 : props.items.length === 4 ? 17 : 22, data: props.items.map((item) => item.value),

@@ -1,0 +1,1032 @@
+{
+  "sources": [
+    {
+      "source_id": "city-hefei",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:22:43.164048+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:22:43.164029+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "robots.txt unavailable or restricted; automatic crawl refused",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://www.hfyaohai.gov.cn/group1/M00/92/B2/wKgEHmhSjH-AakEtABFDSWCfbvA509.pdf"
+            },
+            "url": "https://www.hfyaohai.gov.cn/group1/M00/92/B2/wKgEHmhSjH-AakEtABFDSWCfbvA509.pdf"
+          }
+        ],
+        "last_run_id": "755f7ee1-af57-4df9-b56f-03aa67862063",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://www.hfyaohai.gov.cn/group1/M00/92/B2/wKgEHmhSjH-AakEtABFDSWCfbvA509.pdf"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-wuhu",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:22:45.600379+00:00",
+      "last_success": "2026-10-16T14:22:45.600377+00:00",
+      "next_due": "2026-11-15T14:22:45.600364+00:00",
+      "details": {
+        "completed": [
+          "https://www.wuhu.gov.cn/mlwh/tjgb/41219509.html"
+        ],
+        "failures": [],
+        "last_run_id": "0da10408-1b0d-4e08-9c06-6e6eaea854a7",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-bengbu",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:22:45.994650+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:22:45.994616+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "Unexpected robots response; needs review",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://www.bengbu.gov.cn/"
+            },
+            "url": "https://www.bengbu.gov.cn/"
+          }
+        ],
+        "last_run_id": "81179052-65be-4696-a65b-aeb6aca3964b",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://www.bengbu.gov.cn/"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-huainan",
+      "status": "partial",
+      "last_checked": "2026-10-17T01:14:25.018586+00:00",
+      "last_success": null,
+      "next_due": "2026-10-17T02:14:25.018559+00:00",
+      "details": {
+        "window": {
+          "start": "2023-01-01",
+          "end": "2026-10-17"
+        },
+        "pending": [
+          {
+            "kind": "document",
+            "title": "淮南市2025年国民经济和社会发展统计公报.doc",
+            "url": "https://tjj.huainan.gov.cn/group4/M00/12/12/rB40qWqhDsOAJt3fAAternh4L2Q424.doc"
+          }
+        ],
+        "completed": [
+          "https://tjj.huainan.gov.cn/group4/M00/12/12/rB40qWqhDsKAYFlnAAsoi11L9S8078.pdf",
+          "https://tjj.huainan.gov.cn/zxfbyjd/551865247.html"
+        ],
+        "failures": [
+          {
+            "url": "https://tjj.huainan.gov.cn/group4/M00/12/12/rB40qWqhDsOAJt3fAAternh4L2Q424.doc",
+            "reason": "Source parsing/I/O failed; review input",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "title": "淮南市2025年国民经济和社会发展统计公报.doc",
+              "url": "https://tjj.huainan.gov.cn/group4/M00/12/12/rB40qWqhDsOAJt3fAAternh4L2Q424.doc"
+            }
+          }
+        ],
+        "review_required": [
+          {
+            "asset_id": "4041e531e4789561a3241fe02e56c7a6094400a68d4bc1ddb565de0fce22f035",
+            "reason": "pdf_requires_reviewed_adapter",
+            "url": "https://tjj.huainan.gov.cn/group4/M00/12/12/rB40qWqhDsKAYFlnAAsoi11L9S8078.pdf"
+          }
+        ],
+        "last_run_id": "d310626d-f610-41d0-9fce-40e2e74dbc19"
+      }
+    },
+    {
+      "source_id": "city-maanshan",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:22:50.609361+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:22:50.609336+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "HTTP 404; request stopped without bypass",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://www.mas.gov.cn/sjkf/sjkf-zcwj/tjsj/index.html"
+            },
+            "url": "https://www.mas.gov.cn/sjkf/sjkf-zcwj/tjsj/index.html"
+          }
+        ],
+        "last_run_id": "3a6434fc-e1b6-40ff-8355-c154b55e8c25",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://www.mas.gov.cn/sjkf/sjkf-zcwj/tjsj/index.html"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-huaibei",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:35:52.247361+00:00",
+      "last_success": null,
+      "next_due": "2026-11-15T14:35:52.247339+00:00",
+      "details": {
+        "completed": [
+          "https://tj.huaibei.gov.cn/group1/M00/16/1C/CqET9GqrXzOAUTaQAAnZ0G61zac129.pdf",
+          "https://tj.huaibei.gov.cn/zwgk/public/76/65004912.html"
+        ],
+        "failures": [],
+        "last_run_id": "df87eea8-5989-4afe-95e2-80cad468376a",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "c6782982dc1040197dcd85f80d389866d77651729ddadefb3bd63003efe8405c",
+            "reason": "pdf_requires_reviewed_adapter",
+            "url": "https://tj.huaibei.gov.cn/group1/M00/16/1C/CqET9GqrXzOAUTaQAAnZ0G61zac129.pdf"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-tongling",
+      "status": "partial",
+      "last_checked": "2026-10-17T01:43:36.907494+00:00",
+      "last_success": null,
+      "next_due": "2026-10-17T02:43:36.907136+00:00",
+      "details": {
+        "window": {
+          "start": "2023-01-01",
+          "end": "2026-10-17"
+        },
+        "pending": [
+          {
+            "url": "https://tjj.tl.gov.cn/tlstjj/c00142/pc/content/content_2074671942385590272.html",
+            "kind": "document"
+          }
+        ],
+        "completed": [],
+        "failures": [
+          {
+            "url": "https://tjj.tl.gov.cn/tlstjj/c00142/pc/content/content_2074671942385590272.html",
+            "reason": "robots.txt check failed; no bypass attempted",
+            "retry_at": null,
+            "task": {
+              "url": "https://tjj.tl.gov.cn/tlstjj/c00142/pc/content/content_2074671942385590272.html",
+              "kind": "document"
+            }
+          }
+        ],
+        "review_required": [],
+        "last_run_id": "1b8303fb-995e-4b15-befd-fbacefe57305"
+      }
+    },
+    {
+      "source_id": "city-anqing",
+      "status": "partial",
+      "last_checked": "2026-10-17T01:43:37.279350+00:00",
+      "last_success": null,
+      "next_due": "2026-10-17T02:43:37.279314+00:00",
+      "details": {
+        "window": {
+          "start": "2023-01-01",
+          "end": "2026-10-17"
+        },
+        "pending": [
+          {
+            "url": "https://www.anqing.gov.cn/tjsj/tjgb/2007357161.html",
+            "kind": "document"
+          }
+        ],
+        "completed": [],
+        "failures": [
+          {
+            "url": "https://www.anqing.gov.cn/tjsj/tjgb/2007357161.html",
+            "reason": "robots.txt unavailable or restricted; automatic crawl refused",
+            "retry_at": null,
+            "task": {
+              "url": "https://www.anqing.gov.cn/tjsj/tjgb/2007357161.html",
+              "kind": "document"
+            }
+          }
+        ],
+        "review_required": [],
+        "last_run_id": "b2f63e0a-123b-4c75-b52a-e855538688e3"
+      }
+    },
+    {
+      "source_id": "city-huangshan",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:22:54.229366+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:22:54.229337+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "robots.txt unavailable or restricted; automatic crawl refused",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://www.huangshan.gov.cn/group1/M00/1C/28/wKiM92nyzEOAXiA7AAopjvU8d3Q407.pdf"
+            },
+            "url": "https://www.huangshan.gov.cn/group1/M00/1C/28/wKiM92nyzEOAXiA7AAopjvU8d3Q407.pdf"
+          }
+        ],
+        "last_run_id": "6160dc0c-daca-494b-80ca-0ed389bf3d01",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://www.huangshan.gov.cn/group1/M00/1C/28/wKiM92nyzEOAXiA7AAopjvU8d3Q407.pdf"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-chuzhou",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:22:58.738351+00:00",
+      "last_success": null,
+      "next_due": "2026-11-15T14:22:58.738326+00:00",
+      "details": {
+        "completed": [
+          "https://www.chuzhou.gov.cn/zxzx/bmdt/1112768667.html"
+        ],
+        "failures": [],
+        "last_run_id": "36337190-283c-4994-83de-5070aea51273",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "0cb7ebc6fe4b93cd50f639aac555ff819712d22f61bc5f82da7d7224cf141730",
+            "reason": "article_or_entry_requires_adapter_or_scope_review",
+            "url": "https://www.chuzhou.gov.cn/zxzx/bmdt/1112768667.html"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-fuyang",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:23:01.116585+00:00",
+      "last_success": null,
+      "next_due": "2026-11-15T14:23:01.116565+00:00",
+      "details": {
+        "completed": [
+          "https://www.fy.gov.cn/Content/show/1345298.html"
+        ],
+        "failures": [],
+        "last_run_id": "98e0da31-5210-46e3-a6ef-0973f33ac28f",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "44542b7635f491dbf8739e32d022869dd629cc9e80f8a1f323ddd747f5566191",
+            "reason": "article_or_entry_requires_adapter_or_scope_review",
+            "url": "https://www.fy.gov.cn/Content/show/1345298.html"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-suzhou",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:35:54.840383+00:00",
+      "last_success": null,
+      "next_due": "2026-11-15T14:35:54.840363+00:00",
+      "details": {
+        "completed": [
+          "https://tjj.ahsz.gov.cn/group1/M00/09/AC/Cp8OO2pEtxOASuGoAAvPDzDMChc431.pdf",
+          "https://tjj.ahsz.gov.cn/sjsz/tjgb/196408981.html"
+        ],
+        "failures": [],
+        "last_run_id": "9a414699-2179-4cbc-973f-033763cc7fdd",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "84a9a54329961b8eaa9bf1513fce69bbe6c211063cafd6356141007b5c08b32e",
+            "reason": "pdf_requires_reviewed_adapter",
+            "url": "https://tjj.ahsz.gov.cn/group1/M00/09/AC/Cp8OO2pEtxOASuGoAAvPDzDMChc431.pdf"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-luan",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:23:16.209887+00:00",
+      "last_success": "2026-10-16T14:23:16.209884+00:00",
+      "next_due": "2026-11-15T14:23:16.209871+00:00",
+      "details": {
+        "completed": [
+          "https://tjj.luan.gov.cn/sjla/tjgg/5480630.html"
+        ],
+        "failures": [],
+        "last_run_id": "0921b61e-5c82-4e73-aa31-ac221668551c",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-bozhou",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:23:16.223712+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:23:16.223702+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "robots.txt check failed; no bypass attempted",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://bozhou.gov.cn/file_bz/27/202503/20250331be2a14b6f5a24f1687def9eb932de999.pdf"
+            },
+            "url": "https://bozhou.gov.cn/file_bz/27/202503/20250331be2a14b6f5a24f1687def9eb932de999.pdf"
+          }
+        ],
+        "last_run_id": "20795e60-a6a0-43bb-bf9b-370319f161d7",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://bozhou.gov.cn/file_bz/27/202503/20250331be2a14b6f5a24f1687def9eb932de999.pdf"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-chizhou",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:23:18.674190+00:00",
+      "last_success": "2026-10-16T14:23:18.674188+00:00",
+      "next_due": "2026-11-15T14:23:18.674176+00:00",
+      "details": {
+        "completed": [
+          "https://cztjj.chizhou.gov.cn/Content/show/781353.html"
+        ],
+        "failures": [],
+        "last_run_id": "c4b005d3-75ea-4a87-ba61-e694cf1f2289",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "city-xuancheng",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:23:21.396005+00:00",
+      "last_success": "2026-10-16T14:23:21.396004+00:00",
+      "next_due": "2026-11-15T14:23:21.395993+00:00",
+      "details": {
+        "completed": [
+          "https://www.xuancheng.gov.cn/News/show/1706704.html"
+        ],
+        "failures": [],
+        "last_run_id": "b22a015a-e22b-46c5-8963-7f8b2c91e083",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "caac-east-monthly",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:20:45.889963+00:00",
+      "last_success": "2026-10-16T14:20:45.889960+00:00",
+      "next_due": "2026-10-23T14:20:45.889938+00:00",
+      "details": {
+        "completed": [
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202302/P020230221341131726336.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202302/t20230221_217309.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202303/P020230322493420271752.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202303/t20230322_217653.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202304/P020230423405864706384.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202304/t20230423_218324.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202305/P020230522544747598027.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202305/t20230522_219966.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202306/P020230626378845155476.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202306/t20230626_220436.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202307/P020230721322819035993.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202307/t20230721_220733.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202308/P020230822336968584349.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202308/t20230822_221077.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202309/P020230927363480473878.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202309/t20230927_221590.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202310/P020231023371906253729.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202310/t20231023_221799.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202311/P020231122447128265508.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202311/t20231122_222114.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202312/P020231225383968678629.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202312/t20231225_222439.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202402/P020241211554572934062.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202402/t20240223_223022.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202403/P020241211556253271717.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202403/t20240322_223292.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202404/P020241211558025619743.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202404/t20240422_223935.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202405/P020241211558569773771.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202405/t20240521_224229.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202406/P020241211559273857296.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202406/t20240620_224526.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202407/P020241211593938672768.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202407/t20240729_224860.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202408/P020241211595237311017.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202408/t20240823_225146.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202409/P020241211603175740641.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202409/t20240923_225458.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202410/P020241211604436045155.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202410/t20241021_225650.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202411/P020241211605311487741.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202411/t20241125_225917.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202412/P020241224290590780657.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202412/t20241223_226216.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202502/P020250224343413036795.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202502/t20250224_226761.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202503/P020250324365164283355.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202503/t20250324_227000.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202504/P020250424388745613238.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202504/t20250424_227296.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202505/P020250523396346793125.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202505/t20250523_227556.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202506/P020250624489135864504.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202506/t20250624_227789.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202507/P020250725365169315525.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202507/t20250725_228069.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202508/P020250825386434382356.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202508/t20250825_228366.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202509/P020250924377469735037.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202509/t20250924_228705.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202510/P020251024405462790164.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202510/t20251024_228952.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202511/P020251125550261257219.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202511/t20251125_229206.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202512/P020251224339954553759.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202512/t20251224_229555.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202602/P020260225337525826076.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202602/t20260225_230109.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202603/P020260324516185298505.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202603/t20260324_230328.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202604/P020260423497528922112.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202604/t20260423_230646.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202605/P020260525605971113121.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202605/t20260525_230909.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202606/P020260625349637911435.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202606/t20260625_231144.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202607/P020260724320238229091.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202607/t20260724_231373.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202608/P020260824603500472990.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202608/t20260824_231576.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202609/P020260924526836562690.pdf",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202609/t20260924_231787.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/index_1.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/index_2.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/index_3.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/index_4.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/index_5.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/index_6.html",
+          "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/index_7.html"
+        ],
+        "failures": [],
+        "last_run_id": "ef06e2e7-fb42-4969-ab56-b2f239921830",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-huangshan-main",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:19.703597+00:00",
+      "last_success": null,
+      "next_due": "2026-10-23T14:25:19.703575+00:00",
+      "details": {
+        "completed": [
+          "https://static.cninfo.com.cn/finalpage/2026-04-18/1225118314.PDF"
+        ],
+        "failures": [],
+        "last_run_id": "d4d38478-2772-47d9-b53d-a00add2a6775",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "698c8cb52b774e47949b9441f1d3027c1f3f926f5257c0521262beb8938ac112",
+            "reason": "pdf_requires_reviewed_adapter",
+            "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225118314.PDF"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-hongcun",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:19.832285+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:25:19.832270+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "robots.txt unavailable or restricted; automatic crawl refused",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://www.huangshan.gov.cn/zfsj/sjjd/8392970.html"
+            },
+            "url": "https://www.huangshan.gov.cn/zfsj/sjjd/8392970.html"
+          }
+        ],
+        "last_run_id": "78c196c7-3926-4f5e-84a0-d2da37db8858",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://www.huangshan.gov.cn/zfsj/sjjd/8392970.html"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-jiuhuashan",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:25:22.025622+00:00",
+      "last_success": "2026-10-16T14:25:22.025618+00:00",
+      "next_due": "2026-10-23T14:25:22.025592+00:00",
+      "details": {
+        "completed": [
+          "https://www.jiuhuashan.gov.cn/OpennessContent/show/1645195.html"
+        ],
+        "failures": [],
+        "last_run_id": "4b59e73a-adb6-4778-99b1-05295242d2ae",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-tianzhushan",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:22.097490+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:25:22.097472+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "robots.txt check failed; no bypass attempted",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://m.tzs.cn/site-ah-tzs/info/4873"
+            },
+            "url": "https://m.tzs.cn/site-ah-tzs/info/4873"
+          }
+        ],
+        "last_run_id": "fc92231e-71d6-4f28-b558-158c6dea93d4",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://m.tzs.cn/site-ah-tzs/info/4873"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-tiantangzhai",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:28.846639+00:00",
+      "last_success": null,
+      "next_due": "2026-10-23T14:25:28.846616+00:00",
+      "details": {
+        "completed": [
+          "https://www.ahjinzhai.gov.cn/public/6596281/38246535.html"
+        ],
+        "failures": [],
+        "last_run_id": "05897d11-3075-4209-9058-406fbc817698",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "89c21a718b4de29ea5467ada8ea8804f89e1396efef7a542a4575c55bbaae7b4",
+            "reason": "article_or_entry_requires_adapter_or_scope_review",
+            "url": "https://www.ahjinzhai.gov.cn/public/6596281/38246535.html"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-wanfohu",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:59:02.553684+00:00",
+      "last_success": "2026-10-16T14:59:02.553681+00:00",
+      "next_due": "2026-10-23T14:59:02.553656+00:00",
+      "details": {
+        "completed": [
+          "https://wlj.luan.gov.cn/zwzx/xqcz/5423086.html"
+        ],
+        "failures": [],
+        "last_run_id": "a8b22e39-4c57-41e4-b88a-12be516af54f",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-sanhe",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:36.188629+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:25:36.188600+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "URL/redirect outside configured HTTPS host allowlist",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://ahfx.wenming.cn/wmyw/202505/t20250507_3537912.shtml"
+            },
+            "url": "https://ahfx.wenming.cn/wmyw/202505/t20250507_3537912.shtml"
+          }
+        ],
+        "last_run_id": "ba445b2a-60e4-4d8d-ba86-4ddbd2f2e84b",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://ahfx.wenming.cn/wmyw/202505/t20250507_3537912.shtml"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-langyashan",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:25:40.608082+00:00",
+      "last_success": "2026-10-16T14:25:40.608079+00:00",
+      "next_due": "2026-10-23T14:25:40.608063+00:00",
+      "details": {
+        "completed": [
+          "https://www.lysfjq.cn/display.php?id=1247"
+        ],
+        "failures": [],
+        "last_run_id": "08391458-ebb9-4dbe-84c8-ae826b407690",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-balihe",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:42.997078+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T14:30:42.997052+00:00",
+      "details": {
+        "completed": [
+          "https://www.balihe.com/4g/info.asp?base_id=3"
+        ],
+        "failures": [],
+        "last_run_id": "570630d9-83d6-4ee9-b119-7540b7d4ba89",
+        "pending": [
+          {
+            "kind": "document",
+            "title": "乐享五一，畅游水乡！八里河旅游区五一假期热度稳升，全天候演艺点亮美好假期！",
+            "url": "https://www.balihe.com/4g/display.asp?id=5254"
+          },
+          {
+            "kind": "document",
+            "title": "乐享五一，畅游水乡！网络大V刘皮特走进八里河，引爆假期文旅热潮！",
+            "url": "https://www.balihe.com/4g/display.asp?id=5253"
+          },
+          {
+            "kind": "document",
+            "title": "乐享五一，畅游水乡！美景相伴暖心护航 八里河五一假期完美收官",
+            "url": "https://www.balihe.com/4g/display.asp?id=5250"
+          },
+          {
+            "kind": "document",
+            "title": "春游江淮 | 春风伴归途，八里河旅游区清明假期圆满落幕！",
+            "url": "https://www.balihe.com/4g/display.asp?id=5249"
+          },
+          {
+            "kind": "document",
+            "title": "春游江淮 | 清明假期嗨玩八里河！邂逅西游经典，尽享春日文旅盛宴",
+            "url": "https://www.balihe.com/4g/display.asp?id=5247"
+          },
+          {
+            "kind": "page",
+            "url": "https://www.balihe.com/4g/info.asp?base_id=3&second_id=3001&pageIndex=2"
+          }
+        ],
+        "review_required": [
+          {
+            "asset_id": "251d456ea534e67ac7ea6f1a6947c46a2219d3a4d65dc84aa168868f0081ce2e",
+            "reason": "article_or_entry_requires_adapter_or_scope_review",
+            "url": "https://www.balihe.com/4g/info.asp?base_id=3"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "scenic-longchuan",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:45.358337+00:00",
+      "last_success": null,
+      "next_due": "2026-10-23T14:25:45.358318+00:00",
+      "details": {
+        "completed": [
+          "https://www.cnjx.gov.cn/OpennessContent/show/3478342.html"
+        ],
+        "failures": [],
+        "last_run_id": "c72d7527-7989-435d-99f4-d0b6fe41f9ae",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "c4cdf3af40c8fb72e46caa5b6a8efebfc7f1272600fabd04c6e19d1ad1a5d476",
+            "reason": "article_or_entry_requires_adapter_or_scope_review",
+            "url": "https://www.cnjx.gov.cn/OpennessContent/show/3478342.html"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "rail_station-hefei-south",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:25:50.267854+00:00",
+      "last_success": "2026-10-16T14:25:50.267851+00:00",
+      "next_due": "2026-10-23T14:25:50.267830+00:00",
+      "details": {
+        "completed": [
+          "https://news.cri.cn/n/20250217/fe33a8cc-283c-de32-ec94-3f3bd8eccf6b.html"
+        ],
+        "failures": [],
+        "last_run_id": "e6c6b1e8-52d5-4358-9e0f-65cc7edf3af0",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "rail_station-hefei",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:52.668535+00:00",
+      "last_success": null,
+      "next_due": "2026-10-23T14:25:52.668513+00:00",
+      "details": {
+        "completed": [
+          "https://www.ahjd.gov.cn/News/show/1693081.html"
+        ],
+        "failures": [],
+        "last_run_id": "f0282273-79d3-4705-91df-806b51cceef1",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "08ae68e4c761ce211bfb3564fa1077770d07fd4125b40963ecbb45e7d505d77c",
+            "reason": "article_or_entry_requires_adapter_or_scope_review",
+            "url": "https://www.ahjd.gov.cn/News/show/1693081.html"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "rail_station-wuhu",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:25:54.983780+00:00",
+      "last_success": "2026-10-16T14:25:54.983777+00:00",
+      "next_due": "2026-10-23T14:25:54.983765+00:00",
+      "details": {
+        "completed": [
+          "https://tzcjzx.wuhu.gov.cn/zsdt/gzdt/8754081.html"
+        ],
+        "failures": [],
+        "last_run_id": "654895ff-e1ad-4170-9358-bcbe534c281a",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "rail_station-fuyang-west",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:25:58.459589+00:00",
+      "last_success": "2026-10-16T14:25:58.459586+00:00",
+      "next_due": "2026-10-23T14:25:58.459570+00:00",
+      "details": {
+        "completed": [
+          "https://paper.people.com.cn/rmrb/pc/content/202603/01/content_30142836.html"
+        ],
+        "failures": [],
+        "last_run_id": "6b9a9444-4be0-4630-92ad-1c5dec32947f",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "rail_station-huangshan-north",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:25:58.607574+00:00",
+      "last_success": null,
+      "next_due": "2026-10-16T15:25:58.607558+00:00",
+      "details": {
+        "completed": [],
+        "failures": [
+          {
+            "reason": "robots.txt unavailable or restricted; automatic crawl refused",
+            "retry_at": null,
+            "task": {
+              "kind": "document",
+              "url": "https://www.huangshan.gov.cn/zfsj/sjjd/8420396.html"
+            },
+            "url": "https://www.huangshan.gov.cn/zfsj/sjjd/8420396.html"
+          }
+        ],
+        "last_run_id": "f18c1921-9516-424e-804e-2da6562ef65b",
+        "pending": [
+          {
+            "kind": "document",
+            "url": "https://www.huangshan.gov.cn/zfsj/sjjd/8420396.html"
+          }
+        ],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "rail_station-chizhou",
+      "status": "partial",
+      "last_checked": "2026-10-16T14:26:00.804377+00:00",
+      "last_success": null,
+      "next_due": "2026-10-23T14:26:00.804361+00:00",
+      "details": {
+        "completed": [
+          "https://www.chizhou.gov.cn/"
+        ],
+        "failures": [],
+        "last_run_id": "610a7133-2865-4a10-ba75-b17c1021a9c1",
+        "pending": [],
+        "review_required": [
+          {
+            "asset_id": "b16efe5951f84781945a118d7f640e31419c55b145860debfc3cfec96a9b1c03",
+            "reason": "article_or_entry_requires_adapter_or_scope_review",
+            "url": "https://www.chizhou.gov.cn/"
+          }
+        ],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    },
+    {
+      "source_id": "rail_station-huangshan-north-ahnews",
+      "status": "succeeded",
+      "last_checked": "2026-10-16T14:59:04.791398+00:00",
+      "last_success": "2026-10-16T14:59:04.791395+00:00",
+      "next_due": "2026-10-23T14:59:04.791374+00:00",
+      "details": {
+        "completed": [
+          "https://szb.ahnews.com.cn/szb/content/202507/21/c1096188.html"
+        ],
+        "failures": [],
+        "last_run_id": "72406747-5e38-499a-b9d9-6b9686852f69",
+        "pending": [],
+        "review_required": [],
+        "window": {
+          "end": "2026-10-16",
+          "start": "2023-01-01"
+        }
+      }
+    }
+  ]
+}

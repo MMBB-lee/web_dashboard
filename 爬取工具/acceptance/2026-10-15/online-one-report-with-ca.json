@@ -1,0 +1,61 @@
+{
+  "status": "succeeded",
+  "discovery": {
+    "run_id": "c1619980-cc9e-4b61-99ae-4823b8015118",
+    "status": "succeeded",
+    "references": [
+      {
+        "period": "2026-08",
+        "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202609/t20260924_231787.html",
+        "title": "2026年8月华东地区机场运输生产情况\n                      2026-09-24",
+        "pdf_url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202609/P020260924526836562690.pdf",
+        "sha256": "c42dfb4232510256775629ba67ae2c0188902eade69be1586b2515707edd1063"
+      }
+    ],
+    "failures": [],
+    "robots": [
+      {
+        "url": "https://hd.caac.gov.cn/robots.txt",
+        "http_status": 404,
+        "policy": "no_robots_file"
+      }
+    ],
+    "bounded_pages": 1,
+    "max_reports": 1,
+    "team_database_touched": false,
+    "seed_manifest": "manifests/discovered-c1619980-cc9e-4b61-99ae-4823b8015118.json"
+  },
+  "ingestion": {
+    "run_id": "2c31bd3c-3e26-4ee4-a057-53edfa0c8d55",
+    "started_at": "2026-10-15T08:43:05.454000+00:00",
+    "status": "succeeded",
+    "mode": "independent_crawler",
+    "team_database_touched": false,
+    "assets_processed": 1,
+    "assets_failed": 0,
+    "records": {
+      "inserted": 0,
+      "skipped": 8,
+      "revised": 0,
+      "quarantined": 0
+    },
+    "samples_archived_without_numeric_claim": 0,
+    "items": [
+      {
+        "source_id": "caac-east-monthly",
+        "source_url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202609/P020260924526836562690.pdf",
+        "period": "2026-08",
+        "asset_id": "7449baa8535028ce11bde626c1ed22ff5a13653cd94279482ac61117fb203fe2",
+        "sha256": "c42dfb4232510256775629ba67ae2c0188902eade69be1586b2515707edd1063",
+        "status": "validated",
+        "counts": {
+          "inserted": 0,
+          "skipped": 8,
+          "revised": 0,
+          "quarantined": 0
+        }
+      }
+    ],
+    "finished_at": "2026-10-15T08:43:05.616752+00:00"
+  }
+}

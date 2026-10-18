@@ -1,0 +1,46 @@
+{
+  "status": "partial",
+  "started_at": "2026-10-16T14:10:52.869205+00:00",
+  "finished_at": "2026-10-16T14:10:52.886760+00:00",
+  "clock_override": false,
+  "window": {
+    "start": "2023-01-01",
+    "end": "2026-10-16"
+  },
+  "recovered_interrupted_runs": 0,
+  "sources": [
+    {
+      "run_id": "0e2f97bb-01ec-4951-9f6a-e933bf5b0fd1",
+      "source_id": "scenic-wanfohu",
+      "status": "partial",
+      "started_at": "2026-10-16T14:10:52.872092+00:00",
+      "window": {
+        "start": "2023-01-01",
+        "end": "2026-10-16"
+      },
+      "items": [
+        {
+          "url": "https://wlj.luan.gov.cn/zwzx/xqcz/5423086.html",
+          "kind": "document",
+          "status": "failed",
+          "reason": "robots.txt check failed; no bypass attempted",
+          "retry_at": null
+        }
+      ],
+      "records": {
+        "inserted": 0,
+        "skipped": 0,
+        "revised": 0,
+        "quarantined": 0
+      },
+      "discovery_complete_in_configured_entries": false,
+      "public_search_audit_complete": false,
+      "resumed": false,
+      "robots": [],
+      "pending": 1,
+      "review_required": [],
+      "finished_at": "2026-10-16T14:10:52.885892+00:00"
+    }
+  ],
+  "team_database_touched": false
+}

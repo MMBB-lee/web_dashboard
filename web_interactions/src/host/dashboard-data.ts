@@ -63,10 +63,7 @@ export async function getHolidays(year?: number, kind?: Holiday['kind']): Promis
 }
 
 export async function getHolidayComparison(holidayIds: string[], entityId: string, mode: 'daily_average' | 'period_total' | 'day_index'): Promise<HolidayCompareResult> {
-  const body = { holiday_ids: holidayIds, series: [{ entity_id: entityId, metric: 'scenic_visits' }], mode }
-  const value = await request<HolidayCompareResult & { results?: HolidayCompareResult['items']; comparisons?: HolidayCompareResult['items'] }>(
-    '/holidays/compare', { method: 'POST', body: JSON.stringify(body) })
-  return { comparable: value.comparable, reason: value.reason ?? null, items: value.items ?? value.results ?? value.comparisons ?? [] }
+  return request(`/holidays/statistics?${query({ holiday_ids: holidayIds.join(','), entity_id: entityId, mode })}`)
 }
 
 export async function getEvents(regionCode = '340000'): Promise<EventSummary[]> {
@@ -77,4 +74,8 @@ export async function getEvents(regionCode = '340000'): Promise<EventSummary[]> 
 // D 的分析接口已预留，A 后续跨对象比较时可直接调用。
 export function compareSeries(body: { series: Array<{ entity_id: string; metric: string }>; grain: TrendGrain; start: string; end: string; display_mode: 'separate_axes' | 'index_100'; base_period?: string }): Promise<unknown> {
   return request('/analytics/compare', { method: 'POST', body: JSON.stringify(body) })
+}
+
+export function getNativeSeries(entityId: string, metric: string, grain = 'auto', preferredGrain = 'month', start?: string, end?: string): Promise<SeriesResult> {
+  return request(`/public-data/${encodeURIComponent(entityId)}/series?${query({ metric, grain, preferred_grain: preferredGrain, start, end })}`)
 }

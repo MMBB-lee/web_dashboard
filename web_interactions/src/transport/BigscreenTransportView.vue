@@ -4,6 +4,7 @@ import BigscreenChart from '../components/BigscreenChart.vue'
 import TrafficNetwork from '../components/TrafficNetwork.vue'
 import TrendChart from '../components/TrendChart.vue'
 import type { Entity, Forecast, Grain, Metric, Point, Series } from '../types/api'
+import { decimalText } from '../utils'
 
 const props = defineProps<{
   entities?: Entity[]
@@ -234,7 +235,7 @@ function formatWan(value: number) {
           </div>
           <div class="model-stats">
             <div><span>模型</span><strong>季节性趋势模型</strong></div>
-            <div><span>回测 sMAPE</span><strong>{{ forecast?.backtest?.smape?.toFixed(1) ?? (100 - qualityGauges[2].value).toFixed(1) }}%</strong></div>
+            <div><span>回测 sMAPE</span><strong>{{ decimalText(forecast?.backtest?.smape ?? (100 - qualityGauges[2].value)) }}%</strong></div>
             <div><span>更新方式</span><strong>按统计期滚动</strong></div>
           </div>
           <p><i class="pi pi-shield" /> 铁路展示发送量，机场展示吞吐量，两类统计口径不直接合并。</p>

@@ -1,0 +1,648 @@
+{
+  "status": "partial",
+  "started_at": "2026-10-16T14:15:28.610513+00:00",
+  "finished_at": "2026-10-16T14:17:11.449780+00:00",
+  "clock_override": false,
+  "window": {
+    "start": "2023-01-01",
+    "end": "2026-10-16"
+  },
+  "recovered_interrupted_runs": 0,
+  "sources": [
+    {
+      "run_id": "ddcfcdda-c1ed-4765-b2dd-991bf0ad1e2b",
+      "source_id": "caac-east-monthly",
+      "status": "partial",
+      "started_at": "2026-10-16T14:15:28.612518+00:00",
+      "window": {
+        "start": "2023-01-01",
+        "end": "2026-10-16"
+      },
+      "items": [
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202606/t20260625_231144.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "1e421bf99c723ecef69d09a333bb214483f17fa310b0576a78727b5021db032f",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202605/t20260525_230909.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "154a73a91267a430521c0e86f8fe0d0452eca795480e47d31b185e434fd34db2",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202604/t20260423_230646.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "96435553908cfeec6546401e55cc48454a624ce3ff012635587990c15d2128b3",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202603/t20260324_230328.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "cfc66352ab36cd120f981a04b9d412bc22cd762f1fd2c2d563c257485925b403",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202602/t20260225_230109.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "569b0a068c2a241b17cd99f541fb7ab0cd88c1ee20dc89b1fa9e626a193d7a11",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202512/t20251224_229555.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "63e231b0f5a88034f6f5073f3f758ee0e3d054f60ffac036eaf67f87f268c96c",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202511/t20251125_229206.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "00836efcb5c13c54b3c99924b0d9183f616a6836e151dad8666d6801b52365a6",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202510/t20251024_228952.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "16626fd34ce40c18bd282984af2feb92d22db4ac5d2cedf2f22621ce1c60d4c9",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202509/t20250924_228705.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "5944919a921b815826c6ec56e061ea4d13e8148e9c4d526def74d5796933a360",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202508/t20250825_228366.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "d7b634755b372f100db152d50fb5c96597d96cf6eee4a35730adba8f833015ba",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202507/t20250725_228069.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "2cc54450c185fb597fcaeda4a2c2a4e79b8b1b68afb575936ab49636cf4edd46",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202506/t20250624_227789.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "4991e1b8b85a9c656e19a4d436dcb3146791fc0206d886df6852ccf9e33f4d56",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202505/t20250523_227556.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "50f22957e0b9453598785731439bab74ff1e00875861a67a96e186c346ac8477",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202504/t20250424_227296.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "8adf42985e490656dc78003bc21fdfed9d4729cb2dc5b99b9f8bca4f4d9a2b27",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202503/t20250324_227000.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "2a1ee3d6458f2737dde0edaff5a243da1ec9ee6036db0b206a1672228a4c1705",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/index_1.html",
+          "kind": "page",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "b46d1c68e6aa32d405c2269d053b52b8c23bc96359c3d0798f916fee15aa9e7c",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202609/P020260924526836562690.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "c42dfb4232510256775629ba67ae2c0188902eade69be1586b2515707edd1063",
+          "counts": {
+            "inserted": 0,
+            "skipped": 8,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202608/P020260824603500472990.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "3c3c0f1fd19d03eff07f445cce27d39f48dc91292f9e2df55dcfa782937ed273",
+          "counts": {
+            "inserted": 0,
+            "skipped": 8,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202607/P020260724320238229091.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "3285973d3e6b0e89d8169fd150a116efaac485db3d460a15e3a5a865362b47dc",
+          "counts": {
+            "inserted": 0,
+            "skipped": 8,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202606/P020260625349637911435.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "a8a628e9f907275312044ff3a26d84529720275601ff401fcbb2d6592d28a8fc",
+          "counts": {
+            "inserted": 0,
+            "skipped": 8,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202605/P020260525605971113121.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "1a1c9766770c965d4aad9e645a1fae535ae48543e6d46ce55cebdceede03d8c2",
+          "counts": {
+            "inserted": 0,
+            "skipped": 8,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202604/P020260423497528922112.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "77f94a5d89a4cee5df5db1082a57b0ab842a7cbb04d2059362123e183487a1d8",
+          "counts": {
+            "inserted": 0,
+            "skipped": 7,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202603/P020260324516185298505.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "e7abba2fcefdee68e8240ac3bf3fda0fd0177b2b55a7aaaca500230bf6c6b5ee",
+          "counts": {
+            "inserted": 0,
+            "skipped": 7,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202602/P020260225337525826076.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "00451a82bde9359d822e437af14e6fdff32bbdb8b8d422dcb28715bf3bc9aa6b",
+          "counts": {
+            "inserted": 0,
+            "skipped": 7,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202512/P020251224339954553759.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "52b860e7c9652dee8f5b5a69a7b4f86a3c6088996ab9222d03e409705909f482",
+          "counts": {
+            "inserted": 0,
+            "skipped": 7,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202511/P020251125550261257219.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "8e84a33a6a991de9f1a957c5a9ddd8d9ef0ba3966117036663f5b74f164775c0",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202510/P020251024405462790164.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "191f129b66f2ead4d18fdeb7a1d35e115f0556918730f783e6252e0bb940e3eb",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202509/P020250924377469735037.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "5c8d488d8cc2bc6fb162645ef74a1cad463e562538ae645397b70b731725af6e",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202508/P020250825386434382356.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "6a2e49a445e07c96ab31328ca857528d5fe1bf590b2d00be707c58a3e199d0b8",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202507/P020250725365169315525.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "fa755e737125224688a315a5690bfdf5bd85c8b47cc7c25c72b4cbb3668af265",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202506/P020250624489135864504.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "c28c6da4d6c8cdb6798a66452cc8ad0cfd291527154eab259c47dc76aee70dfe",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202505/P020250523396346793125.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "aa56e7fa52b2a93e145c9b17431e146de64993c69879c06645178ec60a53a669",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202504/P020250424388745613238.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "a04e6f9e110e59188093b65a88c04c216d27a73988b6c9d3da105def2a556d15",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202503/P020250324365164283355.pdf",
+          "kind": "airport_pdf",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "2bd92c0389e6bc86eb3294f1f3e1a96083f4703f2501851c81a5ec169f09cf9a",
+          "counts": {
+            "inserted": 0,
+            "skipped": 6,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202502/t20250224_226761.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "c534ca4daceca2dff5481e4a0a59968b1e181d25773e653da8ca12d72d16effa",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202412/t20241223_226216.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "e4328489e64d9f7f6ca9190b5b8971828eae2d764cb8604c9d3e90a3aa50ce6b",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202411/t20241125_225917.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202410/t20241021_225650.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202409/t20240923_225458.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202408/t20240823_225146.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202407/t20240729_224860.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202406/t20240620_224526.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202405/t20240521_224229.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202404/t20240422_223935.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202403/t20240322_223292.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202402/t20240223_223022.html",
+          "kind": "airport_article",
+          "status": "failed",
+          "reason": "Expected one unambiguous airport-ranking PDF; attachments require review",
+          "retry_at": null
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202312/t20231225_222439.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "1741cd70027a3280ef0c97abce209f095cee2001e406602f7f1834be4499c24d",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202311/t20231122_222114.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "841d66497bfccd9fe43585ef1a6eca4f4f0b2fa6781305ea3a2ca05f5dc8eb27",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202310/t20231023_221799.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "c4a216d12f91f2c38475e4be487248e4bd8382acbafd6bf31abab1ee95ffd893",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202309/t20230927_221590.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "d1ea15c713e71c3d9ecd0ee8fe3bb02bf72693b837f4518fc914932cb8fa5c8e",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/202308/t20230822_221077.html",
+          "kind": "airport_article",
+          "status": "processed",
+          "http_status": 200,
+          "sha256": "e8cd64430fa257d664f2701de16acabd22c1618d4401531a52ec6027a606f366",
+          "counts": {
+            "inserted": 0,
+            "skipped": 0,
+            "revised": 0,
+            "quarantined": 0
+          }
+        }
+      ],
+      "records": {
+        "inserted": 0,
+        "skipped": 122,
+        "revised": 0,
+        "quarantined": 0
+      },
+      "discovery_complete_in_configured_entries": false,
+      "public_search_audit_complete": false,
+      "resumed": true,
+      "robots": [
+        {
+          "url": "https://hd.caac.gov.cn/robots.txt",
+          "http_status": 404,
+          "policy": "no_robots_file"
+        }
+      ],
+      "pending": 20,
+      "review_required": [],
+      "finished_at": "2026-10-16T14:17:11.447256+00:00"
+    }
+  ],
+  "team_database_touched": false
+}

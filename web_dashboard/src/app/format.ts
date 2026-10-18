@@ -22,7 +22,9 @@ export function pointLabel(point: NumericPoint): string {
     const [year, week] = isoWeek(point.period_start).split('-W')
     return `${year}年第${Number(week)}周`
   }
-  return point.period_start.slice(5)
+  if (point.grain === 'year') return `${point.period_start.slice(0, 4)}年`
+  if (point.grain === 'quarter') return `${point.period_start.slice(0, 4)}年Q${Math.ceil(Number(point.period_start.slice(5, 7)) / 3)}`
+  return formatPeriod(point.period_start, point.period_end)
 }
 
 export function formatAxisValue(value: number): string {

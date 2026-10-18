@@ -7,7 +7,7 @@ import UiSelect from '../ui/UiSelect.vue'
 type Option = { value: string; label: string }
 const props = defineProps<{ card: OverviewCard; demo: boolean; index: number; selectedId: string; options: Option[] }>()
 const emit = defineEmits<{ select: [id: string] }>()
-const title = computed(() => ({ scenic_visits: '接待人次', rail_departures: '总客流量', airport_throughput: '旅客吞吐量' } as Record<string, string>)[props.card.metric] ?? props.card.metric)
+const title = computed(() => ({ scenic_visits: '接待人次', rail_departures: '发送人次', airport_throughput: '旅客吞吐量' } as Record<string, string>)[props.card.metric] ?? props.card.metric)
 const selectorLabel = computed(() => ({ scenic_visits: '景区', rail_departures: '火车站', airport_throughput: '机场' } as Record<string, string>)[props.card.metric] ?? '地点')
 const selectorOptions = computed(() => props.options)
 </script>

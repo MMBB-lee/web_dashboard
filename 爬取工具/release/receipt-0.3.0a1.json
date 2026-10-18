@@ -1,0 +1,63 @@
+{
+  "format": "anhui-crawler-release-2",
+  "version": "0.3.0a1",
+  "packaged_at": "2026-10-16T15:25:17.463095+00:00",
+  "published_to_remote": false,
+  "full_acceptance": false,
+  "blockers": [
+    "object_metric_historical_audits_incomplete",
+    "native_package_or_database_receipt_missing_or_invalid:Windows",
+    "native_scheduler_trigger_and_recovery_receipt_missing_or_invalid:Windows"
+  ],
+  "source_tests": {
+    "tests": 127,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "installed_tests": {
+    "tests": 127,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "standard_facts": 287,
+  "candidate_facts": 2,
+  "files": [
+    {
+      "name": "anhui_public_data_crawler-0.3.0a1-py3-none-any.whl",
+      "sha256": "4dc19c97bc51dd5863d62232d22243ac6e32b49aeaac9a74f17d283df86461e1",
+      "byte_size": 58430
+    },
+    {
+      "name": "anhui-public-data-crawler-0.3.0a1.zip",
+      "sha256": "25132bd5dbbe2beaeb910fa46c85544473307545dbbe4a301b387bdfe2685dc3",
+      "byte_size": 1176170
+    },
+    {
+      "name": "anhui-crawler-data-0.3.0a1.zip",
+      "sha256": "7ec621b999f83daa9dee0a0529345e3c0d0899b330ac3dc4c422f0761a00473a",
+      "byte_size": 140456
+    }
+  ],
+  "dependencies": {
+    "name": "dependencies-0.3.0a1.txt",
+    "sha256": "b733bf3f44582e669007ba859c5d3dc43a18bd79a699569bf90e29bcc05d6f87",
+    "byte_size": 320
+  },
+  "private_seed": {
+    "name": "PRIVATE-acceptance-seed-0.3.0a1.zip",
+    "sha256": "4ff68e45bfa9941b9d27f0aa12e9531562386e2c3fbf948ac3e124fdfb067d43",
+    "byte_size": 6295682,
+    "private_originals_do_not_publish": true,
+    "asset_entries": 79
+  },
+  "old_releases_unchanged": 8,
+  "excluded_from_public": [
+    "Original full text",
+    "Databases",
+    "Credentials",
+    "Runtime environments",
+    "Team packages"
+  ]
+}

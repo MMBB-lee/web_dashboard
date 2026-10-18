@@ -1,0 +1,2 @@
+# Preserve pinned source, model and sample bytes on every checkout.
+/model_bundle/p2pnet/** -text

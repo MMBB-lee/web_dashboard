@@ -1,0 +1,249 @@
+{
+  "city_bulletins": {
+    "parser_version": "city-bulletin-annual-1",
+    "mode": "offline_reviewed_bulletin_ingestion",
+    "automatic_network_discovery": false,
+    "sources": [
+      {
+        "source_id": "city-anqing",
+        "city": "安庆市",
+        "metrics": [
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_road_transport",
+            "grain": "year",
+            "unit": "人次"
+          },
+          {
+            "metric": "star_rated_hotels",
+            "scope": "municipal_year_end_inventory",
+            "grain": "day",
+            "unit": "家"
+          },
+          {
+            "metric": "a_rated_scenic_sites",
+            "scope": "municipal_year_end_inventory",
+            "grain": "day",
+            "unit": "处"
+          }
+        ]
+      },
+      {
+        "source_id": "city-chizhou",
+        "city": "池州市",
+        "metrics": [
+          {
+            "metric": "a_rated_scenic_sites",
+            "scope": "municipal_year_end_inventory",
+            "grain": "day",
+            "unit": "个"
+          }
+        ]
+      },
+      {
+        "source_id": "city-huaibei",
+        "city": "淮北市",
+        "metrics": [
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_road_transport",
+            "grain": "year",
+            "unit": "人次"
+          }
+        ]
+      },
+      {
+        "source_id": "city-huainan",
+        "city": "淮南市",
+        "metrics": [
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_road_transport",
+            "grain": "year",
+            "unit": "人次"
+          },
+          {
+            "metric": "star_rated_hotels",
+            "scope": "municipal_year_end_inventory",
+            "grain": "day",
+            "unit": "家"
+          }
+        ]
+      },
+      {
+        "source_id": "city-luan",
+        "city": "六安市",
+        "metrics": [
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_road_transport",
+            "grain": "year",
+            "unit": "人次"
+          },
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_water_transport",
+            "grain": "year",
+            "unit": "人次"
+          }
+        ]
+      },
+      {
+        "source_id": "city-suzhou",
+        "city": "宿州市",
+        "metrics": [
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_road_transport",
+            "grain": "year",
+            "unit": "人次"
+          }
+        ]
+      },
+      {
+        "source_id": "city-tongling",
+        "city": "铜陵市",
+        "metrics": [
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_road_transport",
+            "grain": "year",
+            "unit": "人次"
+          },
+          {
+            "metric": "rail_passenger_departures",
+            "scope": "municipal_rail_not_single_station",
+            "grain": "year",
+            "unit": "人次"
+          }
+        ]
+      },
+      {
+        "source_id": "city-wuhu",
+        "city": "芜湖市",
+        "metrics": [
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_road_transport",
+            "grain": "year",
+            "unit": "人次"
+          },
+          {
+            "metric": "rail_passenger_departures",
+            "scope": "municipal_rail_not_single_station",
+            "grain": "year",
+            "unit": "人次"
+          },
+          {
+            "metric": "star_rated_hotels",
+            "scope": "municipal_year_end_inventory",
+            "grain": "day",
+            "unit": "家"
+          },
+          {
+            "metric": "a_rated_scenic_sites",
+            "scope": "municipal_year_end_inventory",
+            "grain": "day",
+            "unit": "处"
+          }
+        ]
+      },
+      {
+        "source_id": "city-xuancheng",
+        "city": "宣城市",
+        "metrics": [
+          {
+            "metric": "passenger_transport_volume",
+            "scope": "municipal_road_and_water_excluding_rail",
+            "grain": "year",
+            "unit": "人次"
+          }
+        ]
+      }
+    ]
+  },
+  "reviewed_topics": {
+    "parser_version": "reviewed-topics-1",
+    "reviewed_articles_only": true,
+    "sources": [
+      {
+        "source_id": "rail_station-huangshan-north-ahnews",
+        "title_contains": "轨道上的文旅协奏曲",
+        "period": [
+          "2025-01-01",
+          "2025-06-30"
+        ]
+      },
+      {
+        "source_id": "scenic-wanfohu",
+        "title_contains": "舒城“五一”文旅热力值拉满",
+        "period": [
+          "2025-05-01",
+          "2025-05-05"
+        ]
+      },
+      {
+        "source_id": "scenic-jiuhuashan",
+        "title_contains": "九华山风景区2025年春节假日旅游市场安全平稳有序",
+        "period": [
+          "2025-01-28",
+          "2025-02-04"
+        ]
+      },
+      {
+        "source_id": "scenic-langyashan",
+        "title_contains": "琅琊山景区2025年国庆假期圆满收官",
+        "period": [
+          "2025-10-01",
+          "2025-10-08"
+        ]
+      },
+      {
+        "source_id": "rail_station-hefei-south",
+        "title_contains": "合肥南站创春运单日发送旅客新高",
+        "period": [
+          "2025-02-15",
+          "2025-02-15"
+        ]
+      },
+      {
+        "source_id": "rail_station-fuyang-west",
+        "title_contains": "高铁出行添便利",
+        "period": [
+          "2026-02-24",
+          "2026-02-24"
+        ]
+      },
+      {
+        "source_id": "rail_station-wuhu",
+        "title_contains": "芜湖铁路多项出行数据创新高",
+        "period": [
+          "2025-04-06",
+          "2025-04-06"
+        ]
+      }
+    ]
+  },
+  "annual_reports": {
+    "parser_version": "huangshan-annual-entries-1",
+    "reviewed_full_reports_only": true,
+    "metric": "scenic_mountain_entries",
+    "unit": "人",
+    "reports": [
+      {
+        "url": "https://static.cninfo.com.cn/finalpage/2025-04-19/1223151684.PDF",
+        "report_year": 2024,
+        "publication_date": "2025-04-19"
+      },
+      {
+        "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225118314.PDF",
+        "report_year": 2025,
+        "publication_date": "2026-04-18"
+      }
+    ]
+  },
+  "airports": {
+    "parser_version": "caac-east-airports-monthly-1",
+    "source_id": "caac-east-monthly"
+  }
+}

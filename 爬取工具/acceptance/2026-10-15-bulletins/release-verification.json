@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-15T09:52:09.209635+00:00",
+  "version": "0.2.0",
+  "test_runs": {
+    "source-tests.xml": {
+      "tests": 85,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "installed-wheel-tests.xml": {
+      "tests": 85,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  },
+  "counts": {
+    "facts": 277,
+    "airport_months": 260,
+    "city_records": 17,
+    "cities": 9,
+    "annual_city_flows": 11,
+    "year_end_inventory": 6,
+    "registry_entities": 44
+  },
+  "installed_wheel_sqlite_and_mysql": "passed",
+  "portable_clean_backfill": "passed",
+  "original_0_1_0_release_sha_unchanged": true,
+  "old_airport_facts_unchanged": true,
+  "mysql_shutdown_confirmed": true,
+  "data_files_deleted": false,
+  "team_code_or_database_modified": false,
+  "new_source_network_requests": 0,
+  "scheduled_service_enabled": false,
+  "full_province_complete": false
+}

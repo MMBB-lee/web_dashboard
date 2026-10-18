@@ -3,14 +3,16 @@ import { computed } from 'vue'
 import type { Entity } from '../types/api'
 import { boundaryPath, locateTransportEntities, mapHeight, mapWidth } from '../transport/geography'
 import { useInteractions } from '../module'
-const props = defineProps<{ entities: Entity[]; activeId: string; latestValue?: number | null }>()
+const props = defineProps<{ entities: Entity[]; activeId: string; latestValue?: number | null; latestPeriodEnd?: string; latestGrain?: string }>()
 const emit = defineEmits<{ select: [entity: Entity] }>()
 const { options } = useInteractions()
 const locations = computed(() => locateTransportEntities(props.entities))
 const nodes = computed(() => locations.value.nodes)
 const mapEntities = computed(() => nodes.value.map(node => ({
   ...node.entity, longitude: node.longitude, latitude: node.latitude,
-  latest_value: node.entity.id === props.activeId ? props.latestValue ?? null : null,
+  latest_value: node.entity.id === props.activeId ? props.latestValue ?? node.entity.latest_value ?? null : node.entity.latest_value ?? null,
+  latest_period_end: node.entity.id === props.activeId ? props.latestPeriodEnd ?? node.entity.latest_period_end : node.entity.latest_period_end,
+  latest_grain: node.entity.id === props.activeId ? props.latestGrain ?? node.entity.latest_grain : node.entity.latest_grain,
 })))
 const railId = computed(() => mapEntities.value.find(entity => entity.id === props.activeId && entity.type === 'rail_station')?.id
   ?? mapEntities.value.find(entity => entity.type === 'rail_station')?.id)

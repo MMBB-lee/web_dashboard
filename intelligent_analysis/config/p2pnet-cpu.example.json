@@ -1,0 +1,29 @@
+{
+  "weights_version": "leader-SHTechA-50604773",
+  "roi": {
+    "points": [
+      {
+        "x": 0.0,
+        "y": 0.0
+      },
+      {
+        "x": 1.0,
+        "y": 0.0
+      },
+      {
+        "x": 1.0,
+        "y": 1.0
+      },
+      {
+        "x": 0.0,
+        "y": 1.0
+      }
+    ]
+  },
+  "sample_interval_seconds": 10,
+  "aggregation_minutes": 5,
+  "inference_engine": "pytorch",
+  "device": "CPU",
+  "count_model": "p2pnet",
+  "confidence_threshold": 0.5
+}

@@ -1,0 +1,47 @@
+{
+  "status": "succeeded",
+  "scope": "synthetic_isolated_mysql_only",
+  "checks": [
+    {
+      "name": "concurrent_same_source_import_is_one_insert_one_skip",
+      "results": [
+        {
+          "inserted": 1,
+          "skipped": 0,
+          "revised": 0,
+          "quarantined": 0
+        },
+        {
+          "inserted": 0,
+          "skipped": 1,
+          "revised": 0,
+          "quarantined": 0
+        }
+      ]
+    },
+    {
+      "name": "changed_source_quarantined_without_silent_overwrite"
+    },
+    {
+      "name": "explicit_revision_preserves_previous_record"
+    },
+    {
+      "name": "older_publication_cannot_replace_newer_active_fact"
+    },
+    {
+      "name": "invalid_batch_rolls_back_prior_valid_row"
+    }
+  ],
+  "tables": [
+    "ac_assets",
+    "ac_entities",
+    "ac_facts",
+    "ac_issues",
+    "ac_meta",
+    "ac_revisions",
+    "ac_runs",
+    "ac_sources"
+  ],
+  "team_database_touched": false,
+  "records_are_not_public_statistics": true
+}

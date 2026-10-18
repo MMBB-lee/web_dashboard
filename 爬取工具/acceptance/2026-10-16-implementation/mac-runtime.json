@@ -1,0 +1,22 @@
+{
+  "status": "installed",
+  "platform": "Darwin",
+  "label": "org.anhui.public-data-crawler",
+  "schedule_timezone": "Asia/Shanghai",
+  "next_natural_trigger_at": "2026-10-17T09:00:00+08:00",
+  "interpreter": "/Users/Admin/Library/Application Support/AnhuiPublicDataCrawler/runtime-0.3.0a1/bin/python",
+  "data_root": "/Users/Admin/Library/Application Support/AnhuiPublicDataCrawler/data",
+  "schedule": {
+    "Hour": 9,
+    "Minute": 0
+  },
+  "task_query": [
+    "state = not running",
+    "program = /Users/Admin/Library/Application Support/AnhuiPublicDataCrawler/runtime-0.3.0a1/bin/python",
+    "runs = 0",
+    "last exit code = (never exited)"
+  ],
+  "regular_task_triggered_during_install": false,
+  "acceptance_task_trigger_and_recovery": "passed_isolated_then_removed",
+  "windows_regular_task_enabled": false
+}

@@ -1,0 +1,56 @@
+{
+  "format": "anhui-crawler-closeout-1",
+  "frozen_at": "2026-10-17T04:12:07.879754+00:00",
+  "cutoff_beijing": "2026-10-17",
+  "version": "0.3.0a1",
+  "new_software_wheel": false,
+  "published_to_remote": false,
+  "full_acceptance": false,
+  "blockers": [
+    "object_metric_historical_audits_incomplete",
+    "native_package_or_database_receipt_missing_or_invalid:Windows",
+    "native_scheduler_trigger_and_recovery_receipt_missing_or_invalid:Windows"
+  ],
+  "tests": {
+    "source-tests": {
+      "tests": 127,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "installed-wheel-tests": {
+      "tests": 127,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "standard_facts": 287,
+  "candidate_facts": 2,
+  "originals_verified": 135,
+  "restored_business_facts_identical": true,
+  "latest_natural_update_status": "partial",
+  "files": [
+    {
+      "name": "anhui_public_data_crawler-0.3.0a1-py3-none-any.whl",
+      "byte_size": 58430,
+      "sha256": "4dc19c97bc51dd5863d62232d22243ac6e32b49aeaac9a74f17d283df86461e1"
+    },
+    {
+      "name": "anhui-crawler-data-0.3.0a1-closeout-2026-10-17.zip",
+      "byte_size": 133667,
+      "sha256": "3168c68148258804f47c704da86ac5fe249bd7c04b4d5ebc6048f7f4050c2477"
+    },
+    {
+      "name": "anhui-public-data-crawler-0.3.0a1-closeout-2026-10-17.zip",
+      "byte_size": 2727250,
+      "sha256": "7ea94af0e2af079bba57fe3a5e817f5098440a152078368033dfd758fdb8e3f1"
+    }
+  ],
+  "private_recovery_excluded": true,
+  "private_seed_included": false,
+  "source_archive_entries": 179,
+  "mysql_acceptance": "prior_same_wheel_2026-10-16_not_rerun",
+  "windows_acceptance": "pending",
+  "baseline_full_export_rows_unchanged": 277
+}

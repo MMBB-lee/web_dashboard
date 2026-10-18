@@ -1,8 +1,65 @@
+# Dependencies, virtual environments and build output
 node_modules/
+.venv/
+venv/
+.conda/
+__pypackages__/
 dist/
-test-results/
-playwright-report/
+build/
+*.egg-info/
+
+# Local credentials (keep shareable configuration templates)
 .env
 .env.*
 !.env.example
+.pypirc
+*.pem
+*.key
+PRIVATE-*
+
+# Python / frontend caches and generated test reports
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.vite/
+*.tsbuildinfo
+.coverage
+.coverage.*
+coverage/
+htmlcov/
+test-results/
+playwright-report/
+blob-report/
+
+# Local databases and runtime output (portable data packages remain included)
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.db
+*.db-*
 *.log
+logs/
+*.tmp
+*.bak
+
+# Rebuildable distribution archives; retain source, receipts and model bundles
+*.whl
+**/release/*.zip
+**/release/*.tar.gz
+
+# Editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local recordings and generated counting captures stay on this machine.
+/videos/*
+!/videos/.gitkeep
+/cap_images/*
+!/cap_images/.gitkeep

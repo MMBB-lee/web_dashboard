@@ -1,6 +1,26 @@
 {
   "repository": "https://github.com/MMBB-lee/web_dashboard",
   "commit": "e00af3428eb263b4a4e8e282d5a7b469d55d328c",
+  "localOverrides": {
+    "src/components/charts/HolidayCompareChart.vue": "Space numeric axis labels with fewer ticks, compact units and overlap hiding on the small homepage holiday chart.",
+    "src/components/map/three-map.ts": "Use screen-space thick lines for visible animated point-to-point connections at the user's request. Show source attribution, actual units and statistical dates with located database entities.",
+    "src/components/layout/DashboardShell.vue": "Update the header title text at the user's request while preserving the existing typography and alignment.",
+    "vite.config.ts": "Allow the PrimeIcons font directory when pnpm stores dependencies outside the workspace.",
+    "src/features/scenic/ScenicView.vue": "Retain original chart layout and native-period controls; tighten only source text line height and paragraph spacing to keep update text inside the unchanged panel.",
+    "src/features/scenic/scenic.ts": "Read actual native statistical periods and dates into the existing scenic charts.",
+    "src/app/data.ts": "Read verified native statistical periods through the shared chart API.",
+    "src/app/types.ts": "Include original annual, quarterly, half-year and cumulative periods and source metadata.",
+    "src/app/format.ts": "Label native statistical periods without presenting them as months.",
+    "src/features/dashboard/overview.ts": "Load all selected entities at their actual native periods and use the province-wide map data.",
+    "src/features/dashboard/DashboardView.vue": "Display native statistical dates and avoid ranking incomparable periods.",
+    "src/components/charts/TrendChart.vue": "Render isolated actual observations as visible points.",
+    "src/components/map/map-types.ts": "Carry the actual statistical period and unit in map markers.",
+    "src/components/layout/MetricCard.vue": "Display railway departures with their actual metric label.",
+    "src/features/holidays/holidays.ts": "Display single-holiday statistics and fetch unique source metadata for readable source names instead of repeated UUIDs.",
+    "src/features/holidays/HolidayView.vue": "Display holiday statistics with readable deduplicated sources and ellipsis/disclosure controls for full explanations without overflowing panels.",
+    "tests/demoData.ts": "Allow one to six existing demo holiday records to follow the single-holiday statistics interface without adding simulated production data.",
+    "src/components/charts/ForecastChart.vue": "Use a neutral historical-series label for project inputs while keeping the existing orange forecast line and layout."
+  },
   "files": {
     ".gitignore": "92c0b13d7eeb125354f1a9ea9b06c644fb27d268de29f39c803ee67802bb29e7",
     "README.md": "2a19a0f86026c5666d06330f7358aeebfada528a8b56b9d8a07d7d241a736bc9",

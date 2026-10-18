@@ -6,8 +6,8 @@ import { GridComponent, TooltipComponent, MarkAreaComponent, AriaComponent } fro
 import { CanvasRenderer } from 'echarts/renderers'
 import type { Point } from '../types/api'
 use([LineChart, GridComponent, TooltipComponent, MarkAreaComponent, AriaComponent, CanvasRenderer])
-type ChartPoint = Pick<Point, 'value' | 'unit' | 'period_start' | 'period_end' | 'lower_bound' | 'upper_bound'>
-const props = defineProps<{ points: ChartPoint[]; forecast?: ChartPoint[]; label?: string; short?: boolean; historyLabel?: string; unit?: string }>()
+type ChartPoint = Pick<Point, 'value' | 'unit' | 'period_start' | 'period_end' | 'lower_bound' | 'upper_bound'> & { grain?: string; offset_seconds?: number }
+const props = defineProps<{ points: ChartPoint[]; forecast?: ChartPoint[]; label?: string; short?: boolean; relative?: boolean; historyLabel?: string; unit?: string }>()
 const host = ref<HTMLDivElement>()
 let chart: EChartsType | undefined
 let observer: ResizeObserver | undefined
@@ -18,8 +18,8 @@ function draw() {
   if (!chart) return
   const historyLength = props.points.length
   const value = (p: ChartPoint, field: 'value' | 'lower_bound' | 'upper_bound') => p[field] == null ? null : p[field]! / divisor.value
-  const labels = all.value.map(p => props.short ? p.period_end.slice(11, 19) : p.period_start.slice(0, 7))
-  const datum = (p: ChartPoint, amount: number | null) => props.short ? [Date.parse(p.period_end), amount] : amount
+  const labels = all.value.map(p => props.relative ? p.period_end : props.short ? p.period_end.slice(11, 19) : p.grain === 'year' ? `${p.period_start.slice(0, 4)}年` : p.grain === 'month' ? p.period_start.slice(0, 7) : p.period_start.slice(0, 10))
+  const datum = (p: ChartPoint, amount: number | null) => props.relative ? [p.offset_seconds, amount] : props.short ? [Date.parse(p.period_end), amount] : amount
   chart.setOption({
     animation: typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     animationDuration: 900, animationEasing: 'cubicOut',
@@ -31,10 +31,10 @@ function draw() {
       if (!p) return ''
       return `${labels[index]} · ${index >= historyLength ? '预测' : props.historyLabel || '历史'}\n${p.value == null ? '缺失' : (p.value / divisor.value).toLocaleString('zh-CN', { maximumFractionDigits: 2 })} ${divisor.value === 10000 ? '万' : ''}${props.unit || p.unit}${p.lower_bound != null && p.upper_bound != null ? `\n区间 ${(p.lower_bound / divisor.value).toFixed(1)} – ${(p.upper_bound / divisor.value).toFixed(1)}` : ''}`
     } },
-    xAxis: { type: props.short ? 'time' : 'category', boundaryGap: false, ...(props.short ? {} : { data: labels }), axisLine: { lineStyle: { color: 'rgba(117, 167, 210, .3)' } }, axisTick: { show: false }, axisLabel: { color: '#a2bfda', fontSize: 12, hideOverlap: true, margin: 14, ...(props.short ? { formatter: (time: number) => new Date(time + 8 * 3600000).toISOString().slice(11, 16) } : {}) } },
+    xAxis: { type: props.relative ? 'value' : props.short ? 'time' : 'category', boundaryGap: false, ...(!props.short && !props.relative ? { data: labels } : {}), axisLine: { lineStyle: { color: 'rgba(117, 167, 210, .3)' } }, axisTick: { show: false }, axisLabel: { color: '#a2bfda', fontSize: 12, hideOverlap: true, margin: 14, ...(props.relative ? { formatter: (seconds: number) => `${Math.floor(seconds / 60)}分${Math.floor(seconds % 60)}秒` } : props.short ? { formatter: (time: number) => new Date(time + 8 * 3600000).toISOString().slice(11, 16) } : {}) } },
     yAxis: { type: 'value', name: (divisor.value === 10000 ? '万' : '') + (props.unit || all.value[0]?.unit || '人次'), nameTextStyle: { color: '#a2bfda', fontSize: 12 }, axisLabel: { color: '#a2bfda', fontSize: 12 }, splitLine: { lineStyle: { color: 'rgba(117, 167, 210, .11)' } } },
     series: [
-      { name: props.label || '历史值', type: 'line', data: all.value.map((p, i) => datum(p, i < historyLength ? value(p, 'value') : null)), smooth: .25, connectNulls: false, symbol: 'circle', symbolSize: 6, showSymbol: false, lineStyle: { color: '#00d4ff', width: 2.5, shadowColor: 'rgba(0, 212, 255, .36)', shadowBlur: 10 }, itemStyle: { color: '#00d4ff' }, areaStyle: { color: new graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(0, 212, 255, .32)' }, { offset: 1, color: 'rgba(0, 212, 255, .015)' }]) } },
+      { name: props.label || '历史值', type: 'line', data: all.value.map((p, i) => datum(p, i < historyLength ? value(p, 'value') : null)), smooth: .25, connectNulls: false, symbol: 'circle', symbolSize: props.points.length === 1 ? 10 : 6, showSymbol: props.points.length === 1, lineStyle: { color: '#00d4ff', width: 2.5, shadowColor: 'rgba(0, 212, 255, .36)', shadowBlur: 10 }, itemStyle: { color: '#00d4ff' }, areaStyle: { color: new graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(0, 212, 255, .32)' }, { offset: 1, color: 'rgba(0, 212, 255, .015)' }]) } },
       { name: '区间下界', type: 'line', data: all.value.map((p, i) => datum(p, i >= historyLength ? value(p, 'lower_bound') : null)), stack: 'band', symbol: 'none', lineStyle: { opacity: 0 }, areaStyle: { opacity: 0 }, silent: true },
       { name: '预测区间', type: 'line', data: all.value.map((p, i) => datum(p, i >= historyLength && p.lower_bound != null && p.upper_bound != null ? (p.upper_bound - p.lower_bound) / divisor.value : null)), stack: 'band', symbol: 'none', lineStyle: { opacity: 0 }, areaStyle: { color: '#688cae', opacity: .16 }, silent: true },
       { name: '预测值', type: 'line', data: all.value.map((p, i) => datum(p, i >= historyLength ? value(p, 'value') : null)), smooth: .25, symbolSize: 5, lineStyle: { color: '#ffb84d', width: 2, type: 'dashed' }, itemStyle: { color: '#ffb84d' } },
@@ -42,7 +42,7 @@ function draw() {
   }, true)
 }
 onMounted(() => { if (host.value) { chart = init(host.value); observer = new ResizeObserver(() => chart?.resize()); observer.observe(host.value); draw() } })
-watch(() => [props.points, props.forecast, props.short, props.historyLabel, props.unit], draw, { deep: true })
+watch(() => [props.points, props.forecast, props.short, props.relative, props.historyLabel, props.unit], draw, { deep: true })
 onBeforeUnmount(() => { observer?.disconnect(); chart?.dispose() })
 </script>
 <template>

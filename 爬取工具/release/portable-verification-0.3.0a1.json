@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "at": "2026-10-16T15:27:53.714363+00:00",
+  "wheel_sha256": "4dc19c97bc51dd5863d62232d22243ac6e32b49aeaac9a74f17d283df86461e1",
+  "source_package_sha256": "25132bd5dbbe2beaeb910fa46c85544473307545dbbe4a301b387bdfe2685dc3",
+  "cwd_outside_project": true,
+  "private_seed_extracted_outside_project": true,
+  "installed_package_mode": "non_editable_-I",
+  "team_modules_absent": {
+    "data_foundation": true,
+    "intelligent_analysis": true,
+    "app": true
+  },
+  "team_database_environment_ignored": true,
+  "first_inserted": 289,
+  "repeat_inserted": 0,
+  "repeat_skipped": 290,
+  "export_standard": 287,
+  "export_candidates": 2,
+  "data_retained": true,
+  "full_plan_acceptance": false
+}

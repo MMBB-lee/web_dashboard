@@ -1,0 +1,70 @@
+{
+  "schema_version": "anhui-crawler-release-1",
+  "version": "0.1.0",
+  "released_at": "2026-10-15T09:00:07.175731+00:00",
+  "scope": "standalone_crawler_initial_airport_batch",
+  "published_to_remote": false,
+  "local_git_commit": "use git rev-parse HEAD; package does not embed its own commit",
+  "files": [
+    {
+      "name": "anhui_public_data_crawler-0.1.0-py3-none-any.whl",
+      "byte_size": 28094,
+      "sha256": "6c3fca5779e26b6809012773dcfb4c1371c0bb673055baf921606ae9cc627a43"
+    },
+    {
+      "name": "anhui-public-data-crawler-0.1.0-2026-10-15.zip",
+      "byte_size": 135419,
+      "sha256": "79523dc1aade05f9df773fa432c0822f8843a086b5f7332efb42a41b3163a4a8"
+    },
+    {
+      "name": "anhui-crawler-data-0.1.0-2026-10-15.zip",
+      "byte_size": 97728,
+      "sha256": "544ca1cb4b8b59cf5d163a5634f49d8cf26d50249694e19c464bb69ef36a776f"
+    }
+  ],
+  "exported_files": [
+    {
+      "path": "coverage.json",
+      "sha256": "f9051165542113935e73ac283c6f552b77f5b422ed6f36c9b3fd44eb487dba18",
+      "byte_size": 22037
+    },
+    {
+      "path": "facts.csv",
+      "sha256": "648b5d63e609f0ce4231078efdf4b96b741594aea2519d2682c341456524aa1a",
+      "byte_size": 185479
+    },
+    {
+      "path": "facts.json",
+      "sha256": "2800677fd205fac0b68f2ea7f6c35e66c973893a3c6b881fe1f61b961d96957e",
+      "byte_size": 316110
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "a02b8a35376346ba70f0d47cba0f849d233254952a93e29ee96f29c91e3140d7",
+      "byte_size": 154
+    },
+    {
+      "path": "registry.json",
+      "sha256": "4acb619d4d452f0399e4a0b3b601dd4ddda9f10c33fa4e938e0f50722dde2693",
+      "byte_size": 37231
+    }
+  ],
+  "counts": {
+    "entities_in_registry": 44,
+    "sources_in_registry": 33,
+    "airport_entities_with_monthly_facts": 8,
+    "monthly_facts": 260
+  },
+  "not_included": [
+    "Raw official HTML/PDF full text",
+    "Credentials/business database URLs",
+    "Third-party dependency wheels",
+    "Team C/D/E packages"
+  ],
+  "pending": [
+    "Other source numeric adapters",
+    "December monthly originals",
+    "Scheduled incremental updates",
+    "Full province completeness"
+  ]
+}

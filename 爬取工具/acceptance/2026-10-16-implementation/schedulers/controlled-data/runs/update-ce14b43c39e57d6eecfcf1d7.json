@@ -1,0 +1,19 @@
+{
+  "status": "succeeded",
+  "started_at": "2026-10-16T15:18:31.078707+00:00",
+  "finished_at": "2026-10-16T15:18:31.079902+00:00",
+  "clock_override": false,
+  "window": {
+    "start": "2023-01-01",
+    "end": "2026-10-16"
+  },
+  "recovered_interrupted_runs": 0,
+  "sources": [
+    {
+      "source_id": "scenic-wanfohu",
+      "status": "not_due",
+      "next_due": "2026-10-23T15:18:23.428627+00:00"
+    }
+  ],
+  "team_database_touched": false
+}

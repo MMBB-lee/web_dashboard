@@ -149,6 +149,7 @@ test('API requests use visible people metadata, CSRF and only the forecast contr
   const fetcher = createDemoApi('normal', dashboardDemo('normal'))
   const requests: { path: string; params: Record<string, string>; method: string; csrf?: string; body: Record<string, unknown> | null }[] = []
   let unavailable = true
+  let countingStarted = false
   let forecastStatus: 'ready' | 'data_insufficient' | 'quality_insufficient' = 'ready'
   let malformedRoi = false, frameUnavailable = false, negativeForecast = false
   const errors: string[] = []
@@ -157,6 +158,11 @@ test('API requests use visible people metadata, CSRF and only the forecast contr
     const request = route.request(), url = new URL(request.url())
     const body = request.postDataJSON() as Record<string, unknown> | null
     requests.push({ path: url.pathname, params: Object.fromEntries(url.searchParams), method: request.method(), csrf: request.headers()['x-csrf-token'], body })
+    if (url.pathname.endsWith('/counting')) {
+      if (request.method() === 'POST') countingStarted = true
+      await route.fulfill({ status: request.method() === 'POST' ? 202 : 200, json: { data: countingStarted ? { analysis_id: analysisId, status: 'ready', processed_samples: 720, total_samples: 720, progress: 100 } : null, meta: { request_id: 'counting' } } })
+      return
+    }
     if (url.pathname.endsWith('/counts') && unavailable) {
       await route.fulfill({ status: 409, json: { error: { code: 'analysis_not_ready', message: '测试分析结果尚未就绪' }, request_id: 'video-409' } })
       return
@@ -167,8 +173,9 @@ test('API requests use visible people metadata, CSRF and only the forecast contr
     }
     const response = await fetcher(request.url(), { method: request.method(), headers: request.headers(), body: request.postData() ?? undefined })
     const payload = await response.json()
+    if (payload.data?.user) payload.data.user.role = 'admin'
     if (url.pathname.endsWith('/counts') && payload.data) {
-      Object.assign(payload.data, { inference_engine: 'openvino', openvino_version: '2026.0', device: 'CPU', weights_version: 'test-dm-count-weights', manual_validation: { sample_count: 32, mae: 1.75 } })
+      Object.assign(payload.data, { count_model: 'p2pnet', inference_engine: 'pytorch', device: 'CPU', weights_version: 'test-p2pnet-weights', manual_validation: { sample_count: 32, mae: 1.75 } })
       if (malformedRoi) payload.data.roi = [null, [0.5], [2, 0.5]]
     }
     if (url.pathname.endsWith('/short-forecast') && payload.data && forecastStatus !== 'ready') {
@@ -183,19 +190,19 @@ test('API requests use visible people metadata, CSRF and only the forecast contr
   await page.locator('#password').fill('demo2026')
   await page.getByRole('button', { name: '登录工作台' }).click()
   await expect(page.getByRole('combobox', { name: '录像片段' })).toBeVisible()
-  await expect(page.getByLabel('分析结果编号', { exact: true })).toBeVisible()
-  await page.getByLabel('分析结果编号', { exact: true }).fill(analysisId)
-  await page.getByRole('button', { name: '关联分析结果' }).click()
+  await expect(page.getByLabel('分析结果编号', { exact: true })).toHaveCount(0)
+  await page.getByRole('button', { name: '开始计数', exact: true }).click()
   await expect(page.getByText('测试分析结果尚未就绪', { exact: true })).toBeVisible()
   await expect(page.getByRole('combobox', { name: '录像片段' })).toBeVisible()
-  await expect(page.getByLabel('分析结果编号', { exact: true })).toHaveValue(analysisId)
   await expect(page.getByRole('button', { name: '重新加载', exact: true })).toBeVisible()
   unavailable = false
   await page.getByRole('button', { name: '重新加载', exact: true }).click()
   await expect(page.getByRole('combobox', { name: '计数粒度' })).toBeVisible()
-  await expect(page.locator('.count-metadata')).toContainText('openvino / CPU')
-  await expect(page.locator('.count-metadata')).toContainText('2026.0')
-  await expect(page.locator('.count-metadata')).toContainText('test-dm-count-weights')
+  await expect(page.locator('.count-metadata')).toContainText('pytorch / CPU')
+  await expect(page.locator('.count-metadata')).toContainText('test-p2pnet-weights')
+  const startRequest = requests.find(request => request.path.endsWith('/counting') && request.method === 'POST')!
+  expect(startRequest.csrf).toBe('demo-csrf')
+  expect(startRequest.body).toMatchObject({ count_model: 'p2pnet', inference_engine: 'pytorch', device: 'CPU' })
   await expect(page.locator('.counter-panel')).toContainText('32 帧 · MAE 1.8 人')
   await choose(page, '计数粒度', '逐帧估计')
   await expect(historyRows(page)).toHaveCount(721)
@@ -217,7 +224,7 @@ test('API requests use visible people metadata, CSRF and only the forecast contr
   }
 
   malformedRoi = true
-  await page.getByRole('button', { name: '关联分析结果' }).click()
+  await page.getByRole('button', { name: '开始计数', exact: true }).click()
   await expect(page.getByText('计数接口未提供有效的归一化 ROI 多边形', { exact: true })).toBeVisible()
   await expect(page.getByRole('combobox', { name: '计数粒度' })).toBeVisible()
   malformedRoi = false

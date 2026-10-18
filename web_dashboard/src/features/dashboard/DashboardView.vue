@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { backendMode } from '../../app/data'
 import { formatPeriod, formatValue } from '../../app/format'
-import type { Entity } from '../../app/types'
+import type { Entity, NumericPoint } from '../../app/types'
 import MetricCard from '../../components/layout/MetricCard.vue'
 import AnhuiMap from '../../components/map/AnhuiMap.vue'
 import TrendChart from '../../components/charts/TrendChart.vue'
@@ -19,7 +19,7 @@ const {
   grain, scenicId, railId, airportId, selectedScenicId, selectedRailId, selectedAirportId,
   scenicEntities, railEntities, airportEntities, selectedCards, mapEntities,
   loading, error, overview, series, railSeries, airportSeries, seriesError, railError, airportError,
-  forecast, forecastError, events, holidayComparison, holidayError, reload,
+  forecast, events, holidayComparison, holidayError, reload,
 } = useOverview()
 const chartLoading = useVisibleChartLoading(loading)
 const isDemo = computed(() => backendMode.value === 'demo')
@@ -32,7 +32,13 @@ const transportEntity = computed(() => transportMode.value === 'rail_station'
   : airportEntities.value.find(entity => entity.id === selectedAirportId.value))
 const transportError = computed(() => transportMode.value === 'rail_station' ? railError.value : airportError.value)
 const transportMetric = computed(() => transportMode.value === 'rail_station' ? '铁路发送人次' : '机场旅客吞吐量')
-const transportLastPoint = computed(() => transportSeries.value?.points.at(-1))
+function visiblePeriod(points: NumericPoint[], forecastVisible = false) {
+  const shown = forecastVisible ? points.slice(-7) : points
+  const first = shown[0], last = shown.at(-1)
+  return first && last ? formatPeriod(first.period_start, last.period_end) : '—'
+}
+const scenicPeriod = computed(() => visiblePeriod(series.value?.points ?? [], forecast.value?.status === 'ready' && !!forecast.value.forecast_points.length))
+const transportPeriod = computed(() => visiblePeriod(transportSeries.value?.points ?? []))
 const demoTrendNote = computed(() => {
   const latest = latestPoint.value?.value
   const previous = previousPoint.value?.value
@@ -44,9 +50,8 @@ const transportNotice = ref('')
 const grainOptions = [{ value: 'week', label: '按周' }, { value: 'month', label: '按月' }]
 const keyObjects = computed(() => [...(overview.value?.map_entities ?? [])]
   .filter(entity => entity.type === 'scenic' && entity.latest_metric === 'scenic_visits' && entity.latest_value != null)
-  .sort((a, b) => (b.latest_value ?? 0) - (a.latest_value ?? 0))
+  .sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'))
   .slice(0, 5))
-const maxKeyValue = computed(() => keyObjects.value[0]?.latest_value ?? 1)
 const holidayItems = computed(() => holidayComparison.value?.items.filter(item => item.value != null) ?? [])
 
 function setGrain(value: string) {
@@ -84,7 +89,7 @@ function openEntity(entity: Entity) {
 <template>
   <div class="dashboard-page">
   <section class="page-heading">
-    <p>景区、铁路站与机场按各自指标展示，帮助快速定位客流变化。</p>
+    <p>景区、铁路站与机场按各自指标展示。</p>
     <div class="toolbar">
       <div class="field grain-field"><span>统计粒度</span><UiSelect :model-value="grain" :options="grainOptions" label="统计粒度" @update:model-value="setGrain" /></div>
       <button class="button-subtle" :disabled="loading" @click="reload">{{ loading ? '加载中…' : '刷新数据' }}</button>
@@ -101,12 +106,12 @@ function openEntity(entity: Entity) {
     <div class="dashboard-grid dashboard-body">
       <div class="dashboard-column">
         <section class="panel section-panel chart-panel">
-          <div class="panel-head"><h2 class="panel-title">景区历史及未来趋势</h2><span class="panel-kicker">{{ grain === 'week' ? '周' : '月' }}度 · 历史实线 / 预测虚线</span></div>
+          <div class="panel-head"><h2 class="panel-title">景区历史及未来趋势</h2><span class="panel-kicker">{{ ({ year: '年度', quarter: '季度', day: '日度', holiday: '节假日', half_year: '半年', cumulative: '累计', week: '周度', month: '月度' })[series?.grain ?? grain] }} · 历史实线 / 预测虚线</span></div>
           <ChartLoading v-if="chartLoading" kind="line" label="正在加载景区趋势…" />
           <ForecastChart v-else-if="forecast?.status === 'ready' && forecast.forecast_points.length" :actual="series?.points ?? []" :forecast="forecast.forecast_points" unit="人次" />
           <TrendChart v-else-if="series?.points.length" :points="series.points" name="实际接待人次" unit="人次" />
           <div v-else class="state-box">{{ seriesError || '没有符合当前粒度的已核验数据。' }}</div>
-          <div class="chart-caption">{{ series?.entity.name ?? '景区' }} · 景区接待人次 · 人次 · 统计期：{{ latestPoint ? formatPeriod(latestPoint.period_start, latestPoint.period_end, latestPoint.grain) : '—' }} · {{ isDemo ? '静态样例，非官方统计' : `来源：${latestPoint?.source_ids.join('、') || '待标注'} · 更新：${latestPoint?.ingested_at || '待标注'}` }}<template v-if="forecast?.status === 'ready'"> · 回测 MAE：{{ formatValue(forecast.backtest?.mae) }} 人次 · sMAPE：{{ forecast.backtest?.smape ?? '—' }}% · 模型：{{ forecast.model_version ?? '—' }}</template><template v-else-if="forecastError || forecast?.reason"> · {{ forecastError || forecast?.reason }}</template></div>
+          <div class="chart-caption">{{ series?.entity.name ?? '景区' }} · 景区接待人次 · 人次 · 统计期：{{ scenicPeriod }}</div>
         </section>
         <section class="panel section-panel holiday-panel">
           <div class="panel-head"><h2 class="panel-title">节假日对比</h2><span class="panel-kicker">国庆节 · 同期日均</span></div>
@@ -124,16 +129,16 @@ function openEntity(entity: Entity) {
           <div class="meta-strip"><span>覆盖对象 <strong>{{ mapEntities.length }} 个</strong></span><span>动态连线仅示意地点关联，非实际出行轨迹</span><span v-if="isDemo">位置与数值为静态样例</span></div>
         </section>
         <section class="panel section-panel key-panel">
-          <div class="panel-head"><h2 class="panel-title">重点对象</h2><span class="panel-kicker">景区接待人次 TOP 5</span></div>
+          <div class="panel-head"><h2 class="panel-title">重点对象</h2><span class="panel-kicker">景区最新周期统计</span></div>
           <div v-if="keyObjects.length" class="key-list">
             <button v-for="(entity, index) in keyObjects" :key="entity.id" class="key-row" type="button" :aria-label="`查看${entity.name}，${formatValue(entity.latest_value)}人次`" @click="openEntity(entity)">
               <span class="key-rank">{{ index + 1 }}</span><span class="key-name">{{ entity.name }}</span>
-              <span class="key-track"><span :style="{ width: `${Math.max(8, (entity.latest_value ?? 0) / maxKeyValue * 100)}%` }" /></span>
+              <span class="key-track"><small>{{ entity.latest_period_end ?? '—' }}</small></span>
               <strong>{{ formatValue(entity.latest_value) }}</strong>
             </button>
           </div>
           <div v-else class="state-box compact-state">当前{{ grain === 'week' ? '周' : '月' }}粒度下暂无景区接待数据。</div>
-          <div class="chart-caption">单位：人次 · {{ grain === 'week' ? '周' : '月' }}度最新值 · {{ isDemo ? '静态样例' : '以接口返回口径为准' }}</div>
+          <div class="chart-caption">单位：人次 · 各自原始统计期 · {{ isDemo ? '静态样例' : '以接口返回口径为准' }}</div>
         </section>
       </div>
       <div class="dashboard-column">
@@ -142,7 +147,7 @@ function openEntity(entity: Entity) {
         <ChartLoading v-if="chartLoading" kind="line" label="正在加载交通客流…" />
         <TrendChart v-else-if="transportSeries?.points.length" :points="transportSeries.points" :name="transportMetric" unit="人次" />
         <div v-else class="state-box">{{ transportError || '所选地点暂无可展示的客流序列。' }}</div>
-        <div class="chart-caption">{{ transportEntity?.name ?? '所选地点' }} · {{ transportMetric }} · 人次 · 统计期：{{ transportLastPoint ? formatPeriod(transportLastPoint.period_start, transportLastPoint.period_end, transportLastPoint.grain) : '—' }} · {{ isDemo ? '静态样例，非官方统计' : `来源：${transportLastPoint?.source_ids.join('、') || '待标注'} · 更新：${transportLastPoint?.ingested_at || '待标注'}` }}</div>
+        <div class="chart-caption">{{ transportEntity?.name ?? '所选地点' }} · {{ transportMetric }} · 人次 · 统计期：{{ transportPeriod }}</div>
         </section>
         <section class="panel section-panel event-panel">
           <div class="panel-head"><h2 class="panel-title">事件摘要</h2><span class="panel-kicker">{{ isDemo ? '演示数据 · 以官方公告为准' : `${events.length} 条有效事件` }}</span></div>
@@ -196,7 +201,8 @@ function openEntity(entity: Entity) {
 .key-row:hover, .key-row:focus-visible { background: rgba(0, 212, 255, .08); }
 .key-rank { color: var(--accent); font: 700 14px Consolas, monospace; }
 .key-name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.key-track { height: 9px; background: rgba(0, 212, 255, .11); }
+.key-track { height: auto; background: transparent; overflow: visible; }
+.key-track small { color: var(--text-main); font-size: 13px; line-height: 1.3; white-space: nowrap; }
 .key-track span { display: block; height: 100%; background: linear-gradient(90deg, #1486d1, var(--accent)); box-shadow: 0 0 6px rgba(0, 212, 255, .36); }
 .key-row strong { color: var(--text-title); text-align: right; font-variant-numeric: tabular-nums; }
 .event-empty { margin-top: 8px; padding: 10px; border: 1px dashed var(--border-soft); color: var(--text-sub); font-size: 12px; line-height: 1.45; }

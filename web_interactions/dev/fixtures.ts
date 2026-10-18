@@ -24,7 +24,8 @@ export const events: (EventItem & { region_code: string })[] = [
   { id: '30000000-0000-4000-8000-000000000002', title: '合肥南站发送量波动提示', kind: 'rail_adjustment', status: 'active', authority: 'model_signal', severity: 'warning', region_code: '340100', affected_entity_ids: [entities[0]!.id], starts_at: '2026-10-09T09:00:00+08:00', ends_at: '2026-10-15T23:59:00+08:00', published_at: '2026-10-09T09:00:00+08:00', last_verified_at: '2026-10-09T09:00:00+08:00', source_id: sourceId, description: '模拟规则发现月度发送量变化，仅用于展示模型提示。模型提示不是官方预警，也不能用于判断车站实时拥挤程度。', timeline: [{ at: '2026-10-09T09:00:00+08:00', label: '模型提示生成', description: '演示规则 demo-signal-v1' }] },
   { id: '30000000-0000-4000-8000-000000000003', title: '合肥新桥机场航班调整通知', kind: 'flight_adjustment', status: 'resolved', authority: 'official', severity: 'info', region_code: '340100', affected_entity_ids: [entities[2]!.id], starts_at: '2026-09-28T08:00:00+08:00', ends_at: '2026-09-28T18:00:00+08:00', published_at: '2026-09-27T16:00:00+08:00', last_verified_at: '2026-09-28T18:00:00+08:00', source_id: sourceId, description: '模拟航班调整公告，已解除。保留时间线用于说明历史公告与当前有效状态的区别。', timeline: [{ at: '2026-09-27T16:00:00+08:00', label: '公告发布', description: '模拟时刻调整' }, { at: '2026-09-28T18:00:00+08:00', label: '影响解除', description: '演示调整已结束' }] },
 ]
-export const videos: VideoItem[] = [
+type RecordedDemoVideo = VideoItem & { scenic_id: string; camera_id: string; recorded_start_at: string; recorded_end_at: string; permission_record_id: string }
+export const videos: RecordedDemoVideo[] = [
   { id: '40000000-0000-4000-8000-000000000001', scenic_id: '00000000-0000-4000-8000-000000000001', camera_id: 'demo-east-gate', recorded_start_at: '2026-09-28T09:00:00+08:00', recorded_end_at: '2026-09-28T12:00:00+08:00', status: 'ready', permission_record_id: 'demo-no-video-file' },
   { id: '40000000-0000-4000-8000-000000000002', scenic_id: '00000000-0000-4000-8000-000000000001', camera_id: 'demo-sparse-area', recorded_start_at: '2026-09-28T09:00:00+08:00', recorded_end_at: '2026-09-28T12:00:00+08:00', status: 'ready', permission_record_id: 'demo-no-video-file' },
 ]
@@ -38,7 +39,7 @@ export const demoCameraNames: Record<string, string> = {
   'demo-sparse-area': '黄山 · 稀疏画面模拟样本',
 }
 export function chinaTime(time: number) { return new Date(time + 8 * 3600000).toISOString().slice(0, 19) + '+08:00' }
-function cameraPoints(video: VideoItem, sparse: boolean) {
+function cameraPoints(video: RecordedDemoVideo, sparse: boolean) {
   const start = Date.parse(video.recorded_start_at)
   const frames: CountPoint[] = Array.from({ length: 1080 }, (_, frame) => {
     const window = Math.floor(frame / 30), sample = frame % 30

@@ -1,0 +1,71 @@
+{
+  "schema_version": "anhui-crawler-facts-1",
+  "records": [
+    {
+      "id": "13422847b668b59163b3a74ce4297b608b8d5c783b7423dbe0f5f341070d79b8",
+      "entity_id": "rail:wuhu",
+      "source_id": "rail_station-wuhu",
+      "asset_id": "54616c18f63fa14a8430dd2969c4339486cfa6573f7b7f6c489aecd5e9bb9cc3",
+      "metric": "station_passenger_departures",
+      "scope": "single_station_departures",
+      "grain": "day",
+      "period_start": "2025-04-05",
+      "period_end": "2025-04-05",
+      "value": "50000.0000",
+      "unit": "人次",
+      "quality": "candidate",
+      "qualifier": "超过",
+      "original_value": "5万人次",
+      "locator": {
+        "article_title": "芜湖铁路多项出行数据创新高_芜湖市投资促进中心",
+        "content_selector": "//*[contains(concat(\" \",normalize-space(@class),\" \"),\" j-fontContent \")]",
+        "matched_text": "4月5日,芜湖站发送旅客也超过5万人次",
+        "normalization": "万人次×10000；不分摊、不由预计值推算",
+        "paragraph": "清明假期，芜湖铁路客流持续高位运行，其中，4月4日，芜湖车务段单日发送旅客22.01万人次，创下单日客发量历史新高，而随着清明小长假的结束，6日铁路返程客流高峰到来，芜湖车务段单日客发量再次创下新高。芜湖站4月4日清明节当天发送旅客8.76万人次，创单日客流历史新高。4月5日，芜湖站发送旅客也超过5万人次，客流持续在高位运行。随着清明小长假的结束，4月6日，芜湖站返程客流高峰到来，主要集中在长三角、武汉、南昌及省内合肥等方向，当天，芜湖去往合肥、南京、上海的高铁车票基本售罄。",
+        "period_evidence": "explicit article reporting date and reviewed publication year",
+        "publication_date_rule": "meta",
+        "statistical_status": "published_actual_not_final_audit",
+        "xpath": "/html/body/div/div[2]/div/div[2]/div[2]/p[2]"
+      },
+      "parser_version": "reviewed-topics-1",
+      "revision_no": 1,
+      "source_url": "https://tzcjzx.wuhu.gov.cn/zsdt/gzdt/8754081.html",
+      "source_sha256": "ef3075e5885db58728f29e8b5c9305de7a95f83591bfdd06f7c0928af2d27be0",
+      "source_published_at": "2025-04-07T09:32:00+08:00",
+      "retrieved_at": "2026-10-14T12:58:01.001601+00:00"
+    },
+    {
+      "id": "5028096c21c66d155fe109a2c0fe35f5e3c1c762f638efda4c42ab5da5ad02a2",
+      "entity_id": "scenic:langyashan",
+      "source_id": "scenic-langyashan",
+      "asset_id": "ed6a360bc2e467af13b90ede4f02d851a421b3bf89ba1f5d1202429af94384f1",
+      "metric": "scenic_visits",
+      "scope": "scenic_reported_visits",
+      "grain": "holiday",
+      "period_start": "2025-10-01",
+      "period_end": "2025-10-08",
+      "value": "281000.0000",
+      "unit": "人次",
+      "quality": "candidate",
+      "qualifier": "约",
+      "original_value": "28.1万人次",
+      "locator": {
+        "article_title": "琅琊山景区2025年国庆假期圆满收官——多措并举保障游客畅游，八方来客共赏醉美秋色 - 琅琊山景区",
+        "content_selector": "//*[contains(concat(\" \",normalize-space(@class),\" \"),\" article \")]/div[@class='bd']",
+        "matched_text": "8天内吸引约28.1万人次",
+        "normalization": "万人次×10000；不分摊、不由预计值推算",
+        "paragraph": "2025年国庆黄金周圆满落幕，琅琊山景区以其深厚的文化底蕴与多彩的假日体验，8天内吸引约28.1万人次来此畅游，实现整体收入约775.54万元。景区通过精彩纷呈的文旅活动、细致周到的服务升级与坚实可靠的安全保障，为广大游客奉献了一个完美假期。",
+        "period_evidence": "https://www.gov.cn/zhengce/zhengceku/202411/content_6986383.htm",
+        "publication_date_rule": "langya",
+        "statistical_status": "published_actual_not_final_audit",
+        "xpath": "/html/body/div/div[2]/div[3]/div/div[2]/p[1]"
+      },
+      "parser_version": "reviewed-topics-1",
+      "revision_no": 1,
+      "source_url": "https://www.lysfjq.cn/display.php?id=1247",
+      "source_sha256": "9db8cd5597e0b90dd312f69c633dc12e655699de141560aed8645370d7bac8be",
+      "source_published_at": "2025-10-08T00:00:00+08:00",
+      "retrieved_at": "2026-10-14T13:02:16.106416+00:00"
+    }
+  ]
+}

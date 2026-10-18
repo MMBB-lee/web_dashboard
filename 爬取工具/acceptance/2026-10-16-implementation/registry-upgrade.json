@@ -1,0 +1,23 @@
+{
+  "status": "migrated",
+  "from": "2",
+  "schema_version": "2",
+  "backup": {
+    "status": "backed_up",
+    "schema_version": "2",
+    "file": "before-upgrade-2026-10-16T142205.396166_0000-17d83360.zip",
+    "sha256": "de03a9c10bc8dd5346860766a088d0082fcdec4381f40d1bcee882046393f11d",
+    "rows": {
+      "ac_entities": 44,
+      "ac_meta": 2,
+      "ac_runs": 16,
+      "ac_sources": 33,
+      "ac_assets": 124,
+      "ac_issues": 12,
+      "ac_source_state": 2,
+      "ac_facts": 285,
+      "ac_fetch_state": 91,
+      "ac_revisions": 0
+    }
+  }
+}

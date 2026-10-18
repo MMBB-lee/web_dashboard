@@ -1,0 +1,170 @@
+{
+  "coordinate_system": "WGS84",
+  "entities": {
+    "合肥新桥机场": {
+      "type": "airport",
+      "longitude": 116.9769,
+      "latitude": 31.98779,
+      "crs": "WGS84",
+      "source_url": "https://ourairports.com/airports/ZSOF/",
+      "source_name": "OurAirports",
+      "matched_name": "Hefei Xinqiao International Airport",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    },
+    "黄山屯溪机场": {
+      "type": "airport",
+      "longitude": 118.255997,
+      "latitude": 29.733299,
+      "crs": "WGS84",
+      "source_url": "https://ourairports.com/airports/ZSTX/",
+      "source_name": "OurAirports",
+      "matched_name": "Huangshan Tunxi International Airport",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    },
+    "阜阳机场": {
+      "type": "airport",
+      "longitude": 115.734364,
+      "latitude": 32.882157,
+      "crs": "WGS84",
+      "source_url": "https://ourairports.com/airports/ZSFY/",
+      "source_name": "OurAirports",
+      "matched_name": "Fuyang Xiguan Airport",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    },
+    "安庆天柱山机场": {
+      "type": "airport",
+      "longitude": 117.050003,
+      "latitude": 30.582199,
+      "crs": "WGS84",
+      "source_url": "https://ourairports.com/airports/ZSAQ/",
+      "source_name": "OurAirports",
+      "matched_name": "Anqing Tianzhushan Airport / Anqing North Air Base",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    },
+    "池州九华山机场": {
+      "type": "airport",
+      "longitude": 117.6856,
+      "latitude": 30.7403,
+      "crs": "WGS84",
+      "source_url": "https://ourairports.com/airports/JUH/",
+      "source_name": "OurAirports",
+      "matched_name": "Chizhou Jiuhuashan Airport",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    },
+    "芜湖宣州机场": {
+      "type": "airport",
+      "longitude": 118.66687,
+      "latitude": 31.1045,
+      "crs": "WGS84",
+      "source_url": "https://ourairports.com/airports/ZSWA/",
+      "source_name": "OurAirports",
+      "matched_name": "Wuhu Xuanzhou Airport",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    },
+    "亳州机场": {
+      "type": "airport",
+      "longitude": 115.911859,
+      "latitude": 33.560777,
+      "crs": "WGS84",
+      "source_url": "https://ourairports.com/airports/CN-0413/",
+      "source_name": "OurAirports",
+      "matched_name": "Bozhou Airport (under construction)",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    },
+    "蚌埠滕湖机场": {
+      "type": "airport",
+      "longitude": 117.058344,
+      "latitude": 33.166292,
+      "crs": "WGS84",
+      "source_url": "https://ourairports.com/airports/CN-0476/",
+      "source_name": "OurAirports",
+      "matched_name": "Bengbu Tenghu Airport",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    },
+    "合肥南站": {
+      "type": "rail_station",
+      "longitude": 117.2847003,
+      "latitude": 31.8003121,
+      "crs": "WGS84",
+      "source_name": "OpenStreetMap via Photon",
+      "source_url": "https://www.openstreetmap.org/way/328506500",
+      "matched_name": "合肥南站",
+      "selection_rank": 0,
+      "retrieved_at": "2026-10-18T03:20:47.971738+00:00"
+    },
+    "黄山北站": {
+      "type": "rail_station",
+      "longitude": 118.2679358,
+      "latitude": 29.8176646,
+      "crs": "WGS84",
+      "source_name": "OpenStreetMap via Photon",
+      "source_url": "https://www.openstreetmap.org/way/361109864",
+      "matched_name": "黄山北站",
+      "selection_rank": 0,
+      "retrieved_at": "2026-10-18T03:20:48.101983+00:00"
+    },
+    "芜湖站": {
+      "type": "rail_station",
+      "longitude": 118.3860019,
+      "latitude": 31.349784,
+      "crs": "WGS84",
+      "source_name": "OpenStreetMap via Photon",
+      "source_url": "https://www.openstreetmap.org/node/9235207765",
+      "matched_name": "芜湖",
+      "selection_rank": 1,
+      "retrieved_at": "2026-10-18T03:20:48.110332+00:00"
+    },
+    "黄山风景区主景区": {
+      "type": "scenic",
+      "longitude": 118.1601569,
+      "latitude": 30.1383784,
+      "crs": "WGS84",
+      "source_name": "OpenStreetMap via Photon",
+      "source_url": "https://www.openstreetmap.org/relation/13371860",
+      "matched_name": "黄山风景区",
+      "selection_rank": 1,
+      "retrieved_at": "2026-10-18T03:20:48.135732+00:00"
+    },
+    "九华山": {
+      "type": "scenic",
+      "longitude": 117.8153384,
+      "latitude": 30.4950169,
+      "crs": "WGS84",
+      "source_name": "OpenStreetMap via Photon",
+      "source_url": "https://www.openstreetmap.org/way/587047183",
+      "matched_name": "九华山风景名胜区",
+      "selection_rank": 1,
+      "retrieved_at": "2026-10-18T03:20:48.128129+00:00"
+    },
+    "阜阳西站": {
+      "type": "rail_station",
+      "longitude": 115.7476278,
+      "latitude": 32.8849409,
+      "crs": "WGS84",
+      "source_name": "OpenStreetMap via Photon",
+      "source_url": "https://www.openstreetmap.org/node/4592130192",
+      "matched_name": "阜阳西",
+      "selection_rank": 1,
+      "retrieved_at": "2026-10-18T03:20:48.120188+00:00"
+    },
+    "万佛湖": {
+      "type": "scenic",
+      "longitude": 116.7612461,
+      "latitude": 31.3016072,
+      "crs": "WGS84",
+      "source_url": "https://www.openstreetmap.org/way/1512884359",
+      "source_name": "OpenStreetMap via Photon",
+      "matched_name": "万佛湖风景区",
+      "retrieved_at": "2026-10-18",
+      "location_kind": "representative_point"
+    }
+  }
+}

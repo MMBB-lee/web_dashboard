@@ -57,7 +57,7 @@ const option = computed<EChartsOption>(() => props.variant === 'period-change' ?
     splitLine: { lineStyle: { color: 'rgba(117, 167, 210, .11)' } },
   },
   series: [{
-    name: props.name ?? '实际值', type: 'line', smooth: .32, symbol: 'circle', symbolSize: 5, showSymbol: false,
+    name: props.name ?? '实际值', type: 'line', smooth: .32, symbol: 'circle', symbolSize: 5, showSymbol: props.points.length === 1,
     lineStyle: { width: 2.5, color: '#00d4ff', shadowBlur: 9, shadowColor: 'rgba(0, 212, 255, .36)' },
     itemStyle: { color: '#00d4ff' },
     areaStyle: { color: new graphic.LinearGradient(0, 0, 0, 1, [

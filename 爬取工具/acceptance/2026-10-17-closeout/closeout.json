@@ -1,0 +1,95 @@
+{
+  "status": "verified_existing_scope",
+  "frozen_at": "2026-10-17T04:12:07.879754+00:00",
+  "cutoff_beijing": "2026-10-17",
+  "crawler_version": "0.3.0a1",
+  "full_acceptance": false,
+  "blockers": [
+    "object_metric_historical_audits_incomplete",
+    "native_package_or_database_receipt_missing_or_invalid:Windows",
+    "native_scheduler_trigger_and_recovery_receipt_missing_or_invalid:Windows"
+  ],
+  "export": {
+    "status": "exported",
+    "records": 287,
+    "candidates": 2,
+    "version": "0.3.0a1",
+    "generated_at": "2026-10-17T04:12:03.607909+00:00",
+    "database_dialect": "sqlite",
+    "fact_filter": {
+      "start": "2023-01-01",
+      "end": "2026-10-17",
+      "semantics": "interval_overlap_no_period_clipping"
+    },
+    "coverage_window": {
+      "start": "2023-01",
+      "end": "2026-10"
+    },
+    "data_acceptance_complete": false,
+    "audit_window": {
+      "start": "2023-01-01",
+      "end": "2026-10-17"
+    },
+    "quality_status": "passed",
+    "package_scope": "independent_data_only"
+  },
+  "restored_business_facts_identical": true,
+  "baseline_facts_unchanged": 277,
+  "old_release_files_unchanged": 8,
+  "release_files_verified": 12,
+  "installed_and_source_files_identical_to_wheel": 20,
+  "business_fact_sha256": "37426fd6814979ebf2c2d74bd4497c986a455bda9106afcb2fbb4bf25284f006",
+  "private_recovery": {
+    "status": "backed_up",
+    "schema_version": "2",
+    "file": "PRIVATE-runtime-recovery.zip",
+    "sha256": "86cb0aadc554ead5eb76fb05b92aca1136889bd7337b62b5c5a06d80c681e1ca",
+    "rows": {
+      "ac_entities": 44,
+      "ac_meta": 2,
+      "ac_runs": 60,
+      "ac_sources": 34,
+      "ac_assets": 135,
+      "ac_issues": 27,
+      "ac_source_state": 34,
+      "ac_facts": 289,
+      "ac_fetch_state": 129,
+      "ac_revisions": 0
+    }
+  },
+  "latest_update": {
+    "status": "partial",
+    "started_at": "2026-10-17T01:14:20.515838+00:00",
+    "finished_at": "2026-10-17T01:43:37.297279+00:00",
+    "clock_override": false
+  },
+  "latest_source_outcomes": {
+    "disabled_requires_review": 16,
+    "not_due": 15,
+    "partial": 3
+  },
+  "latest_failures": [
+    {
+      "source_id": "city-huainan",
+      "url": "https://tjj.huainan.gov.cn/group4/M00/12/12/rB40qWqhDsOAJt3fAAternh4L2Q424.doc",
+      "reason": "Source parsing/I/O failed; review input"
+    },
+    {
+      "source_id": "city-tongling",
+      "url": "https://tjj.tl.gov.cn/tlstjj/c00142/pc/content/content_2074671942385590272.html",
+      "reason": "robots.txt check failed; no bypass attempted"
+    },
+    {
+      "source_id": "city-anqing",
+      "url": "https://www.anqing.gov.cn/tjsj/tjgb/2007357161.html",
+      "reason": "robots.txt unavailable or restricted; automatic crawl refused"
+    }
+  ],
+  "live_database_opened_read_only": true,
+  "team_database_touched": false,
+  "mysql_evidence": {
+    "status": "prior_verified_not_rerun",
+    "date": "2026-10-16",
+    "receipt": "../2026-10-16-implementation/native-mac/receipt.json"
+  }
+}

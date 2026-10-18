@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-16T15:01:16.305403+00:00",
+  "database_dialect": "mysql",
+  "old_schema": "1",
+  "new_schema": "2",
+  "facts_unchanged": 277,
+  "source_snapshot_sha256": "b4f3a574d078ae290cfcd1d5cd3b1f99543fdb02f900572d4b18028c311f60c7",
+  "migration": {
+    "status": "migrated",
+    "from": "1",
+    "schema_version": "2",
+    "backup": {
+      "status": "backed_up",
+      "schema_version": "1",
+      "file": "before-upgrade-2026-10-16T150113.750712_0000-7f0ce8cd.zip",
+      "sha256": "fa8a303081d489da17a32f3b57f0e08cb2f0a68712a41ffce9f994fd63d05f47",
+      "rows": {
+        "ac_entities": 44,
+        "ac_meta": 1,
+        "ac_runs": 9,
+        "ac_sources": 33,
+        "ac_assets": 77,
+        "ac_issues": 1,
+        "ac_facts": 277,
+        "ac_revisions": 0
+      }
+    }
+  },
+  "quality": {
+    "status": "passed",
+    "verified_at": "2026-10-16T15:01:16.302110+00:00",
+    "originals_verified": 77,
+    "facts_verified": 277,
+    "active_runs": 0,
+    "errors": [],
+    "counts": {
+      "ac_entities": 44,
+      "ac_meta": 2,
+      "ac_runs": 9,
+      "ac_sources": 34,
+      "ac_assets": 77,
+      "ac_issues": 1,
+      "ac_source_state": 0,
+      "ac_facts": 277,
+      "ac_fetch_state": 0,
+      "ac_revisions": 0
+    },
+    "data_acceptance_complete": false,
+    "schema_integrity_is_not_full_data_acceptance": true
+  },
+  "repeat_migration": "up_to_date",
+  "team_database_touched": false
+}

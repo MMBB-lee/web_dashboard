@@ -8,21 +8,37 @@ import HolidayShareChart from '../../components/charts/HolidayShareChart.vue'
 import ChartLoading from '../../components/charts/ChartLoading.vue'
 import { useVisibleChartLoading } from '../../components/charts/useVisibleChartLoading'
 import UiSelect from '../../components/ui/UiSelect.vue'
+import TextDisclosure from '../../components/ui/TextDisclosure.vue'
 import { useHolidays } from './holidays'
 
-const { kind, selectedIds, entityId, mode, holidays, entities, metric, comparison, dailyAverageComparison, loading, error, selectedHolidays, loadComparison } = useHolidays()
+const { kind, selectedIds, entityId, mode, holidays, entities, metric, comparison, dailyAverageComparison, loading, error, selectedHolidays, availableIds, sourceIds, sources, sourcesLoading, loadComparison } = useHolidays()
 const chartLoading = useVisibleChartLoading(loading)
-const comparisonLoading = computed(() => selectedHolidays.value.length >= 2 && chartLoading.value)
+const comparisonLoading = computed(() => selectedHolidays.value.length >= 1 && chartLoading.value)
 const isDemo = computed(() => backendMode.value === 'demo')
+const sourceEntries = computed(() => {
+  const seen = new Set<string>()
+  return sourceIds.value.flatMap(id => {
+    const source = sources.value[id]
+    if (!source) return []
+    const key = `${source.title}:${source.url}`
+    if (seen.has(key)) return []
+    seen.add(key)
+    return [{ ...source, safeUrl: /^(https?:)\/\//i.test(source.url) ? source.url : '' }]
+  })
+})
+const sourceText = computed(() => isDemo.value ? '静态演示数据，非官方统计'
+  : sourceEntries.value.length ? sourceEntries.value.map(source => source.title || source.publisher || '统计资料').join('、')
+  : sourcesLoading.value ? '正在读取来源…' : sourceIds.value.length ? '已导入统计资料' : '暂无来源信息')
+const captionText = computed(() => [comparison.value?.reason, metric.value?.definition ?? '景区接待人次。', `来源：${sourceText.value}`].filter(Boolean).join(' '))
 const modeLabel = computed(() => ({ daily_average: '日均接待人次', period_total: '假期总接待人次', day_index: '逐日变化' })[mode.value])
-const kindOptions = [{ value: 'may_day', label: '五一' }, { value: 'national_day', label: '国庆' }, { value: 'summer', label: '暑假' }, { value: 'winter', label: '寒假' }]
+const kindOptions = [{ value: 'spring_festival', label: '春节' }, { value: 'may_day', label: '五一' }, { value: 'national_day', label: '国庆' }, { value: 'summer', label: '暑假' }, { value: 'winter', label: '寒假' }, { value: 'new_year', label: '元旦' }, { value: 'qingming', label: '清明' }, { value: 'dragon_boat', label: '端午' }, { value: 'mid_autumn', label: '中秋' }]
 const availableHolidays = computed(() => holidays.value.filter(item => item.kind === kind.value && !selectedIds.value.includes(item.id)))
 const holidayOptions = computed(() => availableHolidays.value.map(item => ({ value: item.id, label: item.name })))
 const canAdd = computed(() => selectedIds.value.length < 6 && availableHolidays.value.length > 0)
 const entityOptions = computed(() => entities.value.map(item => ({ value: item.id, label: item.name })))
 const modeOptions = [{ value: 'daily_average', label: '日均值' }, { value: 'period_total', label: '假期总量' }, { value: 'day_index', label: '逐日序列' }]
 function setKind(value: string) {
-  if (value === 'may_day' || value === 'national_day' || value === 'summer' || value === 'winter') kind.value = value
+  if (kindOptions.some(item => item.value === value)) kind.value = value as typeof kind.value
 }
 function setMode(value: string) {
   if (value === 'daily_average' || value === 'period_total' || value === 'day_index') mode.value = value
@@ -32,8 +48,9 @@ const selectedItems = computed(() => selectedHolidays.value.map(holiday => ({
   result: dailyAverageComparison.value?.items.find(item => item.holiday_id === holiday.id),
 })))
 const selectionHint = computed(() => selectedHolidays.value.length === 0
-  ? '请先添加假期；选择至少两个假期后，这里会显示客流对比。'
-  : selectedHolidays.value.length === 1 ? '再添加一个假期后，这里会显示客流对比。' : '')
+  ? '请先添加假期；一个假期即可查看统计，多个假期可以比较。' : '')
+const availableComparisonItems = computed(() => comparison.value?.items.filter(item => item.value != null) ?? [])
+const availableDailyItems = computed(() => dailyAverageComparison.value?.items.filter(item => item.value != null) ?? [])
 const shareValues = computed(() => {
   const values = comparison.value?.items.map(item => item.value)
   if (!comparison.value?.comparable || !values?.length || values.some(value => value == null || value < 0)) return null
@@ -54,12 +71,13 @@ function removeHoliday(id: string) {
     <p>按同口径比较假期总量或日均值，不把不同长度的假期直接计算成同比。</p>
   </section>
 
+
   <section class="panel section-panel filter-panel">
     <div class="holiday-filters">
       <div class="field"><span>假期类型</span><UiSelect :model-value="kind" :options="kindOptions" label="假期类型" @update:model-value="setKind" /></div>
       <div class="field"><span>景区</span><UiSelect v-model="entityId" :options="entityOptions" label="景区" searchable /></div>
       <div class="field"><span>比较方式</span><UiSelect :model-value="mode" :options="modeOptions" label="比较方式" @update:model-value="setMode" /></div>
-      <div class="field add-field"><span>添加假期（{{ selectedHolidays.length }}/6）</span><UiSelect v-if="canAdd" model-value="" :options="holidayOptions" label="添加假期" @update:model-value="addHoliday" /><span v-else class="add-unavailable">{{ selectedIds.length >= 6 ? '最多选择 6 个' : '当前类型已全部加入' }}</span></div>
+      <div class="field add-field"><span>添加假期（{{ selectedHolidays.length }}/6）</span><UiSelect v-if="canAdd" model-value="" :options="holidayOptions" label="添加假期" @update:model-value="addHoliday" /><span v-else class="add-unavailable">{{ selectedIds.length >= 6 ? '最多选择 6 个' : holidays.some(item => item.kind === kind) ? '当前类型已全部加入' : '没有此类假期定义' }}</span></div>
       <button class="button-primary" :disabled="loading" @click="loadComparison">{{ loading ? '计算中…' : '更新对比' }}</button>
     </div>
   </section>
@@ -81,31 +99,31 @@ function removeHoliday(id: string) {
         <section class="panel section-panel compare-panel">
           <div class="panel-head"><h2 class="panel-title">{{ modeLabel }}对比</h2><span class="panel-kicker">{{ comparison?.items[0]?.unit ?? '人次' }}</span></div>
           <ChartLoading v-if="comparisonLoading" kind="bar" label="正在加载假期客流对比…" />
-          <HolidayCompareChart v-else-if="selectedHolidays.length >= 2 && comparison?.comparable && comparison.items.length" :items="comparison.items" />
+          <HolidayCompareChart v-else-if="availableComparisonItems.length" :items="availableComparisonItems" />
           <div v-else class="state-box empty-chart-state">{{ selectionHint || comparison?.reason || '所选假期没有可比较的数据。' }}</div>
-          <div v-if="!comparisonLoading && selectedHolidays.length >= 2" class="chart-caption">{{ metric?.definition ?? '景区接待人次。' }} {{ isDemo ? '静态假期样例，非官方统计。' : `来源：${comparison?.items.flatMap(item => item.source_ids).join('、') || '待标注'}。` }}</div>
+          <div v-if="!comparisonLoading && selectedHolidays.length >= 1" class="chart-caption"><TextDisclosure :text="captionText" label="展开完整统计说明" align="start" /></div>
         </section>
 
         <section class="panel section-panel visual-panel donut-panel">
           <div class="panel-head"><h2 class="panel-title">所选假期数值占比</h2><span class="panel-kicker">{{ modeLabel }}</span></div>
           <ChartLoading v-if="comparisonLoading" kind="donut" label="正在加载假期占比…" />
           <HolidayShareChart v-else-if="selectedHolidays.length >= 2 && shareValues && comparison" :labels="comparison.items.map(item => item.label)" :values="shareValues" :unit="comparison.items[0]?.unit ?? '人次'" title="所选假期数值占比" />
-          <div v-else class="state-box empty-chart-state">{{ selectionHint || comparison?.reason || '当前条件下没有可计算占比的数值。' }}</div>
+          <div v-else class="state-box empty-chart-state">{{ selectedHolidays.length === 1 ? '一个假期可查看统计；选择至少两个有数据的假期后可计算占比。' : selectionHint || comparison?.reason || '当前条件下没有可计算占比的数值。' }}</div>
         </section>
 
         <section class="panel section-panel visual-panel duration-panel">
           <div class="panel-head"><h2 class="panel-title">假期天数对比</h2><span class="panel-kicker">假期日历 / 天</span></div>
           <ChartLoading v-if="comparisonLoading" kind="bar" label="正在加载假期天数…" />
-          <HolidayDurationChart v-else-if="selectedHolidays.length >= 2" :holidays="selectedHolidays" />
+          <HolidayDurationChart v-else-if="selectedHolidays.length >= 1" :holidays="selectedHolidays" />
           <div v-else class="state-box empty-chart-state">{{ selectionHint }}</div>
         </section>
 
         <section class="panel section-panel visual-panel daily-panel">
           <div class="panel-head"><h2 class="panel-title">日均客流量变化</h2><span class="panel-kicker">按所选假期时间顺序 · 人次/日</span></div>
           <ChartLoading v-if="comparisonLoading" kind="line" label="正在加载日均客流量变化…" />
-          <HolidayCompareChart v-else-if="selectedHolidays.length >= 2 && dailyAverageComparison?.comparable && dailyAverageComparison.items.length" :items="dailyAverageComparison.items" variant="timeline" />
+          <HolidayCompareChart v-else-if="availableDailyItems.length" :items="availableDailyItems" variant="timeline" />
           <div v-else class="state-box empty-chart-state">{{ selectionHint || dailyAverageComparison?.reason || '所选假期没有可用的日均客流数据。' }}</div>
-          <div v-if="!comparisonLoading && dailyAverageComparison?.comparable" class="chart-caption">仅显示当前选中的 {{ selectedHolidays.length }} 个假期；按假期开始日期从早到晚排列。</div>
+          <div v-if="!comparisonLoading && availableDailyItems.length" class="chart-caption">按假期开始日期排列，日均为假期总量除以假期天数。</div>
         </section>
 
         <section class="panel section-panel source-panel">
@@ -114,7 +132,19 @@ function removeHoliday(id: string) {
             <div><dt>指标</dt><dd>{{ metric?.display_name ?? '景区接待人次' }}</dd></div>
             <div><dt>统计方式</dt><dd>{{ modeLabel }}</dd></div>
             <div><dt>已选假期</dt><dd>{{ selectedHolidays.length }} 个（最多 6 个）</dd></div>
-            <div><dt>数据来源</dt><dd>{{ isDemo ? '静态演示数据，非官方统计' : comparison?.items.flatMap(item => item.source_ids).join('、') || '待标注' }}</dd></div>
+            <div><dt>数据来源</dt><dd>
+              <TextDisclosure :text="sourceText" label="展开完整数据来源">
+                <div v-if="sourceEntries.length" class="source-details">
+                  <article v-for="source in sourceEntries" :key="source.id">
+                    <strong>{{ source.title || '统计资料' }}</strong>
+                    <p v-if="source.publisher">发布单位：{{ source.publisher }}</p>
+                    <p v-if="source.coverage_start || source.coverage_end">统计范围：{{ source.coverage_start || '—' }} 至 {{ source.coverage_end || '—' }}</p>
+                    <a v-if="source.safeUrl" :href="source.safeUrl" target="_blank" rel="noopener noreferrer">查看来源 ↗<span>{{ source.url }}</span></a>
+                  </article>
+                </div>
+                <span v-else>{{ sourceText }}</span>
+              </TextDisclosure>
+            </dd></div>
           </dl>
         </section>
       </div>
@@ -158,8 +188,15 @@ function removeHoliday(id: string) {
 .empty-chart-state { flex: 1; display: grid; place-items: center; min-height: 0; padding: 12px; text-align: center; }
 .holiday-visuals .chart-caption { margin-top: auto; }
 .source-list { display: grid; gap: 0; margin: 0; font-size: 12px; }
-.source-list > div { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border-soft); }
+.source-list > div { display: grid; grid-template-columns: 72px minmax(0, 1fr); align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border-soft); line-height: 1.6; }
 .source-list dt { color: var(--text-sub); }.source-list dd { min-width: 0; margin: 0; color: var(--text-main); overflow-wrap: anywhere; }
+.source-list > div:last-child { border-bottom: 0; }
+.source-details { display: grid; gap: 14px; }
+.source-details article + article { padding-top: 12px; border-top: 1px solid var(--border-soft); }
+.source-details strong { display: block; color: var(--text-title); font-size: 13px; }
+.source-details p { margin: 4px 0; }
+.source-details a { color: var(--accent); }
+.source-details a span { display: block; color: var(--text-sub); }
 @media (max-width: 1500px) {
   .selected-holidays { gap: 7px; }
   .selected-holiday { gap: 4px; padding-left: 6px; padding-right: 16px; }

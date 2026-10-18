@@ -1,0 +1,20 @@
+{
+  "status": "failed",
+  "discovery": {
+    "run_id": "dd5129d0-ce69-4e05-ad0f-b436dc883b91",
+    "status": "failed",
+    "references": [],
+    "failures": [
+      {
+        "url": "https://hd.caac.gov.cn/HD_XXGK/HD_TJSJ/",
+        "reason": "robots.txt check failed; no bypass attempted"
+      }
+    ],
+    "robots": [],
+    "bounded_pages": 1,
+    "max_reports": 1,
+    "team_database_touched": false,
+    "seed_manifest": "manifests/discovered-dd5129d0-ce69-4e05-ad0f-b436dc883b91.json"
+  },
+  "ingestion": null
+}

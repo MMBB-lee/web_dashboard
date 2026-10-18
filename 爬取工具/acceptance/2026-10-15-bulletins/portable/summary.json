@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-15T09:49:56.322269+00:00",
+  "version": "0.2.0",
+  "wheel_sha256": "3748cdd1097c1a8f1b136544c15634a1ad986fe56a98e2a7ad52febcd7a225a5",
+  "installed_package_files_matching_wheel": 11,
+  "team_modules_absent": {
+    "data_foundation": true,
+    "app": true,
+    "intelligent_analysis": true
+  },
+  "cwd_outside_team_checkout": true,
+  "seed_copied": true,
+  "first_inserted": 277,
+  "repeat_inserted": 0,
+  "repeat_skipped": 277,
+  "team_database_environment_ignored": true,
+  "exported_facts": 277,
+  "temporary_data_retained": true
+}

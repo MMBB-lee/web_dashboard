@@ -1,5 +1,8 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { Line2 } from 'three/addons/lines/Line2.js'
+import { LineGeometry } from 'three/addons/lines/LineGeometry.js'
+import { LineMaterial } from 'three/addons/lines/LineMaterial.js'
 import { unproject, worldPosition, extrudeFeature, borderPositions, hasCoordinates } from './map-geometry'
 import type { MapOptions, MapController, MapBoundaries, BoundaryCollection, LocatedEntity } from './map-types'
 
@@ -10,6 +13,9 @@ const CITY_COLORS = ['#10395e', '#123d63', '#14395f', '#123452', '#173f65', '#12
 const DEPTH = 1.4
 // 减少全省适配时的留白，使默认地图更大，同时保留完整轮廓。
 const FIT_PADDING = 1.06
+// Screen-space widths stay readable when the map is resized or zoomed.
+const ROUTE_LINE_WIDTH = 2.8
+const ROUTE_TAIL_WIDTH = 4
 
 interface ScreenPosition { x: number; y: number; inside: boolean }
 interface ScreenBox { left: number; right: number; top: number; bottom: number }
@@ -24,7 +30,7 @@ interface Flow {
   curve: THREE.QuadraticBezierCurve3
   head: THREE.Sprite
   second: THREE.Sprite
-  tailGeometry: THREE.BufferGeometry
+  tailGeometry: LineGeometry
   tailLength: number
   duration: number
   offset: number
@@ -116,6 +122,11 @@ export function createAnhuiMap(host: HTMLElement, initial: MapOptions, data: Map
   sourceLink.rel = 'noopener noreferrer'
   sourceLink.title = `${data.boundary_version}；源边界未抽稀。`
   attribution.append(sourceLink, element('span', '', '地名避让显示，放大可查看区县 · 立体高度仅为示意'))
+  const poiLink = element('a', '', '地点：OurAirports / © OpenStreetMap')
+  poiLink.href = 'https://www.openstreetmap.org/copyright'
+  poiLink.target = '_blank'
+  poiLink.rel = 'noopener noreferrer'
+  attribution.append(poiLink)
   const tooltip = element('div', 'three-map-tooltip')
   tooltip.hidden = true
   tooltip.setAttribute('role', 'tooltip')
@@ -275,9 +286,9 @@ export function createAnhuiMap(host: HTMLElement, initial: MapOptions, data: Map
     tooltipEntity = item
     const entity = item.entity
     tooltipName.textContent = entity.name
-    tooltipKind.textContent = KINDS[entity.type] || '地点'
+    tooltipKind.textContent = `${KINDS[entity.type] || '地点'}${entity.latest_period_end ? ' · ' + entity.latest_period_end : ''}`
     tooltipKind.style.color = COLORS[entity.type] || COLORS.scenic
-    tooltipValue.textContent = `${METRICS[entity.type] || '客流'}：${Number.isFinite(entity.latest_value) ? Number(entity.latest_value).toLocaleString('zh-CN') + ' 人次' : '暂无数值'}`
+    tooltipValue.textContent = `${METRICS[entity.type] || '客流'}：${Number.isFinite(entity.latest_value) ? Number(entity.latest_value).toLocaleString('zh-CN') + ' ' + (entity.unit || '人次') : '暂无数值'}`
     tooltipCoordinate.textContent = `经度 ${entity.longitude.toFixed(5)}° · 纬度 ${entity.latitude.toFixed(5)}°`
     tooltipNote.textContent = `${current.demo ? '静态样例 · ' : ''}连线仅示意地点关联，非实际出行轨迹`
     tooltip.hidden = false
@@ -312,19 +323,19 @@ export function createAnhuiMap(host: HTMLElement, initial: MapOptions, data: Map
     control.y = Math.max(2, Math.min(7, distance * .24))
     const curve = new THREE.QuadraticBezierCurve3(start, control, end)
     const color = COLORS[kind]
-    const lineGeometry = new THREE.BufferGeometry().setFromPoints(curve.getPoints(100))
-    flowGroup.add(new THREE.Line(lineGeometry, new THREE.LineBasicMaterial({ color, transparent: true, opacity: .48, depthWrite: false })))
-    const tailGeometry = new THREE.BufferGeometry()
+    const lineGeometry = new LineGeometry().setPositions(curve.getPoints(100).flatMap(point => [point.x, point.y, point.z]))
+    flowGroup.add(new Line2(lineGeometry, new LineMaterial({ color, linewidth: ROUTE_LINE_WIDTH, transparent: true, opacity: .72, depthWrite: false })))
+    const tailGeometry = new LineGeometry()
     const tailLength = 28
-    tailGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(tailLength * 3), 3))
+    tailGeometry.setPositions(new Float32Array(tailLength * 3))
     const tailColors = new Float32Array(tailLength * 3)
     const tone = new THREE.Color(color)
     for (let i = 0; i < tailLength; i++) {
       const intensity = Math.pow(1 - i / tailLength, 1.3)
       tailColors.set([tone.r * intensity, tone.g * intensity, tone.b * intensity], i * 3)
     }
-    tailGeometry.setAttribute('color', new THREE.BufferAttribute(tailColors, 3))
-    const tail = new THREE.Line(tailGeometry, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: .96, depthWrite: false, blending: THREE.AdditiveBlending }))
+    tailGeometry.setColors(tailColors)
+    const tail = new Line2(tailGeometry, new LineMaterial({ linewidth: ROUTE_TAIL_WIDTH, vertexColors: true, transparent: true, opacity: .96, depthWrite: false, blending: THREE.AdditiveBlending }))
     tail.frustumCulled = false
     const head = pointSprite(color, 1.1)
     const second = pointSprite(color, .72)
@@ -347,7 +358,7 @@ export function createAnhuiMap(host: HTMLElement, initial: MapOptions, data: Map
       node.type = 'button'
       node.dataset.entityId = entity.id
       node.style.setProperty('--point-color', COLORS[entity.type] || COLORS.scenic)
-      const value = Number.isFinite(entity.latest_value) ? Number(entity.latest_value).toLocaleString('zh-CN') + ' 人次' : '暂无数值'
+      const value = Number.isFinite(entity.latest_value) ? Number(entity.latest_value).toLocaleString('zh-CN') + ' ' + (entity.unit || '人次') : '暂无数值'
       node.setAttribute('aria-label', `${entity.name}，${KINDS[entity.type] || '地点'}，${value}`)
       node.append(element('span', 'three-point-core'))
       const item: MarkerItem = { entity, node, position: worldPosition(entity.longitude, entity.latitude, .48), screen: null }
@@ -384,12 +395,15 @@ export function createAnhuiMap(host: HTMLElement, initial: MapOptions, data: Map
       const t = reducedMotion ? .58 : (time / flow.duration + flow.offset) % 1
       flow.head.position.copy(flow.curve.getPoint(t))
       flow.second.position.copy(flow.curve.getPoint(reducedMotion ? .23 : (t + .5) % 1))
-      const position = flow.tailGeometry.getAttribute('position')
+      const starts = flow.tailGeometry.getAttribute('instanceStart') as THREE.InterleavedBufferAttribute
+      const ends = flow.tailGeometry.getAttribute('instanceEnd') as THREE.InterleavedBufferAttribute
       for (let i = 0; i < flow.tailLength; i++) {
         const point = flow.curve.getPoint(Math.max(0, t - i * .0045))
-        position.setXYZ(i, point.x, point.y, point.z)
+        if (i < flow.tailLength - 1) starts.setXYZ(i, point.x, point.y, point.z)
+        if (i > 0) ends.setXYZ(i - 1, point.x, point.y, point.z)
       }
-      position.needsUpdate = true
+      // Both endpoints share one buffer; update it in place instead of reallocating per frame.
+      starts.data.needsUpdate = true
     }
     for (let i = 0; i < pulseRings.length; i++) {
       const pulse = reducedMotion ? .2 : (time / 2100 + i * .26) % 1

@@ -1,0 +1,290 @@
+{
+  "status": "partial",
+  "started_at": "2026-10-17T01:14:20.515838+00:00",
+  "finished_at": "2026-10-17T01:43:37.297279+00:00",
+  "clock_override": false,
+  "window": {
+    "start": "2023-01-01",
+    "end": "2026-10-17"
+  },
+  "recovered_interrupted_runs": 0,
+  "sources": [
+    {
+      "source_id": "city-hefei",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:22:43.164029+00:00"
+    },
+    {
+      "source_id": "city-wuhu",
+      "status": "not_due",
+      "next_due": "2026-11-15T14:22:45.600364+00:00"
+    },
+    {
+      "source_id": "city-bengbu",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:22:45.994616+00:00"
+    },
+    {
+      "run_id": "d310626d-f610-41d0-9fce-40e2e74dbc19",
+      "source_id": "city-huainan",
+      "status": "partial",
+      "started_at": "2026-10-17T01:14:20.519758+00:00",
+      "window": {
+        "start": "2023-01-01",
+        "end": "2026-10-17"
+      },
+      "items": [
+        {
+          "url": "https://tjj.huainan.gov.cn/zxfbyjd/551865247.html",
+          "kind": "document",
+          "status": "processed",
+          "http_status": 304,
+          "sha256": "00b1f0a8c529a8913e4615356f0bd4e5ea7af86bcad41d332b9e3dec5eb73c92",
+          "counts": {
+            "inserted": 0,
+            "skipped": 2,
+            "revised": 0,
+            "quarantined": 0
+          }
+        },
+        {
+          "url": "https://tjj.huainan.gov.cn/group4/M00/12/12/rB40qWqhDsOAJt3fAAternh4L2Q424.doc",
+          "kind": "document",
+          "status": "failed",
+          "reason": "Source parsing/I/O failed; review input",
+          "retry_at": null
+        }
+      ],
+      "records": {
+        "inserted": 0,
+        "skipped": 2,
+        "revised": 0,
+        "quarantined": 0
+      },
+      "discovery_complete_in_configured_entries": false,
+      "public_search_audit_complete": false,
+      "resumed": true,
+      "robots": [
+        {
+          "url": "https://tjj.huainan.gov.cn/robots.txt",
+          "http_status": 404,
+          "policy": "no_robots_file"
+        }
+      ],
+      "pending": 1,
+      "review_required": [
+        {
+          "asset_id": "4041e531e4789561a3241fe02e56c7a6094400a68d4bc1ddb565de0fce22f035",
+          "reason": "pdf_requires_reviewed_adapter",
+          "url": "https://tjj.huainan.gov.cn/group4/M00/12/12/rB40qWqhDsKAYFlnAAsoi11L9S8078.pdf"
+        }
+      ],
+      "finished_at": "2026-10-17T01:14:25.020676+00:00"
+    },
+    {
+      "source_id": "city-maanshan",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:22:50.609336+00:00"
+    },
+    {
+      "source_id": "city-huaibei",
+      "status": "not_due",
+      "next_due": "2026-11-15T14:35:52.247339+00:00"
+    },
+    {
+      "run_id": "1b8303fb-995e-4b15-befd-fbacefe57305",
+      "source_id": "city-tongling",
+      "status": "partial",
+      "started_at": "2026-10-17T01:14:25.026620+00:00",
+      "window": {
+        "start": "2023-01-01",
+        "end": "2026-10-17"
+      },
+      "items": [
+        {
+          "url": "https://tjj.tl.gov.cn/tlstjj/c00142/pc/content/content_2074671942385590272.html",
+          "kind": "document",
+          "status": "failed",
+          "reason": "robots.txt check failed; no bypass attempted",
+          "retry_at": null
+        }
+      ],
+      "records": {
+        "inserted": 0,
+        "skipped": 0,
+        "revised": 0,
+        "quarantined": 0
+      },
+      "discovery_complete_in_configured_entries": false,
+      "public_search_audit_complete": false,
+      "resumed": true,
+      "robots": [],
+      "pending": 1,
+      "review_required": [],
+      "finished_at": "2026-10-17T01:43:36.911525+00:00"
+    },
+    {
+      "run_id": "b2f63e0a-123b-4c75-b52a-e855538688e3",
+      "source_id": "city-anqing",
+      "status": "partial",
+      "started_at": "2026-10-17T01:43:36.918647+00:00",
+      "window": {
+        "start": "2023-01-01",
+        "end": "2026-10-17"
+      },
+      "items": [
+        {
+          "url": "https://www.anqing.gov.cn/tjsj/tjgb/2007357161.html",
+          "kind": "document",
+          "status": "failed",
+          "reason": "robots.txt unavailable or restricted; automatic crawl refused",
+          "retry_at": null
+        }
+      ],
+      "records": {
+        "inserted": 0,
+        "skipped": 0,
+        "revised": 0,
+        "quarantined": 0
+      },
+      "discovery_complete_in_configured_entries": false,
+      "public_search_audit_complete": false,
+      "resumed": true,
+      "robots": [],
+      "pending": 1,
+      "review_required": [],
+      "finished_at": "2026-10-17T01:43:37.282615+00:00"
+    },
+    {
+      "source_id": "city-huangshan",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:22:54.229337+00:00"
+    },
+    {
+      "source_id": "city-chuzhou",
+      "status": "disabled_requires_review",
+      "next_due": "2026-11-15T14:22:58.738326+00:00"
+    },
+    {
+      "source_id": "city-fuyang",
+      "status": "disabled_requires_review",
+      "next_due": "2026-11-15T14:23:01.116565+00:00"
+    },
+    {
+      "source_id": "city-suzhou",
+      "status": "not_due",
+      "next_due": "2026-11-15T14:35:54.840363+00:00"
+    },
+    {
+      "source_id": "city-luan",
+      "status": "not_due",
+      "next_due": "2026-11-15T14:23:16.209871+00:00"
+    },
+    {
+      "source_id": "city-bozhou",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:23:16.223702+00:00"
+    },
+    {
+      "source_id": "city-chizhou",
+      "status": "not_due",
+      "next_due": "2026-11-15T14:23:18.674176+00:00"
+    },
+    {
+      "source_id": "city-xuancheng",
+      "status": "not_due",
+      "next_due": "2026-11-15T14:23:21.395993+00:00"
+    },
+    {
+      "source_id": "caac-east-monthly",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:20:45.889938+00:00"
+    },
+    {
+      "source_id": "scenic-huangshan-main",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:25:19.703575+00:00"
+    },
+    {
+      "source_id": "scenic-hongcun",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:25:19.832270+00:00"
+    },
+    {
+      "source_id": "scenic-jiuhuashan",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:25:22.025592+00:00"
+    },
+    {
+      "source_id": "scenic-tianzhushan",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:25:22.097472+00:00"
+    },
+    {
+      "source_id": "scenic-tiantangzhai",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-23T14:25:28.846616+00:00"
+    },
+    {
+      "source_id": "scenic-wanfohu",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:59:02.553656+00:00"
+    },
+    {
+      "source_id": "scenic-sanhe",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:25:36.188600+00:00"
+    },
+    {
+      "source_id": "scenic-langyashan",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:25:40.608063+00:00"
+    },
+    {
+      "source_id": "scenic-balihe",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T14:30:42.997052+00:00"
+    },
+    {
+      "source_id": "scenic-longchuan",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-23T14:25:45.358318+00:00"
+    },
+    {
+      "source_id": "rail_station-hefei-south",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:25:50.267830+00:00"
+    },
+    {
+      "source_id": "rail_station-hefei",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-23T14:25:52.668513+00:00"
+    },
+    {
+      "source_id": "rail_station-wuhu",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:25:54.983765+00:00"
+    },
+    {
+      "source_id": "rail_station-fuyang-west",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:25:58.459570+00:00"
+    },
+    {
+      "source_id": "rail_station-huangshan-north",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-16T15:25:58.607558+00:00"
+    },
+    {
+      "source_id": "rail_station-chizhou",
+      "status": "disabled_requires_review",
+      "next_due": "2026-10-23T14:26:00.804361+00:00"
+    },
+    {
+      "source_id": "rail_station-huangshan-north-ahnews",
+      "status": "not_due",
+      "next_due": "2026-10-23T14:59:04.791374+00:00"
+    }
+  ],
+  "team_database_touched": false
+}

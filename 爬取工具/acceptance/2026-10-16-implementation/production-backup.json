@@ -1,0 +1,18 @@
+{
+  "status": "backed_up",
+  "schema_version": "2",
+  "file": "mac-production-bootstrap-030.zip",
+  "sha256": "dd036337929b97621956f88215e2b318e4b09228f0132af4c0e10852f7935005",
+  "rows": {
+    "ac_entities": 44,
+    "ac_meta": 2,
+    "ac_runs": 57,
+    "ac_sources": 34,
+    "ac_assets": 135,
+    "ac_issues": 24,
+    "ac_source_state": 34,
+    "ac_facts": 289,
+    "ac_fetch_state": 129,
+    "ac_revisions": 0
+  }
+}

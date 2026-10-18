@@ -1,0 +1,46 @@
+{
+  "status": "partial",
+  "started_at": "2026-10-16T15:18:11.017946+00:00",
+  "finished_at": "2026-10-16T15:18:11.039826+00:00",
+  "clock_override": false,
+  "window": {
+    "start": "2023-01-01",
+    "end": "2026-10-16"
+  },
+  "recovered_interrupted_runs": 0,
+  "sources": [
+    {
+      "run_id": "9f1d8299-61b3-4f0e-b06b-15409d2d669b",
+      "source_id": "scenic-wanfohu",
+      "status": "partial",
+      "started_at": "2026-10-16T15:18:11.020302+00:00",
+      "window": {
+        "start": "2023-01-01",
+        "end": "2026-10-16"
+      },
+      "items": [
+        {
+          "url": "https://not-allowlisted.invalid/controlled-failure",
+          "kind": "document",
+          "status": "failed",
+          "reason": "URL/redirect outside configured HTTPS host allowlist",
+          "retry_at": null
+        }
+      ],
+      "records": {
+        "inserted": 0,
+        "skipped": 0,
+        "revised": 0,
+        "quarantined": 0
+      },
+      "discovery_complete_in_configured_entries": false,
+      "public_search_audit_complete": false,
+      "resumed": true,
+      "robots": [],
+      "pending": 1,
+      "review_required": [],
+      "finished_at": "2026-10-16T15:18:11.038968+00:00"
+    }
+  ],
+  "team_database_touched": false
+}

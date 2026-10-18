@@ -1,167 +1,502 @@
-# 安徽文旅交通驾驶舱（整合版）
+# 安徽文旅交通项目启动指南（Windows / Python 3.13）
 
-七个业务页面共用导航、登录态和 API 客户端。默认使用模拟数据，不包含真实后端、模型推理或授权录像。
+本文以当前整合项目为准，覆盖首次安装、MySQL 建表与数据导入、大模型配置、前后端和爬虫启动，以及录像 P2PNet 计数。命令使用 **PowerShell**。
 
-## 当前职责与上游版本
+项目路径：`D:\李墨白\比赛项目\数字媒体\项目++++`。如果换了位置，请统一替换以下命令中的绝对路径。
 
-`web_dashboard/` 完整同步自 [MMBB-lee/web_dashboard](https://github.com/MMBB-lee/web_dashboard/commit/e00af3428eb263b4a4e8e282d5a7b469d55d328c)，固定提交为 `e00af3428eb263b4a4e8e282d5a7b469d55d328c`。57 个上游文件保持原样，校验记录位于 `upstream-dashboard.json`，单元测试按 Git 的 LF 文本换行规范逐文件检查一致性，兼容 Windows 的 CRLF 工作区。
+已有环境、数据库和数据时，直接看第 8 节“日常启动”，不必重新安装和导入。
 
-A 的入口、总览、景区、假期和地图均以上游为准。整合站点从仓库根目录运行 `pnpm dev`：根 `vite.config.ts` 只在整合构建中接入 B 的 `web_interactions/src/host/`，负责统一会话、演示/API 模式、接口客户端及地点跳转。A 目录自身仍保留上游的独立运行方式。
+## 1. 项目结构与运行方式
 
-B 的交通页通过 `transportMap` 选项复用 A 的地图组件，提供五个演示交通枢纽、地图点选与筛选器联动；真实接口继续使用返回的经纬度。原有的录像分析编号、409 重试、问答与事件跳转适配保存在 B 侧。景区和假期页面的界面与数据样例跟随上述 A 版本；下面较早日期的交接记录用于保留历史背景。
-
-2026-10-15 本次同步验收：32 项单元测试、6 项 A 地图专项检查和 37 个浏览器场景通过。浏览器先执行全站回归，再针对会话过期提示及新版假期选择流程复查；同时复查了七页登录回跳、刷新与退出。1920、1366、390 三种宽度的页面检查通过，已人工检查交通地图截图。两模块类型检查和整合版生产构建通过，仍有既有图表资源体积提示。API 场景使用请求桩，不代表真实后端或模型已联调。
-
-## 安装与运行
-
-需要 Node.js 20.19+（或 22.12+）、pnpm 11。只需克隆本仓库，无需另外下载同级代码。
-
-```powershell
-pnpm install --frozen-lockfile
-pnpm dev
+```text
+项目++++/
+├─ .venv/                   项目专用 Python 3.13 环境（不提交）
+├─ api_platform/            D：FastAPI 后端、认证、任务调度、大模型接入
+├─ data_foundation/         C：数据模型、Alembic 迁移、真实资料及导入模块
+├─ intelligent_analysis/    E：RAG、客流预测、P2PNet 模型源码和权重
+├─ 爬取工具/                独立爬虫、SQLite 采集库、8765 采集控制台
+├─ web_dashboard/           全域总览、景区客流、假期专题等前端
+├─ web_interactions/        交通、事件、问答、录像等前端及整合入口
+├─ videos/                  直接放录像文件
+├─ cap_images/              抽帧检测后的红点计数截图
+├─ package.json             整合前端启动入口
+└─ README.md
 ```
 
-访问 http://127.0.0.1:5173，点击“进入演示工作台”；也可输入演示账号 `demo` / `demo2026`。演示会话只存在内存，刷新后需要重新进入，随后返回原业务页面。
+| 服务 | 地址 | 说明 |
+|---|---|---|
+| 整合前端 | http://127.0.0.1:5173 | 项目全部页面，只启动根目录这一套前端 |
+| 后端 API | http://127.0.0.1:8000 | 前端通过 Vite 代理访问 `/api/v1` |
+| API 文档 | http://127.0.0.1:8000/docs | 查看接口与参数 |
+| 后台 Worker | 无网页端口 | 处理知识文档索引等队列任务 |
+| 爬虫 UI | http://127.0.0.1:8765 | 独立采集控制台，可按需启动 |
+| MySQL | 默认 127.0.0.1:3306 | 项目业务库，与爬虫 SQLite 分开 |
+
+不要同时启动两个 5173 前端。无需单独启动一个 E 的 HTTP 服务：D 会直接调用已安装的 E 包。
+
+## 2. 准备运行环境
+
+需要 Git、Node.js/npm、pnpm、MySQL，以及创建项目 Python 环境的工具。本机核对环境为 Python 3.13.16、Node.js 25.0.0、pnpm 11.25.0；`package.json` 指定 pnpm 11.25.0。后端声明 Python `>=3.13,<3.14`。
+
+### 2.1 Python 只使用项目环境，不单独安装全局 Python
+
+**本机现有环境可直接复用**，Python 位于：
 
 ```powershell
-pnpm typecheck
-pnpm test
-pnpm build
-pnpm test:e2e
+cd "D:\李墨白\比赛项目\数字媒体\项目++++"
+.\.venv\python.exe -X utf8 -c "import sys; print(sys.version); print(sys.executable)"
 ```
 
-浏览器测试默认使用已安装的 Google Chrome。生产主应用产物在 `web_dashboard/dist/`；部署需配置 SPA 路由回退。`web_interactions` 独立演示可通过 `pnpm --filter @anhui/web-interactions dev` 启动，勿与主应用同时占用 5173。
+本项目现有 `.venv` 是 Conda 前缀环境，所以解释器在 `.venv\python.exe`，不是 `.venv\Scripts\python.exe`。无需激活环境，直接调用完整路径即可。
 
-## 模式与地图
+新电脑或新克隆没有 `.venv` 时，可使用已安装的 Miniconda/Miniforge 创建同样结构的环境，无需单独安装系统 Python：
 
-在 `web_dashboard/.env.local` 中设置 `VITE_DATA_MODE=api` 可启用真实接口；默认 `demo`，不会根据网络状态自动切换。API 代理默认为 `http://127.0.0.1:8000`，可用 `API_PROXY_TARGET` 覆盖。真实后端尚未联调。
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++"
+conda create --prefix ".\.venv" python=3.13 pip -y
+.\.venv\python.exe -X utf8 -c "import sys; print(sys.version)"
+```
 
-演示故障场景在首次打开时传入 `?scenario=empty|error|insufficient|expired|invalid|network`。分别覆盖空数据、503、预测不足、401、422、网络断开。
+已有 `.venv` 时跳过创建；不要对正在使用的环境重复执行创建命令。如果使用 `uv venv` 或标准 `venv` 创建环境，其 Windows 解释器通常在 `.venv\Scripts\python.exe`，须统一替换本文所有 Python 路径，不能混用。
 
-总览和交通页共用上述 A 版本的 Three.js 立体行政区地图，无需高德 Key。地图使用随前端发布的 `web_dashboard/public/geo/anhui-boundaries.json`，包含 16 个地级市、104 个区县及完整边界，来源与精度说明见同目录的 `README.md`。
+### 2.2 安装前端依赖
 
-支持滚轮缩放、拖拽旋转、右键平移、俯视/立体切换和返回全省；地级市、区县和全部地名可分别切换。景区、铁路站、机场沿用整合版原有坐标与详情跳转，动态连线表示当前景区与铁路站、机场的关联示意，不代表实际出行轨迹。保留演示模式的静态样例标记。运行 `pnpm --filter web-dashboard test:map` 可检查地图挂载、更新、卸载、边界加载重试及完整几何投影。
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++"
+node --version
+npm install -g pnpm@11.25.0
+pnpm.cmd install --frozen-lockfile
+```
 
-## 目录与来源
+已安装相同版本 pnpm 时跳过全局安装。使用 `pnpm.cmd` 可避免 PowerShell 对 `pnpm.ps1` 的执行策略限制。
 
-- `web_dashboard/`：A 的完整上游源码，导入自 https://github.com/MMBB-lee/web_dashboard ，提交 `e00af3428eb263b4a4e8e282d5a7b469d55d328c`。
-- `web_interactions/`：交互包、认证、API 客户端、交通、事件、问答、录像；保留本仓库原提交历史。
-- `tests/`：统一认证、数据契约和 Chrome 页面集成测试。
+### 2.3 安装后端、C、E 与爬虫依赖
 
-采用 pnpm workspace，本地包引用不依赖仓库外目录。所有页面均显示演示标记；问答为预设响应，视频计数与本地预览文件无关。
+全部在项目根目录执行：
 
-## A/B 前端交接与 D 端联调约定
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++"
+.\.venv\python.exe -X utf8 -m pip install --upgrade pip
+.\.venv\python.exe -X utf8 -m pip install -e ".\api_platform[dev]"
+.\.venv\python.exe -X utf8 -m pip install -e ".\data_foundation[data]"
+.\.venv\python.exe -X utf8 -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+.\.venv\python.exe -X utf8 -m pip install -e ".\intelligent_analysis[vision,forecast]"
+.\.venv\python.exe -X utf8 -m pip install -e ".\爬取工具"
+.\.venv\python.exe -X utf8 -m pip install python-dotenv "PyMySQL[rsa]"
+```
 
-### B 页面视觉适配（2026-10-12）
+这里直接安装现有源码，无需查找旧 wheel，也不要再执行依赖 `$eWheel.FullName` 的旧命令。`[vision,forecast]` 必须跟在有效包路径后面，不能单独作为安装参数。
 
-以同级 `../web_dashboard` 已拉取的 `31ef154`（完善客流总览、景区与假期展示）为视觉模板，统一交通、事件、问答、录像及登录控件的深蓝底色、青色强调、直角卡片、角标边框、标题字号和紧凑间距。历史图用青色实线，预测用橙色虚线；数据、接口、单位、预测区间及指标口径不变。
+快速检查：
 
-本次只改 B 仓库中的 `web_interactions/src/` 和验证/交接文件，不更新内置的 `web_dashboard/` 副本，不包含采集更新工具。
+```powershell
+.\.venv\python.exe -X utf8 -c "import data_foundation, intelligent_analysis, anhui_crawler, torch, cv2, httpx; print('依赖导入成功'); print('PyTorch:', torch.__version__)"
+```
 
-A 沿用唯一应用入口与 `@anhui/web-interactions/styles.css` 导入，正式交通页继续设置 `transportLayout: 'standard'`。独立演示保留原来的大屏预览；验收正式样式使用仓库根目录的 `pnpm dev`。无新增应用入口、路由或公共组件。
+## 3. 创建 MySQL 数据库并配置后端
 
-B 样式限定在 `.b-ui`，直接读取 A 已有的 `--bg-main`、`--bg-panel`、`--border-glow`、`--text-title`、`--text-main`、`--text-sub`、`--accent`、`--accent-warn` 等变量；未提供时使用对应模板默认值。下拉浮层显式带 `.b-ui.b-select-overlay`，详情抽屉沿用 `.b-ui.b-drawer`，不覆盖全局控件。后续提取跨模块公共组件或更改 A 的变量规范，需先与 A 对齐。
+### 3.1 确认 MySQL 服务运行
 
-验证记录：B 类型检查、两个模块生产构建、22 项单元测试、20 项既有浏览器回归及 4 项新增视觉/浮层检查通过（新增检查修正测试定位后复测）。1920×1080、1366×768、390×844 的四个 B 页面无横向溢出，卡片背景、边框和圆角与宿主一致；已人工检查截图。构建仍有图表资源超过 500 kB 的体积提示。浏览器使用演示数据和 API 请求桩，未新增真实后端联调。
+可以在 Windows“服务”中启动已安装的 MySQL 服务。以下命令只查看服务：
 
-执行 `pnpm test:e2e tests/e2e/visual-consistency.spec.ts` 可复现新增检查；本次 12 张验收截图保存在忽略目录 `playwright-report/b-visual-review/`。
+```powershell
+Get-Service -Name '*mysql*'
+```
 
-### B 录像画面人数更新（2026-10-14）
+已有可用数据库时复用，不要删除或重建。新库可执行：
 
-按 `../更新说明/` 中 B 的验收要求和视频接口 27—28 更新现有页面。录像计数使用 `camera_visible_people`，单位为“人”；移除旧进出方向、`entries/exits` 和累计人次。侧栏显示截止位置前最近帧或完整窗口的估计人数，5 分钟点为有效帧中位数，不把连续帧人数相加。
+```powershell
+mysql -u root -p
+```
 
-录像页支持逐帧 / 5 分钟切换，显示录制起止时间、固定 ROI、质量状态、有效抽样帧数、DM-Count 权重、实际推理引擎及设备、人工核验 MAE。ROI 图是归一化区域示意，不冒充录像截图；仅在引擎为 `openvino` 时显示其版本。计数为青色实线，未来人数为橙色虚线，可用区间单独显示。短时图使用真实时间轴，保留 10 秒抽帧和 5 分钟预测之间的时间比例；零人数与缺失分别显示 `0` 和“缺失”。
+输入 **MySQL 管理员密码**后，在 MySQL 提示符执行下面的 SQL。请先把示例密码替换为自己的密码：
 
-预测请求仅包含 `analysis_id`、`cutoff_at`、`horizon_minutes`、`step_minutes=5`，复用登录 Cookie 和 CSRF 校验。切换录像、粒度、时长或截止位置会清空旧预测；409 `analysis_not_ready` 保留回放和关联表单供重试，`data_insufficient` / `quality_insufficient` 均不绘制预测曲线。服务错误不会回退模拟人数，旧计数响应和无效 ROI / 人数会明确报错。
+```sql
+CREATE DATABASE IF NOT EXISTS tourism_flow
+  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS 'tourism_app'@'127.0.0.1'
+  IDENTIFIED BY 'ReplaceWithYourDatabasePassword';
+GRANT ALL PRIVILEGES ON tourism_flow.* TO 'tourism_app'@'127.0.0.1';
+EXIT;
+```
 
-演示包含密集和稀疏两段人工构造的 3 小时样例、零人数、缺失和遮挡窗口，以及明确标记的模拟核验 / 回测误差。默认截止 2 小时、预测 30 分钟；15 / 30 分钟分别以约 60 / 120 分钟历史为起步门槛，并执行模拟质量判断，60 分钟因没有同机位多天数据及有效回测而返回不足。模拟门槛与误差仅用于交互检查，不是模型性能或真实数据验收结果。选择本地视频仅供本机播放，不上传，演示计数、ROI 和时间轴与文件无关联。
+这个数据库账号与网页登录的 `root` 不是同一个账号。已有同名 MySQL 用户时，`CREATE USER IF NOT EXISTS` 不会修改其密码，连接串应填写该账号的真实密码。
 
-新设计稿未固定以下 JSON 内部结构，本次将 B 类型及模拟接口具体化为下列格式，供 D/E 联调确认；未新增 HTTP 路由：
+### 3.2 配置 `api_platform/.env`
 
-- `Counts.roi`：归一化 `[x, y][]` 多边形，至少三个点。
-- 分析元数据位于计数响应顶层：`count_model`、`weights_version`、`inference_engine`、`device`、可选 `openvino_version`。可选 `sample_interval_seconds` 未返回时展示“接口未提供”，不假定实际抽帧间隔。
-- 计数点沿用通用数字字段 `period_start` / `period_end` / `value` 等；`grain=5min` 时还要求 `sample_count` 和 `aggregation_rule=median`。逐帧点可不带聚合字段。
-- 预测使用独立 `CameraForecast` 类型，保留 `training_cutoff`、`input_window_minutes`、`model_version`；`validation_error` 为按 `15/30/60` 分钟索引的对象或 `null`，各项包含 `mae`、`baseline_mae`、`sample_count`、`method`。无回测结果保持 `null`，不补造。
-- 预测点使用通用数字字段、`grain=5min`、`is_forecast=true`，时间表示未来时间点；示例中 `period_start=period_end`。区间沿用已有 `lower_bound` / `upper_bound`。
+首次使用才复制；已有文件时保留：
 
-保留原有分析编号配置与手动输入，不假设 `/videos` 返回分析编号。新增演示样例的编号和名称仅在 B 的演示模式加载，无需修改 A 入口。未修改 A/C/D/E 的代码；真实 FastAPI、授权录像、DM-Count 计数及回测仍待 D/E 联调。
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++"
+if (-not (Test-Path -LiteralPath ".\api_platform\.env")) {
+    Copy-Item -LiteralPath ".\api_platform\.env.example" -Destination ".\api_platform\.env"
+}
+notepad ".\api_platform\.env"
+```
 
-本次改动文件（保留此前已有视觉适配修改）：
+在文件中修改对应项，避免重复添加同名配置：
 
-- 页面与图表：`web_interactions/src/video/VideoReplayView.vue`、`web_interactions/src/components/TrendChart.vue`、`web_interactions/src/styles.css`。
-- 类型与演示：`web_interactions/src/types/api.ts`、`web_interactions/dev/App.vue`、`web_interactions/dev/fixtures.ts`、`web_interactions/dev/mock.ts`。
-- 测试：`tests/unit/video-contract.test.ts`、`tests/e2e/video-counts.spec.ts`、`tests/e2e/handoff.spec.ts`、`tests/e2e/dashboard.spec.ts`。
-- 交接说明：`README.md`。
+```dotenv
+DATABASE_URL=mysql+pymysql://tourism_app:ReplaceWithYourDatabasePassword@127.0.0.1:3306/tourism_flow?charset=utf8mb4
+DATA_DIR=./data
+D_JOB_STORE_BACKEND=c_store
+SECURE_COOKIES=false
+ALLOWED_ORIGINS=["http://127.0.0.1:5173","http://localhost:5173"]
+CSRF_SECRET=替换为下面命令生成的随机字符串
+VIDEO_STORAGE_DIR=../videos
+P2PNET_BUNDLE_DIR=../intelligent_analysis/model_bundle/p2pnet
+RAG_INDEX_PATH=./data/rag_index.json
+VIDEO_TMP_DIR=./data/video_tmp
+COUNTS_STORAGE_PATH=./data/counts
+LLM_ENABLED=false
+```
 
-2026-10-14 验证：B 类型检查、两个前端模块生产构建、31 项单元测试、31 项 Chrome 浏览器测试通过；桌面和手机截图人工检查完成，无横向溢出或页面异常。浏览器测试使用演示数据与 API 请求桩，覆盖 409 重试、粒度失败恢复、无效 ROI、负预测值拒绝及不足状态无预测曲线。截图在忽略目录 `test-results/video-counts-1920.png` 和 `test-results/video-counts-390.png`。测试服务退出阶段在本机未自动结束，关闭本次测试创建的进程后，测试命令正常返回成功；构建仍有既有图表资源体积提示。
+生成 CSRF 密钥，复制输出填到 `CSRF_SECRET`：
 
-### A 装配 B
+```powershell
+.\.venv\python.exe -X utf8 -c "import secrets; print(secrets.token_urlsafe(48))"
+```
 
-`web_dashboard/src/app/runtime.ts` 创建唯一 `createInteractions` 实例，主入口注册插件、路由和守卫，数据层复用其 client。A 的总览、景区、假期和 B 的页面共用认证。
+数据库密码如果含 `@`、`#`、`%`、`:` 等 URL 特殊字符，需要对连接串中的密码部分进行 URL 编码。不要把 `.env` 提交到 Git，也不要用示例密码覆盖现有配置。
 
-`InteractionOptions.resolveEntityRoute(entityId, client)` 返回 Vue Router 内部目标或 null。A 实现中分页读取 `/catalog/entities`：景区返回 `scenic?id=...`，车站/机场返回 `b-transport?entity_id=...`。事件详情和问答图表使用此入口。未知对象显示错误，不替换为默认车站。单独使用 B 时，仅解析目录中的交通对象。
+所有后端命令均从 `api_platform` 目录执行，以便正确读取该目录的 `.env`。
 
-### 预测区间
+## 4. 创建或升级数据表
 
-历史预测和录像短时预测统一使用 `forecast_points[].lower_bound`、`upper_bound`，值为 number 或 null。共享客户端兼容旧 `lower`、`upper`；新字段存在时优先，包括显式 null 和 0。缺失区间保持 null，不补造。A/B 图表均读取统一字段。
+Alembic 的 `env.py` 要求环境变量 `DATABASE_URL`，不会自动读取 `.env`。因此在**同一个 PowerShell 窗口**先载入配置，再执行迁移：
 
-此文件明确了原接口设计稿中“上下界”未命名的字段；D 正式接口请据此确认。请求路径及训练参数保持不变。
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+$env:PYTHONUTF8 = "1"
+$env:DATABASE_URL = (& ..\.venv\python.exe -X utf8 -c "from app.core.config import get_settings; print(get_settings().database_url)").Trim()
+if ($LASTEXITCODE -ne 0 -or -not $env:DATABASE_URL) { throw "数据库配置读取失败，请先检查 .env" }
+$env:DATA_ROOT = Join-Path (Get-Location).Path "data"
+..\.venv\python.exe -X utf8 -m alembic -c "..\data_foundation\alembic.ini" upgrade head
+if ($LASTEXITCODE -ne 0) { throw "迁移失败，请解决当前错误后再继续" }
+..\.venv\python.exe -X utf8 -m alembic -c "..\data_foundation\alembic.ini" current
+```
 
-### 录像分析结果
+当前源码的迁移末端为 `local_video_counts_04`。常用表包括：
 
-既有契约的 `POST /videos/{video_id}/analyses` 返回 `analysis_id`，`GET /videos/{video_id}/counts` 和短时预测均要求它。契约未定义最新分析结果查询接口，因此本次不新增或假设此类接口。
+| 表 | 用途 |
+|---|---|
+| `users`、`sessions` | 网页用户及会话 |
+| `entities`、`metrics`、`sources`、`source_assets` | 地点、指标、来源与原件 |
+| `observations` | 标准业务观测 |
+| `public_data_facts` | 爬虫及 C 资料的公开事实归档 |
+| `project_flow_data` | 项目客流补充序列，区分公开、估算和模拟 |
+| `holidays` | 假期日历及分析窗口 |
+| `events`、`event_entities`、`event_history` | 事件与变更历史 |
+| `knowledge_documents`、`knowledge_indexes`、`knowledge_chunks` | 知识文档及索引登记 |
+| `local_video_files` | `videos` 目录录像索引 |
+| `local_video_analyses`、`local_video_count_points` | 当前目录录像的 P2PNet 分析及计数 |
 
-A 可在 `web_dashboard/.env.local` 配置公开标识映射（不是凭据）：
+不要手动把 `alembic_version` 改成 head 或用 `stamp head` 跳过失败的建表。迁移报错时先确认目标库、账号权限和现有表结构。
+
+## 5. 初始化爬虫库、导入业务数据
+
+### 5.1 初始化独立 SQLite 采集库
+
+爬虫 UI 不会自动创建缺失的 SQLite 库。首次启动 UI 前执行：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\爬取工具"
+..\.venv\python.exe -X utf8 -m anhui_crawler --data-root ".\data\local" init
+```
+
+已有当前版本的库时可复用。旧版库提示需要迁移时，按其提示执行 `migrate`，不要删除数据库：
+
+```powershell
+..\.venv\python.exe -X utf8 -m anhui_crawler --data-root ".\data\local" migrate --report ".\data\migration.json"
+```
+
+`init` 只初始化对象和来源配置，不会凭空产生采集数据。爬虫数据保存在 `爬取工具/data/local/crawler.sqlite3`，不是项目 MySQL。
+
+### 5.2 检查真实资料包是否完整
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+..\.venv\python.exe -X utf8 "..\data_foundation\examples\import_real_dataset.py" --manifest "..\data_foundation\real_data\2026-10-12-v2\manifest.json"
+```
+
+这条命令只校验。当前资料包应有 `manifest.json` 以及它引用的原件、CSV、浏览器存档、假期文件等；只拷贝 manifest 无法完成导入。新克隆缺少本机未提交的原件或数据包时，先恢复完整数据目录。
+
+### 5.3 推荐：通过统一入口导入 MySQL
+
+该入口读取后端 `.env`，会导入 C 的真实资料包、独立 SQLite 中的事实，并在存在项目补充包时导入它：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+# 先预览，不写数据库
+..\.venv\python.exe -X utf8 -m scripts.import_public_data
+```
+
+**全新业务库需要先登记补充包涉及的地点。** 现有爬虫库有完整事实时，桥接导入会登记这些对象；但刚执行 `init` 的空爬虫库没有事实，不能靠它自动登记全部地点。以下命令根据本项目已有清单补齐地点目录，不生成客流数值，也不会覆盖已有地点：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+@'
+import json
+from pathlib import Path
+from uuid import NAMESPACE_URL, uuid5
+import sqlalchemy as sa
+from app.core.providers import get_c_store
+from data_foundation import EntityCreate
+from data_foundation.db.models import Entity
+
+root = Path.cwd().parent
+package = root / 'data_foundation/real_data/project_flow/manifest.json'
+if not package.is_file():
+    print('没有项目补充包，跳过其地点目录登记')
+    raise SystemExit(0)
+needed = {r['entity_name'] for r in json.loads(package.read_text(encoding='utf-8'))['rows']}
+registry = json.loads((root / '爬取工具/src/anhui_crawler/config/registry.json').read_text(encoding='utf-8'))
+baseline = json.loads((root / 'data_foundation/real_data/2026-10-12-v2/manifest.json').read_text(encoding='utf-8'))
+catalog = {e['name']: dict(e, id=str(uuid5(NAMESPACE_URL, 'public-entity:' + e['id']))) for e in registry['entities']}
+catalog.update({e['name']: e for e in baseline['catalog']['entities']})
+store = get_c_store()
+added = 0
+with store.write() as u:
+    existing = {(e.name, e.type) for e in u.session.scalars(sa.select(Entity))}
+    for name in sorted(needed):
+        e = catalog[name]
+        if (name, e['type']) not in existing:
+            u.catalog.create_entity(EntityCreate(id=e['id'], name=name, type=e['type'], region_code=e['region_code']))
+            added += 1
+print('新增地点目录：', added)
+'@ | ..\.venv\python.exe -X utf8 -
+```
+
+然后执行正式导入：
+
+```powershell
+# 确认预览成功后导入；--migrate 同时确保增量表已建立
+..\.venv\python.exe -X utf8 -m scripts.import_public_data --apply --migrate --report ".\data\public-import-report.json"
+```
+
+当前项目补充包位于 `data_foundation/real_data/project_flow/manifest.json`，包含 2023-01-01 至 2026-10-07 的景区、铁路和机场序列，并保留公开、估算、模拟标记。以命令输出和数据清单为准，不把这部分都称为实测。
+
+若只需要导入 C 的真实资料包，可在第 4 节已设置 `DATABASE_URL`、`DATA_ROOT` 的**同一个终端**执行以下替代命令；它不是统一导入后必须再执行的一步：
+
+```powershell
+..\.venv\python.exe -X utf8 "..\data_foundation\examples\import_real_dataset.py" --manifest "..\data_foundation\real_data\2026-10-12-v2\manifest.json" --apply
+```
+
+必须由 Python 执行 `.py` 文件；`manifest.json` 是参数，不是可执行程序。所有命令使用 `-X utf8`，避免中文 Windows 默认 GBK 导致 `UnicodeDecodeError`。
+
+### 5.4 更新项目补充数据与坐标
+
+已有补充包仅重新导入：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+..\.venv\python.exe -X utf8 "..\data_foundation\examples\import_project_flow.py" --apply
+```
+
+需要按已登记依据重新生成补充序列并导入时，可执行：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\爬取工具"
+..\.venv\python.exe -X utf8 scripts\update_project_data.py --offline --apply
+```
+
+去掉 `--offline` 会尝试重新获取已登记的公开依据。该流程仍依赖已有真实资料、爬虫库及 `reviewed_sources.json`，不是任意网站自动爬取器。
+
+补齐缺失经纬度：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+..\.venv\python.exe -X utf8 -m scripts.update_entity_coordinates
+```
+
+已知地点优先使用内置坐标；其他地点可能查询网络地理编码。已有完整坐标保留，无法确认的地点不会随意生成坐标。
+
+## 6. 创建网页登录管理员
+
+先完成建表，再执行：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+..\.venv\python.exe -X utf8 -m scripts.create_admin root --display-name "管理员"
+```
+
+按提示输入两次密码。沿用本机演示账号时，用户名为 `root`，密码为 `12345678`；新部署也可设置自己的密码。密码存入 `users` 表时会进行哈希处理。
+
+如果提示用户名已存在，说明不应重复创建；直接使用已有密码登录。此命令不重置已有账户密码。网页没有公开注册入口；MySQL 管理员密码不能代替网页登录密码。
+
+## 7. 配置大模型、前端真实数据模式和 P2PNet
+
+### 7.1 OpenAI 兼容大模型接口
+
+编辑 `api_platform/.env` 的对应配置：
+
+```dotenv
+LLM_ENABLED=true
+LLM_BASE_URL=填写供应商的兼容接口基础地址
+LLM_API_KEY=填写本机密钥
+LLM_MODEL=填写该密钥有权限使用的模型名称
+LLM_TIMEOUT_SECONDS=60
+LLM_MAX_TOKENS=2048
+```
+
+本项目会在基础地址后拼接 `/chat/completions`；如果供应商要求 `/v1/chat/completions`，基础地址应带 `/v1`。也支持直接填写完整 `/chat/completions` 地址。不要重复拼接。模型名按供应商账号实际可用值填写，不直接照抄旧模板中的模型名。
+
+手动测试一次 API 连接（会向供应商发送一条测试请求）：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+..\.venv\python.exe -X utf8 -m scripts.check_llm
+```
+
+修改配置后重启 API 和 Worker。密钥只放后端 `.env`，不放前端 `VITE_` 变量。暂不接大模型时保持 `LLM_ENABLED=false`；此时不能期待当前智能体的完整自然语言能力。
+
+### 7.2 整合前端必须使用 API 模式
+
+打开或创建 `web_dashboard/.env.local`：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++"
+notepad ".\web_dashboard\.env.local"
+```
+
+至少设置：
 
 ```dotenv
 VITE_DATA_MODE=api
-VITE_VIDEO_ANALYSIS_IDS={"40000000-0000-4000-8000-000000000001":"60000000-0000-4000-8000-000000000001"}
 ```
 
-上面 UUID 仅为格式示例，应替换为 D/E 真实分析结果。修改后重启 Vite。也可在录像页输入管理员提供的分析结果编号，点击“关联分析结果”；仅保存在当前页面内存，刷新恢复配置值。切换录像时按视频 ID 独立关联。未关联不发送计数请求；409 提示尚未就绪，403/404 显示后端错误。后端仍需校验分析归属与权限，前端关联不提供授权。
+保留已有其他配置，避免重复同名项。未设置为 `api` 会进入演示模式，不读取真实业务数据。修改后重启 Vite。
 
-真实数据尚待 D/E 提供，已用请求桩验证读取计数、409 恢复和预测链路。
+### 7.3 核对 P2PNet 模型包
 
-### 比较接口兼容
+完整结构至少包括：
 
-B 的 `host/demo-api.ts` 保留既有 `POST /analytics/compare` 适配；景区页面按 A 上游版本展示。比较请求使用各自的指标和 `display_mode=separate_axes`，不合计不同指标的人次。
-
-本次为原设计稿补齐具体响应字段（D 端须按此确认）：
-
-```ts
-interface ComparisonResult {
-  series: Array<{
-    entity_id: string
-    metric: string
-    points: NumericPoint[] // 使用通用数字字段
-    missing_periods: Array<{ start: string; end: string }>
-    source_ids: string[]
-  }>
-  comparison_note: string
-}
+```text
+intelligent_analysis/model_bundle/p2pnet/
+├─ SHTechA.pth
+├─ models/
+├─ util/
+└─ MODEL-RECEIPT.json
 ```
 
-演示接口支持 2—4 条序列，校验对象/指标/粒度；也支持 `index_100` 和有效非零基期。真实后端没有实现此接口时会明确报错，不回退样例。
+后端配置必须指向上述目录：
 
-### 验证
+```dotenv
+P2PNET_BUNDLE_DIR=../intelligent_analysis/model_bundle/p2pnet
+```
 
-单元测试覆盖上游文件一致性、路由分页/未知对象、两代预测字段、null/0、分析映射与比较参数。浏览器测试覆盖事件/问答回到 A 景区、API 模式分析编号关联与 409 恢复，以及 B 交通地图与筛选联动。测试服务使用 5183/5184，与开发预览 5173 分离。
+不要使用旧模板的 `./data/p2pnet_bundle`，除非已将完整模型包放到那个位置。只有 `.pth` 文件、缺少模型源码时也不能运行。模型按登记摘要校验，当前网页计数使用 **P2PNet + PyTorch CPU**。
 
-## 联调验证记录
+## 8. 日常启动：分别打开终端，保持运行
 
-2026-10-10，Windows + Node.js + pnpm 11.25.0 + Google Chrome。
+前置条件：MySQL 服务正在运行，依赖、数据库和 `.env` 已完成配置。以下终端相互独立，无需激活 Python 环境。
 
-- 两模块 TypeScript 检查通过。
-- 22 项 Vitest 测试通过：认证、CSRF 会话流程、内部跳转、统一目录、401/422/503/网络错误、空数据及预测不足。
-- 20 项 Playwright 测试通过：七页登录回跳/刷新/退出，三种屏幕尺寸，地图缺配置及组件桩跳转，景区/假期筛选，事件关联跳转，问答引用，录像短时预测，登录失败及非法跳转，API 模式错误处理。
-- 1920×1080、1366×768、390×844 页面无横向溢出，导航轮巡无未捕获页面异常；手机导航自身允许横向滚动。
-- 独立源码副本执行冻结锁文件安装和两模块生产构建成功，不依赖原仓库依赖或外部同级源码。
-- Vite 提示部分图表资源超过 500 kB，属于构建体积提示，构建成功。
+### 终端 A：启动后端 API
 
-### 验证边界
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+..\.venv\python.exe -X utf8 -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
 
-API 模式使用浏览器请求桩，未连接真实 FastAPI、数据库或模型。地图跳转使用组件桩，未验证真实高德服务及密钥。录像模块使用模拟计数，未运行真实检测，不附带授权视频。演示会话仅存内存，刷新后需再次进入演示。
+检查 http://127.0.0.1:8000/api/v1/health/live，应返回 `{"status":"ok"}`。健康检查成功只代表 API 存活，数据库和模型仍需通过实际页面确认。
 
-截图和浏览器失败产物保存在本地 `test-results/`，不提交。
+### 终端 B：启动后台 Worker
 
-2026-10-10 交接缺口回归：新增景区对象路由分页与未知对象、预测字段兼容及 null/0、录像分析 ID 配置/输入/409 恢复、跨景区对比和筛选清理测试。测试端口为 5183/5184，不占用 5173 预览。详细契约见上方“A/B 前端交接与 D 端联调约定”。
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\api_platform"
+..\.venv\python.exe -X utf8 -m app.worker
+```
+
+用于上传知识文档、重建索引等后台任务。当前本地目录录像的“开始计数”和数据库知识更新按钮也会唤起各自的后台处理，不要求为每次点击另开命令。
+
+### 终端 C：启动整合前端
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++"
+pnpm.cmd dev --host 127.0.0.1 --port 5173 --strictPort
+```
+
+打开 http://127.0.0.1:5173，使用第 6 节创建的网页登录账号。各次访问保持使用同一个主机名，避免在 `localhost` 与 `127.0.0.1` 间切换造成会话不一致。
+
+### 终端 D：按需启动爬虫 UI
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\爬取工具"
+..\.venv\python.exe -X utf8 scripts\dashboard.py --data-root ".\data\local" --port 8765 --open
+```
+
+访问 http://127.0.0.1:8765。首次运行之前必须完成第 5.1 节初始化，否则可能报 `sqlite3.OperationalError: unable to open database file`。
+
+停止某服务：在对应终端按 `Ctrl+C`。修改后端 `.env` 后需重启 API/Worker，修改前端 `.env.local` 后需重启前端。已有服务占用端口时复用或停止对应服务，不要重复启动。
+
+## 9. 首次启动后的实际操作
+
+### 9.1 知识库与数据库 RAG
+
+进入“智能问答 → 知识库管理”：
+
+1. 点击“更新数据库”，将支持的数据库业务字段导出为知识资料并建立索引。
+2. 等待任务完成、资料状态变为可用，再提问。
+3. 可上传 TXT、Markdown、PDF 等资料，补充来源和发布时间；索引任务由 Worker 处理。
+4. 后续业务数据发生变化时，再点击“更新数据库”同步。
+
+助手有部分客流指标的直接数据库查询能力，也会检索已索引资料。它并不能任意查询所有表；录像 P2PNet 计数等数据目前没有接入助手的直接查询或数据库 RAG 导出。数据库存在记录，不代表任意措辞的问题都能被正确识别和回答。
+
+### 9.2 录像回放、人数计数与截图
+
+1. 把自己的录像直接放进 `项目++++/videos/` 根层，支持 MP4、WebM、MOV、MKV、AVI；浏览器可否播放还取决于内部编码。
+2. 打开“录像回放”，刷新列表并选择视频。
+3. 管理员选择抽帧间隔，点击“开始计数”。页面会显示进度，完成后可播放、拖动查看对应抽样时刻的人数。
+4. 每个成功检测的抽样帧自动保存带红色人头检测点的 JPG，右上角显示人数。位置：`cap_images/<视频编号>/<分析编号>/`。
+5. 分析和人数分别保存在 `local_video_analyses`、`local_video_count_points`。没有实际录制时间的视频使用相对秒数，不制造日期。
+
+文件名如 `frame_000002_000005000ms.jpg` 表示第二个抽样帧、视频第 5 秒。红点与人数使用相同统计区域和置信度规则。相同输入和参数且截图完整时复用结果；缺图、旧版无标记截图会在再次点击开始时重新生成。
+
+这里是画面可见人数估计，不是累计进出人次；各帧人数不能直接相加作为总客流。短录像也不一定满足人数预测所需历史窗口。
+
+后端启动时自动创建 `videos` 和同级 `cap_images`，前端不创建服务器目录。Git 仅保留 `.gitkeep` 占位文件，不提交这两个目录的运行内容；本机已有内容不会因此删除。新克隆没有录像是正常现象。
+
+### 9.3 爬虫 UI 的操作范围
+
+- “刷新状态”和每 15 秒自动刷新：只读取 SQLite 状态，不启动采集。
+- “采集结果”的条件筛选：筛选已经采集到的数据，可导出并查看来源证据。
+- “采集并同步 MySQL”：执行已配置的项目客流补充流程，不使用当前页面的筛选条件，也不会采集所有来源。
+- 当前没有在 UI 上选择来源和日期后启动原始采集的入口，也没有新增事件通知入口。
+
+需要真正启动已配置来源的采集时，另开终端执行：
+
+```powershell
+cd "D:\李墨白\比赛项目\数字媒体\项目++++\爬取工具"
+# 检查已启用且到期的来源
+..\.venv\python.exe -X utf8 -m anhui_crawler --data-root ".\data\local" update --due
+```
+
+或指定来源及日期范围：
+
+```powershell
+..\.venv\python.exe -X utf8 -m anhui_crawler --data-root ".\data\local" crawl --source-id caac-east-monthly --start 2023-01-01 --end (Get-Date -Format 'yyyy-MM-dd') --max-pages 20 --max-documents 50
+```
+
+原始采集完成后，如需同步到项目 MySQL，回到 `api_platform` 执行第 5.3 节的 `scripts.import_public_data --apply`。采集范围受来源配置、解析规则、请求预算和公开数据可用性限制。
+
+## 10. 常见错误定位
+
+| 现象 | 处理 |
+|---|---|
+| 找不到 Python | 使用当前环境真实路径 `.venv\python.exe`；不要只输入 `python` |
+| `Invalid requirement: '[vision,forecast]'` | 使用第 2.3 节的完整源码路径安装命令，不用未赋值的 wheel 变量 |
+| Alembic 要求 `DATABASE_URL` | 在同一终端执行第 4 节读取 `.env` 的命令，再迁移 |
+| MySQL `Access denied` / 连接失败 | 核对服务、端口、库名、账号授权、密码和密码 URL 编码；网页登录账号无关 |
+| 找不到 `public_data_facts` 等表 | 核对是否连接同一个业务库，并完成 `upgrade head` |
+| PowerShell 说 `manifest.json` 无法运行 | 执行 Python 导入脚本，把 JSON 放在 `--manifest` 后 |
+| `UnicodeDecodeError: gbk` | 使用 `-X utf8`，确认取得的是当前 UTF-8 修正版代码 |
+| 爬虫 SQLite 无法打开 | 先执行爬虫 `init`，并明确指定 `--data-root .\data\local` |
+| 导入提示原件缺失或摘要不符 | 恢复完整数据包和爬虫原件；不要伪造文件或修改校验摘要 |
+| 前端仍是演示内容 | `web_dashboard/.env.local` 设置 `VITE_DATA_MODE=api`，重启前端 |
+| 登录失败 | 确认 `users` 表中有管理员、密码正确、后端连对数据库；多次失败后需等待限速窗口 |
+| 知识问答没有资料 | 检查 LLM 配置、索引任务状态；执行“更新数据库”；确认问题在已支持的数据范围内 |
+| 大模型 401/404/429 或 503 | 核对 key、模型权限、额度、基础地址是否缺少或重复 `/v1`，运行 `scripts.check_llm` |
+| P2PNet 未配置或计数失败 | 检查完整模型包和 `P2PNET_BUNDLE_DIR`，检查 `cap_images` 写入权限与空间，并查看 API 日志 |
+| 端口被占用 | 复用正在运行的服务，或在原终端 Ctrl+C 停止后重启 |
+
+本 README 的命令入口已按当前源码核对；真实资料包校验和统一导入预览已通过。新电脑的 MySQL 账号、模型与数据文件、网络 API 密钥仍须按本机实际情况配置。

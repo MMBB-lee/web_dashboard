@@ -60,6 +60,7 @@ export function dashboardDemo(scenario: string): DemoHandler {
   }
   if (path === '/holidays') return ok(empty ? [] : demoHolidays.filter(h => (!q.get('year') || h.year === Number(q.get('year'))) && (!q.get('kind') || h.kind === q.get('kind'))))
   if (path === '/holidays/compare') return ok(empty ? { comparable: false, reason: '暂无数据', items: [] } : demoHolidayCompare(body.holiday_ids, body.series[0].entity_id, body.mode))
+  if (path === '/holidays/statistics') return ok(empty ? { comparable: false, reason: '暂无数据', items: [] } : demoHolidayCompare((q.get('holiday_ids') ?? '').split(','), q.get('entity_id') ?? '', q.get('mode') ?? 'daily_average'))
   return undefined
  }
 }

@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "summary": {
+    "standard": 287,
+    "candidates": 2,
+    "entities": 44,
+    "entities_with_facts": 24,
+    "sources": 34,
+    "automatic_sources": 18,
+    "assets": 135,
+    "runs": 60,
+    "issues": 27,
+    "targets": 108,
+    "running": 0
+  },
+  "generated_at": "2026-10-17T05:00:20.939250+00:00",
+  "live_db_bytes_and_mtime_unchanged": true,
+  "candidate_csv_export": {
+    "rows": 2,
+    "qualifiers": [
+      "约",
+      "超过"
+    ],
+    "status": "passed"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "version": "0.5.0",
+  "wheel": "shumei_intelligent_analysis-0.5.0-py3-none-any.whl",
+  "wheel_sha256": "e3139396dbcd33359d55cbf38bcac1943386349d3fb9f5d22a80281673ef916f",
+  "archive": "E-visible-people-0.5.0-2026-10-14.zip",
+  "archive_sha256": "a66e640be81248eb6031d4e83dd37284bbc88217c2b4bde48ff02ac71de32bc8",
+  "wheel_matches_source": true,
+  "zip_crc_verified": true,
+  "tests_passed": 49,
+  "real_knowledge_documents": 16,
+  "real_video_accuracy_verified": false,
+  "production_http_verified": false
+}

@@ -1,7 +1,7 @@
 import { computed, ref, watch } from 'vue'
-import { backendMode, getCatalogEntities, getHolidayComparison, getHolidays, getMetricDefinitions } from '../../app/data'
+import { backendMode, getCatalogEntities, getHolidayComparison, getHolidays, getMetricDefinitions, getSource } from '../../app/data'
 import { displayError } from '../../app/format'
-import type { Entity, Holiday, HolidayCompareItem, HolidayCompareResult, MetricDefinition } from '../../app/types'
+import type { Entity, Holiday, HolidayCompareResult, MetricDefinition, Source } from '../../app/types'
 
 export type HolidayMode = 'daily_average' | 'period_total' | 'day_index'
 
@@ -17,6 +17,12 @@ export function useHolidays() {
   const dailyAverageComparison = ref<HolidayCompareResult | null>(null)
   const loading = ref(false)
   const error = ref('')
+  const availableIds = ref<string[]>([])
+  const sources = ref<Record<string, Source>>({})
+  const sourcesLoading = ref(false)
+  const sourceIds = computed(() => [...new Set(comparison.value?.items.flatMap(item => item.source_ids) ?? [])])
+  let sourcesRequest = 0
+  let availabilityRequest = 0
   let catalogRequest = 0
   let compareRequest = 0
   const selectedHolidays = computed(() => selectedIds.value
@@ -38,7 +44,7 @@ export function useHolidays() {
       metric.value = metrics.find((item) => item.code === 'scenic_visits') ?? null
       const validIds = selectedIds.value.filter(id => holidays.value.some(item => item.id === id))
       selectedIds.value = validIds.slice(0, 6)
-      if (!entities.value.some((item) => item.id === entityId.value)) entityId.value = entities.value[0]?.id ?? ''
+      if (!entities.value.some((item) => item.id === entityId.value)) entityId.value = entities.value.find(item => item.available_grains.includes('holiday'))?.id ?? entities.value[0]?.id ?? ''
     } catch (cause) {
       if (current === catalogRequest) error.value = displayError(cause)
     } finally {
@@ -47,28 +53,38 @@ export function useHolidays() {
   }
 
   async function compareSelected(ids: string[], selectedMode: HolidayMode): Promise<HolidayCompareResult> {
-    const [baseId, ...otherIds] = ids
-    // The documented API accepts exactly two holiday IDs per request.
-    const pairs = await Promise.all(otherIds.map(id => getHolidayComparison([baseId, id], entityId.value, selectedMode)))
-    const findItem = (result: HolidayCompareResult, id: string): HolidayCompareItem | undefined => result.items.find(item => item.holiday_id === id)
-    const items = [findItem(pairs[0], baseId), ...pairs.map((result, index) => findItem(result, otherIds[index]))]
-    const completeItems = items.filter((item): item is HolidayCompareItem => Boolean(item))
-    const complete = completeItems.length === ids.length
-    const unit = items[0]?.unit
-    const sameUnit = items.every(item => item?.unit === unit)
-    const comparable = pairs.every(result => result.comparable) && complete && sameUnit && completeItems.every(item => item.value != null)
+    const result = await getHolidayComparison(ids, entityId.value, selectedMode)
     const unequalDays = new Set(selectedHolidays.value.map(item => item.days_count)).size > 1
     return {
-      comparable,
-      reason: selectedMode === 'period_total' && unequalDays ? '所选假期天数不同，假期总量不宜直接比较；可选择日均值。' : pairs.find(result => !result.comparable)?.reason ?? (!complete ? '部分假期缺少可用数据。' : !sameUnit ? '所选假期的数值单位不同，不能放在同一图中比较。' : completeItems.some(item => item.value == null) ? '部分假期缺少可用数值。' : null),
-      items: complete ? completeItems : [],
+      ...result,
+      comparable: result.comparable && !(selectedMode === 'period_total' && unequalDays),
+      reason: selectedMode === 'period_total' && unequalDays ? '所选假期天数不同，假期总量不宜直接比较；可选择日均值。' : result.reason,
+    }
+  }
+
+  async function loadAvailable() {
+    const current = ++availabilityRequest
+    availableIds.value = []
+    if (backendMode.value !== 'live' || !entityId.value || !holidays.value.length) return
+    const requestedEntity = entityId.value
+    try {
+      const result = await getHolidayComparison(holidays.value.map(item => item.id), requestedEntity, 'daily_average')
+      if (current !== availabilityRequest || requestedEntity !== entityId.value) return
+      availableIds.value = result.items.filter(item => item.value != null).map(item => item.holiday_id)
+      const candidate = [...holidays.value].reverse().find(item => availableIds.value.includes(item.id))
+      if (candidate) {
+        kind.value = candidate.kind
+        selectedIds.value = [candidate.id]
+      }
+    } catch (cause) {
+      if (current === availabilityRequest) error.value = displayError(cause)
     }
   }
 
   async function loadComparison() {
     const current = ++compareRequest
     const ids = selectedHolidays.value.map(item => item.id)
-    if (ids.length < 2 || ids.length > 6 || !entityId.value) {
+    if (ids.length < 1 || ids.length > 6 || !entityId.value) {
       comparison.value = null
       dailyAverageComparison.value = null
       loading.value = false
@@ -95,5 +111,19 @@ export function useHolidays() {
 
   watch(backendMode, loadCatalog, { immediate: true })
   watch([selectedIds, entityId, mode, backendMode], loadComparison)
-  return { kind, selectedIds, entityId, mode, holidays, entities, metric, comparison, dailyAverageComparison, loading, error, selectedHolidays, loadComparison }
+  watch([entityId, holidays], loadAvailable)
+  watch([sourceIds, backendMode], async () => {
+    const current = ++sourcesRequest
+    sourcesLoading.value = false
+    if (backendMode.value !== 'live' || !sourceIds.value.length) return
+    sourcesLoading.value = true
+    try {
+      const results = await Promise.allSettled(sourceIds.value.filter(id => !sources.value[id]).map(async id => [id, await getSource(id)] as const))
+      if (current !== sourcesRequest) return
+      for (const result of results) if (result.status === 'fulfilled') sources.value[result.value[0]] = result.value[1]
+    } finally {
+      if (current === sourcesRequest) sourcesLoading.value = false
+    }
+  })
+  return { kind, selectedIds, entityId, mode, holidays, entities, metric, comparison, dailyAverageComparison, loading, error, selectedHolidays, availableIds, sourceIds, sources, sourcesLoading, loadComparison }
 }

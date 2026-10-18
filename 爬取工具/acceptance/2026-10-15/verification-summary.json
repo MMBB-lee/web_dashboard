@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-15T08:55:10.160380+00:00",
+  "crawler_version": "0.1.0",
+  "python": "3.13.16",
+  "mysql_version": "8.4.11",
+  "schema_version": "1",
+  "crawler_tables": 8,
+  "counts": {
+    "ac_entities": 44,
+    "ac_meta": 1,
+    "ac_runs": 2,
+    "ac_sources": 33,
+    "ac_assets": 76,
+    "ac_issues": 0,
+    "ac_facts": 260,
+    "ac_revisions": 0
+  },
+  "originals_verified": 76,
+  "monthly_records": 260,
+  "airport_entities": 8,
+  "registry_entities": 44,
+  "registry_sources": 33,
+  "matching_old_monthly_baseline_records": 82,
+  "additional_monthly_records": 178,
+  "wheel_sha256": "6c3fca5779e26b6809012773dcfb4c1371c0bb673055baf921606ae9cc627a43",
+  "installed_package_files_matching_wheel": 10,
+  "package_origin": "isolated_site_packages",
+  "team_modules_absent": {
+    "data_foundation": true,
+    "intelligent_analysis": true,
+    "app": true
+  },
+  "outside_team_checkout_installed_wheel_backfill": {
+    "cwd_outside_team_checkout": true,
+    "source_inputs_copied": true,
+    "inserted": 260,
+    "team_database_environment_ignored": true,
+    "temporary_proof_files_retained": true
+  },
+  "test_runs": {
+    "unit-tests-final.xml": {
+      "tests": 54,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "wheel-tests.xml": {
+      "tests": 54,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  },
+  "mysql_guard_cases": 5,
+  "online_report_roundtrip": "succeeded_eight_skipped",
+  "source_period_window": {
+    "start": "2023-01",
+    "end": "2026-08"
+  },
+  "source_bytes_or_team_SDK_modified": false,
+  "limitations": [
+    "Not complete province-wide dataset",
+    "Non-airport numeric adapters pending",
+    "No active scheduled service",
+    "Not Windows or distributed-download acceptance",
+    "Public raw documents not bundled for republication"
+  ],
+  "temporary_mysql_shutdown_confirmed": true,
+  "databases_or_files_deleted": false,
+  "independent_local_repository": true,
+  "remote_repository_created": false
+}

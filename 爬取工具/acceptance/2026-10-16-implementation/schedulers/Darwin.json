@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "platform": "Darwin",
+  "wheel_sha256": "4dc19c97bc51dd5863d62232d22243ac6e32b49aeaac9a74f17d283df86461e1",
+  "native_task_query_succeeded": true,
+  "trigger_history_reviewed": true,
+  "runs": [
+    {
+      "file": "controlled-data/runs/update-5629dfeb0f1016f979bad4f3.json",
+      "sha256": "38d11955b6c07e015171fcd9993b52f4be4f10c03ba0d82ad0355d5b9cdec2d1",
+      "status": "partial",
+      "clock_override": false,
+      "triggered_at": "2026-10-16T15:18:10.807140+00:00",
+      "started_at": "2026-10-16T15:18:11.017946+00:00",
+      "finished_at": "2026-10-16T15:18:11.039826+00:00",
+      "trigger": [
+        "launchctl",
+        "kickstart",
+        "gui/502/org.anhui.public-data-crawler.acceptance"
+      ],
+      "native_query": "state = not running\nprogram = /Users/Admin/Library/Application Support/AnhuiPublicDataCrawler/runtime-0.3.0a1/bin/python\nruns = 1\nlast exit code = 2\nstate = active\nstate = active"
+    },
+    {
+      "file": "controlled-data/runs/update-7fa13c8173c0addbd4f0cd3e.json",
+      "sha256": "1c698fc38ebcf7a2b857553f6340c271c365cc94a831443e92e19e9ef5ff1fa1",
+      "status": "succeeded",
+      "clock_override": false,
+      "triggered_at": "2026-10-16T15:18:11.826721+00:00",
+      "started_at": "2026-10-16T15:18:21.074862+00:00",
+      "finished_at": "2026-10-16T15:18:23.430239+00:00",
+      "trigger": [
+        "launchctl",
+        "kickstart",
+        "gui/502/org.anhui.public-data-crawler.acceptance"
+      ],
+      "native_query": "state = not running\nprogram = /Users/Admin/Library/Application Support/AnhuiPublicDataCrawler/runtime-0.3.0a1/bin/python\nruns = 2\nlast exit code = 0\nstate = active\nstate = active"
+    },
+    {
+      "file": "controlled-data/runs/update-ce14b43c39e57d6eecfcf1d7.json",
+      "sha256": "7e5d79a26dbcac2e453dff94c78794b76a13eea74e532959e781a3a46e178f34",
+      "status": "succeeded",
+      "clock_override": false,
+      "triggered_at": "2026-10-16T15:18:23.860092+00:00",
+      "started_at": "2026-10-16T15:18:31.078707+00:00",
+      "finished_at": "2026-10-16T15:18:31.079902+00:00",
+      "trigger": [
+        "launchctl",
+        "kickstart",
+        "gui/502/org.anhui.public-data-crawler.acceptance"
+      ],
+      "native_query": "state = not running\nprogram = /Users/Admin/Library/Application Support/AnhuiPublicDataCrawler/runtime-0.3.0a1/bin/python\nruns = 3\nlast exit code = 0\nstate = active\nstate = active"
+    }
+  ],
+  "test_scope": "isolated_database_injected_allowlist_failure_then_live_source_recovery",
+  "natural_daily_intervals_tested": false,
+  "scheduled_task_removed": true,
+  "started_at": "2026-10-16T15:18:10.801525+00:00",
+  "finished_at": "2026-10-16T15:18:31.893486+00:00"
+}

@@ -1,0 +1,4415 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-16T14:56:09.674987+00:00",
+  "originals_verified": 135,
+  "facts_verified": 289,
+  "active_runs": 0,
+  "errors": [],
+  "counts": {
+    "ac_entities": 44,
+    "ac_meta": 2,
+    "ac_runs": 55,
+    "ac_sources": 34,
+    "ac_assets": 135,
+    "ac_issues": 24,
+    "ac_source_state": 33,
+    "ac_facts": 289,
+    "ac_fetch_state": 128,
+    "ac_revisions": 0
+  },
+  "data_acceptance_complete": false,
+  "matrix": {
+    "schema_version": "anhui-crawler-matrix-1",
+    "generated_at": "2026-10-16T14:56:09.674863+00:00",
+    "window": {
+      "start": "2023-01-01",
+      "end": "2026-10-16"
+    },
+    "entities": 44,
+    "targets": 108,
+    "closed_targets": 0,
+    "entities_with_standard_facts": 24,
+    "all_targets_closed": false,
+    "rows": [
+      {
+        "entity_id": "city:hefei",
+        "name": "合肥市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-hefei",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:43.164029+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:hefei",
+        "name": "合肥市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-hefei",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:43.164029+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:hefei",
+        "name": "合肥市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-hefei",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:43.164029+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:hefei",
+        "name": "合肥市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-hefei",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:43.164029+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:hefei",
+        "name": "合肥市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-hefei",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:43.164029+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:wuhu",
+        "name": "芜湖市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-wuhu",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:22:45.600364+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:wuhu",
+        "name": "芜湖市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-wuhu",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:22:45.600364+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:wuhu",
+        "name": "芜湖市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-12-31",
+            "2025-12-31",
+            "day",
+            "municipal_year_end_inventory"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-wuhu",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:22:45.600364+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:wuhu",
+        "name": "芜湖市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-12-31",
+            "2025-12-31",
+            "day",
+            "municipal_year_end_inventory"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-wuhu",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:22:45.600364+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:wuhu",
+        "name": "芜湖市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 2,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_rail_not_single_station"
+          ],
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_road_transport"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-wuhu",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:22:45.600364+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bengbu",
+        "name": "蚌埠市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bengbu",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:45.994616+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bengbu",
+        "name": "蚌埠市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bengbu",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:45.994616+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bengbu",
+        "name": "蚌埠市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bengbu",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:45.994616+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bengbu",
+        "name": "蚌埠市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bengbu",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:45.994616+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bengbu",
+        "name": "蚌埠市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bengbu",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:45.994616+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huainan",
+        "name": "淮南市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huainan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:35:49.652198+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huainan",
+        "name": "淮南市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huainan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:35:49.652198+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huainan",
+        "name": "淮南市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huainan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:35:49.652198+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huainan",
+        "name": "淮南市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-12-31",
+            "2025-12-31",
+            "day",
+            "municipal_year_end_inventory"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huainan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:35:49.652198+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huainan",
+        "name": "淮南市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_road_transport"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huainan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:35:49.652198+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:maanshan",
+        "name": "马鞍山市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-maanshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:50.609336+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:maanshan",
+        "name": "马鞍山市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-maanshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:50.609336+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:maanshan",
+        "name": "马鞍山市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-maanshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:50.609336+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:maanshan",
+        "name": "马鞍山市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-maanshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:50.609336+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:maanshan",
+        "name": "马鞍山市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-maanshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:50.609336+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huaibei",
+        "name": "淮北市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huaibei",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:52.247339+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huaibei",
+        "name": "淮北市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huaibei",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:52.247339+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huaibei",
+        "name": "淮北市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huaibei",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:52.247339+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huaibei",
+        "name": "淮北市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huaibei",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:52.247339+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huaibei",
+        "name": "淮北市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_road_transport"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huaibei",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:52.247339+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:tongling",
+        "name": "铜陵市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-tongling",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:53.718819+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:tongling",
+        "name": "铜陵市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-tongling",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:53.718819+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:tongling",
+        "name": "铜陵市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-tongling",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:53.718819+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:tongling",
+        "name": "铜陵市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-tongling",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:53.718819+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:tongling",
+        "name": "铜陵市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 2,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_rail_not_single_station"
+          ],
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_road_transport"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-tongling",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:53.718819+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:anqing",
+        "name": "安庆市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-anqing",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.051946+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:anqing",
+        "name": "安庆市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-anqing",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.051946+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:anqing",
+        "name": "安庆市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-12-31",
+            "2025-12-31",
+            "day",
+            "municipal_year_end_inventory"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-anqing",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.051946+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:anqing",
+        "name": "安庆市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-12-31",
+            "2025-12-31",
+            "day",
+            "municipal_year_end_inventory"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-anqing",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.051946+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:anqing",
+        "name": "安庆市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_road_transport"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-anqing",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.051946+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huangshan",
+        "name": "黄山市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huangshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.229337+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huangshan",
+        "name": "黄山市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huangshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.229337+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huangshan",
+        "name": "黄山市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huangshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.229337+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huangshan",
+        "name": "黄山市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huangshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.229337+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:huangshan",
+        "name": "黄山市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-huangshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.229337+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chuzhou",
+        "name": "滁州市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chuzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:22:58.738326+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chuzhou",
+        "name": "滁州市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chuzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:22:58.738326+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chuzhou",
+        "name": "滁州市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chuzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:22:58.738326+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chuzhou",
+        "name": "滁州市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chuzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:22:58.738326+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chuzhou",
+        "name": "滁州市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chuzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:22:58.738326+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:fuyang",
+        "name": "阜阳市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-fuyang",
+            "status": "partial",
+            "next_due": "2026-11-15T14:23:01.116565+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:fuyang",
+        "name": "阜阳市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-fuyang",
+            "status": "partial",
+            "next_due": "2026-11-15T14:23:01.116565+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:fuyang",
+        "name": "阜阳市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-fuyang",
+            "status": "partial",
+            "next_due": "2026-11-15T14:23:01.116565+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:fuyang",
+        "name": "阜阳市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-fuyang",
+            "status": "partial",
+            "next_due": "2026-11-15T14:23:01.116565+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:fuyang",
+        "name": "阜阳市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-fuyang",
+            "status": "partial",
+            "next_due": "2026-11-15T14:23:01.116565+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:suzhou",
+        "name": "宿州市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-suzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:54.840363+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:suzhou",
+        "name": "宿州市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-suzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:54.840363+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:suzhou",
+        "name": "宿州市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-suzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:54.840363+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:suzhou",
+        "name": "宿州市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-suzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:54.840363+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:suzhou",
+        "name": "宿州市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_road_transport"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-suzhou",
+            "status": "partial",
+            "next_due": "2026-11-15T14:35:54.840363+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:luan",
+        "name": "六安市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-luan",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:16.209871+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:luan",
+        "name": "六安市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-luan",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:16.209871+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:luan",
+        "name": "六安市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-luan",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:16.209871+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:luan",
+        "name": "六安市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-luan",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:16.209871+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:luan",
+        "name": "六安市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 2,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_road_transport"
+          ],
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_water_transport"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-luan",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:16.209871+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bozhou",
+        "name": "亳州市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bozhou",
+            "status": "partial",
+            "next_due": "2026-10-16T15:23:16.223702+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bozhou",
+        "name": "亳州市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bozhou",
+            "status": "partial",
+            "next_due": "2026-10-16T15:23:16.223702+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bozhou",
+        "name": "亳州市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bozhou",
+            "status": "partial",
+            "next_due": "2026-10-16T15:23:16.223702+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bozhou",
+        "name": "亳州市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bozhou",
+            "status": "partial",
+            "next_due": "2026-10-16T15:23:16.223702+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:bozhou",
+        "name": "亳州市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bozhou",
+            "status": "partial",
+            "next_due": "2026-10-16T15:23:16.223702+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chizhou",
+        "name": "池州市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chizhou",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:18.674176+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chizhou",
+        "name": "池州市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chizhou",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:18.674176+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chizhou",
+        "name": "池州市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-12-31",
+            "2025-12-31",
+            "day",
+            "municipal_year_end_inventory"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chizhou",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:18.674176+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chizhou",
+        "name": "池州市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chizhou",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:18.674176+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:chizhou",
+        "name": "池州市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-chizhou",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:18.674176+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:xuancheng",
+        "name": "宣城市",
+        "type": "city",
+        "target_metric": "city_tourism_visits",
+        "canonical_metrics": [
+          "city_tourism_visits"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-xuancheng",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:21.395993+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:xuancheng",
+        "name": "宣城市",
+        "type": "city",
+        "target_metric": "city_tourism_expenditure",
+        "canonical_metrics": [
+          "city_tourism_expenditure",
+          "city_tourism_revenue"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-xuancheng",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:21.395993+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:xuancheng",
+        "name": "宣城市",
+        "type": "city",
+        "target_metric": "scenic_site_count",
+        "canonical_metrics": [
+          "a_rated_scenic_sites"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-xuancheng",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:21.395993+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:xuancheng",
+        "name": "宣城市",
+        "type": "city",
+        "target_metric": "hotel_count",
+        "canonical_metrics": [
+          "star_rated_hotels"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-xuancheng",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:21.395993+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "city:xuancheng",
+        "name": "宣城市",
+        "type": "city",
+        "target_metric": "city_transport_passengers",
+        "canonical_metrics": [
+          "passenger_transport_volume",
+          "rail_passenger_departures"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "municipal_road_and_water_excluding_rail"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-xuancheng",
+            "status": "succeeded",
+            "next_due": "2026-11-15T14:23:21.395993+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "airport:HFE",
+        "name": "合肥新桥机场",
+        "type": "airport",
+        "target_metric": "airport_passenger_throughput",
+        "canonical_metrics": [
+          "airport_passenger_throughput"
+        ],
+        "standard_records": 41,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2023-01-01",
+            "2023-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-02-01",
+            "2023-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-03-01",
+            "2023-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-04-01",
+            "2023-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-05-01",
+            "2023-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-06-01",
+            "2023-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-07-01",
+            "2023-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-08-01",
+            "2023-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-09-01",
+            "2023-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-10-01",
+            "2023-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-11-01",
+            "2023-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-01-01",
+            "2024-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-02-01",
+            "2024-02-29",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-03-01",
+            "2024-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-04-01",
+            "2024-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-05-01",
+            "2024-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-06-01",
+            "2024-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-07-01",
+            "2024-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-08-01",
+            "2024-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-09-01",
+            "2024-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-10-01",
+            "2024-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-11-01",
+            "2024-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-01-01",
+            "2025-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-02-01",
+            "2025-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-03-01",
+            "2025-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-04-01",
+            "2025-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-05-01",
+            "2025-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-06-01",
+            "2025-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-07-01",
+            "2025-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-08-01",
+            "2025-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-09-01",
+            "2025-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-10-01",
+            "2025-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-11-01",
+            "2025-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-01-01",
+            "2026-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-02-01",
+            "2026-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-03-01",
+            "2026-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-04-01",
+            "2026-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-05-01",
+            "2026-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-06-01",
+            "2026-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-07-01",
+            "2026-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-08-01",
+            "2026-08-31",
+            "month",
+            "airport_all_passengers"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "caac-east-monthly",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:20:45.889938+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "airport:TXN",
+        "name": "黄山屯溪机场",
+        "type": "airport",
+        "target_metric": "airport_passenger_throughput",
+        "canonical_metrics": [
+          "airport_passenger_throughput"
+        ],
+        "standard_records": 41,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2023-01-01",
+            "2023-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-02-01",
+            "2023-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-03-01",
+            "2023-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-04-01",
+            "2023-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-05-01",
+            "2023-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-06-01",
+            "2023-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-07-01",
+            "2023-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-08-01",
+            "2023-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-09-01",
+            "2023-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-10-01",
+            "2023-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-11-01",
+            "2023-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-01-01",
+            "2024-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-02-01",
+            "2024-02-29",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-03-01",
+            "2024-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-04-01",
+            "2024-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-05-01",
+            "2024-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-06-01",
+            "2024-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-07-01",
+            "2024-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-08-01",
+            "2024-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-09-01",
+            "2024-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-10-01",
+            "2024-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-11-01",
+            "2024-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-01-01",
+            "2025-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-02-01",
+            "2025-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-03-01",
+            "2025-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-04-01",
+            "2025-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-05-01",
+            "2025-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-06-01",
+            "2025-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-07-01",
+            "2025-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-08-01",
+            "2025-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-09-01",
+            "2025-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-10-01",
+            "2025-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-11-01",
+            "2025-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-01-01",
+            "2026-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-02-01",
+            "2026-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-03-01",
+            "2026-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-04-01",
+            "2026-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-05-01",
+            "2026-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-06-01",
+            "2026-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-07-01",
+            "2026-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-08-01",
+            "2026-08-31",
+            "month",
+            "airport_all_passengers"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "caac-east-monthly",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:20:45.889938+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "airport:FUG",
+        "name": "阜阳机场",
+        "type": "airport",
+        "target_metric": "airport_passenger_throughput",
+        "canonical_metrics": [
+          "airport_passenger_throughput"
+        ],
+        "standard_records": 41,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2023-01-01",
+            "2023-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-02-01",
+            "2023-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-03-01",
+            "2023-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-04-01",
+            "2023-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-05-01",
+            "2023-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-06-01",
+            "2023-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-07-01",
+            "2023-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-08-01",
+            "2023-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-09-01",
+            "2023-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-10-01",
+            "2023-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-11-01",
+            "2023-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-01-01",
+            "2024-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-02-01",
+            "2024-02-29",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-03-01",
+            "2024-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-04-01",
+            "2024-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-05-01",
+            "2024-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-06-01",
+            "2024-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-07-01",
+            "2024-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-08-01",
+            "2024-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-09-01",
+            "2024-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-10-01",
+            "2024-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-11-01",
+            "2024-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-01-01",
+            "2025-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-02-01",
+            "2025-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-03-01",
+            "2025-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-04-01",
+            "2025-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-05-01",
+            "2025-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-06-01",
+            "2025-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-07-01",
+            "2025-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-08-01",
+            "2025-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-09-01",
+            "2025-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-10-01",
+            "2025-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-11-01",
+            "2025-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-01-01",
+            "2026-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-02-01",
+            "2026-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-03-01",
+            "2026-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-04-01",
+            "2026-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-05-01",
+            "2026-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-06-01",
+            "2026-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-07-01",
+            "2026-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-08-01",
+            "2026-08-31",
+            "month",
+            "airport_all_passengers"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "caac-east-monthly",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:20:45.889938+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "airport:WHA",
+        "name": "芜湖宣州机场",
+        "type": "airport",
+        "target_metric": "airport_passenger_throughput",
+        "canonical_metrics": [
+          "airport_passenger_throughput"
+        ],
+        "standard_records": 41,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2023-01-01",
+            "2023-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-02-01",
+            "2023-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-03-01",
+            "2023-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-04-01",
+            "2023-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-05-01",
+            "2023-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-06-01",
+            "2023-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-07-01",
+            "2023-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-08-01",
+            "2023-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-09-01",
+            "2023-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-10-01",
+            "2023-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-11-01",
+            "2023-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-01-01",
+            "2024-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-02-01",
+            "2024-02-29",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-03-01",
+            "2024-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-04-01",
+            "2024-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-05-01",
+            "2024-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-06-01",
+            "2024-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-07-01",
+            "2024-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-08-01",
+            "2024-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-09-01",
+            "2024-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-10-01",
+            "2024-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-11-01",
+            "2024-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-01-01",
+            "2025-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-02-01",
+            "2025-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-03-01",
+            "2025-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-04-01",
+            "2025-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-05-01",
+            "2025-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-06-01",
+            "2025-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-07-01",
+            "2025-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-08-01",
+            "2025-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-09-01",
+            "2025-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-10-01",
+            "2025-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-11-01",
+            "2025-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-01-01",
+            "2026-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-02-01",
+            "2026-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-03-01",
+            "2026-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-04-01",
+            "2026-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-05-01",
+            "2026-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-06-01",
+            "2026-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-07-01",
+            "2026-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-08-01",
+            "2026-08-31",
+            "month",
+            "airport_all_passengers"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "caac-east-monthly",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:20:45.889938+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "airport:AQG",
+        "name": "安庆天柱山机场",
+        "type": "airport",
+        "target_metric": "airport_passenger_throughput",
+        "canonical_metrics": [
+          "airport_passenger_throughput"
+        ],
+        "standard_records": 41,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2023-01-01",
+            "2023-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-02-01",
+            "2023-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-03-01",
+            "2023-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-04-01",
+            "2023-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-05-01",
+            "2023-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-06-01",
+            "2023-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-07-01",
+            "2023-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-08-01",
+            "2023-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-09-01",
+            "2023-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-10-01",
+            "2023-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-11-01",
+            "2023-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-01-01",
+            "2024-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-02-01",
+            "2024-02-29",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-03-01",
+            "2024-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-04-01",
+            "2024-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-05-01",
+            "2024-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-06-01",
+            "2024-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-07-01",
+            "2024-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-08-01",
+            "2024-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-09-01",
+            "2024-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-10-01",
+            "2024-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-11-01",
+            "2024-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-01-01",
+            "2025-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-02-01",
+            "2025-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-03-01",
+            "2025-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-04-01",
+            "2025-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-05-01",
+            "2025-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-06-01",
+            "2025-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-07-01",
+            "2025-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-08-01",
+            "2025-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-09-01",
+            "2025-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-10-01",
+            "2025-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-11-01",
+            "2025-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-01-01",
+            "2026-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-02-01",
+            "2026-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-03-01",
+            "2026-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-04-01",
+            "2026-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-05-01",
+            "2026-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-06-01",
+            "2026-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-07-01",
+            "2026-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-08-01",
+            "2026-08-31",
+            "month",
+            "airport_all_passengers"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "caac-east-monthly",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:20:45.889938+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "airport:JUH",
+        "name": "池州九华山机场",
+        "type": "airport",
+        "target_metric": "airport_passenger_throughput",
+        "canonical_metrics": [
+          "airport_passenger_throughput"
+        ],
+        "standard_records": 41,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2023-01-01",
+            "2023-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-02-01",
+            "2023-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-03-01",
+            "2023-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-04-01",
+            "2023-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-05-01",
+            "2023-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-06-01",
+            "2023-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-07-01",
+            "2023-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-08-01",
+            "2023-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-09-01",
+            "2023-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-10-01",
+            "2023-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2023-11-01",
+            "2023-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-01-01",
+            "2024-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-02-01",
+            "2024-02-29",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-03-01",
+            "2024-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-04-01",
+            "2024-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-05-01",
+            "2024-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-06-01",
+            "2024-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-07-01",
+            "2024-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-08-01",
+            "2024-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-09-01",
+            "2024-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-10-01",
+            "2024-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2024-11-01",
+            "2024-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-01-01",
+            "2025-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-02-01",
+            "2025-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-03-01",
+            "2025-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-04-01",
+            "2025-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-05-01",
+            "2025-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-06-01",
+            "2025-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-07-01",
+            "2025-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-08-01",
+            "2025-08-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-09-01",
+            "2025-09-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-10-01",
+            "2025-10-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2025-11-01",
+            "2025-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-01-01",
+            "2026-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-02-01",
+            "2026-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-03-01",
+            "2026-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-04-01",
+            "2026-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-05-01",
+            "2026-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-06-01",
+            "2026-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-07-01",
+            "2026-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-08-01",
+            "2026-08-31",
+            "month",
+            "airport_all_passengers"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "caac-east-monthly",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:20:45.889938+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "airport:bozhou",
+        "name": "亳州机场",
+        "type": "airport",
+        "target_metric": "airport_passenger_throughput",
+        "canonical_metrics": [
+          "airport_passenger_throughput"
+        ],
+        "standard_records": 9,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-11-01",
+            "2025-11-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-01-01",
+            "2026-01-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-02-01",
+            "2026-02-28",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-03-01",
+            "2026-03-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-04-01",
+            "2026-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-05-01",
+            "2026-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-06-01",
+            "2026-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-07-01",
+            "2026-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-08-01",
+            "2026-08-31",
+            "month",
+            "airport_all_passengers"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "caac-east-monthly",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:20:45.889938+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "airport:bengbu-tenghu",
+        "name": "蚌埠滕湖机场",
+        "type": "airport",
+        "target_metric": "airport_passenger_throughput",
+        "canonical_metrics": [
+          "airport_passenger_throughput"
+        ],
+        "standard_records": 5,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2026-04-01",
+            "2026-04-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-05-01",
+            "2026-05-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-06-01",
+            "2026-06-30",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-07-01",
+            "2026-07-31",
+            "month",
+            "airport_all_passengers"
+          ],
+          [
+            "2026-08-01",
+            "2026-08-31",
+            "month",
+            "airport_all_passengers"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "caac-east-monthly",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:20:45.889938+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:huangshan-main",
+        "name": "黄山风景区主景区",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 3,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2023-01-01",
+            "2023-12-31",
+            "year",
+            "scenic_mountain_entries"
+          ],
+          [
+            "2024-01-01",
+            "2024-12-31",
+            "year",
+            "scenic_mountain_entries"
+          ],
+          [
+            "2025-01-01",
+            "2025-12-31",
+            "year",
+            "scenic_mountain_entries"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-huangshan-main",
+            "status": "partial",
+            "next_due": "2026-10-23T14:25:19.703575+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:hongcun",
+        "name": "宏村",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-hongcun",
+            "status": "partial",
+            "next_due": "2026-10-16T15:25:19.832270+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:xidi",
+        "name": "西递",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-hongcun",
+            "status": "partial",
+            "next_due": "2026-10-16T15:25:19.832270+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:jiuhuashan",
+        "name": "九华山",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-28",
+            "2025-02-04",
+            "holiday",
+            "scenic_reported_visits"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-jiuhuashan",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:25:22.025592+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:tianzhushan",
+        "name": "天柱山",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-tianzhushan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:25:22.097472+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:tiantangzhai",
+        "name": "天堂寨",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-tiantangzhai",
+            "status": "partial",
+            "next_due": "2026-10-23T14:25:28.846616+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:wanfohu",
+        "name": "万佛湖",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-05-01",
+            "2025-05-05",
+            "holiday",
+            "scenic_reported_visits"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-wanfohu",
+            "status": "partial",
+            "next_due": "2026-10-23T14:35:59.061177+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:sanhe",
+        "name": "三河古镇",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-sanhe",
+            "status": "partial",
+            "next_due": "2026-10-16T15:25:36.188600+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:langyashan",
+        "name": "琅琊山",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 1,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-langyashan",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:25:40.608063+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:balihe",
+        "name": "八里河",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-balihe",
+            "status": "partial",
+            "next_due": "2026-10-16T14:30:42.997052+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:longchuan",
+        "name": "绩溪龙川",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "scenic-longchuan",
+            "status": "partial",
+            "next_due": "2026-10-23T14:25:45.358318+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "scenic:caishiji",
+        "name": "采石矶",
+        "type": "scenic",
+        "target_metric": "scenic_visits",
+        "canonical_metrics": [
+          "scenic_visits",
+          "scenic_mountain_entries"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-maanshan",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:50.609336+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "rail:hefei-south",
+        "name": "合肥南站",
+        "type": "rail_station",
+        "target_metric": "rail_departures",
+        "canonical_metrics": [
+          "station_passenger_departures"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-02-15",
+            "2025-02-15",
+            "day",
+            "single_station_departures"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "rail_station-hefei-south",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:25:50.267830+00:00"
+          },
+          {
+            "source_id": "rail_station-hefei",
+            "status": "partial",
+            "next_due": "2026-10-23T14:25:52.668513+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "rail:hefei",
+        "name": "合肥站",
+        "type": "rail_station",
+        "target_metric": "rail_departures",
+        "canonical_metrics": [
+          "station_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "rail_station-hefei",
+            "status": "partial",
+            "next_due": "2026-10-23T14:25:52.668513+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "rail:wuhu",
+        "name": "芜湖站",
+        "type": "rail_station",
+        "target_metric": "rail_departures",
+        "canonical_metrics": [
+          "station_passenger_departures"
+        ],
+        "standard_records": 2,
+        "candidate_records": 1,
+        "observed_periods": [
+          [
+            "2025-04-04",
+            "2025-04-04",
+            "day",
+            "single_station_departures"
+          ],
+          [
+            "2025-04-06",
+            "2025-04-06",
+            "day",
+            "single_station_departures"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "rail_station-wuhu",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:25:54.983765+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "rail:fuyang-west",
+        "name": "阜阳西站",
+        "type": "rail_station",
+        "target_metric": "rail_departures",
+        "canonical_metrics": [
+          "station_passenger_departures"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2026-02-24",
+            "2026-02-24",
+            "day",
+            "single_station_departures"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "rail_station-fuyang-west",
+            "status": "succeeded",
+            "next_due": "2026-10-23T14:25:58.459570+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "rail:bengbu-south",
+        "name": "蚌埠南站",
+        "type": "rail_station",
+        "target_metric": "rail_departures",
+        "canonical_metrics": [
+          "station_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-bengbu",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:45.994616+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "rail:huangshan-north",
+        "name": "黄山北站",
+        "type": "rail_station",
+        "target_metric": "rail_departures",
+        "canonical_metrics": [
+          "station_passenger_departures"
+        ],
+        "standard_records": 1,
+        "candidate_records": 0,
+        "observed_periods": [
+          [
+            "2025-01-01",
+            "2025-06-30",
+            "cumulative",
+            "single_station_departures"
+          ]
+        ],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "rail_station-huangshan-north",
+            "status": "partial",
+            "next_due": "2026-10-16T15:25:58.607558+00:00"
+          },
+          {
+            "source_id": "rail_station-huangshan-north-ahnews",
+            "status": "pending",
+            "next_due": null
+          }
+        ]
+      },
+      {
+        "entity_id": "rail:chizhou",
+        "name": "池州站",
+        "type": "rail_station",
+        "target_metric": "rail_departures",
+        "canonical_metrics": [
+          "station_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "rail_station-chizhou",
+            "status": "partial",
+            "next_due": "2026-10-23T14:26:00.804361+00:00"
+          }
+        ]
+      },
+      {
+        "entity_id": "rail:anqing",
+        "name": "安庆站",
+        "type": "rail_station",
+        "target_metric": "rail_departures",
+        "canonical_metrics": [
+          "station_passenger_departures"
+        ],
+        "standard_records": 0,
+        "candidate_records": 0,
+        "observed_periods": [],
+        "audit_status": "pending",
+        "audit_closed": false,
+        "evidence": [],
+        "next_check": null,
+        "source_statuses": [
+          {
+            "source_id": "city-anqing",
+            "status": "partial",
+            "next_due": "2026-10-16T15:22:54.051946+00:00"
+          }
+        ]
+      }
+    ]
+  },
+  "metric_dictionary": {
+    "schema_version": "anhui-crawler-metrics-1",
+    "target_mapping": {
+      "airport_passenger_throughput": [
+        "airport_passenger_throughput"
+      ],
+      "city_tourism_visits": [
+        "city_tourism_visits"
+      ],
+      "city_tourism_expenditure": [
+        "city_tourism_expenditure",
+        "city_tourism_revenue"
+      ],
+      "scenic_site_count": [
+        "a_rated_scenic_sites"
+      ],
+      "hotel_count": [
+        "star_rated_hotels"
+      ],
+      "city_transport_passengers": [
+        "passenger_transport_volume",
+        "rail_passenger_departures"
+      ],
+      "scenic_visits": [
+        "scenic_visits",
+        "scenic_mountain_entries"
+      ],
+      "rail_departures": [
+        "station_passenger_departures"
+      ]
+    },
+    "additional_contracts": {
+      "scenic_mountain_entries": {
+        "entity": "scenic:",
+        "unit": "人",
+        "scopes": [
+          "scenic_mountain_entries"
+        ],
+        "integer": true,
+        "grains": [
+          "year"
+        ]
+      },
+      "scenic_visits": {
+        "entity": "scenic:",
+        "unit": "人次",
+        "scopes": [
+          "scenic_reported_visits",
+          "scenic_mountain_entries"
+        ],
+        "integer": true
+      },
+      "station_passenger_departures": {
+        "entity": "rail:",
+        "unit": "人次",
+        "scopes": [
+          "single_station_departures"
+        ],
+        "integer": true
+      },
+      "city_tourism_visits": {
+        "entity": "city:",
+        "unit": "人次",
+        "scopes": [
+          "municipal_tourism_visits",
+          "municipal_domestic_tourism_visits",
+          "municipal_inbound_tourism_visits"
+        ],
+        "integer": true
+      },
+      "city_tourism_expenditure": {
+        "entity": "city:",
+        "unit": "元",
+        "scopes": [
+          "municipal_tourism_expenditure"
+        ],
+        "integer": false
+      },
+      "city_tourism_revenue": {
+        "entity": "city:",
+        "unit": "元",
+        "scopes": [
+          "municipal_tourism_revenue"
+        ],
+        "integer": false
+      }
+    },
+    "existing_city_and_airport_contracts": "storage.validate_fact; preserved without renaming"
+  },
+  "schema_integrity_is_not_full_data_acceptance": true
+}

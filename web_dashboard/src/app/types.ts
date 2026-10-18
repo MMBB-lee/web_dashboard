@@ -1,4 +1,4 @@
-export type Grain = 'day' | 'week' | 'month' | 'holiday'
+export type Grain = 'day' | 'week' | 'month' | 'holiday' | 'year' | 'quarter' | 'half_year' | 'cumulative'
 export type TrendGrain = 'week' | 'month'
 export type MetricCode = 'scenic_visits' | 'rail_departures' | 'airport_throughput'
 export type BackendMode = 'checking' | 'demo' | 'live' | 'auth'
@@ -11,6 +11,8 @@ export interface NumericPoint {
   period_end: string
   grain: Grain
   source_ids: string[]
+  source_title?: string
+  source_url?: string
   published_at: string | null
   ingested_at: string | null
   quality_status: string
@@ -64,7 +66,7 @@ export interface OverviewCard extends NumericPoint {
 
 export interface Overview {
   cards: OverviewCard[]
-  map_entities: Array<Entity & { latest_value?: number | null; latest_metric?: string }>
+  map_entities: Array<Entity & { latest_value?: number | null; latest_metric?: string; latest_period_end?: string; latest_grain?: Grain; unit?: string }>
   active_events_count: number
   data_freshness: Array<{ metric: string; latest_period_end: string; ingested_at: string | null }>
 }
@@ -76,6 +78,7 @@ export interface SeriesResult {
   points: NumericPoint[]
   missing_periods: Array<{ start: string; end: string }>
   coverage_ratio: number
+  coverage_note?: string
 }
 
 export interface ForecastResult {
@@ -91,7 +94,7 @@ export interface ForecastResult {
 export interface Holiday {
   id: string
   name: string
-  kind: 'may_day' | 'national_day' | 'summer' | 'winter'
+  kind: 'may_day' | 'national_day' | 'summer' | 'winter' | 'spring_festival' | 'new_year' | 'qingming' | 'dragon_boat' | 'mid_autumn'
   year: number
   start: string
   end: string
@@ -110,6 +113,8 @@ export interface HolidayCompareItem {
   grain?: Grain
   missing_days: number
   source_ids: string[]
+  source_title?: string
+  source_url?: string
   published_at?: string | null
   ingested_at?: string | null
   quality_status?: string

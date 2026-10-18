@@ -1,0 +1,5 @@
+* text=auto eol=lf
+release/*.whl -text
+release/*.zip -text
+release/*.json -text
+acceptance/**/*.xml -text

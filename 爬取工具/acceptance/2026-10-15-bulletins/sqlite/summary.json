@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-15T09:45:06.478205+00:00",
+  "crawler_version": "0.2.0",
+  "python": "3.13.16",
+  "database_dialect": "sqlite",
+  "mysql_version": null,
+  "schema_version": "1",
+  "counts": {
+    "ac_entities": 44,
+    "ac_meta": 1,
+    "ac_runs": 7,
+    "ac_sources": 33,
+    "ac_assets": 77,
+    "ac_issues": 1,
+    "ac_facts": 277,
+    "ac_revisions": 0
+  },
+  "previous_airport_records_unchanged": 260,
+  "monthly_airport_records": 260,
+  "new_city_records": 17,
+  "city_entities": 9,
+  "annual_flows": 11,
+  "year_end_inventory": 6,
+  "all_managed_originals_sha_verified": 77,
+  "city_original_xpath_checks": 17,
+  "repeat_inserted": 0,
+  "repeat_skipped": 277,
+  "team_database_touched": false,
+  "network_requests_this_verification": 0,
+  "complete_province_claim": false
+}

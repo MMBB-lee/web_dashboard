@@ -6,10 +6,17 @@ import { analysisId } from '../../web_interactions/dev/fixtures'
 const scenicId=DEMO_SCENIC_IDS.jiuhua
 async function api(page:import('@playwright/test').Page, options:{unavailable?:boolean}={}) {
  const fetcher=createDemoApi('normal',dashboardDemo('normal'))
+ let countingStarted=false
  await page.route('**/api/v1/**',async route=>{
   const request=route.request(), url=request.url()
+  if(url.endsWith('/counting')) {
+   if(request.method()==='POST')countingStarted=true
+   await route.fulfill({status:request.method()==='POST'?202:200,json:{data:countingStarted?{analysis_id:analysisId,status:'ready',processed_samples:720,total_samples:720,progress:100}:null,meta:{request_id:'counting'}}});return
+  }
   const response=await fetcher(url,{method:request.method(),headers:request.headers(),body:request.postData() ?? undefined})
   const payload=await response.json()
+  if(payload.data?.user)payload.data.user.role='admin'
+  if(url.includes('/counts?')&&payload.data)Object.assign(payload.data,{count_model:'p2pnet',inference_engine:'pytorch',device:'CPU'})
   if(/\/events\/[^/?]+$/.test(url)&&payload.data)payload.data.affected_entity_ids=[scenicId]
   if(url.endsWith('/assistant/chat')&&payload.data)payload.data.used_metric_queries[0].entity_id=scenicId
   if(url.includes('/counts?') && options.unavailable) {await route.fulfill({status:409,json:{error:{code:'analysis_not_ready',message:'分析结果尚未就绪'}}});return}
@@ -35,14 +42,11 @@ test('assistant scenic query opens A scenic page',async({page})=>{
  await page.getByRole('button',{name:'查看图表'}).click()
  await expect(page.locator('.scenic-summary')).toContainText('九华山')
 })
-test('API video associates known analysis, handles 409 then predicts',async({page})=>{
+test('API video starts counting without UUID, handles 409 then predicts',async({page})=>{
  const state={unavailable:true};await api(page,state);await login(page,'/video')
- await page.getByLabel('分析结果编号',{exact:true}).fill('bad-id')
- await page.getByRole('button',{name:'关联分析结果'}).click();await expect(page.getByText('请输入有效的分析结果编号（UUID）',{exact:true})).toBeVisible()
- await page.getByLabel('分析结果编号',{exact:true}).fill(analysisId)
- await page.getByRole('button',{name:'关联分析结果'}).click();await expect(page.getByText('分析结果尚未就绪',{exact:true})).toBeVisible()
+ await expect(page.getByLabel('分析结果编号',{exact:true})).toHaveCount(0)
+ await page.getByRole('button',{name:'开始计数',exact:true}).click();await expect(page.getByText('分析结果尚未就绪',{exact:true})).toBeVisible()
  await expect(page.getByRole('combobox',{name:'录像片段'})).toBeVisible()
- await expect(page.getByLabel('分析结果编号',{exact:true})).toHaveValue(analysisId)
  state.unavailable=false
  await page.getByRole('button',{name:'重新加载',exact:true}).click()
  await expect(page.getByRole('combobox',{name:'计数粒度'})).toBeVisible()

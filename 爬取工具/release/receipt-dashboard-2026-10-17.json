@@ -1,0 +1,12 @@
+{
+  "status": "packaged",
+  "file": "anhui-crawler-dashboard-2026-10-17.zip",
+  "sha256": "59185aff73efbfbf8b79b8f5150683c7ba9b9ad2fce87c1534fd88207bc711c3",
+  "byte_size": 121882,
+  "files": 11,
+  "database_and_originals_included": false,
+  "crawler_wheel_unchanged": true,
+  "database_mode": "read_only",
+  "platform_tested": "Darwin",
+  "refresh_interval_seconds": 15
+}

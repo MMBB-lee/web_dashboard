@@ -165,7 +165,7 @@ export const demoHolidays: Holiday[] = [
 
 export function demoHolidayCompare(holidayIds: string[], entityId: string, mode: string): HolidayCompareResult {
   const holidays = holidayIds.map((id) => demoHolidays.find((item) => item.id === id)).filter((item): item is Holiday => Boolean(item))
-  if (holidays.length !== 2) return { comparable: false, reason: '请选择两个假期。', items: [] }
+  if (holidays.length < 1 || holidays.length > 6) return { comparable: false, reason: '请选择一至六个假期。', items: [] }
   if (mode === 'day_index') return { comparable: false, reason: '静态样例仅有假期总量，缺少完整逐日数据，不能绘制逐日曲线。', items: [] }
   const isJiuhua = entityId === DEMO_SCENIC_IDS.jiuhua
   const baseTotals: Record<string, number> = isJiuhua
@@ -173,7 +173,7 @@ export function demoHolidayCompare(holidayIds: string[], entityId: string, mode:
     : { 'demo-may-2020': 205000, 'demo-may-2021': 231000, 'demo-may-2022': 248000, 'demo-may-2023': 277000, 'demo-may-2024': 292000, 'demo-may-2025': 316000, 'demo-national-2020': 318000, 'demo-national-2021': 341000, 'demo-national-2022': 359000, 'demo-national-2023': 436000, 'demo-national-2024': 405000, 'demo-national-2025': 478000 }
   const scale = isJiuhua || entityId === DEMO_SCENIC_IDS.huangshan ? 1
     : (monthlyValues[entityId]?.at(-1) ?? 0) / (monthlyValues[DEMO_SCENIC_IDS.huangshan]?.at(-1) ?? 1)
-  const sameLength = holidays[0].days_count === holidays[1].days_count
+  const sameLength = holidays.every(holiday => holiday.days_count === holidays[0].days_count)
   return {
     comparable: mode === 'daily_average' || sameLength,
     reason: mode === 'period_total' && !sameLength ? '两个假期天数不同，假期总量不宜直接比较；可选择日均值。' : null,

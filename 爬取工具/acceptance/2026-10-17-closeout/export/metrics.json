@@ -1,0 +1,89 @@
+{
+  "schema_version": "anhui-crawler-metrics-1",
+  "target_mapping": {
+    "airport_passenger_throughput": [
+      "airport_passenger_throughput"
+    ],
+    "city_tourism_visits": [
+      "city_tourism_visits"
+    ],
+    "city_tourism_expenditure": [
+      "city_tourism_expenditure",
+      "city_tourism_revenue"
+    ],
+    "scenic_site_count": [
+      "a_rated_scenic_sites"
+    ],
+    "hotel_count": [
+      "star_rated_hotels"
+    ],
+    "city_transport_passengers": [
+      "passenger_transport_volume",
+      "rail_passenger_departures"
+    ],
+    "scenic_visits": [
+      "scenic_visits",
+      "scenic_mountain_entries"
+    ],
+    "rail_departures": [
+      "station_passenger_departures"
+    ]
+  },
+  "additional_contracts": {
+    "scenic_mountain_entries": {
+      "entity": "scenic:",
+      "unit": "人",
+      "scopes": [
+        "scenic_mountain_entries"
+      ],
+      "integer": true,
+      "grains": [
+        "year"
+      ]
+    },
+    "scenic_visits": {
+      "entity": "scenic:",
+      "unit": "人次",
+      "scopes": [
+        "scenic_reported_visits",
+        "scenic_mountain_entries"
+      ],
+      "integer": true
+    },
+    "station_passenger_departures": {
+      "entity": "rail:",
+      "unit": "人次",
+      "scopes": [
+        "single_station_departures"
+      ],
+      "integer": true
+    },
+    "city_tourism_visits": {
+      "entity": "city:",
+      "unit": "人次",
+      "scopes": [
+        "municipal_tourism_visits",
+        "municipal_domestic_tourism_visits",
+        "municipal_inbound_tourism_visits"
+      ],
+      "integer": true
+    },
+    "city_tourism_expenditure": {
+      "entity": "city:",
+      "unit": "元",
+      "scopes": [
+        "municipal_tourism_expenditure"
+      ],
+      "integer": false
+    },
+    "city_tourism_revenue": {
+      "entity": "city:",
+      "unit": "元",
+      "scopes": [
+        "municipal_tourism_revenue"
+      ],
+      "integer": false
+    }
+  },
+  "existing_city_and_airport_contracts": "storage.validate_fact; preserved without renaming"
+}

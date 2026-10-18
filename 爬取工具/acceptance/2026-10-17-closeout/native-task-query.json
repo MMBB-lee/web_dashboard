@@ -1,0 +1,15 @@
+{
+  "queried_at": "2026-10-17T04:12:07.878751+00:00",
+  "platform": "darwin",
+  "query_succeeded": true,
+  "task_fields": [
+    "state = not running",
+    "runs = 1",
+    "last exit code = 2",
+    "\"Minute\" => 0",
+    "\"Hour\" => 9",
+    "state = active",
+    "state = active"
+  ],
+  "task_triggered_by_closeout": false
+}

@@ -1,0 +1,32 @@
+{
+  "version": "0.6.2",
+  "wheel": "shumei_intelligent_analysis-0.6.2-py3-none-any.whl",
+  "wheel_sha256": "7ebff905ec35c98a6c7497df26fbece8265880bf9d4caf70332881832bec56d4",
+  "archive": "E-visible-people-0.6.2-2026-10-18.zip",
+  "archive_sha256": "2a6f599fd9db7ad614cbe9b8a1b0dc2335cd2a88a4aff5c8f81308a936be6fdf",
+  "wheel_matches_source": true,
+  "zip_crc_verified": true,
+  "installed_E_wheel_restart_verified": true,
+  "tests_passed": 139,
+  "tests_skipped": 1,
+  "real_knowledge_documents": 16,
+  "c_version": "0.2.1a2",
+  "c_official_windows_status": "passed",
+  "c_official_windows_test_counts": {
+    "tests": 479,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 478
+  },
+  "c_knowledge_status": "passed",
+  "count_model": "p2pnet",
+  "weights_version": "leader-SHTechA-50604773",
+  "weights_sha256": "506047732b128ff09efef18e94bfacbe35fcfef300e5e9eeeece259b0488c63f",
+  "installed_P2PNet_inference_verified": true,
+  "comparison_task": "stopped_by_user",
+  "D_B_video_integration": "pending_deployed_HTTP_real_video_and_MySQL",
+  "formal_DE_mysql_verified": false,
+  "real_video_accuracy_verified": false,
+  "production_http_verified": false
+}

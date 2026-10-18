@@ -1,6 +1,12 @@
 packages:
   - web_dashboard
   - web_interactions
+# Avoid esbuild directory rename failures in the local virtual store on Windows.
+enableGlobalVirtualStore: true
+packageExtensions:
+  '@primevue/core@4.5.5':
+    dependencies:
+      '@primeuix/styles': 2.0.3
 overrides:
   vue: ^3.5.43
   vue-router: ^4.6.4

@@ -15,22 +15,25 @@ const chartLoading = useVisibleChartLoading(loading)
 const last = computed(() => series.value?.points.at(-1))
 const isDemo = computed(() => backendMode.value === 'demo')
 const entityOptions = computed(() => entities.value.map(entity => ({ value: entity.id, label: entity.name })))
-const grainOptions = [{ value: 'week', label: '按周' }, { value: 'month', label: '按月' }]
-const horizonOptions = computed(() => Array.from({ length: grain.value === 'week' ? 8 : 6 }, (_, index) => ({ value: String(index + 1), label: `${index + 1} ${grain.value === 'week' ? '周' : '月'}` })))
+const grainLabels: Record<string, string> = { day: '按日', week: '按周', month: '按月', year: '按年', quarter: '按季度', half_year: '按半年', holiday: '按节假日', cumulative: '按累计周期' }
+const grainOptions = computed(() => (isDemo.value ? ['week', 'month'] : selectedEntity.value?.available_grains ?? ['month']).map(value => ({ value, label: grainLabels[value] ?? value })))
+const horizonOptions = computed(() => !['week', 'month'].includes(grain.value) ? [{ value: String(horizon.value), label: '不适用' }] : Array.from({ length: grain.value === 'week' ? 8 : 6 }, (_, index) => ({ value: String(index + 1), label: `${index + 1} ${grain.value === 'week' ? '周' : '月'}` })))
 function setHorizon(value: string) { horizon.value = Number(value) }
 </script>
 
 <template>
   <div class="dashboard-page">
   <section class="page-heading scenic-heading">
-    <p>查看接待人次的历史变化与经过回测的周／月预测。</p>
+    <p>查看接待人次的历史变化，按原始统计周期展示。</p>
     <div class="toolbar">
       <div class="field scenic-entity-field"><span>选择景区</span><UiSelect v-model="entityId" :options="entityOptions" label="选择景区" searchable /></div>
       <div class="field"><span>时间粒度</span><UiSelect :model-value="grain" :options="grainOptions" label="时间粒度" @update:model-value="setGrain" /></div>
       <label v-if="grain === 'month'" class="field period-field">开始月份<input v-model="startPeriod" type="month" :max="maxPeriod" @focus="refreshToday" /></label>
-      <div v-else class="field period-field" @focusin="refreshToday"><span>开始周次</span><WeekPicker v-model="startPeriod" label="开始周次" :max="maxPeriod" /></div>
+      <div v-else-if="grain === 'week'" class="field period-field" @focusin="refreshToday"><span>开始周次</span><WeekPicker v-model="startPeriod" label="开始周次" :max="maxPeriod" /></div>
+      <label v-else class="field period-field">开始日期<input v-model="startPeriod" type="date" :max="maxPeriod" /></label>
       <label v-if="grain === 'month'" class="field period-field">结束月份<input v-model="endPeriod" type="month" :min="startPeriod" :max="maxPeriod" @focus="refreshToday" /></label>
-      <div v-else class="field period-field" @focusin="refreshToday"><span>结束周次</span><WeekPicker v-model="endPeriod" label="结束周次" :min="startPeriod" :max="maxPeriod" align="right" /></div>
+      <div v-else-if="grain === 'week'" class="field period-field" @focusin="refreshToday"><span>结束周次</span><WeekPicker v-model="endPeriod" label="结束周次" :min="startPeriod" :max="maxPeriod" align="right" /></div>
+      <label v-else class="field period-field">结束日期<input v-model="endPeriod" type="date" :min="startPeriod" :max="maxPeriod" /></label>
       <button class="button-subtle" :disabled="loading" @click="reload">{{ loading ? '加载中…' : '查询' }}</button>
     </div>
   </section>
@@ -48,8 +51,8 @@ function setHorizon(value: string) { horizon.value = Number(value) }
         <div class="metric-content"><div class="metric-head"><span class="metric-index">02</span><span class="metric-label">最新周期接待人次</span></div><div class="metric-amount"><strong>{{ formatValue(last?.value) }}</strong><span>{{ last?.unit ?? '人次' }}</span></div><div class="metric-bottom"><span>{{ last ? formatPeriod(last.period_start, last.period_end, last.grain) : '暂无数据' }}</span></div></div>
       </article>
       <article class="panel metric-card scenic-stat">
-        <div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5v19l15 11"/><path d="M20 5a19 19 0 1 0 22 25H24V5"/></svg></div>
-        <div class="metric-content"><div class="metric-head"><span class="metric-index">03</span><span class="metric-label">数据覆盖率</span></div><div class="metric-amount"><strong>{{ formatRate(series ? series.coverage_ratio * 100 : null) }}</strong></div><div class="metric-bottom"><span>缺失周期 {{ series?.missing_periods.length ?? 0 }} 个</span></div></div>
+        <div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16" stroke-width="2"/><path d="m16 24 5.5 5.5L32 19" stroke-width="2.6"/></svg></div>
+        <div class="metric-content"><div class="metric-head"><span class="metric-index">03</span><span class="metric-label">数据覆盖率</span></div><div class="metric-amount"><strong>{{ formatRate(series && !series.coverage_note ? series.coverage_ratio * 100 : null) }}</strong></div><div class="metric-bottom"><span>缺失周期 {{ series?.missing_periods.length ?? 0 }} 个</span></div></div>
       </article>
       <article class="panel metric-card scenic-stat">
         <div class="metric-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="8"/><path d="M24 3v8m0 26v8M3 24h8m26 0h8"/></svg></div>
@@ -59,11 +62,11 @@ function setHorizon(value: string) { horizon.value = Number(value) }
 
     <div class="scenic-dashboard dashboard-body">
       <section class="panel section-panel history-panel">
-        <div class="panel-head"><h2 class="panel-title">历史接待趋势</h2><span class="panel-kicker">ACTUAL / {{ grain === 'week' ? '周' : '月' }}</span></div>
+        <div class="panel-head"><h2 class="panel-title">历史接待趋势</h2><span class="panel-kicker">HISTORY / {{ (grainLabels[grain] ?? grain).replace('按', '') }}</span></div>
         <ChartLoading v-if="chartLoading" kind="line" label="正在加载历史接待趋势…" />
         <TrendChart v-else-if="series?.points.length" :points="series.points" name="实际接待人次" unit="人次" />
         <div v-else class="state-box">选定区间没有可展示的数据。</div>
-        <div class="chart-caption">实线表示已核验实际值；缺失周期不补造。{{ series?.missing_periods.length ? `缺失 ${series.missing_periods.length} 个周期。` : '' }}</div>
+        <div class="chart-caption">历史曲线按所选统计粒度展示。</div>
       </section>
       <section class="panel section-panel forecast-panel">
         <div class="panel-head"><h2 class="panel-title">历史预测与区间</h2><div class="field horizon-field"><span>预测步数</span><UiSelect :model-value="String(horizon)" :options="horizonOptions" label="预测步数" @update:model-value="setHorizon" /></div></div>
@@ -73,7 +76,7 @@ function setHorizon(value: string) { horizon.value = Number(value) }
         <div class="chart-caption">预测值用虚线、上下界用点线表示。回测 MAE {{ formatValue(forecast?.backtest?.mae) }} 人次；样本数 {{ forecast?.backtest?.sample_count ?? '—' }}。</div>
       </section>
       <section class="panel section-panel change-panel">
-        <div class="panel-head"><h2 class="panel-title">{{ grain === 'week' ? '周度' : '月度' }}环比变化</h2><span class="panel-kicker">单位：%</span></div>
+        <div class="panel-head"><h2 class="panel-title">{{ (grainLabels[grain] ?? grain).replace('按', '') }}度环比变化</h2><span class="panel-kicker">单位：%</span></div>
         <ChartLoading v-if="chartLoading" kind="bar" label="正在计算环比变化…" />
         <TrendChart v-else-if="series?.points.length" :points="series.points" variant="period-change" />
         <div v-else class="state-box">没有可计算环比的相邻周期。</div>
@@ -97,7 +100,7 @@ function setHorizon(value: string) { horizon.value = Number(value) }
           <div><dt>数据来源</dt><dd>{{ isDemo ? '静态样例，非官方统计' : source?.publisher || last?.source_ids.join('、') || '尚未提供' }}</dd></div>
           <div><dt>模型</dt><dd>{{ forecast?.model_version ?? '暂无模型' }}</dd></div>
         </dl>
-        <p class="quality-footnote">数据不足时不生成预测；缺失周期保持缺失。</p>
+        <p class="quality-footnote">预测采用滚动回测，误差以所选历史序列计算。</p>
       </section>
     </div>
   </template>
@@ -126,7 +129,7 @@ function setHorizon(value: string) { horizon.value = Number(value) }
 .source-panel, .quality-panel { grid-column: span 3; }
 .scenic-dashboard :deep(.chart-canvas) { flex: 1; min-height: 0; height: auto; }
 .horizon-field { display: flex; align-items: center; gap: 7px; white-space: nowrap; --select-min-width: 74px; --select-height: 29px; }.horizon-field :deep(.ui-select-trigger) { font-size: 12px; }
-.source-grid { display: grid; grid-template-columns: 1fr; gap: 7px; }.source-grid > div { padding-bottom: 6px; border-bottom: 1px solid var(--border-soft); }.source-grid span { color: var(--text-sub); font-size: 11px; }.source-grid p { margin: 3px 0 0; color: var(--text-main); font-size: 12px; line-height: 1.3; word-break: break-word; }.source-grid a { color: var(--accent); }
+.source-grid { display: grid; grid-template-columns: 1fr; gap: 7px; }.source-grid > div { padding-bottom: 6px; border-bottom: 1px solid var(--border-soft); }.source-grid span { display: block; color: var(--text-sub); font-size: 11px; line-height: 1.1; }.source-grid p { margin: 1px 0 0; color: var(--text-main); font-size: 12px; line-height: 1.15; letter-spacing: 0; word-break: break-word; }.source-grid a { color: var(--accent); }
 .quality-footnote { margin: auto 0 0; padding-top: 7px; border-top: 1px solid var(--border-soft); color: var(--text-sub); font-size: 11px; line-height: 1.3; }
 .quality-list { display: grid; gap: 0; margin: 0; font-size: 12px; }
 .quality-list > div { display: grid; grid-template-columns: minmax(85px, 1fr) minmax(0, 1.3fr); gap: 8px; padding: 5px 2px; border-bottom: 1px solid var(--border-soft); }
