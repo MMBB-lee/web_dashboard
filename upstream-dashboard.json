@@ -2,6 +2,7 @@
   "repository": "https://github.com/MMBB-lee/web_dashboard",
   "commit": "e00af3428eb263b4a4e8e282d5a7b469d55d328c",
   "localOverrides": {
+    "index.html": "Use the user-provided project icon as the browser favicon.",
     "src/components/charts/HolidayCompareChart.vue": "Space numeric axis labels with fewer ticks, compact units and overlap hiding on the small homepage holiday chart.",
     "src/components/map/three-map.ts": "Use screen-space thick lines for visible animated point-to-point connections at the user's request. Show source attribution, actual units and statistical dates with located database entities.",
     "src/components/layout/DashboardShell.vue": "Update the header title text at the user's request while preserving the existing typography and alignment.",
@@ -19,7 +20,8 @@
     "src/features/holidays/holidays.ts": "Display single-holiday statistics and fetch unique source metadata for readable source names instead of repeated UUIDs.",
     "src/features/holidays/HolidayView.vue": "Display holiday statistics with readable deduplicated sources and ellipsis/disclosure controls for full explanations without overflowing panels.",
     "tests/demoData.ts": "Allow one to six existing demo holiday records to follow the single-holiday statistics interface without adding simulated production data.",
-    "src/components/charts/ForecastChart.vue": "Use a neutral historical-series label for project inputs while keeping the existing orange forecast line and layout."
+    "src/components/charts/ForecastChart.vue": "Use a neutral historical-series label for project inputs while keeping the existing orange forecast line and layout.",
+    ".gitignore": "Allow the non-secret .env.local containing VITE_DATA_MODE=api to be versioned for deployment."
   },
   "files": {
     ".gitignore": "92c0b13d7eeb125354f1a9ea9b06c644fb27d268de29f39c803ee67802bb29e7",

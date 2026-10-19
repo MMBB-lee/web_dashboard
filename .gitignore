@@ -12,6 +12,7 @@ build/
 .env
 .env.*
 !.env.example
+!/web_dashboard/.env.local
 .pypirc
 *.pem
 *.key
@@ -58,8 +59,4 @@ logs/
 Thumbs.db
 Desktop.ini
 
-# Local recordings and generated counting captures stay on this machine.
-/videos/*
-!/videos/.gitkeep
-/cap_images/*
-!/cap_images/.gitkeep
+# Recordings and counting captures are included; MP4s use Git LFS.

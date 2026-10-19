@@ -16,6 +16,18 @@ from app.core import config as config_module
 from app.core.config import _resolve_dir_field, _resolve_file_field
 
 
+def test_capture_directory_is_relative_to_backend_and_independent_of_video_root(tmp_path, monkeypatch):
+    backend = tmp_path / 'project' / 'api_platform'
+    elsewhere = tmp_path / 'different-working-directory'
+    elsewhere.mkdir()
+    monkeypatch.setattr(config_module, '_PACKAGE_ROOT', backend)
+    monkeypatch.chdir(elsewhere)
+    settings = config_module.Settings(_env_file=None, data_dir='./data',
+                                      video_storage_dir='../other-recordings')
+    assert Path(settings.capture_storage_dir).resolve() == backend.parent / 'cap_images'
+    assert not (backend.parent / 'cap_images').exists()
+
+
 def test_file_field_keeps_filename_and_creates_parent(tmp_path: Path) -> None:
     """文件型配置：解析后仍指向**文件**，父目录被创建，不会被当成目录回退。"""
     target = tmp_path / "nested" / "rag_index.json"

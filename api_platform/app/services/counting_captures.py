@@ -1,26 +1,82 @@
 """Save sampled frames with P2PNet head points and the matching ROI count."""
 import json
 import os
+import re
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 from app.core.config import get_settings
 
 FORMAT = 'p2pnet-head-points-v1'
+FOLDER_PATTERN = re.compile(r'^\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}$')
+CHINA_TIME = timezone(timedelta(hours=8))
+FONT_PATH = Path(__file__).resolve().parents[2] / 'assets' / 'fonts' / 'counting.ttf'
+
+
+def root() -> Path:
+    return Path(get_settings().capture_storage_dir).resolve()
+
+
+def read_metadata(path: Path) -> dict:
+    try:
+        if path.is_symlink():
+            return {}
+        value = json.loads(path.read_text(encoding='utf-8'))
+        return value if isinstance(value, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _flat_directory(video_id: str, analysis_id: str) -> Path | None:
+    base = root()
+    if not base.is_dir():
+        return None
+    for folder in base.iterdir():
+        if (not FOLDER_PATTERN.fullmatch(folder.name) or folder.is_symlink() or not folder.is_dir()
+                or not folder.resolve().is_relative_to(base.resolve())):
+            continue
+        metadata = read_metadata(folder / 'analysis.json')
+        if metadata.get('video_id') == video_id and metadata.get('analysis_id') == analysis_id:
+            return folder
+    return None
 
 
 def directory(video_id: str, analysis_id: str) -> Path:
-    return Path(get_settings().video_storage_dir).parent / 'cap_images' / video_id / analysis_id
+    # Legacy paths remain readable; all new directories are reserved by prepare().
+    return _flat_directory(video_id, analysis_id) or root() / video_id / analysis_id
+
+
+def prepare(row: dict) -> Path:
+    """Reserve one flat Beijing-time directory per analysis, including retries."""
+    existing = _flat_directory(row['video_id'], row['id'])
+    if existing is not None:
+        return existing
+    base = root()
+    base.mkdir(parents=True, exist_ok=True)
+    created = datetime.now(CHINA_TIME).replace(microsecond=0)
+    for offset in range(86400):
+        folder = base / (created + timedelta(seconds=offset)).strftime('%Y-%m-%dT%H-%M-%S')
+        try:
+            folder.mkdir()
+        except FileExistsError:
+            continue
+        metadata = dict(video_id=row['video_id'], analysis_id=row['id'],
+                        video_sha256=row['video_sha256'], created_at=created.isoformat())
+        _write_atomic(folder / 'analysis.json', json.dumps(metadata).encode('utf-8'))
+        return folder
+    raise OSError('Cannot reserve a unique capture directory')
 
 
 def complete(row: dict) -> bool:
     """Old cached analyses must also produce captures when started again."""
-    folder = directory(row['video_id'], row['id'])
-    try:
-        metadata = json.loads((folder / 'captures.json').read_text(encoding='utf-8'))
-    except (OSError, ValueError):
+    folder = _flat_directory(row['video_id'], row['id'])
+    if folder is None:
         return False
+    metadata = read_metadata(folder / 'captures.json')
     if not isinstance(metadata, dict) or metadata.get('format') != FORMAT or metadata.get('sample_count') != row['processed_samples']:
+        return False
+    if metadata.get('video_sha256') != row['video_sha256']:
         return False
     files = list(folder.glob('frame_*.jpg'))
     return (row['processed_samples'] > 0 and len(files) == row['processed_samples']
@@ -48,7 +104,8 @@ def annotate(frame, points, roi, threshold: float, value: float):
     canvas = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     draw = ImageDraw.Draw(canvas)
     font_size = max(16, min(48, round(height * .045)))
-    font_path = Path(os.environ.get('WINDIR', 'C:/Windows')) / 'Fonts' / 'msyh.ttc'
+    # Optional project-local Chinese font; no operating-system-specific paths.
+    font_path = FONT_PATH
     if font_path.is_file():
         font = ImageFont.truetype(str(font_path), font_size)
         label = f'人数：{int(value)}'
@@ -69,22 +126,20 @@ def annotate(frame, points, roi, threshold: float, value: float):
 
 
 def save(frame, *, points, roi, threshold: float, value: float,
-         video_id: str, analysis_id: str, index: int, offset: float) -> Path:
+         video_id: str, analysis_id: str, index: int, offset: float, folder: Path) -> Path:
     import cv2
 
     image = annotate(frame, points, roi, threshold, value)
     ok, encoded = cv2.imencode('.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 95])
     if not ok:
         raise OSError('Cannot encode counting capture')
-    folder = directory(video_id, analysis_id)
-    folder.mkdir(parents=True, exist_ok=True)
     target = folder / f'frame_{index + 1:06d}_{round(offset * 1000):09d}ms.jpg'
     _write_atomic(target, encoded.tobytes())
     return target
 
 
-def finish(row: dict, sample_count: int) -> None:
-    target = directory(row['video_id'], row['id']) / 'captures.json'
+def finish(row: dict, sample_count: int, folder: Path) -> None:
+    target = folder / 'captures.json'
     metadata = dict(format=FORMAT, sample_count=sample_count, video_sha256=row['video_sha256'])
     _write_atomic(target, json.dumps(metadata).encode('utf-8'))
 

@@ -11,7 +11,7 @@ from pathlib import Path
 import anyio
 
 from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, Request, UploadFile
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
 
 from app.api.v1._c_errors import raise_mapped_c_error as _raise_mapped_c_error
 from app.api.v1._paging import PageQ, PageSizeQ
@@ -48,6 +48,26 @@ from app.schemas.videos import (
 from app.services import e_bridge
 
 router = APIRouter(prefix="/videos", tags=["录像画面人数计数与短时预测"])
+
+
+@router.get('/capture-folders')
+async def capture_folders(request: Request, _session=Depends(require_authenticated)):
+    from app.services import capture_library
+    return envelope(request, capture_library.folders())
+
+
+@router.get('/capture-images')
+async def capture_images(request: Request, folder: str, _session=Depends(require_authenticated)):
+    from app.services import capture_library
+    return envelope(request, capture_library.images(folder))
+
+
+@router.get('/capture-image')
+async def capture_image(folder: str, filename: str, _session=Depends(require_authenticated)):
+    from app.services import capture_library
+    path = capture_library.image(folder, filename)
+    return FileResponse(path, media_type=capture_library.MEDIA_TYPES[path.suffix.lower()],
+                        headers={'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff'})
 
 
 @router.get('/{video_id}/counting')

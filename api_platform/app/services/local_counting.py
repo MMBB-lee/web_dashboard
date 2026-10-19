@@ -49,6 +49,8 @@ def start(store,video_id,config):
 def current(store,video_id):
     local_videos.sync_directory(native(store),get_settings().video_storage_dir)
     row=db.latest(native(store),video_id)
+    if row and row['status']=='ready' and not counting_captures.complete(row):
+        row=db.requeue_for_captures(native(store),row['id'])
     if row and row['status']=='queued': schedule(store,row)
     return public(row)
 
@@ -88,6 +90,7 @@ def run(store,analysis_id):
         ref=store.get_playback_ref(row['video_id'])
         if local_videos.digest(Path(ref['path']))!=row['video_sha256']:
             raise ValueError('Video changed before analysis')
+        capture_folder=counting_captures.prepare(row)
         capture=cv2.VideoCapture(ref['path']);samples=[]
         try:
             fps=capture.get(cv2.CAP_PROP_FPS)
@@ -103,13 +106,13 @@ def run(store,analysis_id):
                 predictions=counter(cv2.cvtColor(frame,cv2.COLOR_BGR2RGB))
                 value=point_count(predictions,parsed.roi,parsed.confidence_threshold)
                 counting_captures.save(frame,points=predictions,roi=parsed.roi,threshold=parsed.confidence_threshold,
-                    value=value,video_id=row['video_id'],analysis_id=analysis_id,index=index,offset=offset)
+                    value=value,video_id=row['video_id'],analysis_id=analysis_id,index=index,offset=offset,folder=capture_folder)
                 samples.append((offset,value));db.progress(native(store),analysis_id,len(samples))
         finally: capture.release()
         # Recheck content before committing; replaced files never inherit old results.
         store.get_playback_ref(row['video_id'])
         if local_videos.digest(Path(ref['path']))!=row['video_sha256']: raise ValueError('Video changed during analysis')
-        counting_captures.finish(row,len(samples))
+        counting_captures.finish(row,len(samples),capture_folder)
         db.finish(native(store),analysis_id,samples,counter.provenance)
     except Exception:
         logger.exception('P2PNet directory analysis failed: %s',analysis_id)

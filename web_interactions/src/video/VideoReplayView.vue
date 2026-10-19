@@ -6,6 +6,7 @@ import Tag from 'primevue/tag'
 import Message from 'primevue/message'
 import StatePanel from '../components/StatePanel.vue'
 import TrendChart from '../components/TrendChart.vue'
+import CaptureGallery from './CaptureGallery.vue'
 import { useInteractions } from '../module'
 import { ApiError, errorMessage, query } from '../api/client'
 import type { CameraForecast, CountGrain, Counts, CountingTask, VideoItem } from '../types/api'
@@ -218,6 +219,7 @@ onBeforeUnmount(() => { ++generation; ++forecastVersion; clearInterval(folderTim
           </dl>
           <p v-if="options.mode === 'demo'" class="muted small">模拟计数与人工核验示例 · 未执行真实 DM-Count 推理或模型回测。</p>
         </article>
+        <CaptureGallery v-if="options.mode === 'api'" :analysis-id="task?.analysis_id" :task-status="task?.status" />
         <article class="panel video-trend-panel">
           <div class="panel-heading"><div><h2>画面人数趋势与短时预测</h2><p>预测使用截止位置之前的有效 5 分钟计数，与当前查看粒度无关。</p></div><div class="compact-controls">
             <Select :pt="{ overlay: { class: 'b-ui b-select-overlay' } }" v-model="horizon" :options="[15,30,60].map(value => ({ label: `未来 ${value} 分钟`, value }))" option-label="label" option-value="value" aria-label="预测时长" />

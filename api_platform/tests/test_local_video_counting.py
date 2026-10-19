@@ -36,7 +36,7 @@ def counting(tmp_path,monkeypatch):
     native=create_store('sqlite+pysqlite:///'+(tmp_path/'database.sqlite').as_posix(),data_root=tmp_path/'data',allow_sqlite_for_tests=True)
     Base.metadata.create_all(native.engine)
     root=tmp_path/'中文项目'/'videos';root.mkdir(parents=True);(root/'test.mp4').write_bytes(b'test video')
-    settings=Settings(data_dir=str(tmp_path/'data'),video_storage_dir=str(root))
+    settings=Settings(data_dir=str(tmp_path/'data'),video_storage_dir=str(root),capture_storage_dir=str(root.parent/'cap_images'))
     monkeypatch.setattr('app.core.config.get_settings',lambda:settings)
     monkeypatch.setattr(local_counting,'get_settings',lambda:settings)
     monkeypatch.setattr(counting_captures,'get_settings',lambda:settings)
@@ -116,7 +116,10 @@ def test_every_sample_saves_annotated_frame_and_cached_tasks_repair_missing_imag
             return super().__call__(frame)
     monkeypatch.setattr(local_counting,'counter_for',lambda bundle:TrackedCounter())
     task=local_counting.start(store,video['id'],CONFIG)
-    folder=root.parent/'cap_images'/video['id']/task['analysis_id']
+    folder=counting_captures.directory(video['id'],task['analysis_id'])
+    import re
+    assert folder.parent==root.parent/'cap_images'
+    assert re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}',folder.name)
     files=sorted(folder.glob('*.jpg'))
     assert [p.name for p in files]==[
         'frame_000001_000000000ms.jpg','frame_000002_000005000ms.jpg',
@@ -156,6 +159,20 @@ def test_capture_failure_does_not_report_success_and_can_retry(counting,monkeypa
     local_counting.start(store,video['id'],CONFIG)
     assert db.get(store._store,task['analysis_id'])['status']=='ready'
     assert counting_captures.complete(db.get(store._store,task['analysis_id']))
+
+
+def test_loading_cached_result_repairs_deleted_screenshots(counting):
+    store,video,_=counting
+    task=local_counting.start(store,video['id'],CONFIG)
+    folder=counting_captures.directory(video['id'],task['analysis_id'])
+    files=list(folder.glob('*.jpg'))
+    assert len(files)==4
+    files[0].unlink()
+    local_counting.current(store,video['id'])
+    row=db.get(store._store,task['analysis_id'])
+    assert row['status']=='ready'
+    assert counting_captures.complete(row)
+    assert len(list(folder.glob('*.jpg')))==4
 
 
 def test_annotation_uses_model_points_roi_and_confidence_without_altering_input():

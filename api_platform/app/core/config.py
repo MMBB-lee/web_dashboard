@@ -148,6 +148,7 @@ class Settings(BaseSettings):
     openvino_device: str = "CPU"
     video_tmp_dir: str = "./data/video_tmp"
     video_storage_dir: str = "../videos"
+    capture_storage_dir: str = "../cap_images"
     counts_storage_path: str = "./data/counts"
 
     # E 0.6.0 P2PNet 计数器（camera_visible_people）：受信任的模型包目录。
@@ -180,6 +181,13 @@ class Settings(BaseSettings):
     def _absolutize_dirs(cls, value: str) -> str:
         """目录型配置：解析为基于 api_platform/ 仓库根的绝对路径并探测可写。"""
         return _resolve_dir_field(value)
+
+    @field_validator("capture_storage_dir", mode="after")
+    @classmethod
+    def _capture_directory(cls, value: str) -> str:
+        # Keep captures in their configured location; permission errors must not
+        # silently redirect screenshots to the generic temporary data folder.
+        return _resolve_path(value)
 
     @field_validator("job_store_path", "rag_index_path", mode="after")
     @classmethod

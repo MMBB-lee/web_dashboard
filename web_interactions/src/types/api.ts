@@ -59,6 +59,11 @@ export interface CountingTask {
   processed_samples: number; total_samples: number; progress: number; error_message?: string | null;
   sample_interval_seconds?: number; time_basis?: 'calendar' | 'relative'
 }
+export interface CaptureFolder {
+  id: string; name: string; image_count: number; created_at: string;
+  video_id: string | null; analysis_id: string | null; legacy: boolean
+}
+export interface CaptureImage { name: string; byte_size: number; url: string }
 export interface CameraForecastPoint {
   metric: 'camera_visible_people'; value: number | null; unit: '人'; period_start: string; period_end: string; grain: '5min'
   source_ids: string[]; published_at: string; ingested_at: string; quality_status: string
