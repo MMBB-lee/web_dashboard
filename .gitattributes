@@ -7,3 +7,7 @@ data_foundation/real_data/** -text
 
 # Keep browser-playable recordings in Git LFS (one exceeds GitHub's blob limit).
 videos/*.mp4 filter=lfs diff=lfs merge=lfs -text
+
+# Preserve SQL escapes and archived runtime assets exactly across platforms.
+server-migration/*.sql -text
+server-migration/*.tar.gz -text

@@ -1,0 +1,19 @@
+{
+  "source_sha256": "34cf27bd3cb85f9edbb9a0f493462284409fb98767058232e7ddc7f73abe745f",
+  "sanitization": {
+    "disabled_legacy_users": 1,
+    "removed_sessions": 54,
+    "replaced_job_lease_tokens": 101
+  },
+  "runtime_file_count": 332,
+  "files": {
+    "tourism_flow.public.sql": {
+      "bytes": 21070852,
+      "sha256": "879258ddc72fd5b9c8cbf1ff54159875e5a55c14b420d527a6bea742b47334b6"
+    },
+    "runtime-data.tar.gz": {
+      "bytes": 15242116,
+      "sha256": "21c933b569ba02fec74565a3cfc24afda78a584b6d08510fa76cef75c5a4865f"
+    }
+  }
+}

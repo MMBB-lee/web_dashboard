@@ -18,6 +18,9 @@ build/
 *.key
 PRIVATE-*
 
+# Keep the original migration backup private; publish the sanitized SQL copy.
+/server-migration/tourism_flow.sql
+
 # Python / frontend caches and generated test reports
 __pycache__/
 *.py[cod]
